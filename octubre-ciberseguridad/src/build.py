@@ -12,6 +12,7 @@ from playwright.sync_api import sync_playwright
 from PIL import Image
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+OUT = ROOT / "v1-estilo-referencia"
 b64 = lambda p: base64.b64encode((ROOT / p).read_bytes()).decode()
 LOGO = "data:image/png;base64," + b64("assets/logo-blanco.png")
 FONTS = "".join(
@@ -191,7 +192,7 @@ def render():
             pg = b.new_page(viewport={"width": 1080, "height": h})
             pg.set_content(TEMPLATES[p["tipo"]](p), timeout=120000); pg.wait_for_timeout(500)
             name = "webinar-" + p["wordmark"].replace("<b>", "").replace("</b>", "").split()[0].lower() if p["tipo"] == "webinar" else NAMES[p["tipo"]]
-            out = ROOT / ("reels" if p["tipo"] == "reel" else "posts") / f"{p['id']}_{name}.png"
+            out = OUT / ("reels" if p["tipo"] == "reel" else "posts") / f"{p['id']}_{name}.png"
             pg.screenshot(path=str(out)); pg.close(); shots[p["id"]] = out
         b.close()
     return shots
@@ -207,7 +208,7 @@ def grid(shots):
             if im.height > 1350:
                 t = (im.height - 1350) // 2; im = im.crop((0, t, 1080, t + 1350))
             sheet.paste(im.resize((W, H)), (G + c * (W + G), G + r * (H + G)))
-    sheet.save(ROOT / "grilla-octubre.png", optimize=True)
+    sheet.save(OUT / "grilla-octubre.png", optimize=True)
 
 if __name__ == "__main__":
     s = render(); grid(s); print("ok", len(s))
