@@ -116,15 +116,15 @@ def t_list(p):  # gráfico de barras proporcional a UTM
 {foot(1245, '#MesDeLaCiberseguridad')}""")
 
 def t_agenda(p):
-    rows = "".join(f"""<div class='abs card' style='left:76px;right:76px;top:{440+i*170}px;height:140px;display:flex;align-items:center;gap:30px;padding:0 34px'>
+    rows = "".join(f"""<div class='abs card' style='left:76px;right:76px;top:{470+i*160}px;height:132px;display:flex;align-items:center;gap:30px;padding:0 34px'>
       <div style='flex:none;width:110px;height:96px;border-radius:22px;background:linear-gradient(135deg,{SKY},{AZURE});color:#fff;text-align:center'>
         <div style='font-size:17px;font-weight:700;letter-spacing:3px;margin-top:10px'>OCT</div><div style='font-size:50px;font-weight:800;line-height:.95'>{d}</div></div>
       <div><div style='font-size:36px;font-weight:800'>{n}</div><div style='font-size:21px;font-weight:500;opacity:.75;margin-top:2px'>{c}</div></div></div>""" for i, (d, n, c) in enumerate(p["items"]))
     return page(1350, "lt", f"""
 <svg class='arcs' width='1080' height='1350' viewBox='0 0 1080 1350'>{arc(1040, 30, 260, 220, -28, 18, .5, .1, gid='a1', opacity=.6)}</svg>
 <div class='abs lab' style='left:76px;top:290px'>Octubre · Mes de la Ciberseguridad</div>
-<div class='abs' style='left:76px;top:330px;font-size:74px;font-weight:800;line-height:1.02'>4 martes.<br><span style='color:{AZURE}'>4 webinars.</span></div>{rows}
-<div class='abs' style='left:76px;top:1135px;font-size:24px;font-weight:600;color:{AZURE}'>11:00 hrs Chile · 09:00 hrs Perú - Colombia</div>
+<div class='abs' style='left:76px;top:345px;font-size:68px;font-weight:800;line-height:1.05;white-space:nowrap'>4 martes. <span style='color:{AZURE}'>4 webinars.</span></div>{rows}
+<div class='abs' style='left:76px;top:1130px;font-size:25px;font-weight:600;color:{AZURE}'>11:00 hrs Chile · 09:00 hrs Perú - Colombia</div>
 {foot(1245, '#webinarscpnnet')}""")
 
 # ---------------------------------------------------------------- reel (diagonal)
