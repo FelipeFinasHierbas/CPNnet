@@ -1,0 +1,723 @@
+{
+  "_meta": {
+    "source": "Catalogo-CPNnet-Security-Para-web-y-clientes (PDF, 51 paginas)",
+    "language": "es",
+    "notes": "Fuente unica de verdad del bot. El catalogo NO trae precios, descuentos ni plazos: el bot no debe inventarlos. Campos vacios (null) significan que el catalogo no los define."
+  },
+  "domains": [
+    {
+      "id": "proteccion",
+      "name": "Protección",
+      "layer": "Protection Layer",
+      "description": "Soluciones orientadas a prevenir incidentes y proteger identidades, accesos, redes, endpoints, infraestructura híbrida y aplicaciones."
+    },
+    {
+      "id": "gestion-riesgo",
+      "name": "Gestión de Riesgo",
+      "layer": "Risk Management Layer",
+      "description": "Soluciones para identificar exposición, priorizar riesgos, proteger datos sensibles, validar controles y reducir brechas de cumplimiento."
+    },
+    {
+      "id": "operaciones-seguridad",
+      "name": "Operaciones de Seguridad",
+      "layer": "Security Operations Layer",
+      "description": "Plataformas para detectar, correlacionar, responder y operar la seguridad de forma continua en modelos SOC, MDR, XDR y MSSP."
+    }
+  ],
+  "categories": [
+    { "id": "identity-access", "domain": "proteccion", "name": "Identity & Access Security", "first_order": ["segura", "onespan"], "cross_sell": ["sophos-xdr-mdr"] },
+    { "id": "network-hybrid", "domain": "proteccion", "name": "Network & Hybrid Infrastructure Security", "first_order": ["sophos-network", "sonicwall", "faronics"], "cross_sell": ["segura", "cymulate"] },
+    { "id": "appsec-devsecops", "domain": "proteccion", "name": "Application Security & DevSecOps", "first_order": ["aikido"], "cross_sell": ["segura", "onespan", "cymulate"] },
+    { "id": "exposure-validation", "domain": "gestion-riesgo", "name": "Exposure Management & Continuous Validation", "first_order": ["vicarius", "cymulate", "action1", "vectoraiq"], "cross_sell": ["aikido"] },
+    { "id": "data-security", "domain": "gestion-riesgo", "name": "Data Security, Governance & Insider Risk", "first_order": ["kriptos", "safetica"], "cross_sell": ["segura", "sophos-xdr-mdr"] },
+    { "id": "secops-xdr", "domain": "operaciones-seguridad", "name": "Security Operations & XDR", "first_order": ["sophos-xdr-mdr", "sophos-taegis", "seceon"], "cross_sell": ["vicarius", "segura", "stellar-cyber", "action1"] }
+  ],
+  "brands": [
+    {
+      "id": "segura",
+      "name": "Segura",
+      "tier": "primer_orden",
+      "category": "identity-access",
+      "tagline": "Plataforma de seguridad de identidades privilegiadas para controlar, limitar y auditar los accesos más críticos.",
+      "summary": "Permite descubrir y proteger cuentas privilegiadas, resguardar credenciales, aplicar accesos Just-in-Time, supervisar sesiones, controlar proveedores y terceros, y extender la protección hacia secretos, endpoints y ambientes híbridos. Reduce el riesgo de abuso de privilegios y da trazabilidad de quién accede, a qué, por cuánto tiempo y qué hace.",
+      "ideal_for": ["administradores", "proveedores externos", "cuentas de servicio", "DevOps", "cloud", "OT", "exigencias de auditoría"],
+      "problems": [
+        "Cuentas privilegiadas compartidas o sin trazabilidad",
+        "Contraseñas administrativas que no se rotan",
+        "Proveedores con acceso amplio o permanente",
+        "Usuarios con privilegios locales innecesarios (Endpoint Privilege Manager)",
+        "Secretos, cuentas de servicio y permisos cloud difíciles de gobernar"
+      ],
+      "differentiators": [
+        "Cobertura de privilegio más allá del PAM tradicional (terceros, endpoints, secretos DevOps, identidades de máquina, permisos cloud)",
+        "Acceso de terceros sin dar conectividad amplia a la red (Domum)",
+        "Sesiones privilegiadas auditables",
+        "Mínimo privilegio en endpoint integrado",
+        "Plataforma unificada de Identity Security"
+      ],
+      "sizing": "Se vende por módulos y alcance. Levantar: usuarios/administradores privilegiados, cuentas privilegiadas y de servicio, servidores/dispositivos, cantidad de terceros y módulos requeridos (PAM, Domum, EPM, DSM, CIEM, etc.).",
+      "entry_point": "PAM Assessment o revisión de accesos de terceros",
+      "qualifying_questions": [
+        "¿Cuántos administradores y cuentas privilegiadas o de servicio tienen?",
+        "¿Cuántos proveedores o terceros acceden a sus sistemas y cómo?",
+        "¿Tienen exigencias de auditoría o cumplimiento sobre accesos privilegiados?"
+      ]
+    },
+    {
+      "id": "onespan",
+      "name": "OneSpan",
+      "tier": "primer_orden",
+      "category": "identity-access",
+      "tagline": "Autenticación fuerte, firma de transacciones y seguridad de apps móviles para operaciones de alto valor.",
+      "summary": "Protege la identidad digital y la integridad de operaciones de alto valor con autenticación fuerte, autenticación móvil, passwordless/passkeys, firma de transacciones y seguridad para aplicaciones móviles. Relevante cuando no basta con saber quién inicia sesión, sino qué operación autoriza y desde qué contexto. Se usa principalmente en banca, fintech, servicios financieros, canales digitales y apps móviles.",
+      "ideal_for": ["banca", "fintech", "servicios financieros", "gobierno", "canales digitales", "apps móviles"],
+      "problems": [
+        "Robo o compromiso de credenciales",
+        "Fraude en transacciones digitales",
+        "Aplicaciones móviles expuestas a manipulación o malware",
+        "Experiencias de autenticación fragmentadas",
+        "Procesos de firma y acuerdos digitales con demasiada fricción"
+      ],
+      "differentiators": [
+        "Foco en autenticación de alto aseguramiento",
+        "Seguridad de identidad y de transacción en una misma estrategia",
+        "Modernización progresiva con DigipassONE hacia passwordless/passkeys",
+        "Encaja en casos regulados y de alto riesgo",
+        "Cobertura del ciclo digital del usuario (acceso, dispositivo/app, operación y firma)"
+      ],
+      "sizing": "Depende del caso de uso: usuarios/identidades, autenticaciones, transacciones, aplicaciones móviles o volumen de firmas.",
+      "entry_point": "Workshop de caso de uso. No venderlo de forma genérica: identificar si el problema es autenticación, fraude/transacción, seguridad móvil o acuerdos digitales.",
+      "qualifying_questions": [
+        "¿El problema principal es autenticación, fraude en transacciones, seguridad de la app móvil o firma digital?",
+        "¿Cuántos usuarios y cuántas transacciones o firmas manejan?",
+        "¿Operan en un sector regulado (banca, fintech, gobierno)?"
+      ]
+    },
+    {
+      "id": "sophos-network",
+      "name": "Sophos Network Security",
+      "tier": "primer_orden",
+      "category": "network-hybrid",
+      "tagline": "Firewall, switching, wireless, SD-WAN, ZTNA y NDR gestionados desde Sophos Central.",
+      "summary": "Portafolio integrado de seguridad de red que protege el perímetro, conecta sucursales, da acceso seguro a usuarios remotos y coordina la respuesta entre red y endpoint. Su fortaleza es la integración del ecosistema Sophos, que simplifica la administración y automatiza acciones frente a amenazas activas. Adecuada para organizaciones distribuidas que quieren consolidar red, acceso y administración en una arquitectura.",
+      "ideal_for": ["organizaciones distribuidas", "múltiples sucursales", "reemplazo de VPN", "renovación de firewall"],
+      "problems": [
+        "Seguridad de red fragmentada en múltiples consolas",
+        "Ataques avanzados y tráfico cifrado que atraviesan el perímetro (Firewall XGS: IPS, control de apps, inspección TLS)",
+        "Sucursales difíciles de conectar y administrar (SD-WAN, SD-RED zero-touch)",
+        "Acceso remoto que depende de VPN amplias y poco granulares (Sophos ZTNA)",
+        "Red y endpoints que reaccionan de forma aislada (Synchronized Security, Active Threat Response)"
+      ],
+      "differentiators": [
+        "Portafolio de red integrado bajo Sophos Central",
+        "Integración real entre endpoint y red (Security Heartbeat, Synchronized Security)",
+        "Firewall preparado para MDR/XDR",
+        "Arquitectura Xstream e inspección TLS",
+        "Flexibilidad de despliegue: appliance XGS, software, virtual y cloud"
+      ],
+      "sizing": "Para el firewall: throughput con servicios habilitados, velocidad de enlaces WAN, usuarios/conexiones, VPN, interfaces, HA y crecimiento esperado.",
+      "entry_point": "Renovación de firewall, apertura de nuevas sucursales, consolidación de redes distribuidas o reemplazo de VPN por ZTNA.",
+      "qualifying_questions": [
+        "¿Cuántas sedes y cuántos usuarios hay que proteger?",
+        "¿Qué velocidad de enlaces WAN tienen y cuánto esperan crecer?",
+        "¿Buscan renovar firewall, conectar sucursales o reemplazar la VPN?"
+      ]
+    },
+    {
+      "id": "sonicwall",
+      "name": "SonicWall",
+      "tier": "primer_orden",
+      "category": "network-hybrid",
+      "tagline": "Firewalls de nueva generación, SD-WAN, acceso seguro y administración centralizada.",
+      "summary": "Ayuda a controlar tráfico, aplicaciones, amenazas y conectividad entre sedes, manteniendo políticas consistentes a medida que la infraestructura crece. Relevante para organizaciones con múltiples ubicaciones, renovación de firewall, trabajo híbrido o necesidad de proteger conectividad distribuida.",
+      "ideal_for": ["múltiples sedes", "renovación de firewall", "trabajo híbrido", "MSP"],
+      "problems": [
+        "Firewalls antiguos o insuficientes para el tráfico actual",
+        "Sucursales con configuraciones y seguridad inconsistentes",
+        "Acceso remoto demasiado amplio (Cloud Secure Edge)",
+        "Necesidad de conectar sedes sin separar red y seguridad (Secure SD-WAN)",
+        "Falta de segmentación y control del tráfico interno"
+      ],
+      "differentiators": [
+        "Portafolio amplio para sucursal, datacenter y virtual",
+        "Seguridad y conectividad en la misma propuesta (NGFW, SD-WAN, VPN, routing)",
+        "Opción de servicio gestionado (MPSS)",
+        "Ruta hacia Zero Trust / SASE con Cloud Secure Edge",
+        "Fuerte encaje en canal y MSP"
+      ],
+      "sizing": "Para NGFW: throughput con servicios habilitados, usuarios/conexiones simultáneas, interfaces, VPN, HA, sedes y crecimiento. Para Cloud Secure Edge: licenciamiento por usuario y función/tier.",
+      "entry_point": "Sizing de firewall o revisión de arquitectura de sucursales.",
+      "qualifying_questions": [
+        "¿Cuántas sedes tienen y cuántos usuarios conectados simultáneamente?",
+        "¿Qué firewall tienen hoy y por qué quieren cambiarlo?",
+        "¿Necesitan alta disponibilidad, VPN o un servicio gestionado?"
+      ]
+    },
+    {
+      "id": "faronics",
+      "name": "Faronics",
+      "tier": "primer_orden",
+      "category": "network-hybrid",
+      "tagline": "Deep Freeze: equipos que vuelven a un estado conocido con cada reinicio.",
+      "summary": "Mantiene endpoints estables, disponibles y fáciles de administrar, especialmente con equipos compartidos, públicos o de alta rotación. Deep Freeze restaura el equipo a un estado conocido al reiniciar; Deep Freeze Cloud agrega administración, despliegue, patching y personalización. Valioso en colegios, universidades, laboratorios, kioscos, call centers y retail.",
+      "ideal_for": ["colegios", "universidades", "laboratorios", "kioscos", "call centers", "retail", "POS"],
+      "problems": [
+        "Equipos compartidos que quedan mal configurados",
+        "Usuarios que instalan software o modifican configuraciones",
+        "Alta carga de soporte en laboratorios, kioscos o salas",
+        "Endpoints remotos difíciles de administrar (Faronics Cloud/Deploy)",
+        "Necesidad de mantener equipos disponibles y consistentes"
+      ],
+      "differentiators": [
+        "Reboot-to-restore como propuesta central",
+        "Especialización en equipos compartidos y públicos",
+        "Reducción directa de tickets de configuración",
+        "Administración remota complementaria (despliegue, actualización, acceso remoto)",
+        "Mantiene homogeneidad en grandes grupos de PCs"
+      ],
+      "sizing": "Principalmente por cantidad de dispositivos/workstations y producto/edición. Levantar: número de PCs, ubicación/remotos, SO, necesidad cloud u on-premise y capacidades adicionales.",
+      "entry_point": "Piloto controlado en 10–20 equipos de alto soporte.",
+      "qualifying_questions": [
+        "¿Cuántos equipos compartidos o públicos administran y dónde están?",
+        "¿Qué sistema operativo usan y necesitan administración cloud u on-premise?",
+        "¿Cuántos tickets de soporte generan hoy por configuraciones dañadas?"
+      ]
+    },
+    {
+      "id": "aikido",
+      "name": "Aikido Security",
+      "tier": "primer_orden",
+      "category": "appsec-devsecops",
+      "tagline": "Seguridad de aplicaciones unificada del código a la nube y el runtime, con corrección asistida por IA.",
+      "summary": "Integra análisis de código y dependencias, detección de secretos, infraestructura como código, seguridad de contenedores y cloud, pruebas ofensivas y protección en ejecución. Acerca la seguridad al flujo del desarrollador y reduce la fragmentación de herramientas. Útil para empresas que desarrollan software, SaaS, APIs o apps cloud-native.",
+      "ideal_for": ["empresas que desarrollan software", "SaaS", "APIs", "cloud-native", "equipos DevOps"],
+      "problems": [
+        "Vulnerabilidades detectadas demasiado tarde",
+        "Demasiadas herramientas AppSec separadas",
+        "Muchos falsos positivos y hallazgos irrelevantes",
+        "Correcciones que dependen totalmente del desarrollador (AutoFix y pull requests)",
+        "Secretos y configuraciones expuestas en el SDLC"
+      ],
+      "differentiators": [
+        "Plataforma unificada Code-to-Runtime",
+        "Experiencia centrada en desarrolladores",
+        "Reducción de ruido (reachability y auto-triage)",
+        "Corrección integrada, no solo detección",
+        "Cobertura modular y escalable"
+      ],
+      "sizing": "Principalmente por número de desarrolladores cubiertos y plan. Para enterprise y módulos avanzados el precio es personalizado.",
+      "entry_point": "Demo conectando uno o pocos repositorios de prueba.",
+      "qualifying_questions": [
+        "¿Cuántos desarrolladores tienen y cuántos repositorios o aplicaciones?",
+        "¿Qué herramientas de seguridad de código usan hoy?",
+        "¿Desarrollan sobre cloud, contenedores o APIs?"
+      ]
+    },
+    {
+      "id": "vicarius",
+      "name": "Vicarius",
+      "tier": "primer_orden",
+      "category": "exposure-validation",
+      "tagline": "Gestión de exposición orientada a la remediación: priorización, patching, scripting y protección sin parche.",
+      "summary": "No se limita a identificar vulnerabilidades: busca cerrar el ciclo con priorización, patching, scripting y protección sin parche. Ayuda a reducir el backlog y la ventana de exposición cuando los equipos saben qué problemas tienen pero no logran corregirlos con rapidez. Relevante para endpoints y servidores distribuidos, apps de terceros, sistemas legacy y ambientes donde un parche no siempre existe.",
+      "ideal_for": ["endpoints y servidores distribuidos", "sistemas legacy", "aplicaciones de terceros"],
+      "problems": [
+        "Backlog de vulnerabilidades que no deja de crecer",
+        "Parches pendientes en sistemas y aplicaciones",
+        "Vulnerabilidades sin parche disponible (Patchless Protection)",
+        "Correcciones manuales que consumen demasiado tiempo (motor de scripting)",
+        "Falta de validación de que el riesgo realmente desapareció"
+      ],
+      "differentiators": [
+        "Remediation-first",
+        "Tres caminos de corrección: patching, scripting y patchless protection",
+        "Cobertura cuando no hay parche",
+        "Une IT y Seguridad en un mismo flujo",
+        "Adecuada para clientes que ya tienen scanner"
+      ],
+      "sizing": "Cantidad de endpoints/servidores administrados y alcance de módulos. Levantar: número de endpoints y servidores, SO, aplicaciones críticas/terceros y backlog de vulnerabilidades.",
+      "entry_point": "Assessment de remediación o prueba sobre un grupo representativo de equipos.",
+      "qualifying_questions": [
+        "¿Cuántos endpoints y servidores tienen y con qué sistemas operativos?",
+        "¿Qué tan grande es su backlog de vulnerabilidades y qué scanner usan?",
+        "¿Tienen sistemas legacy o aplicaciones sin parche disponible?"
+      ]
+    },
+    {
+      "id": "cymulate",
+      "name": "Cymulate",
+      "tier": "primer_orden",
+      "category": "exposure-validation",
+      "tagline": "Exposure Validation: comprobar de forma continua si los controles previenen, detectan y responden.",
+      "summary": "Usa Breach and Attack Simulation y otras capacidades de validación para identificar brechas, demostrar explotabilidad, priorizar exposiciones y optimizar controles existentes. Entrega evidencia práctica sobre la efectividad de inversiones como EDR/XDR, firewall, correo, SIEM/SOAR, DLP y cloud, pasando de evaluaciones puntuales a validación continua y medible.",
+      "ideal_for": ["SOC", "purple team", "gestión de vulnerabilidades", "líderes de seguridad"],
+      "problems": [
+        "Controles instalados pero nunca probados",
+        "Pentest anual que queda desactualizado",
+        "Demasiadas vulnerabilidades sin contexto de explotabilidad",
+        "SIEM/EDR/XDR con reglas que no se han probado (Detection Engineering)",
+        "Cambios de seguridad sin evidencia de mejora"
+      ],
+      "differentiators": [
+        "Validación continua frente a pruebas puntuales",
+        "Prueba controles existentes en condiciones controladas",
+        "Conecta lo ofensivo con lo defensivo",
+        "Prioriza con evidencia, no solo con scores técnicos",
+        "Complementa inversiones existentes"
+      ],
+      "sizing": "Depende de módulos, alcance de validación y tamaño/activos del entorno. Levantar qué controles se quieren validar, número aproximado de activos/segmentos y casos de uso.",
+      "entry_point": "Baseline de validación o assessment de efectividad de controles.",
+      "qualifying_questions": [
+        "¿Qué controles (EDR, firewall, correo, SIEM, DLP) quieren validar?",
+        "¿Cada cuánto hacen pruebas de intrusión hoy?",
+        "¿Tienen un SOC o equipo de purple team que use los resultados?"
+      ]
+    },
+    {
+      "id": "action1",
+      "name": "Action1",
+      "tier": "primer_orden",
+      "category": "exposure-validation",
+      "tagline": "Autonomous Endpoint Management cloud: patching y remediación sin depender de VPN.",
+      "summary": "Mantiene Windows, macOS, Linux y aplicaciones de terceros actualizados sin depender de VPN y con visibilidad continua del parchado. Reduce el tiempo y trabajo manual para mantener los equipos al día. Adecuada para fuerza laboral remota, múltiples sedes, alta carga de patching o necesidad de demostrar cumplimiento.",
+      "ideal_for": ["fuerza laboral remota", "múltiples sedes", "alta carga de patching", "cumplimiento continuo"],
+      "problems": [
+        "Parches atrasados en Windows, macOS y aplicaciones",
+        "Equipos remotos fuera de la VPN",
+        "Software de terceros fuera de WSUS/Intune",
+        "Dificultad para demostrar cumplimiento de parches",
+        "Procesos manuales de actualización que consumen recursos"
+      ],
+      "differentiators": [
+        "Patching como foco principal y simple",
+        "Cobertura de terceros integrada",
+        "No requiere VPN para equipos remotos",
+        "Vulnerabilidad + remediación en el mismo flujo",
+        "Entrada comercial rápida"
+      ],
+      "sizing": "Principalmente por número de endpoints/servidores administrados. Levantar cantidad de estaciones, servidores, SO, ubicaciones/remotos y principales aplicaciones de terceros.",
+      "entry_point": "Assessment de patch compliance o piloto.",
+      "qualifying_questions": [
+        "¿Cuántas estaciones y servidores administran, y cuántos son remotos?",
+        "¿Qué usan hoy para parchar (WSUS, Intune, manual)?",
+        "¿Qué aplicaciones de terceros son críticas?"
+      ]
+    },
+    {
+      "id": "vectoraiq",
+      "name": "VectoraIQ",
+      "tier": "primer_orden",
+      "category": "exposure-validation",
+      "tagline": "Plataforma modular de agentes de IA para rating/ASM, DevSecOps, seguridad ofensiva, insider risk y respuesta conductual.",
+      "summary": "Plataforma modular que aplica IA a distintos dominios de ciberseguridad. Por su amplitud, el mejor posicionamiento es partir por un caso de uso específico y no presentar toda la plataforma. En CPNnet se ancla principalmente en gestión de exposición y riesgo, con oportunidades en aplicaciones, validación ofensiva y comportamiento.",
+      "ideal_for": ["clientes que buscan automatización e inteligencia aplicada a procesos de seguridad especializados"],
+      "problems": [
+        "Visibilidad incompleta de superficie de ataque (SecureRatingIQ: security rating + ASM)",
+        "Evaluaciones ofensivas demasiado manuales (Offensive Security Suite)",
+        "Vulnerabilidades en código y pipelines (DevSecOps Engine: SAST/DAST/SCA)",
+        "Riesgo interno difícil de detectar (Personnel Intelligence: análisis conductual y UEBA)",
+        "Señales de red y comportamiento sin respuesta coordinada (XSR/XNC)"
+      ],
+      "differentiators": [
+        "Arquitectura modular de agentes especializados",
+        "SecureRatingIQ comunica el riesgo con scoring entendible por negocio",
+        "Automatización ofensiva dentro del mismo ecosistema",
+        "Módulo DevSecOps con remediación",
+        "Expansión por módulos"
+      ],
+      "sizing": "Identificar primero el módulo y caso de uso, y levantar activos, usuarios, aplicaciones o alcance según corresponda. CPNnet debe validar el modelo con el fabricante antes de cotizar.",
+      "entry_point": "Elegir un módulo concreto, especialmente SecureRatingIQ/ASM u Offensive Security.",
+      "qualifying_questions": [
+        "¿Qué caso de uso les interesa: superficie de ataque, pruebas ofensivas, DevSecOps o riesgo interno?",
+        "¿Cuántos activos, dominios o aplicaciones tendría el alcance?"
+      ]
+    },
+    {
+      "id": "kriptos",
+      "name": "Kriptos",
+      "tier": "primer_orden",
+      "category": "data-security",
+      "tagline": "Descubrir, clasificar y gobernar información sensible no estructurada con IA.",
+      "summary": "Ayuda a saber qué datos posee la organización, dónde están y quién puede acceder a ellos mediante automatización e IA. Su valor es generar visibilidad antes de aplicar DLP o gobierno. Especialmente relevante en Microsoft 365, Google Workspace, repositorios compartidos, datos personales, propiedad intelectual y adopción de herramientas de IA.",
+      "ideal_for": ["Microsoft 365", "Google Workspace", "datos personales", "propiedad intelectual", "gobierno de IA"],
+      "problems": [
+        "La empresa no sabe dónde está toda su información sensible",
+        "Clasificación manual o basada en palabras clave (clasificación contextual con múltiples modelos de IA)",
+        "Permisos excesivos y sobreexposición en M365/Google (Access Governance)",
+        "Dificultad para preparar evidencia de cumplimiento (Data Compliance)",
+        "Uso de datos sensibles en herramientas de IA sin gobierno (AI Governance)"
+      ],
+      "differentiators": [
+        "Especialización en datos no estructurados",
+        "Clasificación contextual con múltiples modelos",
+        "Clasificación conectada con gobierno de acceso",
+        "Interoperabilidad con etiquetas de Microsoft Purview y Google Workspace",
+        "Extensión natural hacia AI Governance"
+      ],
+      "sizing": "Depende de fuentes de datos, usuarios/entornos y volumen documental. Levantar cantidad de usuarios/endpoints, servidores y repositorios cloud a revisar.",
+      "entry_point": "Data Discovery Assessment. Pregunta inicial: ¿Saben exactamente dónde está toda la información sensible de la empresa y quién puede verla?",
+      "qualifying_questions": [
+        "¿Saben dónde está su información sensible y quién puede verla?",
+        "¿Usan Microsoft 365 o Google Workspace? ¿Cuántos usuarios?",
+        "¿Les preocupa el uso de herramientas de IA con datos corporativos?"
+      ]
+    },
+    {
+      "id": "safetica",
+      "name": "Safetica",
+      "tier": "primer_orden",
+      "category": "data-security",
+      "tagline": "DLP e Insider Risk con una operación manejable, combinando datos, identidad y comportamiento.",
+      "summary": "Combina políticas de protección de datos con contexto de usuario y comportamiento para reducir fugas accidentales o intencionales. Controla cómo se usa y mueve la información sensible por endpoints, correo, web, dispositivos removibles y servicios cloud. Casos habituales: colaboradores salientes, propiedad intelectual, datos personales, contratistas y uso no autorizado de canales o apps.",
+      "ideal_for": ["mid-market", "colaboradores salientes", "propiedad intelectual", "datos personales", "contratistas"],
+      "problems": [
+        "Datos sensibles que salen por canales no autorizados",
+        "Empleados que copian información antes de salir de la empresa",
+        "USB, correo, web y cloud difíciles de controlar de forma consistente",
+        "Demasiadas alertas DLP sin contexto",
+        "Información en Microsoft 365 y plataformas cloud"
+      ],
+      "differentiators": [
+        "DLP + Insider Risk en una misma propuesta",
+        "Contexto conductual",
+        "Foco en productividad: bloquea acciones riesgosas sin interrumpir el trabajo normal",
+        "Atractiva para mid-market",
+        "Complementa clasificación externa (por ejemplo Kriptos)"
+      ],
+      "sizing": "Normalmente por usuarios/endpoints y por edición/módulos. Levantar cantidad de usuarios, endpoints, plataformas cloud, canales a controlar y tipo de información sensible.",
+      "entry_point": "DLP/Insider Risk Assessment.",
+      "qualifying_questions": [
+        "¿Cuántos usuarios y endpoints necesitan proteger?",
+        "¿Por qué canales les preocupa la fuga (USB, correo, web, cloud)?",
+        "¿Tienen casos de colaboradores salientes o contratistas con acceso a información crítica?"
+      ]
+    },
+    {
+      "id": "sophos-xdr-mdr",
+      "name": "Sophos XDR / MDR",
+      "tier": "primer_orden",
+      "category": "secops-xdr",
+      "tagline": "Protección de endpoint ampliada a detección, investigación y respuesta; con MDR 24/7 por especialistas.",
+      "summary": "XDR para equipos internos y MDR con monitoreo y respuesta gestionada 24/7. La integración con el ecosistema Sophos y fuentes de terceros correlaciona señales y acelera la contención. Relevante para organizaciones con demasiadas alertas, poca cobertura 24/7, equipos reducidos o que necesitan mejorar su respuesta sin construir un SOC completo.",
+      "ideal_for": ["equipos de seguridad reducidos", "organizaciones sin cobertura 24/7", "demasiadas alertas"],
+      "problems": [
+        "Ataques que evaden controles preventivos",
+        "Datos aislados entre endpoint, firewall, email, identidad y cloud",
+        "Demasiadas alertas para el equipo interno",
+        "Falta de cobertura fuera de horario",
+        "Empresa sin capacidad para construir un SOC completo"
+      ],
+      "differentiators": [
+        "Prevención de endpoint + XDR + MDR dentro del mismo ecosistema",
+        "MDR no depende exclusivamente de telemetría Sophos",
+        "Modelo simple por usuario y servidor",
+        "Escalabilidad de XDR a MDR",
+        "Ecosistema coordinado de endpoint, firewall, email y otras capas"
+      ],
+      "sizing": "Se licencia principalmente por usuario y por servidor. Levantar usuarios, servidores, SO, modalidad XDR o MDR, fuentes de terceros y necesidad de retención.",
+      "entry_point": "Revisión de madurez de detección/respuesta. Para MDR, el gatillante es falta de 24/7, poco personal o demasiadas alertas.",
+      "qualifying_questions": [
+        "¿Cuántos usuarios y servidores tienen?",
+        "¿Tienen cobertura 24/7 hoy y cuántas personas operan seguridad?",
+        "¿Quieren operar XDR internamente o delegar con MDR?"
+      ]
+    },
+    {
+      "id": "sophos-taegis",
+      "name": "Sophos Taegis",
+      "tier": "primer_orden",
+      "category": "secops-xdr",
+      "tagline": "Plataforma abierta de SecOps con XDR, MDR y Next-Gen SIEM para telemetría multivendor.",
+      "summary": "Integra XDR, MDR y Next-Gen SIEM (más NDR y VDR) para correlacionar telemetría de múltiples fabricantes y convertirla en incidentes investigables y accionables. Pensada para entornos complejos que quieren modernizar el SOC, consolidar herramientas o evolucionar desde un SIEM tradicional, sin obligar a reemplazar inversiones existentes. Fuerte en ambientes multivendor, SOC propios y empresas grandes.",
+      "ideal_for": ["entornos multivendor", "SOC propios", "empresas grandes", "clientes con SIEM legacy"],
+      "problems": [
+        "SOC con demasiadas herramientas y datos aislados",
+        "SIEM tradicional costoso o difícil de operar",
+        "Investigaciones lentas por falta de correlación",
+        "Organización que necesita XDR abierto",
+        "Falta de analistas especializados (Taegis MDR)"
+      ],
+      "differentiators": [
+        "Arquitectura abierta y multivendor",
+        "XDR + SIEM en la misma plataforma",
+        "Sophos Endpoint incluido en XDR/MDR Taegis",
+        "MDR operado hasta resolución",
+        "NDR/VDR como extensiones naturales"
+      ],
+      "sizing": "Según solución (XDR/MDR/SIEM/NDR/VDR), endpoints/usuarios y servidores, fuentes de datos, volumen/retención de logs y módulos requeridos.",
+      "entry_point": "Workshop de arquitectura SecOps. Especialmente fuerte cuando el cliente tiene SIEM legacy, muchas herramientas o SOC propio.",
+      "qualifying_questions": [
+        "¿Tienen un SOC propio y qué SIEM o herramientas usan hoy?",
+        "¿Cuántas fuentes de datos y qué volumen de logs manejan?",
+        "¿Quieren modernizar el SIEM, sumar XDR o delegar a un MDR?"
+      ]
+    },
+    {
+      "id": "seceon",
+      "name": "Seceon",
+      "tier": "primer_orden",
+      "category": "secops-xdr",
+      "tagline": "Plataforma all-in-one de AI-SIEM, XDR y automatización, con foco en MSP/MSSP y licenciamiento por activos.",
+      "summary": "Centraliza telemetría de endpoints, red, identidades, cloud y otras fuentes para correlacionar eventos y automatizar acciones. Atractiva para organizaciones y MSP/MSSP que buscan consolidación, operación multi-tenant y costos más predecibles. Útil con un equipo de seguridad pequeño, muchas fuentes de eventos o necesidad de construir servicios SOC escalables.",
+      "ideal_for": ["MSP/MSSP", "equipos de seguridad pequeños", "operación multi-tenant"],
+      "problems": [
+        "SIEM con alto costo y demasiadas herramientas adicionales",
+        "Demasiadas alertas para un SOC pequeño",
+        "MSSP que necesita multi-tenant y operación escalable",
+        "Telemetría distribuida en logs, red, identidad, endpoint y cloud",
+        "Necesidad de previsibilidad comercial frente al crecimiento de logs"
+      ],
+      "differentiators": [
+        "Diseño explícito para MSP/MSSP",
+        "All-in-one SecOps (SIEM, XDR, postura, compliance, respuesta)",
+        "Licenciamiento basado en activos",
+        "Automatización nativa (playbooks, correlación, respuesta)",
+        "Foco en eficiencia del SOC"
+      ],
+      "sizing": "El fabricante posiciona licenciamiento basado en activos. Levantar número/tipo de activos, endpoints, servidores, dispositivos de red, cloud, fuentes principales y si el modelo será enterprise o MSP/MSSP.",
+      "entry_point": "POV de 30 días o discovery de arquitectura SOC.",
+      "qualifying_questions": [
+        "¿Es para uso propio (enterprise) o para prestar servicios (MSP/MSSP)?",
+        "¿Cuántos activos y qué fuentes de datos habría que integrar?",
+        "¿Cuántas personas operan hoy el SOC?"
+      ]
+    },
+    {
+      "id": "stellar-cyber",
+      "name": "Stellar Cyber",
+      "tier": "cross_selling",
+      "category": "secops-xdr",
+      "tagline": "Plataforma SecOps abierta: AI-SIEM, NDR, ITDR, UEBA y Open XDR.",
+      "summary": "Complementa entornos multivendor y aporta visibilidad de red y otras fuentes sin obligar a reemplazar el EDR existente. En CPNnet es un cross-selling estratégico para SOC, NDR, OT y consolidación de telemetría. Relevante para empresas grandes y proveedores de servicios que necesitan una plataforma abierta, multi-tenant y orientada a automatizar la investigación.",
+      "ideal_for": ["empresas grandes", "proveedores de servicios / MSSP", "entornos OT"],
+      "problems": [
+        "SOC con herramientas aisladas (Open XDR)",
+        "Falta de visibilidad de red y movimiento lateral (NDR/OT)",
+        "SIEM tradicional con alto esfuerzo de investigación",
+        "Riesgo de identidad no correlacionado con red/endpoint (ITDR y UEBA)",
+        "MSSP que necesita arquitectura multi-tenant"
+      ],
+      "differentiators": [
+        "Open XDR como filosofía de integración",
+        "NDR/OT integrado en la misma plataforma",
+        "SIEM + XDR + ITDR + UEBA",
+        "Bring Your Own EDR",
+        "MITRE ATT&CK Coverage Analyzer"
+      ],
+      "sizing": "Depende de fuentes y volumen de telemetría, activos/usuarios y módulos. Levantar EPS/GB por día si aplica, cantidad de fuentes, retención requerida, NDR/OT, tenants y EDR existente.",
+      "entry_point": "Workshop de arquitectura SOC/NDR o POC con fuentes representativas.",
+      "qualifying_questions": [
+        "¿Qué EDR y SIEM tienen hoy?",
+        "¿Necesitan visibilidad de red u OT?",
+        "¿Es para uso propio o para operar como MSSP multi-tenant?"
+      ]
+    },
+    {
+      "id": "veracode",
+      "name": "Veracode",
+      "tier": "cross_selling",
+      "category": "appsec-devsecops",
+      "tagline": "Application Risk Management: SAST, DAST, SCA y ASPM en un solo ciclo de desarrollo.",
+      "summary": "Plataforma de gestión de riesgo de aplicaciones orientada a identificar, priorizar y reducir vulnerabilidades durante todo el ciclo de desarrollo. Adecuada para organizaciones con múltiples aplicaciones, grandes equipos de desarrollo y programas formales de AppSec o DevSecOps que necesitan estandarizar la seguridad a escala.",
+      "ideal_for": ["múltiples aplicaciones", "grandes equipos de desarrollo", "programas formales de AppSec/DevSecOps"],
+      "problems": [
+        "Vulnerabilidades en código interno (SAST)",
+        "Riesgos en componentes open source (SCA)",
+        "APIs y aplicaciones vulnerables en ejecución (DAST)",
+        "Demasiados hallazgos sin priorización (ASPM)",
+        "Seguridad que retrasa el desarrollo"
+      ],
+      "capabilities": ["SAST", "DAST", "SCA", "Application Risk Management / ASPM", "Remediación asistida", "Cobertura cloud-native"],
+      "sizing": null,
+      "entry_point": null,
+      "qualifying_questions": [
+        "¿Cuántas aplicaciones y desarrolladores tienen?",
+        "¿Tienen un programa formal de AppSec o DevSecOps?"
+      ]
+    },
+    {
+      "id": "ridge-security",
+      "name": "Ridge Security (RidgeBot)",
+      "tier": "cross_selling",
+      "category": "exposure-validation",
+      "tagline": "Pentesting automatizado y validación ofensiva continua.",
+      "summary": "Plataforma automatizada de seguridad ofensiva que descubre, intenta explotar de forma controlada y valida vulnerabilidades para saber cuáles representan un riesgo real. Automatiza el penetration testing y permite pruebas más frecuentes sobre redes, sistemas, aplicaciones y APIs. Para organizaciones que quieren pasar de 'tenemos vulnerabilidades' a 'sabemos cuáles realmente pueden explotarse'.",
+      "ideal_for": ["organizaciones sin equipo ofensivo propio", "validación continua de vulnerabilidades"],
+      "problems": [
+        "Pentesting demasiado esporádico",
+        "Vulnerabilidades que nunca se validan",
+        "Falta de especialistas en seguridad ofensiva",
+        "Dificultad para identificar rutas de ataque",
+        "APIs y aplicaciones sin validación ofensiva"
+      ],
+      "capabilities": ["Automated Pen Testing", "Validación real", "Pruebas recurrentes", "Cadenas de ataque", "API y apps web", "Adversary Emulation"],
+      "sizing": null,
+      "entry_point": null,
+      "qualifying_questions": [
+        "¿Cada cuánto hacen pentesting y quién lo hace?",
+        "¿Qué redes, aplicaciones o APIs quieren validar?"
+      ]
+    },
+    {
+      "id": "appgate",
+      "name": "Appgate",
+      "tier": "cross_selling",
+      "category": "identity-access",
+      "tagline": "Zero Trust Network Access (ZTNA).",
+      "summary": "Controla el acceso a aplicaciones y recursos según identidad, dispositivo y contexto, sustituyendo el acceso amplio a la red por conexiones específicas a los recursos autorizados. Relevante para trabajo remoto, acceso de terceros, infraestructura híbrida y organizaciones que buscan reducir su dependencia de VPN tradicionales.",
+      "ideal_for": ["trabajo remoto", "acceso de terceros", "infraestructura híbrida", "reemplazo de VPN"],
+      "problems": [
+        "VPN con acceso excesivo",
+        "Usuarios remotos y distribuidos",
+        "Acceso de proveedores y terceros",
+        "Infraestructura híbrida",
+        "Exposición innecesaria"
+      ],
+      "capabilities": ["Políticas basadas en identidad", "Acceso de mínimo privilegio", "Direct Routing", "Infraestructura oculta", "Políticas adaptativas", "Acceso para usuarios y workloads"],
+      "sizing": null,
+      "entry_point": null,
+      "qualifying_questions": [
+        "¿Cuántos usuarios remotos y terceros acceden hoy por VPN?",
+        "¿Qué recursos quieren proteger: apps, servidores, entornos cloud?"
+      ]
+    },
+    {
+      "id": "goto",
+      "name": "GoTo / LogMeIn Resolve",
+      "tier": "cross_selling",
+      "category": "network-hybrid",
+      "tagline": "Administración y soporte TI: soporte remoto, RMM, helpdesk y gestión de endpoints.",
+      "summary": "Plataforma integrada que combina soporte remoto, Remote Monitoring & Management, automatización, helpdesk, administración de activos y gestión de endpoints. Orientada a equipos TI y MSP con usuarios y dispositivos distribuidos que buscan reducir la cantidad de herramientas. Útil en ambientes híbridos, fuerzas de trabajo remotas y alto volumen de soporte.",
+      "ideal_for": ["equipos TI", "MSP", "fuerzas de trabajo remotas", "alto volumen de soporte"],
+      "problems": [
+        "Soporte remoto lento o fragmentado",
+        "Falta de visibilidad sobre endpoints",
+        "Tareas operativas manuales",
+        "Helpdesk y administración separados",
+        "Fuerza laboral distribuida"
+      ],
+      "capabilities": ["Remote Support", "RMM", "Remote Execution y automatización", "Helpdesk y ticketing", "Asset Management", "MDM y administración de apps"],
+      "sizing": null,
+      "entry_point": null,
+      "qualifying_questions": [
+        "¿Cuántos técnicos y cuántos dispositivos administran?",
+        "¿Qué herramientas de soporte remoto y ticketing usan hoy?"
+      ]
+    },
+    {
+      "id": "lastpass",
+      "name": "LastPass Business",
+      "tier": "cross_selling",
+      "category": "identity-access",
+      "tagline": "Gestión de contraseñas empresariales.",
+      "summary": "Permite centralizar, proteger y administrar las contraseñas de empleados y equipos con bóvedas cifradas, generación y autocompletado, uso compartido controlado, políticas administrativas e integraciones con directorios. Útil cuando la organización depende de contraseñas y necesita reducir malas prácticas como reutilización, almacenamiento inseguro o uso compartido informal.",
+      "ideal_for": ["organizaciones que aún dependen de contraseñas", "equipos que comparten cuentas"],
+      "problems": [
+        "Contraseñas débiles o reutilizadas",
+        "Contraseñas en planillas o documentos",
+        "Contraseñas compartidas entre empleados",
+        "Poca visibilidad de TI",
+        "Procesos manuales de alta y baja"
+      ],
+      "capabilities": ["Bóveda cifrada", "Generador y autocompletado", "Uso compartido controlado", "Administración centralizada", "Integraciones con directorios", "MFA, SSO y más"],
+      "sizing": null,
+      "entry_point": null,
+      "qualifying_questions": [
+        "¿Cuántos usuarios necesitan la herramienta?",
+        "¿Cómo comparten y guardan hoy las contraseñas?"
+      ]
+    },
+    {
+      "id": "algosec",
+      "name": "AlgoSec",
+      "tier": "cross_selling",
+      "category": "network-hybrid",
+      "tagline": "Gestión de seguridad de red centrada en las aplicaciones.",
+      "summary": "Administra conectividad y políticas a través de ambientes on-premise, cloud y redes híbridas. Permite descubrir dependencias de aplicaciones, visualizar flujos, analizar riesgos, automatizar cambios de políticas y mantener evidencia de cumplimiento. Adecuada para organizaciones con múltiples firewalls, tecnologías de red, ambientes multi-cloud y cambios frecuentes de conectividad.",
+      "ideal_for": ["múltiples firewalls", "multi-cloud", "cambios frecuentes de conectividad", "auditorías"],
+      "problems": [
+        "Reglas de firewall demasiado complejas",
+        "Cambios de red lentos y manuales",
+        "Sin relación entre reglas y aplicaciones",
+        "Riesgo de indisponibilidad por cambios",
+        "Auditorías difíciles de mantener"
+      ],
+      "capabilities": ["Visibilidad application-centric", "Descubrimiento y mapeo", "Security Policy Management", "Automatización de cambios", "Cobertura híbrida y multivendor", "Riesgo y cumplimiento continuo"],
+      "sizing": null,
+      "entry_point": null,
+      "qualifying_questions": [
+        "¿Cuántos firewalls y de qué fabricantes administran?",
+        "¿Cuántos cambios de reglas procesan al mes y cuánto demoran?"
+      ]
+    },
+    {
+      "id": "hacknoid",
+      "name": "Hacknoid",
+      "tier": "cross_selling",
+      "category": "exposure-validation",
+      "tagline": "Gestión continua de vulnerabilidades, sin agentes.",
+      "summary": "Descubre activos, mantiene un inventario actualizado, analiza de forma recurrente la superficie tecnológica y prioriza hallazgos. Funciona con arquitectura sin agentes y puede desplegarse on-premise, cloud o híbrido. Adecuada para organizaciones que buscan visibilidad continua de activos y vulnerabilidades con una operación simplificada.",
+      "ideal_for": ["equipos pequeños", "visibilidad continua de activos"],
+      "problems": [
+        "Activos que TI no sabe que existen",
+        "Evaluaciones demasiado espaciadas",
+        "Demasiados hallazgos sin priorización",
+        "Herramientas demasiado complejas",
+        "Dificultad para demostrar evolución"
+      ],
+      "capabilities": ["Evaluación continua", "Descubrimiento automático de activos", "Arquitectura sin agentes", "Priorización contextual", "Dashboard centralizado", "Reportes y seguimiento"],
+      "sizing": null,
+      "entry_point": null,
+      "qualifying_questions": [
+        "¿Cuántos activos tienen (servidores, equipos, cloud, IoT)?",
+        "¿Cada cuánto escanean vulnerabilidades hoy?"
+      ]
+    },
+    {
+      "id": "ironchip",
+      "name": "Ironchip",
+      "tier": "cross_selling",
+      "category": "identity-access",
+      "tagline": "Identidad y autenticación contextual, passwordless y anti-phishing.",
+      "summary": "Reduce la dependencia de contraseñas y refuerza la verificación del usuario mediante factores contextuales, incluyendo señales de localización. Incorpora passwordless, protección anti-phishing, múltiples métodos de autenticación e Identity Threat Detection & Response. Relevante para modernizar MFA, proteger acceso remoto o de proveedores y reducir riesgos de robo de credenciales.",
+      "ideal_for": ["modernizar MFA", "acceso remoto o de proveedores"],
+      "problems": [
+        "Dependencia excesiva de contraseñas",
+        "Phishing y robo de credenciales",
+        "MFA con demasiada fricción",
+        "Accesos sospechosos que parecen legítimos",
+        "Acceso de proveedores y terceros"
+      ],
+      "capabilities": ["Autenticación passwordless", "Inteligencia de localización", "Protección anti-phishing", "ITDR", "Múltiples métodos de autenticación", "Integración de identidad y SSO"],
+      "sizing": null,
+      "entry_point": null,
+      "qualifying_questions": [
+        "¿Cuántos usuarios necesitan MFA o passwordless?",
+        "¿Qué MFA o proveedor de identidad usan hoy?"
+      ]
+    },
+    {
+      "id": "teramind",
+      "name": "Teramind",
+      "tier": "cross_selling",
+      "category": "data-security",
+      "tagline": "Insider Risk y prevención de pérdida de datos basados en el comportamiento del usuario.",
+      "summary": "Plataforma centrada en el comportamiento del usuario para gestionar insider risk, prevenir pérdida de información y dar visibilidad detallada sobre cómo empleados, contratistas y terceros usan sistemas y datos. Combina monitoreo de actividad, DLP, analítica de comportamiento, reglas automáticas y evidencia forense de sesiones. Útil cuando el riesgo viene de actividades accidentales, negligentes o maliciosas de personas con acceso autorizado.",
+      "ideal_for": ["riesgo interno", "contratistas y terceros", "investigaciones forenses"],
+      "problems": [
+        "Fuga intencional de información",
+        "Pérdidas de datos por errores",
+        "Falta de visibilidad sobre usuarios con acceso sensible",
+        "Dificultad para investigar incidentes internos",
+        "Comportamientos anómalos difíciles de identificar"
+      ],
+      "capabilities": ["User Activity Monitoring", "Data Loss Prevention", "UEBA", "Reglas y acciones automáticas", "Grabación y análisis de sesiones", "Protección basada en contexto"],
+      "sizing": null,
+      "entry_point": null,
+      "qualifying_questions": [
+        "¿Cuántos usuarios y contratistas con acceso sensible hay que monitorear?",
+        "¿Han tenido incidentes de fuga interna o necesitan evidencia forense?"
+      ]
+    }
+  ]
+}
