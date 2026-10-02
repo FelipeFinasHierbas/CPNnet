@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Demo · Asistente comercial CPNnet Security</title>
+<style>
+.cpnnet-chat{--c-primary:#2b4c8c;--c-dark:#1b2f5e;--c-accent:#4f9bd6;--c-bg:#f4f7fb;position:fixed;right:20px;bottom:20px;z-index:99999;font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#1c2540}
+.cpnnet-chat *{box-sizing:border-box}
+.cpnnet-chat [hidden]{display:none!important}
+.cpnnet-chat__launcher{width:58px;height:58px;border:0;border-radius:50%;background:linear-gradient(135deg,var(--c-primary),var(--c-dark));color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(27,47,94,.35);transition:transform .15s}
+.cpnnet-chat__launcher:hover{transform:scale(1.06)}
+.cpnnet-chat__panel{width:370px;max-width:calc(100vw - 24px);height:560px;max-height:calc(100vh - 40px);background:#fff;border-radius:16px;box-shadow:0 12px 40px rgba(20,30,60,.28);display:flex;flex-direction:column;overflow:hidden}
+.cpnnet-chat__header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:linear-gradient(135deg,var(--c-primary),var(--c-dark));color:#fff}
+.cpnnet-chat__title{display:flex;flex-direction:column;line-height:1.2}
+.cpnnet-chat__title span{font-size:12px;opacity:.85}
+.cpnnet-chat__close{background:transparent;border:0;color:#fff;font-size:26px;line-height:1;cursor:pointer;padding:0 4px}
+.cpnnet-chat__log{flex:1;overflow-y:auto;padding:14px;background:var(--c-bg);display:flex;flex-direction:column;gap:10px}
+.cpnnet-chat__msg{max-width:86%;padding:9px 12px;border-radius:14px;word-wrap:break-word;overflow-wrap:anywhere}
+.cpnnet-chat__msg--assistant{align-self:flex-start;background:#fff;border:1px solid #dde5f0;border-bottom-left-radius:4px}
+.cpnnet-chat__msg--user{align-self:flex-end;background:var(--c-primary);color:#fff;border-bottom-right-radius:4px}
+.cpnnet-chat__msg--typing{opacity:.6;font-style:italic}
+.cpnnet-chat__wa{display:inline-block;margin-top:8px;padding:8px 12px;border-radius:8px;background:#1faa59;color:#fff!important;text-decoration:none;font-weight:600}
+.cpnnet-chat__chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 14px 10px;background:var(--c-bg)}
+.cpnnet-chat__chip{border:1px solid var(--c-primary);background:#fff;color:var(--c-primary);border-radius:18px;padding:7px 12px;cursor:pointer;font:inherit;font-size:13px}
+.cpnnet-chat__chip:hover{background:var(--c-primary);color:#fff}
+.cpnnet-chat__form{display:flex;gap:8px;padding:10px;border-top:1px solid #e4e9f2;background:#fff}
+.cpnnet-chat__input{flex:1;resize:none;border:1px solid #cfd8e6;border-radius:10px;padding:9px 10px;font:inherit;max-height:96px}
+.cpnnet-chat__input:focus{outline:2px solid var(--c-accent);border-color:transparent}
+.cpnnet-chat__send{border:0;border-radius:10px;background:var(--c-primary);color:#fff;padding:0 14px;cursor:pointer;font:inherit;font-weight:600}
+.cpnnet-chat__send:disabled{opacity:.5;cursor:default}
+.cpnnet-chat__note{margin:0;padding:6px 12px 10px;font-size:11px;color:#6a7488;background:#fff}
+@media (max-width:480px){.cpnnet-chat{right:12px;bottom:12px}.cpnnet-chat__panel{height:calc(100vh - 24px)}}
+
+:root{--p:#2b4c8c;--d:#1b2f5e;--a:#4f9bd6;--bg:#f4f7fb;--ink:#1c2540;--mut:#5f6b85}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+.top{background:linear-gradient(135deg,var(--p),var(--d));color:#fff;padding:18px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.top b{font-size:18px}.top span{opacity:.85;font-size:14px}
+.badge{background:#fff;color:var(--d);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700}
+main{max-width:1180px;margin:0 auto;padding:28px;display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:28px}
+h1{font-size:26px;margin:0 0 6px}
+.lead{color:var(--mut);margin:0 0 20px}
+.scen{display:grid;gap:10px;margin-bottom:22px}
+.scen button{text-align:left;border:1px solid #cfd8e6;background:#fff;border-radius:12px;padding:12px 14px;cursor:pointer;font:inherit;color:var(--ink);transition:.15s}
+.scen button:hover{border-color:var(--p)}
+.scen button.on{border-color:var(--p);box-shadow:0 0 0 2px rgba(43,76,140,.18);background:#eef3fb}
+.scen strong{display:block;color:var(--p)}.scen small{color:var(--mut)}
+.card{background:#fff;border:1px solid #dde5f0;border-radius:14px;padding:16px 18px}
+.card h2{font-size:15px;margin:0 0 10px;color:var(--d)}
+.wa{background:#e7f8ec;border:1px solid #b8e6c6;border-radius:12px;padding:12px 14px;font-size:14px;white-space:pre-line;color:#15361f}
+.wa.empty{background:#f0f2f6;border-color:#dde2ec;color:var(--mut);font-style:italic}
+.note{font-size:13px;color:var(--mut);margin-top:14px}
+.hint{font-size:13px;color:var(--mut);margin:0 0 6px}
+/* el widget se muestra siempre abierto dentro de la página */
+.demo-chat{position:static;align-self:start}
+.demo-chat .cpnnet-chat__panel{height:620px;width:100%;box-shadow:0 12px 40px rgba(20,30,60,.2)}
+.cpnnet-chat__chips{flex-direction:column;align-items:stretch}
+.cpnnet-chat__chip{text-align:left;border-radius:12px;line-height:1.35}
+@media(max-width:900px){main{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="top"><div><b>CPNnet Security</b> <span>· Asistente comercial con IA</span></div><div class="badge">DEMO GUIONADA</div></div>
+<main>
+  <section>
+    <h1>Así conversa el asistente</h1>
+    <p class="lead">Elige un escenario y avanza con las respuestas sugeridas en el chat. Es una demo guionada para mostrar el flujo: en el sitio real el asistente responde con IA a cualquier consulta, usando solo el catálogo de CPNnet.</p>
+    <div class="scen" id="scen"></div>
+    <div class="card">
+      <h2>Lo que recibe el ejecutivo por WhatsApp</h2>
+      <div class="wa empty" id="lead">Aparece al final de la conversación, cuando el visitante acepta compartir sus datos.</div>
+    </div>
+    <p class="note">Los datos de las conversaciones de ejemplo (nombres, empresas, correos) son ficticios.</p>
+  </section>
+  <div class="cpnnet-chat demo-chat" id="chat"></div>
+</main>
+<script>
+var WELCOME='¡Hola! Soy el asistente virtual de CPNnet Security. ¿Nos escribes como partner/integrador o como empresa que busca una solución de ciberseguridad?';
+var SCENARIOS=[
+{id:'a',title:'Empresa con equipo de seguridad pequeño',sub:'Muchas alertas, sin cobertura fuera de horario',
+ steps:[
+  {u:'Somos una empresa. Tenemos un equipo de seguridad pequeño, muchas alertas y nadie de guardia fuera de horario.',
+   b:'Entiendo, es justo el escenario para el que existe el MDR. Con **Sophos MDR**, especialistas monitorean, investigan y responden por ustedes las 24 horas. Si prefieren una plataforma para operar con su propio equipo, está **Seceon**, pensada para SOC pequeños y con licenciamiento por activos.\n\nPara orientarte mejor: ¿cuántos usuarios y servidores tienen?'},
+  {u:'Unos 120 usuarios y 15 servidores.',
+   b:'Perfecto. Sophos XDR/MDR se licencia por usuario y por servidor, así que con esos datos ya se puede dimensionar. El primer paso que recomendamos es una **revisión de madurez de detección y respuesta**.\n\n¿Quieres que un ejecutivo de CPNnet te contacte para coordinarla? Necesito tu autorización para compartir tus datos con el equipo comercial.'},
+  {u:'Sí, acepto. Soy Ana Pérez, de ACME (Chile), ana@acme.cl',
+   b:'Gracias, Ana. Ya preparé el resumen para el equipo comercial. Puedes continuar con un ejecutivo por WhatsApp:',
+   lead:'Nuevo lead desde www.cpnnetsecurity.com\nPerfil: empresa\nNombre: Ana Pérez\nEmpresa: ACME\nPaís: Chile\nContacto: ana@acme.cl\nNecesidad: Equipo de seguridad pequeño, exceso de alertas y sin cobertura fuera de horario\nMarcas de interés: Sophos XDR/MDR, Seceon\nDimensionamiento: ~120 usuarios, 15 servidores\nSiguiente paso sugerido: Revisión de madurez de detección/respuesta'}
+ ]},
+{id:'b',title:'Partner: cliente quiere reemplazar su VPN',sub:'El asistente reconoce al integrador y habla de dimensionamiento',
+ steps:[
+  {u:'Soy integrador. Un cliente quiere reemplazar su VPN por algo más granular.',
+   b:'Para ese caso hay dos caminos en el portafolio: **Sophos Network** (incluye ZTNA, con acceso por aplicación y recurso; encaja si el cliente usa o renueva firewall Sophos) y **Appgate** (ZTNA basado en identidad, dispositivo y contexto, con infraestructura oculta).\n\n¿El cliente tiene usuarios remotos, terceros o ambos? ¿Cuántos?'},
+  {u:'Unos 300 usuarios remotos y 20 proveedores externos.',
+   b:'Gracias. Para Sophos el dimensionamiento considera usuarios/conexiones, VPN y el firewall asociado; la entrada recomendada es la renovación de firewall o el reemplazo de VPN por ZTNA. En Appgate, el dimensionamiento lo valida un ejecutivo con el fabricante. Ambos cubren el acceso de terceros que mencionas.\n\n¿Quieres que un ejecutivo te contacte con esta información? Necesito tu autorización para compartir tus datos.'},
+  {u:'Sí. Soy Luis Rojas, de Integra TI (Perú), luis@integrati.pe',
+   b:'Gracias, Luis. Preparé el resumen para el equipo comercial. Puedes continuar por WhatsApp:',
+   lead:'Nuevo lead desde www.cpnnetsecurity.com\nPerfil: partner\nNombre: Luis Rojas\nEmpresa: Integra TI\nPaís: Perú\nContacto: luis@integrati.pe\nNecesidad: Reemplazar VPN de un cliente por acceso granular (ZTNA)\nMarcas de interés: Sophos Network, Appgate\nDimensionamiento: ~300 usuarios remotos, 20 proveedores externos\nSiguiente paso sugerido: Reemplazo de VPN por ZTNA / renovación de firewall'}
+ ]},
+{id:'c',title:'Pregunta que el catálogo no responde',sub:'El asistente no inventa precios y deriva',
+ steps:[
+  {u:'¿Cuánto cuesta Sophos MDR por usuario?',
+   b:'No manejo precios ni descuentos: esa información la entrega un ejecutivo de CPNnet junto con la cotización. Lo que sí puedo decirte es que Sophos XDR/MDR se dimensiona **por usuario y por servidor**.\n\nSi me cuentas cuántos tienes, dejo todo listo para que un ejecutivo te cotice. ¿Te parece?'},
+  {u:'Sí: 80 usuarios y 5 servidores. Acepto que compartan mis datos. Marcos Díaz, Colombia, 3001234567',
+   b:'Gracias, Marcos. Ya dejé tu consulta lista para un ejecutivo, que te enviará la cotización. Puedes continuar por WhatsApp:',
+   lead:'Nuevo lead desde www.cpnnetsecurity.com\nPerfil: desconocido\nNombre: Marcos Díaz\nPaís: Colombia\nContacto: 3001234567\nNecesidad: Cotización de Sophos MDR\nMarcas de interés: Sophos XDR/MDR\nDimensionamiento: 80 usuarios, 5 servidores\nSiguiente paso sugerido: Cotización con ejecutivo'}
+ ]}
+];
+var cur=null,step=0,busy=false,hinted=false;
+function el(t,c,x){var n=document.createElement(t);if(c)n.className=c;if(x!=null)n.textContent=x;return n}
+function rich(box,text){text.split('\n').forEach(function(l,i){if(i)box.appendChild(document.createElement('br'));l.split(/(\*\*[^*]+\*\*)/g).forEach(function(p){if(/^\*\*[^*]+\*\*$/.test(p))box.appendChild(el('strong',null,p.slice(2,-2)));else if(p)box.appendChild(document.createTextNode(p))})})}
+var chat=document.getElementById('chat');
+var panel=el('section','cpnnet-chat__panel');
+var head=el('header','cpnnet-chat__header');var ti=el('div','cpnnet-chat__title');ti.appendChild(el('strong',null,'CPNnet Security'));ti.appendChild(el('span',null,'Asistente virtual (IA)'));head.appendChild(ti);
+var log=el('div','cpnnet-chat__log');var chips=el('div','cpnnet-chat__chips');
+var form=el('form','cpnnet-chat__form');var inp=el('textarea','cpnnet-chat__input');inp.rows=1;inp.placeholder='Escribe tu consulta…';var snd=el('button','cpnnet-chat__send','Enviar');snd.type='submit';form.appendChild(inp);form.appendChild(snd);
+var note=el('p','cpnnet-chat__note','Asistente con IA. No compartas contraseñas ni datos sensibles. Al dejar tus datos aceptas que los use el equipo comercial de CPNnet para contactarte.');
+[head,log,chips,form,note].forEach(function(n){panel.appendChild(n)});chat.appendChild(panel);
+function bubble(role,text,wa){var b=el('div','cpnnet-chat__msg cpnnet-chat__msg--'+role);rich(b,text);if(wa){var a=el('a','cpnnet-chat__wa','Continuar por WhatsApp con un ejecutivo');a.href='#lead';b.appendChild(document.createElement('br'));b.appendChild(a)}log.appendChild(b);log.scrollTop=log.scrollHeight;return b}
+function showChips(){chips.textContent='';var s=cur&&cur.steps[step];if(!s){chips.hidden=true;return}chips.hidden=false;var c=el('button','cpnnet-chat__chip',s.u);c.type='button';c.onclick=function(){play(s)};chips.appendChild(c)}
+function play(s){if(busy)return;busy=true;chips.hidden=true;bubble('user',s.u);var t=bubble('assistant','Escribiendo…');t.classList.add('cpnnet-chat__msg--typing');
+ setTimeout(function(){t.remove();bubble('assistant',s.b,!!s.lead);if(s.lead){var L=document.getElementById('lead');L.className='wa';L.textContent=s.lead}step++;busy=false;showChips()},1100)}
+function start(i){cur=SCENARIOS[i];step=0;busy=false;hinted=false;log.textContent='';bubble('assistant',WELCOME);var L=document.getElementById('lead');L.className='wa empty';L.textContent='Aparece al final de la conversación, cuando el visitante acepta compartir sus datos.';
+ [].forEach.call(document.querySelectorAll('#scen button'),function(b,j){b.classList.toggle('on',j===i)});showChips()}
+form.addEventListener('submit',function(e){e.preventDefault();var v=inp.value.trim();if(!v)return;inp.value='';bubble('user',v);if(!hinted){hinted=true;setTimeout(function(){bubble('assistant','En esta demo guionada elige una de las respuestas sugeridas. En el sitio real respondo con IA a cualquier consulta.')},500)}});
+inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();form.requestSubmit()}});
+var sc=document.getElementById('scen');SCENARIOS.forEach(function(s,i){var b=el('button');b.type='button';b.appendChild(el('strong',null,s.title));b.appendChild(el('small',null,s.sub));b.onclick=function(){start(i)};sc.appendChild(b)});
+start(0);
+</script>
+</body>
+</html>

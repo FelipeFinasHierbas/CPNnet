@@ -27,3 +27,7 @@ El script copia la base de conocimiento (`knowledge/`) y el prompt (`bot/system-
 
 ## Actualizar el conocimiento
 Editar `knowledge/brands.json` (o `bot/system-prompt.md`), correr `knowledge/validate.py` y volver a generar el .zip.
+
+## Demo y presentación
+- `demo/index.html`: demo guionada de una sola página (abrir con doble clic; no necesita internet ni API key). Regenerar con `python3 demo/build.py` tras editar `demo/template.html`.
+- `presentacion/Asistente-comercial-CPNnet.pdf`: presentación para el cliente (fuente: `presentacion/presentacion.html`).
