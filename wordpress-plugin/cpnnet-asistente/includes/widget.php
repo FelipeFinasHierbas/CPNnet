@@ -12,5 +12,6 @@ add_action('wp_enqueue_scripts', function () {
     wp_add_inline_script('cpnnet-asistente', 'window.CPNNET_ASISTENTE = ' . wp_json_encode([
         'endpoint' => esc_url_raw(rest_url('cpnnet-asistente/v1/chat')),
         'welcome'  => (string) cpnnet_asistente_get('welcome'),
+        'logo'     => esc_url_raw(CPNNET_ASISTENTE_URL . 'assets/img/cpnnet-logo-white.png'),
     ]) . ';', 'before');
 });

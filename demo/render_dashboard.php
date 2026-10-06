@@ -30,12 +30,15 @@ foreach(cpnnet_asistente_kb()['brands'] as $b) $add('cfg-conocimiento-brand-'.$b
 $add('cfg-conocimiento-brand-nueva', cap('cpnnet_asistente_admin_page',['tab'=>'conocimiento','brand'=>'nueva']));
 $csv=cpnnet_asistente_csv_for([]);
 $css=file_get_contents(CPNNET_ASISTENTE_DIR.'assets/admin.css');
+$b64=fn($f,$m)=>"data:$m;base64,".base64_encode(file_get_contents(CPNNET_ASISTENTE_DIR.'assets/'.$f));
+$css=preg_replace_callback('#url\("fonts/(montserrat-latin-\d+-normal\.woff2)"\)#',fn($m)=>'url("'.$b64('fonts/'.$m[1],'font/woff2').'")',$css);
+$logo=$b64('img/cpnnet-logo-white.png','image/png');
 $body=''; foreach($sec as $id=>$h) $body.='<section class="page" data-page="'.$id.'" hidden>'.$h.'</section>';
 $html=<<<HTML
 <!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Demo · Panel comercial CPNnet</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f0f0f1;font:13px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#1d2327}
-#bar{position:sticky;top:0;z-index:20;background:#1d2327;color:#f0f0f1;display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:34px;font-size:12.5px}
+*{box-sizing:border-box}body{margin:0;background:#f0f0f1;font:13px/1.5 "Montserrat CPN",Montserrat,-apple-system,"Segoe UI",Roboto,sans-serif;color:#1d2327}
+#bar{position:sticky;top:0;z-index:20;background:#1d2327;color:#f0f0f1;display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:34px;font-size:12px}
 #bar b{color:#fff}#bar span{opacity:.8}
 #layout{display:flex;min-height:calc(100vh - 34px)}
 #side{width:200px;background:#1d2327;flex:none;padding-top:8px}
@@ -60,7 +63,7 @@ input[type=text],input[type=search],input[type=date],input[type=url],input[type=
 <a href="#panel-30" data-nav="panel">Panel</a><a href="#leads" data-nav="leads">Leads</a><a href="#integ" data-nav="integ">Integración CRM</a><a href="#cfg-general" data-nav="cfg">Configuración</a></nav>
 <main id="main">$body</main></div><div id="toast"></div>
 <script>
-var CSV=%CSV%;window.confirm=function(){return true};
+var CSV=%CSV%,LOGO=%LOGO%;[].forEach.call(document.querySelectorAll('img.cpn-logo'),function(i){i.src=LOGO});window.confirm=function(){return true};
 var pages=[].slice.call(document.querySelectorAll('.page'));
 function show(id){var t=pages.filter(function(p){return p.dataset.page===id})[0];if(!t){toast('En el sitio real aquí se abre esta pantalla.');return}
  pages.forEach(function(p){p.hidden=p!==t});var g=id.split('-')[0];
@@ -88,5 +91,7 @@ show((location.hash||'#panel-30').slice(1));
 </script></body></html>
 HTML;
 $html=str_replace('%CSV%',json_encode($csv,JSON_UNESCAPED_UNICODE),$html);
+$html=str_replace('ASSET/assets/img/cpnnet-logo-white.png','data:image/gif;base64,R0lGODlhAQABAAAAACw=',$html); // el logo real se asigna una sola vez desde JS
+$html=str_replace('%LOGO%',json_encode($logo),$html);
 file_put_contents($out,$html);
 echo "dashboard.html: ".round(strlen($html)/1024)." KB, ".count($sec)." pantallas\n";

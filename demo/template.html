@@ -8,18 +8,18 @@
 /*CSS*/
 :root{--p:#2b4c8c;--d:#1b2f5e;--a:#4f9bd6;--bg:#f4f7fb;--ink:#1c2540;--mut:#5f6b85}
 *{box-sizing:border-box}
-body{margin:0;font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
-.top{background:linear-gradient(135deg,var(--p),var(--d));color:#fff;padding:18px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-.top b{font-size:18px}.top span{opacity:.85;font-size:14px}
+body{margin:0;font:15px/1.55 "Montserrat CPN",Montserrat,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+.top{background:linear-gradient(135deg,var(--p),var(--d));color:#fff;padding:12px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.top{align-items:center}.top .logo{height:46px;width:auto;display:block}.top .brand{display:flex;align-items:center;gap:16px}.top .sep{width:1px;height:34px;background:rgba(255,255,255,.3)}.top span.t{opacity:.9;font-size:14px;font-weight:600}
 .badge{background:#fff;color:var(--d);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700}
 main{max-width:1180px;margin:0 auto;padding:28px;display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:28px}
-h1{font-size:26px;margin:0 0 6px}
+h1{font-size:24px;margin:0 0 6px;font-weight:700}
 .lead{color:var(--mut);margin:0 0 20px}
 .scen{display:grid;gap:10px;margin-bottom:22px}
-.scen button{text-align:left;border:1px solid #cfd8e6;background:#fff;border-radius:12px;padding:12px 14px;cursor:pointer;font:inherit;color:var(--ink);transition:.15s}
+.scen button{font-family:inherit;font-size:14px;text-align:left;border:1px solid #cfd8e6;background:#fff;border-radius:12px;padding:12px 14px;cursor:pointer;font:inherit;color:var(--ink);transition:.15s}
 .scen button:hover{border-color:var(--p)}
 .scen button.on{border-color:var(--p);box-shadow:0 0 0 2px rgba(43,76,140,.18);background:#eef3fb}
-.scen strong{display:block;color:var(--p)}.scen small{color:var(--mut)}
+.scen strong{display:block;color:var(--p);font-weight:700}.scen small{color:var(--mut)}
 .card{background:#fff;border:1px solid #dde5f0;border-radius:14px;padding:16px 18px}
 .card h2{font-size:15px;margin:0 0 10px;color:var(--d)}
 .wa{background:#e7f8ec;border:1px solid #b8e6c6;border-radius:12px;padding:12px 14px;font-size:14px;white-space:pre-line;color:#15361f}
@@ -35,7 +35,7 @@ h1{font-size:26px;margin:0 0 6px}
 </style>
 </head>
 <body>
-<div class="top"><div><b>CPNnet Security</b> <span>· Asistente comercial con IA</span></div><div class="badge">DEMO GUIONADA</div></div>
+<div class="top"><div class="brand"><img class="logo" src="__LOGO_WHITE__" alt="CPNnet Security"><span class="sep"></span><span class="t">Asistente comercial con IA</span></div><div class="badge">DEMO GUIONADA</div></div>
 <main>
   <section>
     <h1>Así conversa el asistente</h1>
@@ -86,7 +86,7 @@ function el(t,c,x){var n=document.createElement(t);if(c)n.className=c;if(x!=null
 function rich(box,text){text.split('\n').forEach(function(l,i){if(i)box.appendChild(document.createElement('br'));l.split(/(\*\*[^*]+\*\*)/g).forEach(function(p){if(/^\*\*[^*]+\*\*$/.test(p))box.appendChild(el('strong',null,p.slice(2,-2)));else if(p)box.appendChild(document.createTextNode(p))})})}
 var chat=document.getElementById('chat');
 var panel=el('section','cpnnet-chat__panel');
-var head=el('header','cpnnet-chat__header');var ti=el('div','cpnnet-chat__title');ti.appendChild(el('strong',null,'CPNnet Security'));ti.appendChild(el('span',null,'Asistente virtual (IA)'));head.appendChild(ti);
+var head=el('header','cpnnet-chat__header');var br=el('div','cpnnet-chat__brand');var lg=el('img','cpnnet-chat__logo');lg.src='__LOGO_WHITE__';lg.alt='CPNnet Security';br.appendChild(lg);var ti=el('div','cpnnet-chat__title');ti.appendChild(el('strong',null,'Asistente virtual'));ti.appendChild(el('span',null,'Con inteligencia artificial'));br.appendChild(ti);head.appendChild(br);
 var log=el('div','cpnnet-chat__log');var chips=el('div','cpnnet-chat__chips');
 var form=el('form','cpnnet-chat__form');var inp=el('textarea','cpnnet-chat__input');inp.rows=1;inp.placeholder='Escribe tu consulta…';var snd=el('button','cpnnet-chat__send','Enviar');snd.type='submit';form.appendChild(inp);form.appendChild(snd);
 var note=el('p','cpnnet-chat__note','Asistente con IA. No compartas contraseñas ni datos sensibles. Al dejar tus datos aceptas que los use el equipo comercial de CPNnet para contactarte.');

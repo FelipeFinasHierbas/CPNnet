@@ -1,18 +1,25 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><title>Asistente comercial con IA · CPNnet Security</title>
 <style>
+@font-face{font-family:"Montserrat CPN";font-weight:400;font-style:normal;src:url("../wordpress-plugin/cpnnet-asistente/assets/fonts/montserrat-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Montserrat CPN";font-weight:500;font-style:normal;src:url("../wordpress-plugin/cpnnet-asistente/assets/fonts/montserrat-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Montserrat CPN";font-weight:600;font-style:normal;src:url("../wordpress-plugin/cpnnet-asistente/assets/fonts/montserrat-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Montserrat CPN";font-weight:700;font-style:normal;src:url("../wordpress-plugin/cpnnet-asistente/assets/fonts/montserrat-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Montserrat CPN";font-weight:800;font-style:normal;src:url("../wordpress-plugin/cpnnet-asistente/assets/fonts/montserrat-latin-800-normal.woff2") format("woff2")}
 @page{size:1280px 720px;margin:0}
 *{box-sizing:border-box}
 :root{--p:#2b4c8c;--d:#1b2f5e;--a:#4f9bd6;--bg:#f4f7fb;--ink:#1c2540;--mut:#5f6b85}
 html,body{margin:0;padding:0}
-body{font:20px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink)}
+body{font:19px/1.5 "Montserrat CPN",Montserrat,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink)}
 .slide{width:1280px;height:720px;padding:56px 72px;position:relative;overflow:hidden;page-break-after:always;background:#fff}
 .slide:last-child{page-break-after:auto}
 .slide.dark{background:linear-gradient(135deg,var(--p),var(--d));color:#fff}
+.slide:not(.dark)::after{content:"";position:absolute;right:72px;top:30px;width:84px;height:62px;background:url("../wordpress-plugin/cpnnet-asistente/assets/img/cpnnet-logo.png") no-repeat right center/contain}
+.cover-logo{height:128px;width:auto;display:block;margin-bottom:6px}
 .tag{display:inline-block;background:#e8eef9;color:var(--p);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;border-radius:20px;padding:5px 14px}
 .dark .tag{background:rgba(255,255,255,.16);color:#fff}
-h1{font-size:54px;line-height:1.1;margin:22px 0 14px}
-h2{font-size:38px;line-height:1.15;margin:16px 0 22px;color:var(--d)}
+h1{font-size:52px;line-height:1.12;margin:22px 0 14px;font-weight:800}
+h2{font-size:34px;line-height:1.18;margin:16px 0 22px;color:var(--d);font-weight:700;max-width:1020px}
 .dark h2{color:#fff}
 p{margin:0 0 12px}.mut{color:var(--mut)}.dark .mut{color:rgba(255,255,255,.8)}
 .foot{position:absolute;left:72px;right:72px;bottom:26px;display:flex;justify-content:space-between;font-size:13px;color:var(--mut)}
@@ -28,18 +35,19 @@ p{margin:0 0 12px}.mut{color:var(--mut)}.dark .mut{color:rgba(255,255,255,.8)}
 ul{margin:0;padding-left:22px}li{margin:10px 0;font-size:22px}
 .shot{border-radius:14px;border:1px solid #cfd8e6;box-shadow:0 10px 30px rgba(20,30,60,.18)}
 .wa{background:#e7f8ec;border:1px solid #b8e6c6;border-radius:14px;padding:20px 22px;font-size:18px;white-space:pre-line;color:#15361f;line-height:1.5}
-table{border-collapse:collapse;width:100%;font-size:21px}
+table{border-collapse:collapse;width:100%;font-size:18px}th:first-child{width:44%}
 th,td{padding:16px 16px;text-align:left;border-bottom:1px solid #dde5f0}
 th{background:var(--p);color:#fff}
 .big{font-size:44px;font-weight:800;color:var(--p)}
 .pill{display:inline-block;background:#e8eef9;color:var(--p);border-radius:20px;padding:7px 16px;font-size:18px;font-weight:600;margin:3px 4px 3px 0}
 .compact .card{padding:18px 24px}.compact .card h3{font-size:24px;margin-bottom:6px}.compact .card p{font-size:18px}
-.warn{font-size:17px;color:var(--mut);margin-top:12px}
+.warn{font-size:15px;color:var(--mut);margin-top:12px}
 </style></head><body>
 
 <section class="slide dark">
-  <span class="tag">Propuesta</span>
-  <h1 style="font-size:64px;margin-top:70px">Asistente comercial<br>con IA para <span style="color:#9fd0f5">CPNnet Security</span></h1>
+  <img class="cover-logo" src="../wordpress-plugin/cpnnet-asistente/assets/img/cpnnet-logo-white.png" alt="CPNnet Security">
+  <span class="tag" style="margin-top:14px">Propuesta</span>
+  <h1 style="font-size:58px;margin-top:34px">Asistente comercial<br>con IA para <span style="color:#9fd0f5">CPNnet Security</span></h1>
   <p class="mut" style="font-size:26px;max-width:860px">Un chat en su sitio web que orienta a partners y empresas sobre el portafolio, y entrega al equipo comercial leads listos para contactar.</p>
   <div class="foot"><span>www.cpnnetsecurity.com</span><span>Presentación para CPNnet</span></div>
 </section>
@@ -58,7 +66,7 @@ th{background:var(--p);color:#fff}
 
 <section class="slide">
   <span class="tag">La solución</span>
-  <h2>Un asistente que conoce el catálogo y sabe con quién habla</h2>
+  <h2>Conoce el catálogo y sabe con quién habla</h2>
   <div class="grid g2">
     <div class="card"><div class="num">1</div><h3>Detecta el perfil</h3><p>Pregunta si es partner/integrador o empresa y adapta el lenguaje: técnico-comercial para partners, de negocio para empresas.</p></div>
     <div class="card"><div class="num">2</div><h3>Parte del problema, no de la marca</h3><p>Hace pocas preguntas y recomienda 1 a 3 marcas del portafolio, con los complementos del mapa de cross-selling.</p></div>
@@ -85,8 +93,8 @@ th{background:var(--p);color:#fff}
 <section class="slide">
   <span class="tag">Ejemplo</span>
   <h2 style="margin-bottom:10px">Conversación con una empresa</h2>
-  <div style="display:grid;grid-template-columns:330px 1fr;gap:40px;align-items:start">
-    <img class="shot" src="chat-a.png" style="width:330px;height:auto">
+  <div style="display:grid;grid-template-columns:300px 1fr;gap:40px;align-items:start">
+    <img class="shot" src="chat-a.png" style="width:300px;height:auto">
     <div>
       <p style="font-size:20px">La empresa cuenta que tiene un equipo de seguridad pequeño, muchas alertas y nadie de guardia fuera de horario.</p>
       <ul>
@@ -132,8 +140,8 @@ Siguiente paso sugerido: Revisión de madurez de detección/respuesta</div>
 <section class="slide">
   <span class="tag">Panel comercial</span>
   <h2 style="margin-bottom:10px">Un panel claro para el área comercial</h2>
-  <div style="display:grid;grid-template-columns:690px 1fr;gap:34px;align-items:start">
-    <img class="shot" src="panel-comercial.png" style="width:690px;height:auto">
+  <div style="display:grid;grid-template-columns:620px 1fr;gap:34px;align-items:start">
+    <img class="shot" src="panel-comercial.png" style="width:620px;height:auto">
     <div>
       <ul style="font-size:20px">
         <li><b>Indicadores:</b> conversaciones, leads, conversión, mensajes y gasto.</li>
@@ -150,7 +158,7 @@ Siguiente paso sugerido: Revisión de madurez de detección/respuesta</div>
 
 <section class="slide">
   <span class="tag">Integración con el CRM</span>
-  <h2>Del asistente al CRM de CPNnet, que vive en el mismo hosting</h2>
+  <h2>Del asistente al CRM, en el mismo hosting</h2>
   <div class="grid g3 compact" style="gap:16px">
     <div class="card"><h3>Exportar CSV</h3><p>Un botón en el panel descarga los leads con los filtros aplicados. Se abre directo en Excel y la mayoría de los CRM lo importan.</p></div>
     <div class="card"><h3>API con token</h3><p>El CRM, o un proceso programado, consulta los leads nuevos y marca los que ya importó. Acceso solo de lectura, protegido con token.</p></div>
@@ -176,7 +184,7 @@ Siguiente paso sugerido: Revisión de madurez de detección/respuesta</div>
 
 <section class="slide">
   <span class="tag">Suyo para administrar</span>
-  <h2>CPNnet edita y mejora el asistente, sin depender de nadie</h2>
+  <h2>CPNnet lo edita y mejora por sí mismo</h2>
   <div class="grid g2 compact" style="gap:14px">
     <div class="card"><h3>General</h3><p>Activar o apagar el chat, WhatsApp que recibe los leads, mensaje de bienvenida, modelo de IA y límites de uso.</p></div>
     <div class="card"><h3>Conocimiento (marcas)</h3><p>Agregar, editar o eliminar marcas con un formulario: resumen, problemas que resuelve, diferenciales, cómo se dimensiona y primer paso recomendado.</p></div>
@@ -189,7 +197,7 @@ Siguiente paso sugerido: Revisión de madurez de detección/respuesta</div>
 
 <section class="slide">
   <span class="tag">Tokens, costos y propiedad</span>
-  <h2>Funciona con la cuenta de CPNnet y el gasto queda acotado</h2>
+  <h2>Cuenta propia y gasto acotado</h2>
   <div class="grid g2" style="grid-template-columns:1.15fr 1fr;gap:26px">
     <div>
       <table>
@@ -198,11 +206,11 @@ Siguiente paso sugerido: Revisión de madurez de detección/respuesta</div>
         <tr><td>Intermedio (Sonnet 5.5)</td><td>≈ US$ 0,009</td><td>≈ US$ 0,08</td></tr>
         <tr><td>Económico (Haiku 4.5)</td><td>≈ US$ 0,004</td><td>≈ US$ 0,04</td></tr>
       </table>
-      <p class="warn">Estimaciones con precios de lista, conversación de 6 mensajes y respuestas de ~400 tokens. El costo real se mide en el panel «Uso y costos»; la factura final es la de la consola de la IA.</p>
+      <p class="warn">Estimaciones con precios de lista (6 mensajes por conversación, ~400 tokens por respuesta). El costo real se mide en «Uso y costos»; la factura es la de la consola de la IA.</p>
     </div>
     <div class="card" style="padding:22px 26px">
       <h3 style="font-size:23px">Quién paga y cómo se controla</h3>
-      <ul style="font-size:19px;margin-top:4px">
+      <ul style="font-size:17px;margin-top:4px">
         <li><b>Cuenta propia de CPNnet</b>, con su medio de pago y facturación.</li>
         <li><b>Créditos prepagados</b> y límite mensual en la consola.</li>
         <li><b>Tope mensual</b> en el plugin: al alcanzarlo, el chat se detiene.</li>

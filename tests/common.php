@@ -35,6 +35,6 @@ $wpdb=new WPDB;
 define('CPNNET_ASISTENTE_DIR',__DIR__.'/cpnnet-asistente/'); const CPNNET_ASISTENTE_OPTION='cpnnet_asistente';
 require CPNNET_ASISTENTE_DIR.'vendor/autoload.php';
 foreach(['settings','leads','usage','kb','prompt','api','integration','admin','dashboard'] as $f) require CPNNET_ASISTENTE_DIR."includes/$f.php";
-define('CPNNET_ASISTENTE_VERSION','t');
+define('CPNNET_ASISTENTE_VERSION','t'); define('CPNNET_ASISTENTE_URL','ASSET/');
 function ok($l,$c){echo ($c?'OK   ':'FAIL ').$l."\n"; if(!$c) $GLOBALS['fail']=1;}
 $GLOBALS['O']['cpnnet_asistente']=['enabled'=>1,'api_key'=>'sk-test','model'=>'claude-opus-5-5','effort'=>'low','whatsapp'=>'56911112222','hourly_limit'=>99,'daily_limit'=>999,'monthly_budget'=>0,'save_transcript'=>1,'welcome'=>'x'];

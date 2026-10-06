@@ -1,9 +1,17 @@
+@font-face{font-family:"Montserrat CPN";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/montserrat-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Montserrat CPN";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/montserrat-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Montserrat CPN";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/montserrat-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Montserrat CPN";font-style:normal;font-weight:700;font-display:swap;src:url("fonts/montserrat-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Montserrat CPN";font-style:normal;font-weight:800;font-display:swap;src:url("fonts/montserrat-latin-800-normal.woff2") format("woff2")}
 /* Panel del área comercial — Asistente CPNnet */
+.cpn-wrap,.cpn-wrap input,.cpn-wrap select,.cpn-wrap textarea,.cpn-wrap button,.cpn-wrap .button{font-family:"Montserrat CPN",Montserrat,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.cpn-wrap code,.cpn-wrap pre,.cpn-wrap .code{font-family:ui-monospace,Menlo,Consolas,monospace}
 .cpn-wrap{--p:#2b4c8c;--d:#1b2f5e;--a:#4f9bd6;--ink:#1c2540;--mut:#667089;--line:#e3e9f3;--bg:#f4f7fb;max-width:1240px;color:var(--ink)}
-.cpn-wrap h1{margin:0;font-size:26px;font-weight:700;color:var(--d)}
-.cpn-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:18px 0 18px;padding:22px 26px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--d));color:#fff}
+.cpn-wrap h1{margin:0;font-size:24px;font-weight:700;color:var(--d)}
+.cpn-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:18px 0 18px;padding:18px 28px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--d));color:#fff}
 .cpn-head h1{color:#fff}.cpn-head p{margin:4px 0 0;color:rgba(255,255,255,.82);font-size:14px}
-.cpn-brand{font-size:12px;letter-spacing:.04em;text-transform:uppercase;opacity:.75;white-space:nowrap}
+.cpn-head-main{display:flex;align-items:center;gap:22px}.cpn-logo{height:64px;width:auto;display:block;flex:none}
+.cpn-head-sep{width:1px;align-self:stretch;background:rgba(255,255,255,.28)}
 .cpn-toolbar{display:flex;align-items:center;gap:8px;margin:0 0 16px;color:var(--mut);font-size:13px}
 .cpn-chip{display:inline-block;padding:6px 14px;border:1px solid var(--line);border-radius:20px;background:#fff;color:var(--ink);text-decoration:none;font-size:13px}
 .cpn-chip:hover{border-color:var(--p);color:var(--p)}.cpn-chip.is-on{background:var(--p);border-color:var(--p);color:#fff}

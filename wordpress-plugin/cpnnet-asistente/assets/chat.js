@@ -57,13 +57,20 @@
   panel.hidden = true;
 
   var header = el('header', 'cpnnet-chat__header');
+  var brand = el('div', 'cpnnet-chat__brand');
+  if (cfg.logo) {
+    var logo = el('img', 'cpnnet-chat__logo');
+    logo.src = cfg.logo; logo.alt = 'CPNnet Security';
+    brand.appendChild(logo);
+  }
   var title = el('div', 'cpnnet-chat__title');
-  title.appendChild(el('strong', null, 'CPNnet Security'));
-  title.appendChild(el('span', null, 'Asistente virtual (IA)'));
+  title.appendChild(el('strong', null, cfg.logo ? 'Asistente virtual' : 'CPNnet Security'));
+  title.appendChild(el('span', null, 'Con inteligencia artificial'));
+  brand.appendChild(title);
   var close = el('button', 'cpnnet-chat__close', '×');
   close.type = 'button';
   close.setAttribute('aria-label', 'Cerrar');
-  header.appendChild(title);
+  header.appendChild(brand);
   header.appendChild(close);
 
   var log = el('div', 'cpnnet-chat__log');

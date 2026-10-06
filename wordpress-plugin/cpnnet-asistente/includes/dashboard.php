@@ -21,11 +21,12 @@ function cpnnet_asistente_wrap_start(string $title, string $subtitle = ''): void
         'lead_saved' => 'Lead actualizado.', 'resent' => 'Se reenvió el lead al CRM.', 'resentfail' => 'No se pudo reenviar al CRM; revisa la configuración del webhook.',
         'marked' => 'Lead marcado como exportado.',
     ];
-    echo '<div class="wrap cpn-wrap"><div class="cpn-head"><div><h1>' . esc_html($title) . '</h1>';
+    $logo = esc_url(CPNNET_ASISTENTE_URL . 'assets/img/cpnnet-logo-white.png');
+    echo '<div class="wrap cpn-wrap"><div class="cpn-head"><div class="cpn-head-main"><img class="cpn-logo" src="' . $logo . '" alt="CPNnet Security"><span class="cpn-head-sep"></span><div><h1>' . esc_html($title) . '</h1>';
     if ($subtitle !== '') {
         echo '<p>' . esc_html($subtitle) . '</p>';
     }
-    echo '</div><span class="cpn-brand">CPNnet Security · Asistente comercial</span></div>';
+    echo '</div></div></div>';
     $msg = isset($_GET['msg']) ? (string) $_GET['msg'] : '';
     if ($msg !== '' && isset($notices[$msg])) {
         $bad = in_array($msg, ['invalid', 'badurl', 'pingfail', 'resentfail'], true);
