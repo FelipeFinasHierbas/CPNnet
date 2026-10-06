@@ -136,7 +136,7 @@ Siguiente paso sugerido: Revisión de madurez de detección/respuesta</div>
     <div class="card"><h3>Solo el catálogo</h3><p>Responde con la información del catálogo de CPNnet. No inventa precios, plazos ni condiciones; cuando no sabe, deriva a una persona.</p></div>
     <div class="card"><h3>Consentimiento</h3><p>Solo comparte datos de contacto con el equipo comercial si el visitante lo autoriza, y se identifica como asistente virtual.</p></div>
     <div class="card"><h3>Llave protegida</h3><p>La clave de la IA vive en el servidor del sitio; el navegador nunca la ve.</p></div>
-    <div class="card"><h3>Gasto acotado</h3><p>Límite de mensajes por visitante y por día, más un límite mensual de gasto en la cuenta de la API.</p></div>
+    <div class="card"><h3>Gasto acotado</h3><p>Límite de mensajes por visitante y por día, tope mensual de gasto en el plugin y límite en la cuenta de la API.</p></div>
     <div class="card"><h3>Sin tocar el CRM</h3><p>Funciona de forma independiente. Opcionalmente guarda una copia de los leads en una tabla propia.</p></div>
     <div class="card"><h3>Dentro de su WordPress</h3><p>Se instala como un plugin en el cPanel actual. No requiere servidores adicionales.</p></div>
   </div>
@@ -144,41 +144,56 @@ Siguiente paso sugerido: Revisión de madurez de detección/respuesta</div>
 </section>
 
 <section class="slide">
-  <span class="tag">Costos y operación</span>
-  <h2>Se paga por uso, en una cuenta independiente</h2>
-  <div class="grid g2" style="grid-template-columns:1.1fr 1fr">
+  <span class="tag">Suyo para administrar</span>
+  <h2>CPNnet edita y mejora el asistente, sin depender de nadie</h2>
+  <div class="grid g2 compact" style="gap:14px">
+    <div class="card"><h3>General</h3><p>Activar o apagar el chat, WhatsApp que recibe los leads, mensaje de bienvenida, modelo de IA y límites de uso.</p></div>
+    <div class="card"><h3>Conocimiento (marcas)</h3><p>Agregar, editar o eliminar marcas con un formulario: resumen, problemas que resuelve, diferenciales, cómo se dimensiona y primer paso recomendado.</p></div>
+    <div class="card"><h3>Reglas y empresa</h3><p>Tono del asistente, cómo detecta partner o empresa y cuándo deriva a un ejecutivo, escritos en español común.</p></div>
+    <div class="card"><h3>Uso y costos</h3><p>Mensajes atendidos, tokens consumidos y gasto estimado del mes y por día, con el tope mensual configurado.</p></div>
+  </div>
+  <p style="margin-top:18px;font-size:19px">Los cambios se aplican <b>al instante</b> desde el panel de WordPress, sin volver a instalar nada. Hay un botón para <b>restaurar</b> el contenido original si algo no queda bien.</p>
+  <div class="foot"><span>Asistente comercial · CPNnet Security</span><span>8</span></div>
+</section>
+
+<section class="slide">
+  <span class="tag">Tokens, costos y propiedad</span>
+  <h2>Funciona con la cuenta de CPNnet y el gasto queda acotado</h2>
+  <div class="grid g2" style="grid-template-columns:1.15fr 1fr;gap:26px">
     <div>
       <table>
-        <tr><th>Referencia (estimada)</th><th>Costo</th></tr>
-        <tr><td>Un mensaje del visitante</td><td>≈ US$ 0,01 – 0,02</td></tr>
-        <tr><td>Una conversación de 5 a 6 mensajes</td><td>≈ US$ 0,10 – 0,15</td></tr>
-        <tr><td>Con un modelo más económico</td><td>≈ la mitad</td></tr>
+        <tr><th>Modelo de IA</th><th>Por mensaje</th><th>Por conversación</th></tr>
+        <tr><td>Más capaz (Opus 5.5)</td><td>≈ US$ 0,015</td><td>≈ US$ 0,14</td></tr>
+        <tr><td>Intermedio (Sonnet 5.5)</td><td>≈ US$ 0,009</td><td>≈ US$ 0,08</td></tr>
+        <tr><td>Económico (Haiku 4.5)</td><td>≈ US$ 0,004</td><td>≈ US$ 0,04</td></tr>
       </table>
-      <p class="warn">Estimaciones con precios de lista del modelo configurado; el costo real se mide con el uso. Sin licencias ni costo fijo por el plugin.</p>
+      <p class="warn">Estimaciones con precios de lista, conversación de 6 mensajes y respuestas de ~400 tokens. El costo real se mide en el panel «Uso y costos»; la factura final es la de la consola de la IA.</p>
     </div>
-    <div class="card">
-      <h3>Control del gasto</h3>
-      <ul style="font-size:21px">
-        <li>Cuenta de API propia de CPNnet, con su facturación.</li>
-        <li>Créditos prepagados y límite mensual de gasto.</li>
-        <li>Tope diario de mensajes configurable.</li>
+    <div class="card" style="padding:22px 26px">
+      <h3 style="font-size:23px">Quién paga y cómo se controla</h3>
+      <ul style="font-size:19px;margin-top:4px">
+        <li><b>Cuenta propia de CPNnet</b>, con su medio de pago y facturación.</li>
+        <li><b>Créditos prepagados</b> y límite mensual en la consola.</li>
+        <li><b>Tope mensual</b> en el plugin: al alcanzarlo, el chat se detiene.</li>
+        <li><b>Modelo a elección</b>: la palanca más fuerte para bajar el costo.</li>
+        <li><b>Contenido acotado</b>: se envía compacto y con caché, y el panel muestra su tamaño.</li>
       </ul>
     </div>
   </div>
-  <div class="foot"><span>Asistente comercial · CPNnet Security</span><span>8</span></div>
+  <div class="foot"><span>Asistente comercial · CPNnet Security</span><span>9</span></div>
 </section>
 
 <section class="slide">
   <span class="tag">Plan</span>
   <h2>Cómo avanzamos</h2>
   <div class="grid g3">
-    <div class="card"><h3>Fase 1 · Piloto</h3><p>Plugin en el sitio, base de conocimiento del catálogo, leads por WhatsApp. Pruebas con el equipo comercial.</p></div>
+    <div class="card"><h3>Fase 1 · Piloto</h3><p>Plugin en el sitio con la cuenta de CPNnet, catálogo cargado, leads por WhatsApp y panel de edición. Pruebas con el equipo comercial.</p></div>
     <div class="card"><h3>Fase 2 · Integración</h3><p>Conexión con el CRM de CPNnet, agenda de reuniones y derivación según país o marca.</p></div>
     <div class="card"><h3>Fase 3 · Mejora continua</h3><p>Revisión de conversaciones, preguntas sin respuesta y medición de conversión de chat a lead.</p></div>
   </div>
   <h3 style="color:var(--d);margin:26px 0 8px;font-size:24px">Para comenzar necesitamos de CPNnet</h3>
-  <div><span class="pill">Número de WhatsApp de los leads</span><span class="pill">Cuenta de API propia con su límite de gasto</span><span class="pill">Acceso al WordPress en cPanel (PHP 8.1 o superior)</span><span class="pill">Revisión del catálogo y del tono del asistente</span></div>
-  <div class="foot"><span>Asistente comercial · CPNnet Security</span><span>9</span></div>
+  <div><span class="pill">Cuenta propia de la IA (créditos y límite de gasto)</span><span class="pill">Número de WhatsApp de los leads</span><span class="pill">Acceso al WordPress en cPanel (PHP 8.1 o superior)</span><span class="pill">Una persona responsable de editar el contenido</span><span class="pill">Revisión del catálogo y del tono del asistente</span></div>
+  <div class="foot"><span>Asistente comercial · CPNnet Security</span><span>10</span></div>
 </section>
 
 </body></html>
