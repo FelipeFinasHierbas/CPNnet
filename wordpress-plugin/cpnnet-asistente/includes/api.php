@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 use Anthropic\Client;
 use Anthropic\Messages\ToolUseBlock;
 
-const CPNNET_ASISTENTE_MAX_HISTORY = 20;
+const CPNNET_ASISTENTE_MAX_HISTORY = 12; // menos historial = menos tokens de entrada por mensaje
 const CPNNET_ASISTENTE_MAX_CHARS   = 1500;
 
 add_action('rest_api_init', function () {
@@ -136,6 +136,10 @@ function cpnnet_asistente_handle_chat(WP_REST_Request $req)
     if (!$messages || end($messages)['role'] !== 'user') {
         return cpnnet_asistente_error('Mensaje vacío.', 400);
     }
+    $budget = (float) cpnnet_asistente_get('monthly_budget');
+    if ($budget > 0 && cpnnet_asistente_month_spend() >= $budget) {
+        return cpnnet_asistente_error('El asistente no está disponible por ahora. Por favor contáctanos por los canales del sitio.', 503);
+    }
     if ($limit = cpnnet_asistente_rate_limit()) {
         return cpnnet_asistente_error($limit, 429);
     }
@@ -148,7 +152,7 @@ function cpnnet_asistente_handle_chat(WP_REST_Request $req)
 
         $args = [
             'model'     => $model,
-            'maxTokens' => 1024,
+            'maxTokens' => 800,
             // Bloque de sistema estable + cache_control: la base de conocimiento (~14k tokens) se cobra
             // como lectura de caché en las conversaciones siguientes.
             'system'    => [[
@@ -163,11 +167,14 @@ function cpnnet_asistente_handle_chat(WP_REST_Request $req)
         }
 
         $whatsapp_url = null;
+        $usage = cpnnet_asistente_usage_zero();
         for ($i = 0; $i < 3; $i++) {
             $args['messages'] = $messages;
             $response = $client->messages->create(...$args);
+            $usage = cpnnet_asistente_usage_add($usage, $response->usage);
 
             if ($response->stopReason === 'refusal') {
+                cpnnet_asistente_usage_log($model, $usage);
                 return new WP_REST_Response(['reply' => 'No puedo ayudarte con esa consulta. ¿Quieres que te derive con un ejecutivo de CPNnet?', 'whatsapp_url' => null]);
             }
             if ($response->stopReason !== 'tool_use') {
@@ -194,6 +201,7 @@ function cpnnet_asistente_handle_chat(WP_REST_Request $req)
                 $reply .= $block->text;
             }
         }
+        cpnnet_asistente_usage_log($model, $usage);
         if ($response->stopReason === 'max_tokens') {
             $reply = trim($reply) . '…';
         }

@@ -17,7 +17,8 @@ El script copia la base de conocimiento (`knowledge/`) y el prompt (`bot/system-
    ```php
    define('CPNNET_ASISTENTE_API_KEY', 'sk-ant-...');
    ```
-4. Ajustes > Asistente CPNnet: número de WhatsApp (solo dígitos, con código de país), mensaje de bienvenida y límites de uso. Marcar "Activar chat" al final.
+4. Ajustes > Asistente CPNnet > General: número de WhatsApp (solo dígitos, con código de país), modelo, mensaje de bienvenida, límites y tope mensual de gasto. Marcar "Activar chat" al final.
+5. El cliente puede editar marcas, reglas y datos de la empresa desde las otras pestañas, sin tocar código (ver `docs/GUIA-CLIENTE.md`).
 
 ## Cómo funciona
 - El navegador solo habla con `/wp-json/cpnnet-asistente/v1/chat` del propio sitio; la API key nunca sale del servidor.
@@ -25,8 +26,11 @@ El script copia la base de conocimiento (`knowledge/`) y el prompt (`bot/system-
 - Cuando el visitante da su consentimiento y quiere avanzar, el bot llama a la herramienta `derivar_a_ejecutivo`: se muestra un botón de WhatsApp con el resumen del lead y, si está activado, se guarda una copia en la tabla `wp_cpnnet_asistente_leads` (visible en phpMyAdmin). **No se lee ni escribe en el CRM interno.**
 - El prompt usa caching: la base de conocimiento (~14k tokens) se cobra como lectura de caché tras la primera consulta.
 
-## Actualizar el conocimiento
-Editar `knowledge/brands.json` (o `bot/system-prompt.md`), correr `knowledge/validate.py` y volver a generar el .zip.
+## Contenido y tokens
+- **Valores por defecto:** `knowledge/brands.json`, `knowledge/company.md` y `bot/system-prompt.md` se empaquetan en el .zip.
+- **Edición por el cliente:** lo que se edite en el panel (pestañas Conocimiento y Reglas) se guarda en la base de datos de WordPress y tiene prioridad sobre los archivos; hay botones para restaurar los originales.
+- **Consumo:** cada respuesta registra tokens y gasto estimado en la tabla `wp_cpnnet_asistente_usage` (pestaña «Uso y costos»). Hay un tope mensual configurable.
+- **Ahorro de tokens:** el prompt va marcado para caché, el conocimiento se envía compacto (sin campos vacíos), el historial se limita a 12 mensajes y cada respuesta a 800 tokens.
 
 ## Demo y presentación
 - `demo/index.html`: demo guionada de una sola página (abrir con doble clic; no necesita internet ni API key). Regenerar con `python3 demo/build.py` tras editar `demo/template.html`.
