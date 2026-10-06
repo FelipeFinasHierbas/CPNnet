@@ -123,10 +123,41 @@ Siguiente paso sugerido: Revisión de madurez de detección/respuesta</div>
         <li>Los datos para dimensionar.</li>
         <li>Cuál es el siguiente paso recomendado.</li>
       </ul>
-      <p style="margin-top:14px;font-size:18px">En esta primera etapa los leads llegan por <b>WhatsApp</b>. El CRM interno de CPNnet no se toca; la conexión con el CRM puede venir en una fase posterior.</p>
+      <p style="margin-top:14px;font-size:18px">Los leads llegan por <b>WhatsApp</b> y además quedan guardados en un repositorio dentro del WordPress de CPNnet, visibles para el área comercial.</p>
     </div>
   </div>
   <div class="foot"><span>Asistente comercial · CPNnet Security</span><span>6</span></div>
+</section>
+
+<section class="slide">
+  <span class="tag">Panel comercial</span>
+  <h2 style="margin-bottom:10px">Un panel claro para el área comercial</h2>
+  <div style="display:grid;grid-template-columns:690px 1fr;gap:34px;align-items:start">
+    <img class="shot" src="panel-comercial.png" style="width:690px;height:auto">
+    <div>
+      <ul style="font-size:20px">
+        <li><b>Indicadores:</b> conversaciones, leads, conversión, mensajes y gasto.</li>
+        <li><b>Gráfico diario</b> de conversaciones y leads.</li>
+        <li>Estado de los leads, <b>marcas más consultadas</b>, perfil y país.</li>
+        <li><b>Lista de leads</b> con filtros y ficha con la conversación, estado y notas.</li>
+        <li>Rol <b>Comercial CPNnet</b>: ve el panel, sin acceso a la configuración.</li>
+      </ul>
+      <p class="warn">Datos de ejemplo.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Asistente comercial · CPNnet Security</span><span>7</span></div>
+</section>
+
+<section class="slide">
+  <span class="tag">Integración con el CRM</span>
+  <h2>Del asistente al CRM de CPNnet, que vive en el mismo hosting</h2>
+  <div class="grid g3 compact" style="gap:16px">
+    <div class="card"><h3>Exportar CSV</h3><p>Un botón en el panel descarga los leads con los filtros aplicados. Se abre directo en Excel y la mayoría de los CRM lo importan.</p></div>
+    <div class="card"><h3>API con token</h3><p>El CRM, o un proceso programado, consulta los leads nuevos y marca los que ya importó. Acceso solo de lectura, protegido con token.</p></div>
+    <div class="card"><h3>Webhook en tiempo real</h3><p>Cada lead nuevo se avisa al CRM al instante, con firma de seguridad. Si falla, se puede reenviar desde la ficha.</p></div>
+  </div>
+  <p style="margin-top:22px;font-size:21px">El plugin <b>nunca escribe en la base de datos del CRM</b>: es el CRM quien toma los datos. Se puede empezar con CSV y pasar a API o webhook cuando el equipo técnico lo decida.</p>
+  <div class="foot"><span>Asistente comercial · CPNnet Security</span><span>8</span></div>
 </section>
 
 <section class="slide">
@@ -137,10 +168,10 @@ Siguiente paso sugerido: Revisión de madurez de detección/respuesta</div>
     <div class="card"><h3>Consentimiento</h3><p>Solo comparte datos de contacto con el equipo comercial si el visitante lo autoriza, y se identifica como asistente virtual.</p></div>
     <div class="card"><h3>Llave protegida</h3><p>La clave de la IA vive en el servidor del sitio; el navegador nunca la ve.</p></div>
     <div class="card"><h3>Gasto acotado</h3><p>Límite de mensajes por visitante y por día, tope mensual de gasto en el plugin y límite en la cuenta de la API.</p></div>
-    <div class="card"><h3>Sin tocar el CRM</h3><p>Funciona de forma independiente. Opcionalmente guarda una copia de los leads en una tabla propia.</p></div>
+    <div class="card"><h3>Sin escribir en el CRM</h3><p>El plugin no modifica la base de datos del CRM: es el CRM quien toma los leads, por API, webhook o CSV.</p></div>
     <div class="card"><h3>Dentro de su WordPress</h3><p>Se instala como un plugin en el cPanel actual. No requiere servidores adicionales.</p></div>
   </div>
-  <div class="foot"><span>Asistente comercial · CPNnet Security</span><span>7</span></div>
+  <div class="foot"><span>Asistente comercial · CPNnet Security</span><span>9</span></div>
 </section>
 
 <section class="slide">
@@ -153,7 +184,7 @@ Siguiente paso sugerido: Revisión de madurez de detección/respuesta</div>
     <div class="card"><h3>Uso y costos</h3><p>Mensajes atendidos, tokens consumidos y gasto estimado del mes y por día, con el tope mensual configurado.</p></div>
   </div>
   <p style="margin-top:18px;font-size:19px">Los cambios se aplican <b>al instante</b> desde el panel de WordPress, sin volver a instalar nada. Hay un botón para <b>restaurar</b> el contenido original si algo no queda bien.</p>
-  <div class="foot"><span>Asistente comercial · CPNnet Security</span><span>8</span></div>
+  <div class="foot"><span>Asistente comercial · CPNnet Security</span><span>10</span></div>
 </section>
 
 <section class="slide">
@@ -180,20 +211,20 @@ Siguiente paso sugerido: Revisión de madurez de detección/respuesta</div>
       </ul>
     </div>
   </div>
-  <div class="foot"><span>Asistente comercial · CPNnet Security</span><span>9</span></div>
+  <div class="foot"><span>Asistente comercial · CPNnet Security</span><span>11</span></div>
 </section>
 
 <section class="slide">
   <span class="tag">Plan</span>
   <h2>Cómo avanzamos</h2>
   <div class="grid g3">
-    <div class="card"><h3>Fase 1 · Piloto</h3><p>Plugin en el sitio con la cuenta de CPNnet, catálogo cargado, leads por WhatsApp y panel de edición. Pruebas con el equipo comercial.</p></div>
-    <div class="card"><h3>Fase 2 · Integración</h3><p>Conexión con el CRM de CPNnet, agenda de reuniones y derivación según país o marca.</p></div>
+    <div class="card"><h3>Fase 1 · Piloto</h3><p>Plugin en el sitio con la cuenta de CPNnet, catálogo cargado, leads por WhatsApp, panel comercial y panel de edición. Pruebas con el equipo comercial.</p></div>
+    <div class="card"><h3>Fase 2 · Integración</h3><p>Conexión activa con el CRM de CPNnet (API o webhook con mapeo de campos), agenda de reuniones y derivación según país o marca.</p></div>
     <div class="card"><h3>Fase 3 · Mejora continua</h3><p>Revisión de conversaciones, preguntas sin respuesta y medición de conversión de chat a lead.</p></div>
   </div>
   <h3 style="color:var(--d);margin:26px 0 8px;font-size:24px">Para comenzar necesitamos de CPNnet</h3>
-  <div><span class="pill">Cuenta propia de la IA (créditos y límite de gasto)</span><span class="pill">Número de WhatsApp de los leads</span><span class="pill">Acceso al WordPress en cPanel (PHP 8.1 o superior)</span><span class="pill">Una persona responsable de editar el contenido</span><span class="pill">Revisión del catálogo y del tono del asistente</span></div>
-  <div class="foot"><span>Asistente comercial · CPNnet Security</span><span>10</span></div>
+  <div><span class="pill">Cuenta propia de la IA (créditos y límite de gasto)</span><span class="pill">Número de WhatsApp de los leads</span><span class="pill">Acceso al WordPress en cPanel (PHP 8.1 o superior)</span><span class="pill">Una persona responsable de editar el contenido</span><span class="pill">Contacto técnico del CRM para conectarlo</span><span class="pill">Revisión del catálogo y del tono del asistente</span></div>
+  <div class="foot"><span>Asistente comercial · CPNnet Security</span><span>12</span></div>
 </section>
 
 </body></html>

@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
  * Registro de consumo de tokens y gasto estimado, con tope mensual.
  * Los precios son de lista (USD por millón de tokens) y sirven para ESTIMAR; el cobro real es el de la consola de Anthropic.
  */
-const CPNNET_ASISTENTE_DB_VERSION = '2';
+const CPNNET_ASISTENTE_DB_VERSION = '3';
 
 function cpnnet_asistente_usage_table(): string
 {
@@ -25,13 +25,15 @@ function cpnnet_asistente_usage_create_table(): void
         id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
         created_at DATETIME NOT NULL,
         model VARCHAR(60) NOT NULL DEFAULT '',
+        conv_id VARCHAR(40) NOT NULL DEFAULT '',
         input_tokens INT UNSIGNED NOT NULL DEFAULT 0,
         output_tokens INT UNSIGNED NOT NULL DEFAULT 0,
         cache_read_tokens INT UNSIGNED NOT NULL DEFAULT 0,
         cache_write_tokens INT UNSIGNED NOT NULL DEFAULT 0,
         cost_usd DECIMAL(10,6) NOT NULL DEFAULT 0,
         PRIMARY KEY  (id),
-        KEY created_at (created_at)
+        KEY created_at (created_at),
+        KEY conv_id (conv_id)
     ) {$charset};");
     update_option('cpnnet_asistente_db_version', CPNNET_ASISTENTE_DB_VERSION);
 }
@@ -82,12 +84,13 @@ function cpnnet_asistente_usage_zero(): array
     return ['input' => 0, 'output' => 0, 'read' => 0, 'write' => 0];
 }
 
-function cpnnet_asistente_usage_log(string $model, array $u): void
+function cpnnet_asistente_usage_log(string $model, array $u, string $conv_id = ''): void
 {
     global $wpdb;
     $wpdb->insert(cpnnet_asistente_usage_table(), [
-        'created_at'         => current_time('mysql'),
+        'created_at'         => current_time('mysql', true),
         'model'              => substr($model, 0, 60),
+        'conv_id'            => substr($conv_id, 0, 40),
         'input_tokens'       => $u['input'],
         'output_tokens'      => $u['output'],
         'cache_read_tokens'  => $u['read'],
@@ -100,7 +103,7 @@ function cpnnet_asistente_month_spend(): float
 {
     global $wpdb;
     $table = cpnnet_asistente_usage_table();
-    $from  = gmdate('Y-m-01 00:00:00', (int) current_time('timestamp'));
+    $from  = gmdate('Y-m-01 00:00:00');
     return (float) $wpdb->get_var($wpdb->prepare("SELECT COALESCE(SUM(cost_usd),0) FROM {$table} WHERE created_at >= %s", $from));
 }
 
@@ -126,7 +129,7 @@ function cpnnet_asistente_usage_by_day(int $days = 30): array
 {
     global $wpdb;
     $table = cpnnet_asistente_usage_table();
-    $since = gmdate('Y-m-d 00:00:00', (int) current_time('timestamp') - $days * DAY_IN_SECONDS);
+    $since = gmdate('Y-m-d 00:00:00', time() - $days * DAY_IN_SECONDS);
     return $wpdb->get_results($wpdb->prepare(
         "SELECT DATE(created_at) day, COUNT(*) messages, SUM(cost_usd) cost FROM {$table}
          WHERE created_at >= %s GROUP BY DATE(created_at) ORDER BY day DESC",

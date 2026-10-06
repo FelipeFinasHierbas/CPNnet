@@ -101,17 +101,20 @@ function cpnnet_asistente_lead_summary(array $in): string
  * Ejecuta la herramienta derivar_a_ejecutivo.
  * @return array{0:string,1:?string,2:bool} [texto para el modelo, URL de WhatsApp, es_error]
  */
-function cpnnet_asistente_run_tool(array $input): array
+function cpnnet_asistente_run_tool(array $input, array $ctx = []): array
 {
     if (empty($input['consentimiento']) || $input['consentimiento'] !== true) {
         return ['Falta el consentimiento explícito del visitante. Pídelo antes de derivar.', null, true];
     }
+    $summary = cpnnet_asistente_lead_summary($input);
+    // El lead siempre queda en el repositorio del área comercial (panel de WordPress), haya o no WhatsApp.
+    $saved = cpnnet_asistente_leads_insert($input, $summary, (string) ($ctx['conv_id'] ?? ''), (string) ($ctx['pagina'] ?? ''), (array) ($ctx['transcript'] ?? []));
+    cpnnet_asistente_webhook_send_lead($saved['uuid']); // aviso al CRM, si hay webhook configurado
+
     $number = (string) cpnnet_asistente_get('whatsapp');
     if ($number === '') {
-        return ['No hay un WhatsApp configurado. Dile al visitante que un ejecutivo lo contactará por los canales del sitio.', null, true];
+        return ['Lead registrado. Dile al visitante que un ejecutivo lo contactará pronto por los datos que dejó. No prometas plazos.', null, false];
     }
-    $summary = cpnnet_asistente_lead_summary($input);
-    cpnnet_asistente_leads_save($input, $summary);
     $url = 'https://wa.me/' . $number . '?text=' . rawurlencode($summary);
     return ['Lead registrado. Se mostrará al visitante un botón para continuar la conversación por WhatsApp con un ejecutivo. No prometas plazos de respuesta.', $url, false];
 }
@@ -144,6 +147,9 @@ function cpnnet_asistente_handle_chat(WP_REST_Request $req)
         return cpnnet_asistente_error($limit, 429);
     }
 
+    $conv_id = isset($params['conversation_id']) && preg_match('/^[A-Za-z0-9-]{8,40}$/', (string) $params['conversation_id']) ? (string) $params['conversation_id'] : '';
+    $page    = substr((string) (wp_parse_url((string) ($params['page'] ?? ''), PHP_URL_PATH) ?: ''), 0, 255);
+
     @set_time_limit(90);
     $model = (string) cpnnet_asistente_get('model');
 
@@ -166,6 +172,8 @@ function cpnnet_asistente_handle_chat(WP_REST_Request $req)
             $args['outputConfig'] = ['effort' => (string) cpnnet_asistente_get('effort')];
         }
 
+        $transcript = $messages; // historial en texto plano, para guardarlo junto al lead
+        $ctx = ['conv_id' => $conv_id, 'pagina' => $page, 'transcript' => $transcript];
         $whatsapp_url = null;
         $usage = cpnnet_asistente_usage_zero();
         for ($i = 0; $i < 3; $i++) {
@@ -174,7 +182,7 @@ function cpnnet_asistente_handle_chat(WP_REST_Request $req)
             $usage = cpnnet_asistente_usage_add($usage, $response->usage);
 
             if ($response->stopReason === 'refusal') {
-                cpnnet_asistente_usage_log($model, $usage);
+                cpnnet_asistente_usage_log($model, $usage, $conv_id);
                 return new WP_REST_Response(['reply' => 'No puedo ayudarte con esa consulta. ¿Quieres que te derive con un ejecutivo de CPNnet?', 'whatsapp_url' => null]);
             }
             if ($response->stopReason !== 'tool_use') {
@@ -185,7 +193,7 @@ function cpnnet_asistente_handle_chat(WP_REST_Request $req)
                 if ($block instanceof ToolUseBlock) {
                     $input = is_array($block->input) ? $block->input : [];
                     [$text, $url, $is_error] = $block->name === 'derivar_a_ejecutivo'
-                        ? cpnnet_asistente_run_tool($input)
+                        ? cpnnet_asistente_run_tool($input, $ctx)
                         : ['Herramienta desconocida.', null, true];
                     $whatsapp_url = $url ?? $whatsapp_url;
                     $results[] = ['type' => 'tool_result', 'toolUseID' => $block->id, 'content' => $text, 'isError' => $is_error];
@@ -201,7 +209,7 @@ function cpnnet_asistente_handle_chat(WP_REST_Request $req)
                 $reply .= $block->text;
             }
         }
-        cpnnet_asistente_usage_log($model, $usage);
+        cpnnet_asistente_usage_log($model, $usage, $conv_id);
         if ($response->stopReason === 'max_tokens') {
             $reply = trim($reply) . '…';
         }

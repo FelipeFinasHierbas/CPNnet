@@ -5,15 +5,23 @@
 
   var STORE = 'cpnnet_asistente_chat';
   var MAX_SEND = 20;
-  var state = { open: false, busy: false, messages: [] };
+  var state = { open: false, busy: false, messages: [], convId: '' };
 
   try {
     var saved = JSON.parse(sessionStorage.getItem(STORE) || 'null');
     if (saved && Array.isArray(saved.messages)) state.messages = saved.messages;
+    if (saved && typeof saved.convId === 'string') state.convId = saved.convId;
   } catch (e) {}
 
+  function newId() {
+    if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    var a = new Uint8Array(16); (window.crypto || window.msCrypto).getRandomValues(a);
+    return Array.prototype.map.call(a, function (b) { return ('0' + b.toString(16)).slice(-2); }).join('');
+  }
+  if (!/^[A-Za-z0-9-]{8,40}$/.test(state.convId)) state.convId = newId();
+
   function persist() {
-    try { sessionStorage.setItem(STORE, JSON.stringify({ messages: state.messages })); } catch (e) {}
+    try { sessionStorage.setItem(STORE, JSON.stringify({ messages: state.messages, convId: state.convId })); } catch (e) {}
   }
 
   function el(tag, cls, text) {
@@ -141,7 +149,7 @@
     fetch(cfg.endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: payload, website: hp.value })
+      body: JSON.stringify({ messages: payload, website: hp.value, conversation_id: state.convId, page: location.pathname })
     })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
       .then(function (res) {

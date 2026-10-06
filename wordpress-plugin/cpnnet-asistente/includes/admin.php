@@ -5,13 +5,36 @@ if (!defined('ABSPATH')) {
 
 /* ===== Panel de administración: Ajustes > Asistente CPNnet ===== */
 
-add_action('admin_menu', function () {
-    add_options_page('Asistente CPNnet', 'Asistente CPNnet', 'manage_options', 'cpnnet-asistente', 'cpnnet_asistente_admin_page');
+/** Capacidad del área comercial: ver y gestionar leads. Los administradores la tienen siempre. */
+add_filter('user_has_cap', function ($allcaps) {
+    if (!empty($allcaps['manage_options'])) {
+        $allcaps['cpnnet_asistente_leads'] = true;
+    }
+    return $allcaps;
 });
 
+/** Rol «Comercial CPNnet»: entra al WordPress solo para ver el panel y los leads (sin acceso a configuración ni a la API key). */
+function cpnnet_asistente_ensure_role(): void
+{
+    if (!get_role('cpnnet_comercial')) {
+        add_role('cpnnet_comercial', 'Comercial CPNnet', ['read' => true, 'cpnnet_asistente_leads' => true]);
+    }
+}
+add_action('init', 'cpnnet_asistente_ensure_role');
+
+add_action('admin_menu', function () {
+    $cap = 'cpnnet_asistente_leads';
+    add_menu_page('Asistente CPNnet', 'Asistente CPNnet', $cap, 'cpnnet-asistente', 'cpnnet_asistente_page_panel', 'dashicons-format-chat', 58);
+    add_submenu_page('cpnnet-asistente', 'Panel comercial', 'Panel', $cap, 'cpnnet-asistente', 'cpnnet_asistente_page_panel');
+    add_submenu_page('cpnnet-asistente', 'Leads', 'Leads', $cap, 'cpnnet-asistente-leads', 'cpnnet_asistente_page_leads');
+    add_submenu_page('cpnnet-asistente', 'Integración con el CRM', 'Integración CRM', 'manage_options', 'cpnnet-asistente-integracion', 'cpnnet_asistente_page_integracion');
+    add_submenu_page('cpnnet-asistente', 'Configuración', 'Configuración', 'manage_options', 'cpnnet-asistente-config', 'cpnnet_asistente_admin_page');
+});
+
+/** URL de la pantalla de configuración (por defecto) o de otra pantalla del plugin ('page' en $args). */
 function cpnnet_asistente_admin_url(array $args = []): string
 {
-    return add_query_arg(array_merge(['page' => 'cpnnet-asistente'], $args), admin_url('options-general.php'));
+    return add_query_arg(array_merge(['page' => 'cpnnet-asistente-config'], $args), admin_url('admin.php'));
 }
 
 function cpnnet_asistente_admin_guard(): void
@@ -24,7 +47,12 @@ function cpnnet_asistente_admin_guard(): void
 
 function cpnnet_asistente_admin_redirect(string $tab, string $msg, array $extra = []): void
 {
-    wp_safe_redirect(cpnnet_asistente_admin_url(array_merge(['tab' => $tab, 'msg' => $msg], $extra)));
+    if (strpos($tab, 'cpnnet-asistente') === 0) { // $tab es el slug de otra pantalla del plugin
+        $url = add_query_arg(array_merge(['page' => $tab, 'msg' => $msg], $extra), admin_url('admin.php'));
+    } else {
+        $url = cpnnet_asistente_admin_url(array_merge(['tab' => $tab, 'msg' => $msg], $extra));
+    }
+    wp_safe_redirect($url);
     exit;
 }
 
@@ -35,16 +63,7 @@ function cpnnet_asistente_admin_page(): void
     }
     $tabs = ['general' => 'General', 'conocimiento' => 'Conocimiento (marcas)', 'reglas' => 'Reglas y empresa', 'uso' => 'Uso y costos'];
     $tab  = isset($_GET['tab'], $tabs[$_GET['tab']]) ? (string) $_GET['tab'] : 'general';
-    $notices = [
-        'saved'    => 'Cambios guardados.',
-        'deleted'  => 'Marca eliminada.',
-        'reset'    => 'Se restauró el contenido original.',
-        'invalid'  => 'Faltan datos obligatorios (el nombre de la marca).',
-    ];
-    echo '<div class="wrap"><h1>Asistente comercial CPNnet</h1>';
-    if (isset($_GET['msg'], $notices[$_GET['msg']])) {
-        echo '<div class="notice notice-' . ($_GET['msg'] === 'invalid' ? 'error' : 'success') . ' is-dismissible"><p>' . esc_html($notices[$_GET['msg']]) . '</p></div>';
-    }
+    cpnnet_asistente_wrap_start('Configuración', 'Ajustes del asistente, lo que sabe y cuánto consume.');
     echo '<h2 class="nav-tab-wrapper">';
     foreach ($tabs as $slug => $label) {
         printf('<a class="nav-tab %s" href="%s">%s</a>', $slug === $tab ? 'nav-tab-active' : '', esc_url(cpnnet_asistente_admin_url(['tab' => $slug])), esc_html($label));
@@ -52,7 +71,7 @@ function cpnnet_asistente_admin_page(): void
     echo '</h2>';
     $render = 'cpnnet_asistente_tab_' . $tab;
     $render();
-    echo '</div>';
+    cpnnet_asistente_wrap_end();
 }
 
 /* ---------- Pestaña General ---------- */
@@ -123,9 +142,10 @@ function cpnnet_asistente_tab_general(): void
                 </td>
             </tr>
             <tr>
-                <th scope="row">Respaldo de leads</th>
+                <th scope="row">Conversación del lead</th>
                 <td>
-                    <label><input type="checkbox" name="<?php echo esc_attr($name); ?>[save_leads]" value="1" <?php checked($o['save_leads'], 1); ?>> Guardar una copia de cada lead en una tabla propia del plugin (<code><?php echo esc_html(cpnnet_asistente_leads_table()); ?></code>, visible en phpMyAdmin). No toca el CRM.</label>
+                    <label><input type="checkbox" name="<?php echo esc_attr($name); ?>[save_transcript]" value="1" <?php checked($o['save_transcript'], 1); ?>> Guardar la conversación junto a cada lead, para que el área comercial vea el contexto</label>
+                    <p class="description">Los leads siempre se guardan en la tabla <code><?php echo esc_html(cpnnet_asistente_leads_table()); ?></code> (visible en phpMyAdmin) y se ven en el panel «Leads». Esta opción solo controla si se incluye la transcripción. Se recomienda mencionarlo en la política de privacidad del sitio.</p>
                 </td>
             </tr>
         </table>
@@ -318,7 +338,7 @@ function cpnnet_asistente_tab_uso(): void
 {
     $budget = (float) cpnnet_asistente_get('monthly_budget');
     $month  = cpnnet_asistente_month_spend();
-    $since  = gmdate('Y-m-d 00:00:00', (int) current_time('timestamp') - 30 * DAY_IN_SECONDS);
+    $since  = gmdate('Y-m-d 00:00:00', time() - 30 * DAY_IN_SECONDS);
     $s      = cpnnet_asistente_usage_summary($since);
     $avg    = $s['messages'] ? $s['cost'] / $s['messages'] : 0.0;
     $usd    = static fn(float $v): string => 'US$ ' . number_format($v, 2, ',', '.');

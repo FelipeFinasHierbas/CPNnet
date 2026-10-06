@@ -1,0 +1,54 @@
+/* Panel del área comercial — Asistente CPNnet */
+.cpn-wrap{--p:#2b4c8c;--d:#1b2f5e;--a:#4f9bd6;--ink:#1c2540;--mut:#667089;--line:#e3e9f3;--bg:#f4f7fb;max-width:1240px;color:var(--ink)}
+.cpn-wrap h1{margin:0;font-size:26px;font-weight:700;color:var(--d)}
+.cpn-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:18px 0 18px;padding:22px 26px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--d));color:#fff}
+.cpn-head h1{color:#fff}.cpn-head p{margin:4px 0 0;color:rgba(255,255,255,.82);font-size:14px}
+.cpn-brand{font-size:12px;letter-spacing:.04em;text-transform:uppercase;opacity:.75;white-space:nowrap}
+.cpn-toolbar{display:flex;align-items:center;gap:8px;margin:0 0 16px;color:var(--mut);font-size:13px}
+.cpn-chip{display:inline-block;padding:6px 14px;border:1px solid var(--line);border-radius:20px;background:#fff;color:var(--ink);text-decoration:none;font-size:13px}
+.cpn-chip:hover{border-color:var(--p);color:var(--p)}.cpn-chip.is-on{background:var(--p);border-color:var(--p);color:#fff}
+.cpn-kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-bottom:16px}
+.cpn-kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:2px;box-shadow:0 1px 2px rgba(20,30,60,.04)}
+.cpn-kpi-label{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);font-weight:600}
+.cpn-kpi-value{font-size:30px;font-weight:700;color:var(--d);line-height:1.15}
+.cpn-kpi-hint{font-size:12px;color:var(--mut)}
+.cpn-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px;box-shadow:0 1px 2px rgba(20,30,60,.04)}
+.cpn-card h3{margin:0 0 12px;font-size:16px;color:var(--d)}.cpn-card h4{margin:16px 0 8px;font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}
+.cpn-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}.cpn-card-head h3{margin:0}
+.cpn-grid{display:grid;gap:16px;margin-bottom:16px}.cpn-grid-2{grid-template-columns:1fr 1fr}.cpn-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cpn-grid>.cpn-card{margin-bottom:0}
+.cpn-chart{width:100%;height:auto;display:block}
+.cpn-grid-line{stroke:var(--line);stroke-width:1}.cpn-axis{fill:var(--mut);font-size:11px}
+.cpn-bar-conv{fill:#bcd3ee}.cpn-bar-lead{fill:var(--p)}
+.cpn-legend{font-size:12px;color:var(--mut)}.cpn-dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin:0 4px 0 12px;vertical-align:baseline}
+.cpn-dot-conv{background:#bcd3ee}.cpn-dot-lead{background:var(--p)}
+.cpn-hbars{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.cpn-hbars li{display:grid;grid-template-columns:minmax(80px,38%) 1fr 34px;align-items:center;gap:10px;font-size:13px}
+.cpn-hbar-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cpn-hbars b{text-align:right;color:var(--d)}
+.cpn-hbar-track{height:9px;background:var(--bg);border-radius:6px;overflow:hidden}.cpn-hbar-fill{display:block;height:100%;background:linear-gradient(90deg,var(--a),var(--p));border-radius:6px}
+.cpn-empty{color:var(--mut);font-size:14px;margin:6px 0}
+.cpn-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.cpn-table th{text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);padding:10px 12px;border-bottom:1px solid var(--line)}
+.cpn-table td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}.cpn-table tr:last-child td{border-bottom:0}.cpn-table tbody tr:hover{background:#f9fbfe}
+.cpn-table a{text-decoration:none;color:var(--d)}.cpn-sub{color:var(--mut);font-size:12.5px}
+.cpn-pill{display:inline-block;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600;background:#eef1f6;color:var(--mut)}
+.cpn-pill-ok{background:#e3f6ea;color:#17703b}
+.cpn-st-nuevo{background:#e6effc;color:#1f4fa8}.cpn-st-contactado{background:#fff3d6;color:#8a5a00}.cpn-st-calificado{background:#ece6fb;color:#5a3fb0}
+.cpn-st-ganado{background:#e3f6ea;color:#17703b}.cpn-st-perdido{background:#fde8e8;color:#a32727}
+.cpn-filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.cpn-filters input[type=search]{min-width:260px}.cpn-filters label{font-size:12.5px;color:var(--mut)}
+.cpn-pager{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.cpn-fields{display:grid;gap:12px}.cpn-field{display:grid;grid-template-columns:150px 1fr;gap:12px;font-size:14px;border-bottom:1px solid var(--bg);padding-bottom:10px}
+.cpn-field>span{color:var(--mut);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+.cpn-label{display:block;margin:12px 0 4px;font-size:12.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}
+.cpn-inline{display:inline-block;margin:0 8px 0 0}
+.cpn-chat{display:flex;flex-direction:column;gap:8px;max-width:760px}
+.cpn-bubble{max-width:78%;padding:9px 13px;border-radius:14px;font-size:14px;line-height:1.45}
+.cpn-bubble-user{align-self:flex-end;background:var(--p);color:#fff;border-bottom-right-radius:4px}
+.cpn-bubble-bot{align-self:flex-start;background:var(--bg);border:1px solid var(--line);border-bottom-left-radius:4px}
+.cpn-code{background:#0f1b38;color:#dbe7ff;border-radius:10px;padding:14px 16px;font-size:12.5px;overflow:auto;line-height:1.5}
+.cpn-token{display:block;margin-top:8px;padding:8px 10px;background:#fff;border:1px dashed var(--p);border-radius:8px;word-break:break-all}
+.cpn-alert{background:#fff8e1;border:1px solid #f0d98a;border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:13.5px}
+.cpn-foot{color:var(--mut);font-size:12.5px;margin:6px 2px}
+@media(max-width:1100px){.cpn-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.cpn-grid-3,.cpn-grid-2{grid-template-columns:1fr}}
+@media(max-width:600px){.cpn-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.cpn-head{flex-direction:column;align-items:flex-start}.cpn-field{grid-template-columns:1fr}.cpn-table{display:block;overflow-x:auto}}

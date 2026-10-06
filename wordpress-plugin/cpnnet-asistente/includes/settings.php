@@ -23,7 +23,7 @@ function cpnnet_asistente_defaults(): array
         'hourly_limit'   => 30,
         'daily_limit'    => 1500,
         'monthly_budget' => 25,
-        'save_leads'     => 1,
+        'save_transcript' => 1,
         'welcome'        => '¡Hola! Soy el asistente virtual de CPNnet Security. ¿Nos escribes como partner/integrador o como empresa que busca una solución de ciberseguridad?',
     ];
 }
@@ -70,7 +70,7 @@ function cpnnet_asistente_sanitize($in): array
         'hourly_limit'   => max(1, min(500, (int) ($in['hourly_limit'] ?? 30))),
         'daily_limit'    => max(10, min(50000, (int) ($in['daily_limit'] ?? 1500))),
         'monthly_budget' => max(0, min(100000, (float) ($in['monthly_budget'] ?? 25))),
-        'save_leads'     => empty($in['save_leads']) ? 0 : 1,
+        'save_transcript' => empty($in['save_transcript']) ? 0 : 1,
         'welcome'        => sanitize_textarea_field((string) ($in['welcome'] ?? '')),
     ];
 }
