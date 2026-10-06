@@ -38,5 +38,6 @@ El script copia la base de conocimiento (`knowledge/`) y el prompt (`bot/system-
 - **Ahorro de tokens:** el prompt va marcado para caché, el conocimiento se envía compacto (sin campos vacíos), el historial se limita a 12 mensajes y cada respuesta a 800 tokens.
 
 ## Demo y presentación
-- `demo/index.html`: demo guionada de una sola página (abrir con doble clic; no necesita internet ni API key). Regenerar con `python3 demo/build.py` tras editar `demo/template.html`.
+- `demo/dashboard.html`: demo navegable del panel comercial (pantallas reales del plugin con datos de ejemplo; abrir con doble clic). Regenerar con `./demo/build_dashboard.sh`.
+- `demo/index.html`: demo guionada del chat, de una sola página (abrir con doble clic; no necesita internet ni API key). Regenerar con `python3 demo/build.py` tras editar `demo/template.html`.
 - `presentacion/Asistente-comercial-CPNnet.pdf`: presentación para el cliente (fuente: `presentacion/presentacion.html`).
