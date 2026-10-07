@@ -1,0 +1,12 @@
+{
+  "name": "cpnnet-asistente-tools",
+  "private": true,
+  "description": "Herramientas de desarrollo: generar el PDF, regenerar capturas y probar las demos en un navegador real.",
+  "scripts": {
+    "pdf": "node build_pdf.js",
+    "capturas": "node regen_screenshots.js",
+    "e2e": "node e2e_demos.js",
+    "setup": "npm install && npx playwright install chromium"
+  },
+  "devDependencies": { "playwright": "^1.48.0" }
+}
