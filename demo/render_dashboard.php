@@ -1,8 +1,8 @@
 <?php
-// Genera demo/dashboard.html: las pantallas REALES del plugin (panel, leads, fichas, integración, configuración)
+// Genera demo/panel.html: las pantallas REALES del plugin (panel, leads, fichas, integración, configuración)
 // renderizadas con datos de ejemplo y envueltas en una navegación simulada de WordPress. Uso: ver demo/build_dashboard.sh
 require __DIR__.'/common.php'; mt_srand(11);
-$out = $argv[1] ?? (__DIR__.'/dashboard.html');
+$out = $argv[1] ?? (__DIR__.'/panel.html');
 $db=$GLOBALS['wpdb']; $now=time();
 $gente=[['Ana Pérez','ACME','Chile','empresa'],['Luis Rojas','Integra TI','Perú','partner'],['Marcos Díaz','Grupo Andes','Colombia','empresa'],['Carla Núñez','SecureNet','Chile','partner'],['Diego Salas','Retail Sur','Chile','empresa'],['Valentina Cruz','Banco Norte','Perú','empresa'],['Pablo Mena','TechPartners','Colombia','partner'],['Sofía Lagos','Clínica Vida','Chile','empresa'],['Andrés Vega','Soluciones Andinas','Perú','partner'],['Camila Soto','Logística Pacífico','Chile','empresa'],['Javier Mora','Colegio San Pedro','Chile','empresa'],['Elena Ríos','NetSolutions','Colombia','partner'],['Tomás Ibarra','Minera del Norte','Chile','empresa'],['Natalia Quispe','Cooperativa Sol','Perú','empresa'],['Ricardo Peña','Cyber Partners','Colombia','partner'],['Isabel Fuentes','Universidad Austral','Chile','empresa'],['Mateo Castro','Seguros Atlas','Colombia','empresa'],['Lucía Herrera','Inova TI','Chile','partner'],['Gonzalo Pino','Aceros del Sur','Chile','empresa']];
 $necs=['Equipo de seguridad pequeño, exceso de alertas y sin cobertura fuera de horario','Reemplazar la VPN por acceso granular para trabajo remoto y terceros','Renovar el firewall y conectar sucursales','Descubrir y clasificar información sensible en Microsoft 365','Controlar equipos compartidos en laboratorios','Reducir el backlog de vulnerabilidades y automatizar parches','Proteger cuentas privilegiadas y accesos de proveedores','Validar si los controles actuales detectan ataques reales'];
@@ -35,7 +35,7 @@ $css=preg_replace_callback('#url\("fonts/(montserrat-latin-\d+-normal\.woff2)"\)
 $logo=$b64('img/cpnnet-logo-white.png','image/png');
 $body=''; foreach($sec as $id=>$h) $body.='<section class="page" data-page="'.$id.'" hidden>'.$h.'</section>';
 $html=<<<HTML
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Demo · Panel comercial CPNnet</title>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Demo · Panel comercial CPNnet</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f0f0f1;font:13px/1.5 "Montserrat CPN",Montserrat,-apple-system,"Segoe UI",Roboto,sans-serif;color:#1d2327}
 #bar{position:sticky;top:0;z-index:20;background:#1d2327;color:#f0f0f1;display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:34px;font-size:12px}
@@ -58,7 +58,7 @@ input[type=text],input[type=search],input[type=date],input[type=url],input[type=
 #toast.on{opacity:1}
 @media(max-width:820px){#side{display:none}#main{padding:6px 12px}}
 </style><style>$css</style></head><body>
-<div id="bar"><span><b>DEMO</b> · Panel comercial del Asistente CPNnet · datos de ejemplo</span><span>Navega, filtra y abre fichas. Nada de lo que hagas se guarda.</span></div>
+<div id="bar"><span><b>DEMO</b> · Panel comercial del Asistente CPNnet · datos de ejemplo</span><span><a href="index.html" style="color:#72aee6;text-decoration:none;margin-right:14px;font-weight:600">← Todas las demos</a>Navega, filtra y abre fichas. Nada de lo que hagas se guarda.</span></div>
 <div id="layout"><nav id="side"><div class="grp">Asistente CPNnet</div>
 <a href="#panel-30" data-nav="panel">Panel</a><a href="#leads" data-nav="leads">Leads</a><a href="#integ" data-nav="integ">Integración CRM</a><a href="#cfg-general" data-nav="cfg">Configuración</a></nav>
 <main id="main">$body</main></div><div id="toast"></div>
@@ -94,4 +94,4 @@ $html=str_replace('%CSV%',json_encode($csv,JSON_UNESCAPED_UNICODE),$html);
 $html=str_replace('ASSET/assets/img/cpnnet-logo-white.png','data:image/gif;base64,R0lGODlhAQABAAAAACw=',$html); // el logo real se asigna una sola vez desde JS
 $html=str_replace('%LOGO%',json_encode($logo),$html);
 file_put_contents($out,$html);
-echo "dashboard.html: ".round(strlen($html)/1024)." KB, ".count($sec)." pantallas\n";
+echo "panel.html: ".round(strlen($html)/1024)." KB, ".count($sec)." pantallas\n";

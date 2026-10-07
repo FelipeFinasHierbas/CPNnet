@@ -42,6 +42,5 @@ El script copia la base de conocimiento (`knowledge/`) y el prompt (`bot/system-
 - **Ahorro de tokens:** el prompt va marcado para caché, el conocimiento se envía compacto (sin campos vacíos), el historial se limita a 12 mensajes y cada respuesta a 800 tokens.
 
 ## Demo y presentación
-- `demo/dashboard.html`: demo navegable del panel comercial (pantallas reales del plugin con datos de ejemplo; abrir con doble clic). Regenerar con `./demo/build_dashboard.sh`.
-- `demo/index.html`: demo guionada del chat, de una sola página (abrir con doble clic; no necesita internet ni API key). Regenerar con `python3 demo/build.py` tras editar `demo/template.html`.
+- **Demos online (sin PHP, sin API key):** `demo/index.html` (portada), `demo/chat.html` (chat guionado) y `demo/panel.html` (panel comercial navegable, con las pantallas reales del plugin y datos de ejemplo). Cada archivo es autocontenido (incluye Montserrat y el logo). `./demo/build_all.sh` las regenera y crea `dist/asistente-demo.zip` para subir al hosting; para editar el chat, modificar `demo/template.html`.
 - `presentacion/Asistente-comercial-CPNnet.pdf`: presentación para el cliente (fuente: `presentacion/presentacion.html`).
