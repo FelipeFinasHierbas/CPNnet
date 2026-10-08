@@ -92,7 +92,7 @@ def t_stat(p):
 <svg class='arcs' width='1080' height='1350' viewBox='0 0 1080 1350'>{rings}</svg>
 <div class='abs lab' style='left:76px;top:300px'>{p['tag']}</div>
 <div class='abs' style='left:76px;top:350px;right:120px;font-size:42px;font-weight:600;line-height:1.25'>{p['kicker']}</div>
-<div class='abs' style='left:60px;top:510px;font-size:{p.get("bigsize",330)}px;font-weight:800;line-height:.95;letter-spacing:-12px;color:{NAVY}'>{p['big']}</div>
+<div class='abs' style='left:60px;top:510px;font-size:{p.get("bigsize",330)}px;font-weight:800;line-height:.95;letter-spacing:{p.get("ls",-12)}px;color:{NAVY}'>{p['big']}</div>
 <div class='abs' style='left:76px;top:{p.get("captop",830)}px;width:{p.get("capw",620)}px;height:8px;border-radius:4px;background:linear-gradient(90deg,{AZURE},{SKY},rgba(132,186,225,0))'></div>
 <div class='abs' style='left:76px;top:{p.get("captop",830)+34}px;right:90px;font-size:38px;font-weight:700;line-height:1.22'>{p['caption']}</div>
 <div class='abs card' style='left:76px;right:76px;top:1000px;padding:30px 40px'><div style='font-size:27px;font-weight:500;line-height:1.38'>{p['takeaway']}</div></div>
@@ -154,7 +154,8 @@ for q in b1.POSTS:
                      (20000, "Infracciones gravísimas", "20.000 UTM"), (40000, "Operadores de Importancia Vital (tope)", "40.000 UTM")]
         q["title"] = "Multas de la Ley 21.663: lo que está en juego"
     if q["tipo"] == "stat":  # ajustes de composición por pieza
-        q["bigsize"] = {"02": 300, "05": 380, "11": 380}.get(q["id"], 330); q["captop"] = 830
+        q["bigsize"] = {"02": 190, "05": 380, "11": 380}.get(q["id"], 330); q["captop"] = 830
+        if q["id"] == "02": q["ls"] = -3; q["captop"] = 790
     if q["tipo"] == "webinar":
         q["dia"] = q["fecha"][:2]
     POSTS.append(q)
