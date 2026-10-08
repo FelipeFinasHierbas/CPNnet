@@ -14,15 +14,15 @@ function cpnnet_asistente_local(?string $utc, string $fmt = 'd-m-Y H:i'): string
 function cpnnet_asistente_wrap_start(string $title, string $subtitle = ''): void
 {
     $notices = [
-        'saved' => 'Cambios guardados.', 'deleted' => 'Marca eliminada.', 'reset' => 'Se restauró el contenido original.',
+        'saved' => 'Cambios guardados.', 'deleted' => 'Elemento eliminado.', 'reset' => 'Se restauró el contenido original.',
         'invalid' => 'Faltan datos obligatorios.', 'token' => 'Token generado.', 'revoked' => 'Token revocado.',
         'badurl' => 'La URL del webhook no es válida (debe empezar con http:// o https://).',
         'pingok' => 'La prueba llegó al CRM correctamente.', 'pingfail' => 'La prueba no llegó al CRM. Revisa la URL y que el CRM responda con código 2xx.',
         'lead_saved' => 'Lead actualizado.', 'resent' => 'Se reenvió el lead al CRM.', 'resentfail' => 'No se pudo reenviar al CRM; revisa la configuración del webhook.',
         'marked' => 'Lead marcado como exportado.',
     ];
-    $logo = esc_url(CPNNET_ASISTENTE_URL . 'assets/img/cpnnet-logo-white.png');
-    echo '<div class="wrap cpn-wrap"><div class="cpn-head"><div class="cpn-head-main"><img class="cpn-logo" src="' . $logo . '" alt="CPNnet Security"><span class="cpn-head-sep"></span><div><h1>' . esc_html($title) . '</h1>';
+    $logo = esc_url(cpnnet_asistente_logo_url(true));
+    echo '<div class="wrap cpn-wrap"><div class="cpn-head"><div class="cpn-head-main"><img class="cpn-logo" src="' . $logo . '" alt="' . esc_attr(cpnnet_asistente_brand_get('name')) . '"><span class="cpn-head-sep"></span><div><h1>' . esc_html($title) . '</h1>';
     if ($subtitle !== '') {
         echo '<p>' . esc_html($subtitle) . '</p>';
     }
@@ -187,7 +187,7 @@ function cpnnet_asistente_leads_table_html(array $rows): string
     if (!$rows) {
         return '<p class="cpn-empty">Aún no hay leads. Cuando un visitante acepte ser contactado, aparecerá aquí.</p>';
     }
-    $h = '<table class="cpn-table"><thead><tr><th>Fecha</th><th>Contacto</th><th>Perfil</th><th>Marcas de interés</th><th>País</th><th>Estado</th><th>CRM</th></tr></thead><tbody>';
+    $h = '<table class="cpn-table"><thead><tr><th>Fecha</th><th>Contacto</th><th>Perfil</th><th>' . esc_html(ucfirst(cpnnet_asistente_brand_get('items'))) . ' de interés</th><th>País</th><th>Estado</th><th>CRM</th></tr></thead><tbody>';
     foreach ($rows as $r) {
         $url = cpnnet_asistente_leads_url(['lead' => (int) $r['id']]);
         $marcas = implode(', ', json_decode((string) $r['marcas'], true) ?: []);
@@ -232,7 +232,7 @@ function cpnnet_asistente_page_panel(): void
     $est = [];
     foreach (CPNNET_ASISTENTE_STATUSES as $k => $l) { $est[$l] = (int) ($s['estados'][$k] ?? 0); }
     echo '<section class="cpn-card"><h3>Estado de los leads</h3>' . cpnnet_asistente_hbars($est) . '</section>';
-    echo '<section class="cpn-card"><h3>Marcas más consultadas</h3>' . cpnnet_asistente_hbars($s['marcas']) . '</section>';
+    echo '<section class="cpn-card"><h3>' . esc_html(ucfirst(cpnnet_asistente_brand_get('items'))) . ' más consultad' . (cpnnet_asistente_brand_get('item') === 'marca' ? 'as' : 'os') . '</h3>' . cpnnet_asistente_hbars($s['marcas']) . '</section>';
     $perfil = [];
     foreach ($s['perfil'] as $k => $v) { $perfil[ucfirst($k)] = $v; }
     echo '<section class="cpn-card"><h3>Perfil y país</h3>' . cpnnet_asistente_hbars($perfil) . '<h4>Países</h4>' . cpnnet_asistente_hbars($s['paises']) . '</section>';
@@ -265,7 +265,7 @@ function cpnnet_asistente_page_leads(): void
 
     cpnnet_asistente_wrap_start('Leads', 'Todos los contactos que dejó el asistente. Haz clic en uno para ver el detalle y la conversación.');
     echo '<form method="get" class="cpn-filters"><input type="hidden" name="page" value="cpnnet-asistente-leads">';
-    echo '<input type="search" name="q" placeholder="Buscar nombre, empresa, país, marca…" value="' . esc_attr($f['q']) . '">';
+    echo '<input type="search" name="q" placeholder="Buscar nombre, empresa, país, ' . cpnnet_asistente_brand_get('item') . '…" value="' . esc_attr($f['q']) . '">';
     echo '<select name="status"><option value="">Todos los estados</option>';
     foreach (CPNNET_ASISTENTE_STATUSES as $k => $l) { echo '<option value="' . esc_attr($k) . '"' . selected($f['status'], $k, false) . '>' . esc_html($l) . '</option>'; }
     echo '</select><select name="perfil"><option value="">Todos los perfiles</option>';
@@ -307,7 +307,7 @@ function cpnnet_asistente_page_lead(int $id): void
         . $row('Contacto', $contact)
         . $row('Empresa', esc_html($r['empresa'] ?: '—'))
         . $row('País', esc_html($r['pais'] ?: '—'))
-        . $row('Marcas de interés', esc_html($marcas ?: '—'))
+        . $row(ucfirst(cpnnet_asistente_brand_get('items')) . ' de interés', esc_html($marcas ?: '—'))
         . $row('Necesidad', nl2br(esc_html((string) $r['necesidad'] ?: '—')))
         . $row('Dimensionamiento', nl2br(esc_html((string) $r['dimensionamiento'] ?: '—')))
         . $row('Siguiente paso sugerido', nl2br(esc_html((string) $r['siguiente_paso'] ?: '—')))

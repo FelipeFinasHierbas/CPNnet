@@ -1,0 +1,25 @@
+{
+ "name": "The Forest Software Lab",
+ "short": "The Forest",
+ "site": "",
+ "lead_title": "Nuevo lead desde The Forest Software Lab",
+ "menu": "Asistente The Forest",
+ "role_label": "Comercial The Forest",
+ "crm_label": "CRM de The Forest",
+ "item": "servicio",
+ "items": "servicios",
+ "welcome": "¡Hola! Soy el asistente virtual de The Forest Software Lab. Cuéntame qué necesitas resolver: datos, automatización, ciberseguridad o desarrollo de software.",
+ "chips": [
+  "Soy partner / consultora",
+  "Busco una solución para mi empresa"
+ ],
+ "colors": {
+  "primary": "#1f5f3f",
+  "dark": "#123b27",
+  "accent": "#4caf7d",
+  "tint": "#bfe3cd",
+  "bg": "#f3f8f5"
+ },
+ "logo": "forest-logo.png",
+ "logo_white": "forest-logo-white.png"
+}

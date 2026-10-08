@@ -48,23 +48,23 @@
   var root = el('div', 'cpnnet-chat');
   var launcher = el('button', 'cpnnet-chat__launcher');
   launcher.type = 'button';
-  launcher.setAttribute('aria-label', 'Abrir asistente de CPNnet');
+  launcher.setAttribute('aria-label', 'Abrir asistente de ' + (cfg.short || 'CPNnet'));
   launcher.innerHTML = '<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.9 2 11.7c0 2.5 1.2 4.7 3.2 6.3L4.5 21l3.6-1.8c1.2.4 2.5.5 3.9.5 5.5 0 10-3.9 10-8.7S17.5 3 12 3z"/></svg>';
 
   var panel = el('section', 'cpnnet-chat__panel');
   panel.setAttribute('role', 'dialog');
-  panel.setAttribute('aria-label', 'Asistente virtual de CPNnet Security');
+  panel.setAttribute('aria-label', 'Asistente virtual de ' + (cfg.name || 'CPNnet Security'));
   panel.hidden = true;
 
   var header = el('header', 'cpnnet-chat__header');
   var brand = el('div', 'cpnnet-chat__brand');
   if (cfg.logo) {
     var logo = el('img', 'cpnnet-chat__logo');
-    logo.src = cfg.logo; logo.alt = 'CPNnet Security';
+    logo.src = cfg.logo; logo.alt = cfg.name || 'CPNnet Security';
     brand.appendChild(logo);
   }
   var title = el('div', 'cpnnet-chat__title');
-  title.appendChild(el('strong', null, cfg.logo ? 'Asistente virtual' : 'CPNnet Security'));
+  title.appendChild(el('strong', null, cfg.logo ? 'Asistente virtual' : (cfg.name || 'CPNnet Security')));
   title.appendChild(el('span', null, cfg.testMode ? 'Modo de prueba · solo administradores' : 'Con inteligencia artificial'));
   brand.appendChild(title);
   var close = el('button', 'cpnnet-chat__close', '×');
@@ -92,7 +92,7 @@
   form.appendChild(hp);
   form.appendChild(send);
 
-  var note = el('p', 'cpnnet-chat__note', 'Asistente con IA. No compartas contraseñas ni datos sensibles. Al dejar tus datos aceptas que los use el equipo comercial de CPNnet para contactarte.');
+  var note = el('p', 'cpnnet-chat__note', 'Asistente con IA. No compartas contraseñas ni datos sensibles. Al dejar tus datos aceptas que los use el equipo comercial de ' + (cfg.short || 'CPNnet') + ' para contactarte.');
 
   panel.appendChild(header);
   panel.appendChild(log);
@@ -124,10 +124,7 @@
     chips.hidden = state.messages.length > 0;
   }
 
-  [
-    'Soy partner / integrador',
-    'Busco una solución para mi empresa'
-  ].forEach(function (label) {
+  (cfg.chips || ['Soy partner / integrador', 'Busco una solución para mi empresa']).forEach(function (label) {
     var c = el('button', 'cpnnet-chat__chip', label);
     c.type = 'button';
     c.addEventListener('click', function () { submit(label); });

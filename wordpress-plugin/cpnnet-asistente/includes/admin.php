@@ -17,14 +17,14 @@ add_filter('user_has_cap', function ($allcaps) {
 function cpnnet_asistente_ensure_role(): void
 {
     if (!get_role('cpnnet_comercial')) {
-        add_role('cpnnet_comercial', 'Comercial CPNnet', ['read' => true, 'cpnnet_asistente_leads' => true]);
+        add_role('cpnnet_comercial', cpnnet_asistente_brand_get('role_label'), ['read' => true, 'cpnnet_asistente_leads' => true]);
     }
 }
 add_action('init', 'cpnnet_asistente_ensure_role');
 
 add_action('admin_menu', function () {
     $cap = 'cpnnet_asistente_leads';
-    add_menu_page('Asistente CPNnet', 'Asistente CPNnet', $cap, 'cpnnet-asistente', 'cpnnet_asistente_page_panel', 'dashicons-format-chat', 58);
+    add_menu_page(cpnnet_asistente_brand_get('menu'), cpnnet_asistente_brand_get('menu'), $cap, 'cpnnet-asistente', 'cpnnet_asistente_page_panel', 'dashicons-format-chat', 58);
     add_submenu_page('cpnnet-asistente', 'Panel comercial', 'Panel', $cap, 'cpnnet-asistente', 'cpnnet_asistente_page_panel');
     add_submenu_page('cpnnet-asistente', 'Leads', 'Leads', $cap, 'cpnnet-asistente-leads', 'cpnnet_asistente_page_leads');
     add_submenu_page('cpnnet-asistente', 'Integración con el CRM', 'Integración CRM', 'manage_options', 'cpnnet-asistente-integracion', 'cpnnet_asistente_page_integracion');
@@ -61,7 +61,7 @@ function cpnnet_asistente_admin_page(): void
     if (!current_user_can('manage_options')) {
         return;
     }
-    $tabs = ['general' => 'General', 'conocimiento' => 'Conocimiento (marcas)', 'reglas' => 'Reglas y empresa', 'uso' => 'Uso y costos'];
+    $tabs = ['general' => 'General', 'conocimiento' => 'Conocimiento (' . cpnnet_asistente_brand_get('items') . ')', 'reglas' => 'Reglas y empresa', 'uso' => 'Uso y costos'];
     $tab  = isset($_GET['tab'], $tabs[$_GET['tab']]) ? (string) $_GET['tab'] : 'general';
     cpnnet_asistente_wrap_start('Configuración', 'Ajustes del asistente, lo que sabe y cuánto consume.');
     echo '<h2 class="nav-tab-wrapper">';
@@ -176,7 +176,7 @@ function cpnnet_asistente_tab_conocimiento(): void
     $edit_id = isset($_GET['brand']) ? sanitize_text_field((string) $_GET['brand']) : '';
     $tokens  = cpnnet_asistente_approx_tokens(cpnnet_asistente_system_prompt());
     ?>
-    <p>Aquí se edita lo que el asistente sabe de cada marca. Los cambios se aplican de inmediato en el chat.
+    <p>Aquí se edita lo que el asistente sabe de cada <?php echo esc_html(cpnnet_asistente_brand_get('item')); ?>. Los cambios se aplican de inmediato en el chat.
        Todo este contenido viaja en cada mensaje (con caché, a una fracción del precio): hoy son <strong>≈ <?php echo esc_html(number_format_i18n($tokens)); ?> tokens</strong>.
        Textos más breves = menos costo.</p>
     <?php if ($edit_id !== '') :
@@ -185,9 +185,9 @@ function cpnnet_asistente_tab_conocimiento(): void
     endif; ?>
 
     <p>
-        <a class="button button-primary" href="<?php echo esc_url(cpnnet_asistente_admin_url(['tab' => 'conocimiento', 'brand' => 'nueva'])); ?>">Agregar marca</a>
+        <a class="button button-primary" href="<?php echo esc_url(cpnnet_asistente_admin_url(['tab' => 'conocimiento', 'brand' => 'nueva'])); ?>">Agregar <?php echo esc_html(cpnnet_asistente_brand_get('item')); ?></a>
         <?php if (cpnnet_asistente_kb_is_custom()) : ?>
-            <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="display:inline" onsubmit="return confirm('¿Restaurar el catálogo original? Se perderán tus cambios en las marcas.');">
+            <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="display:inline" onsubmit="return confirm('¿Restaurar el catálogo original? Se perderán tus cambios.');">
                 <?php wp_nonce_field('cpnnet_asistente_admin'); ?>
                 <input type="hidden" name="action" value="cpnnet_asistente_kb_reset">
                 <button class="button">Restaurar catálogo original</button>
@@ -204,7 +204,7 @@ function cpnnet_asistente_tab_conocimiento(): void
                 <td><?php echo esc_html($cats[$b['category']] ?? $b['category']); ?></td>
                 <td>
                     <a class="button button-small" href="<?php echo esc_url(cpnnet_asistente_admin_url(['tab' => 'conocimiento', 'brand' => $b['id']])); ?>">Editar</a>
-                    <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="display:inline" onsubmit="return confirm('¿Eliminar esta marca?');">
+                    <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="display:inline" onsubmit="return confirm('¿Eliminar este elemento?');">
                         <?php wp_nonce_field('cpnnet_asistente_admin'); ?>
                         <input type="hidden" name="action" value="cpnnet_asistente_kb_delete">
                         <input type="hidden" name="brand_id" value="<?php echo esc_attr($b['id']); ?>">
@@ -226,7 +226,7 @@ function cpnnet_asistente_brand_form(array $kb, array $cats, ?array $b): void
         echo '<tr><th scope="row">' . esc_html($label) . '</th><td>' . $html . ($help ? '<p class="description">' . esc_html($help) . '</p>' : '') . '</td></tr>';
     };
     ?>
-    <h3><?php echo !empty($b['id']) ? 'Editar marca' : 'Nueva marca'; ?></h3>
+    <h3><?php echo !empty($b['id']) ? 'Editar ' . cpnnet_asistente_brand_get('item') : 'Nuevo elemento'; ?></h3>
     <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
         <?php wp_nonce_field('cpnnet_asistente_admin'); ?>
         <input type="hidden" name="action" value="cpnnet_asistente_kb_save">
@@ -252,7 +252,7 @@ function cpnnet_asistente_brand_form(array $kb, array $cats, ?array $b): void
             $row('Preguntas para calificar', '<textarea class="large-text" rows="3" name="qualifying_questions">' . esc_textarea($lines('qualifying_questions')) . '</textarea>', 'Una por línea.');
             ?>
         </table>
-        <?php submit_button('Guardar marca'); ?>
+        <?php submit_button('Guardar'); ?>
         <a href="<?php echo esc_url(cpnnet_asistente_admin_url(['tab' => 'conocimiento'])); ?>">← Volver a la lista</a>
     </form>
     <?php
@@ -374,7 +374,7 @@ function cpnnet_asistente_tab_uso(): void
     <h3>Cómo bajar el costo</h3>
     <ul style="list-style:disc;margin-left:20px">
         <li>Cambiar a un modelo más económico (pestaña General).</li>
-        <li>Acortar el contenido: cada marca, y las reglas, se envían en cada mensaje.</li>
+        <li>Acortar el contenido: cada elemento del conocimiento, y las reglas, se envían en cada mensaje.</li>
         <li>Mantener el esfuerzo de razonamiento en «Bajo».</li>
         <li>Fijar el tope mensual y créditos prepagados en la consola de Anthropic.</li>
     </ul>

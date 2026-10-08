@@ -27,7 +27,7 @@ function cpnnet_asistente_tools(): array
 {
     return [[
         'name'        => 'derivar_a_ejecutivo',
-        'description' => 'Deriva al visitante a un ejecutivo de CPNnet por WhatsApp con un resumen de su consulta. '
+        'description' => 'Deriva al visitante a un ejecutivo de ' . cpnnet_asistente_brand_get('short') . ' por WhatsApp con un resumen de su consulta. '
             . 'Úsala solo cuando el visitante quiera avanzar (cotización, demo, reunión o hablar con alguien) '
             . 'y haya dado su consentimiento explícito para compartir sus datos con el equipo comercial.',
         'inputSchema' => [
@@ -41,7 +41,7 @@ function cpnnet_asistente_tools(): array
                 'necesidad'        => ['type' => 'string', 'description' => 'Necesidad en 1-2 líneas'],
                 'marcas_interes'   => ['type' => 'array', 'items' => ['type' => 'string']],
                 'dimensionamiento' => ['type' => 'string', 'description' => 'Datos de dimensionamiento levantados (usuarios, sedes, endpoints, etc.)'],
-                'siguiente_paso'   => ['type' => 'string', 'description' => 'Siguiente paso sugerido (entry_point de la marca)'],
+                'siguiente_paso'   => ['type' => 'string', 'description' => 'Siguiente paso sugerido (entry_point de la ' . cpnnet_asistente_brand_get('item') . ')'],
                 'consentimiento'   => ['type' => 'boolean', 'description' => 'true solo si el visitante aceptó compartir sus datos con el equipo comercial'],
             ],
             'required'   => ['perfil', 'necesidad', 'consentimiento'],

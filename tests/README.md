@@ -8,3 +8,5 @@ mkdir -p /tmp/t && cd /tmp/t && unzip -q /ruta/al/repo/dist/cpnnet-asistente.zip
 php -S 127.0.0.1:8098 mock.php &  php -S 127.0.0.1:8097 hook.php &
 ANTHROPIC_BASE_URL=http://127.0.0.1:8098 NO_PROXY=127.0.0.1 php test.php   # todas las líneas deben decir OK
 ```
+
+Atajo: `tests/run.sh` descomprime los .zip de `dist/` (base y variantes) y corre `test.php` + `test_brand.php`; con `PLUGIN_DIR=<carpeta>` se prueba una variante a mano.

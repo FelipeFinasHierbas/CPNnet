@@ -15,6 +15,10 @@ CPNnet Security es un mayorista/socio de ciberseguridad de Latinoamérica (Colom
 - Contenido editable por el cliente desde el panel (opciones de WP con prioridad sobre los archivos empaquetados): marcas, reglas, empresa.
 - Identidad: logo extraído del catálogo (`assets/img/`, baja resolución ~300px) y **Montserrat** local (OFL) en widget, panel, demos y PDF. Colores `#2b4c8c / #1b2f5e / #4f9bd6`.
 
+## Variante The Forest (0.5.0)
+Mismo plugin con otra marca: `variants/the-forest/` (`variant.json`, `brand.json`, `knowledge/`, `bot/`, `img/`, `demo/scenarios.json`). La capa `includes/brand.php` lee un `brand.json` opcional en la raíz del plugin (nombre, colores, textos, chips, términos «servicio/servicios» en vez de «marca/marcas»). `VARIANT=the-forest ./wordpress-plugin/build.sh` → `dist/forest-asistente.zip` (carpeta/archivo `forest-asistente`); no activar las dos variantes a la vez (el plugin lo detecta y avisa). Se mantienen sin cambio los identificadores técnicos (namespace REST `cpnnet-asistente/v1`, cabeceras `X-CPNnet-*`, campo `marcas_interes`). El contenido de The Forest es **provisional**: solo lo conocido (servicios, ForestBot©, Agile Biodiversa, etapas del proyecto); lo demás figura «por confirmar» y el bot no lo inventa. Logo = wordmark provisional generado; colores verdes provisionales. `tests/run.sh` prueba base y variantes; demo: `demo/build_forest.py`.
+**Falta de The Forest:** URL del sitio, logo/colores reales, detalle de cada servicio, tecnologías, modalidad con partners, permiso para citar el caso CPNnet, WhatsApp, tono.
+
 ## Estructura y comandos
 Ver `README.md`. Resumen: `./release.sh` construye `releases/*.zip`; `tests/` (SQLite, ver `tests/README.md`; el script falla si ejecuta menos de 50 verificaciones, para detectar salidas silenciosas); `tools/` (Node: `npm run e2e|capturas|pdf`).
 - `wordpress-plugin/build.sh` copia `knowledge/` y `bot/system-prompt.md` dentro del plugin (carpetas `knowledge/` y `prompt/` del plugin están en .gitignore: son copias generadas), corre `composer install --no-dev` y recorta `vendor/`.

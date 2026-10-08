@@ -27,9 +27,9 @@
 .cpn-grid>.cpn-card{margin-bottom:0}
 .cpn-chart{width:100%;height:auto;display:block}
 .cpn-grid-line{stroke:var(--line);stroke-width:1}.cpn-axis{fill:var(--mut);font-size:11px}
-.cpn-bar-conv{fill:#bcd3ee}.cpn-bar-lead{fill:var(--p)}
+.cpn-bar-conv{fill:var(--t,#bcd3ee)}.cpn-bar-lead{fill:var(--p)}
 .cpn-legend{font-size:12px;color:var(--mut)}.cpn-dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin:0 4px 0 12px;vertical-align:baseline}
-.cpn-dot-conv{background:#bcd3ee}.cpn-dot-lead{background:var(--p)}
+.cpn-dot-conv{background:var(--t,#bcd3ee)}.cpn-dot-lead{background:var(--p)}
 .cpn-hbars{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .cpn-hbars li{display:grid;grid-template-columns:minmax(80px,38%) 1fr 34px;align-items:center;gap:10px;font-size:13px}
 .cpn-hbar-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cpn-hbars b{text-align:right;color:var(--d)}

@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       CPNnet Asistente Comercial
  * Description:       Chat con IA (Claude) para www.cpnnetsecurity.com: orienta a partners y empresas sobre el portafolio de CPNnet y deriva los leads por WhatsApp.
- * Version:           0.4.0
+ * Version:           0.5.0
  * Requires PHP:      8.1
  * Requires at least: 6.0
  * Author:            CPNnet Security
@@ -13,7 +13,15 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('CPNNET_ASISTENTE_VERSION', '0.4.0');
+if (defined('CPNNET_ASISTENTE_VERSION')) {
+    // Ya hay otra variante del asistente activa: no cargar dos a la vez.
+    add_action('admin_notices', function () {
+        echo '<div class="notice notice-error"><p><strong>Asistente comercial:</strong> hay dos variantes del asistente activas a la vez. Desactiva una de ellas.</p></div>';
+    });
+    return;
+}
+
+define('CPNNET_ASISTENTE_VERSION', '0.5.0');
 define('CPNNET_ASISTENTE_DIR', plugin_dir_path(__FILE__));
 define('CPNNET_ASISTENTE_URL', plugin_dir_url(__FILE__));
 define('CPNNET_ASISTENTE_OPTION', 'cpnnet_asistente');
@@ -27,6 +35,7 @@ if (is_readable(CPNNET_ASISTENTE_DIR . 'vendor/autoload.php')) {
     return;
 }
 
+require_once CPNNET_ASISTENTE_DIR . 'includes/brand.php';
 require_once CPNNET_ASISTENTE_DIR . 'includes/settings.php';
 require_once CPNNET_ASISTENTE_DIR . 'includes/leads.php';
 require_once CPNNET_ASISTENTE_DIR . 'includes/usage.php';

@@ -25,7 +25,7 @@ function cpnnet_asistente_defaults(): array
         'daily_limit'    => 1500,
         'monthly_budget' => 25,
         'save_transcript' => 1,
-        'welcome'        => '¡Hola! Soy el asistente virtual de CPNnet Security. ¿Nos escribes como partner/integrador o como empresa que busca una solución de ciberseguridad?',
+        'welcome'        => (string) cpnnet_asistente_brand_get('welcome'),
     ];
 }
 

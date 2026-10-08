@@ -1,0 +1,257 @@
+{
+ "_meta": {
+  "source": "Información de The Forest Software Lab (Drive del cliente). Sin precios ni plazos.",
+  "language": "es",
+  "notes": "Fuente única de verdad del bot. Todo lo marcado 'por confirmar' debe completarlo The Forest; el bot no inventa precios, plazos, tecnologías ni clientes."
+ },
+ "domains": [
+  {
+   "id": "datos",
+   "name": "Datos y automatización",
+   "layer": "Data Layer",
+   "description": "BI, IPA/RPA y Big Data."
+  },
+  {
+   "id": "seguridad",
+   "name": "Seguridad y consultoría",
+   "layer": "Advisory Layer",
+   "description": "Ciberseguridad y consultoría."
+  },
+  {
+   "id": "producto",
+   "name": "Software y productos",
+   "layer": "Build Layer",
+   "description": "Fábrica de software y productos propios."
+  }
+ ],
+ "categories": [
+  {
+   "id": "datos-analitica",
+   "domain": "datos",
+   "name": "Datos y automatización",
+   "first_order": [
+    "bi-ipa-rpa",
+    "big-data"
+   ],
+   "cross_sell": [
+    "consultoria"
+   ]
+  },
+  {
+   "id": "seguridad-consultoria",
+   "domain": "seguridad",
+   "name": "Ciberseguridad y consultoría",
+   "first_order": [
+    "ciberseguridad",
+    "consultoria"
+   ],
+   "cross_sell": [
+    "fabrica-software"
+   ]
+  },
+  {
+   "id": "desarrollo-productos",
+   "domain": "producto",
+   "name": "Software y productos",
+   "first_order": [
+    "fabrica-software",
+    "forestbot",
+    "agile-biodiversa"
+   ],
+   "cross_sell": [
+    "bi-ipa-rpa"
+   ]
+  }
+ ],
+ "brands": [
+  {
+   "id": "bi-ipa-rpa",
+   "name": "BI, IPA y RPA",
+   "tier": "primer_orden",
+   "category": "datos-analitica",
+   "tagline": "Inteligencia de negocios y automatización inteligente de procesos.",
+   "summary": "Servicios de Business Intelligence, automatización inteligente de procesos (IPA) y automatización robótica de procesos (RPA) para que la información y las tareas repetitivas dejen de depender de trabajo manual. Detalle de herramientas y alcance por confirmar con The Forest.",
+   "ideal_for": [
+    "áreas que reportan en planillas",
+    "operaciones con tareas repetitivas",
+    "gerencias que necesitan indicadores"
+   ],
+   "problems": [
+    "Reportes manuales y desactualizados",
+    "Tareas repetitivas que consumen horas del equipo",
+    "Información dispersa en varios sistemas"
+   ],
+   "differentiators": [
+    "Equipo propio que cubre datos, automatización y desarrollo",
+    "Proceso de proyecto con etapas definidas"
+   ],
+   "sizing": "Se define en una sesión de Discovery con el equipo de The Forest; el alcance, plazos y valores los confirma un ejecutivo (no hay tarifas publicadas).",
+   "entry_point": "Sesión de Discovery con un ejecutivo de The Forest. Etapas habituales de un proyecto: Discovery → Mockup → Desarrollo → Testing y Go Live → Capacitación y Soporte.",
+   "qualifying_questions": [
+    "¿Cuál es el problema o proceso que quieren resolver y quién lo sufre hoy?",
+    "¿Con qué sistemas o fuentes de datos cuentan actualmente?",
+    "¿Hay una fecha objetivo o un evento que condicione el proyecto?"
+   ]
+  },
+  {
+   "id": "big-data",
+   "name": "Big Data y Data Advanced",
+   "tier": "primer_orden",
+   "category": "datos-analitica",
+   "tagline": "Plataformas de datos y analítica avanzada.",
+   "summary": "Servicios de Big Data y analítica avanzada para ordenar, integrar y aprovechar grandes volúmenes de datos de la organización. Tecnologías y casos específicos por confirmar con The Forest.",
+   "ideal_for": [
+    "empresas con grandes volúmenes de datos",
+    "equipos de analítica",
+    "áreas de TI"
+   ],
+   "problems": [
+    "Datos en silos que no se pueden cruzar",
+    "Falta de base de datos confiable para analítica",
+    "Decisiones tomadas sin datos integrados"
+   ],
+   "differentiators": [
+    "Foco en llevar los datos a decisiones de negocio",
+    "Se combina con BI y automatización"
+   ],
+   "sizing": "Se define en una sesión de Discovery con el equipo de The Forest; el alcance, plazos y valores los confirma un ejecutivo (no hay tarifas publicadas).",
+   "entry_point": "Sesión de Discovery con un ejecutivo de The Forest. Etapas habituales de un proyecto: Discovery → Mockup → Desarrollo → Testing y Go Live → Capacitación y Soporte.",
+   "qualifying_questions": [
+    "¿Cuál es el problema o proceso que quieren resolver y quién lo sufre hoy?",
+    "¿Con qué sistemas o fuentes de datos cuentan actualmente?",
+    "¿Hay una fecha objetivo o un evento que condicione el proyecto?"
+   ]
+  },
+  {
+   "id": "ciberseguridad",
+   "name": "Ciberseguridad",
+   "tier": "primer_orden",
+   "category": "seguridad-consultoria",
+   "tagline": "Servicios de ciberseguridad para proteger la operación.",
+   "summary": "The Forest ofrece servicios de ciberseguridad dentro de su portafolio. El alcance específico (evaluaciones, monitoreo, implementación) está por confirmar con The Forest.",
+   "ideal_for": [
+    "empresas que quieren reducir su exposición",
+    "equipos de TI y de riesgo"
+   ],
+   "problems": [
+    "No saber qué tan expuesta está la organización",
+    "Necesidad de ordenar controles y cumplimiento"
+   ],
+   "differentiators": [
+    "Se integra con el resto de los servicios de datos y software"
+   ],
+   "sizing": "Se define en una sesión de Discovery con el equipo de The Forest; el alcance, plazos y valores los confirma un ejecutivo (no hay tarifas publicadas).",
+   "entry_point": "Sesión de Discovery con un ejecutivo de The Forest. Etapas habituales de un proyecto: Discovery → Mockup → Desarrollo → Testing y Go Live → Capacitación y Soporte.",
+   "qualifying_questions": [
+    "¿Cuál es el problema o proceso que quieren resolver y quién lo sufre hoy?",
+    "¿Con qué sistemas o fuentes de datos cuentan actualmente?",
+    "¿Hay una fecha objetivo o un evento que condicione el proyecto?"
+   ]
+  },
+  {
+   "id": "consultoria",
+   "name": "Consultoría",
+   "tier": "primer_orden",
+   "category": "seguridad-consultoria",
+   "tagline": "Acompañamiento para definir qué construir y cómo.",
+   "summary": "Consultoría para levantar necesidades, ordenar prioridades y definir la solución antes de construirla. Alcance específico por confirmar con The Forest.",
+   "ideal_for": [
+    "gerencias",
+    "áreas de transformación digital"
+   ],
+   "problems": [
+    "No tener claro por dónde partir",
+    "Proyectos que se ejecutan sin diseño previo"
+   ],
+   "differentiators": [
+    "Enfoque que parte por Discovery antes de desarrollar"
+   ],
+   "sizing": "Se define en una sesión de Discovery con el equipo de The Forest; el alcance, plazos y valores los confirma un ejecutivo (no hay tarifas publicadas).",
+   "entry_point": "Sesión de Discovery con un ejecutivo de The Forest. Etapas habituales de un proyecto: Discovery → Mockup → Desarrollo → Testing y Go Live → Capacitación y Soporte.",
+   "qualifying_questions": [
+    "¿Cuál es el problema o proceso que quieren resolver y quién lo sufre hoy?",
+    "¿Con qué sistemas o fuentes de datos cuentan actualmente?",
+    "¿Hay una fecha objetivo o un evento que condicione el proyecto?"
+   ]
+  },
+  {
+   "id": "fabrica-software",
+   "name": "Fábrica de software",
+   "tier": "primer_orden",
+   "category": "desarrollo-productos",
+   "tagline": "Desarrollo de software a medida.",
+   "summary": "Fábrica de software que construye soluciones a medida siguiendo las etapas: Discovery → Mockup → Desarrollo → Testing y Go Live → Capacitación y Soporte. Tecnologías y metodología detalladas por confirmar con The Forest.",
+   "ideal_for": [
+    "empresas que necesitan un sistema propio",
+    "áreas de TI sin capacidad de desarrollo"
+   ],
+   "problems": [
+    "Procesos que ningún software estándar cubre",
+    "Equipos de TI sin capacidad para desarrollar",
+    "Necesidad de ver avances tempranos (mockup)"
+   ],
+   "differentiators": [
+    "Etapas claras con mockup antes de desarrollar",
+    "Incluye capacitación y soporte tras el Go Live",
+    "Existe un caso de éxito con CPNnet"
+   ],
+   "sizing": "Se define en una sesión de Discovery con el equipo de The Forest; el alcance, plazos y valores los confirma un ejecutivo (no hay tarifas publicadas).",
+   "entry_point": "Sesión de Discovery con un ejecutivo de The Forest. Etapas habituales de un proyecto: Discovery → Mockup → Desarrollo → Testing y Go Live → Capacitación y Soporte.",
+   "qualifying_questions": [
+    "¿Cuál es el problema o proceso que quieren resolver y quién lo sufre hoy?",
+    "¿Con qué sistemas o fuentes de datos cuentan actualmente?",
+    "¿Hay una fecha objetivo o un evento que condicione el proyecto?"
+   ]
+  },
+  {
+   "id": "forestbot",
+   "name": "ForestBot©",
+   "tier": "primer_orden",
+   "category": "desarrollo-productos",
+   "tagline": "Asistente virtual / chatbot de The Forest.",
+   "summary": "ForestBot© es el producto de asistentes conversacionales de The Forest. Funcionalidades, canales y condiciones comerciales por confirmar con The Forest.",
+   "ideal_for": [
+    "empresas que atienden consultas repetitivas",
+    "áreas comerciales y de soporte"
+   ],
+   "problems": [
+    "Atención fuera de horario",
+    "Consultas repetitivas que saturan al equipo"
+   ],
+   "differentiators": [
+    "Producto propio de The Forest"
+   ],
+   "sizing": "Se define en una sesión de Discovery con el equipo de The Forest; el alcance, plazos y valores los confirma un ejecutivo (no hay tarifas publicadas).",
+   "entry_point": "Sesión de Discovery con un ejecutivo de The Forest. Etapas habituales de un proyecto: Discovery → Mockup → Desarrollo → Testing y Go Live → Capacitación y Soporte.",
+   "qualifying_questions": [
+    "¿Cuál es el problema o proceso que quieren resolver y quién lo sufre hoy?",
+    "¿Con qué sistemas o fuentes de datos cuentan actualmente?",
+    "¿Hay una fecha objetivo o un evento que condicione el proyecto?"
+   ]
+  },
+  {
+   "id": "agile-biodiversa",
+   "name": "Agile Biodiversa",
+   "tier": "primer_orden",
+   "category": "desarrollo-productos",
+   "tagline": "Iniciativa/producto de The Forest.",
+   "summary": "Agile Biodiversa es una iniciativa de The Forest. El catálogo disponible no detalla su alcance: un ejecutivo debe explicarlo.",
+   "ideal_for": [
+    "por confirmar"
+   ],
+   "problems": [
+    "Por confirmar"
+   ],
+   "differentiators": [
+    "Por confirmar"
+   ],
+   "sizing": "Se define en una sesión de Discovery con el equipo de The Forest; el alcance, plazos y valores los confirma un ejecutivo (no hay tarifas publicadas).",
+   "entry_point": "Sesión de Discovery con un ejecutivo de The Forest. Etapas habituales de un proyecto: Discovery → Mockup → Desarrollo → Testing y Go Live → Capacitación y Soporte.",
+   "qualifying_questions": [
+    "¿Cuál es el problema o proceso que quieren resolver y quién lo sufre hoy?",
+    "¿Con qué sistemas o fuentes de datos cuentan actualmente?",
+    "¿Hay una fecha objetivo o un evento que condicione el proyecto?"
+   ]
+  }
+ ]
+}

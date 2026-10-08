@@ -3,7 +3,8 @@ import json
 import sys
 from pathlib import Path
 
-data = json.loads((Path(__file__).parent / "brands.json").read_text(encoding="utf-8"))
+path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).parent / "brands.json"
+data = json.loads(path.read_text(encoding="utf-8"))
 brand_ids = {b["id"] for b in data["brands"]}
 cat_ids = {c["id"] for c in data["categories"]}
 dom_ids = {d["id"] for d in data["domains"]}

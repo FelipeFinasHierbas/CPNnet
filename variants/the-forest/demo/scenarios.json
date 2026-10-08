@@ -1,0 +1,58 @@
+[
+ {
+  "id": "a",
+  "title": "Empresa con reportes manuales",
+  "sub": "Quiere dejar las planillas y automatizar",
+  "steps": [
+   {
+    "u": "Somos una empresa. Armamos los reportes a mano en planillas y nos toma días.",
+    "b": "Entiendo, es un caso típico para **BI y automatización (IPA/RPA)**: consolidar la información en indicadores y automatizar las tareas repetitivas. Si además tienen datos en varios sistemas, se puede sumar **Big Data / Data Advanced**.\n\nPara orientarte mejor: ¿cuántos sistemas o fuentes de datos intervienen hoy en esos reportes?"
+   },
+   {
+    "u": "Unos cuatro: ERP, CRM y dos planillas.",
+    "b": "Gracias. El paso habitual es una **sesión de Discovery** con un ejecutivo de The Forest para levantar el problema y definir el alcance; los plazos y valores los confirma él, yo no puedo adelantarlos.\n\n¿Quieres que un ejecutivo de The Forest te contacte? Necesito tu autorización para compartir tus datos con el equipo comercial."
+   },
+   {
+    "u": "Sí, acepto. Soy Ana Pérez, de ACME (Chile), ana@acme.cl",
+    "b": "Gracias, Ana. Ya preparé el resumen para el equipo comercial. Puedes continuar con un ejecutivo por WhatsApp:",
+    "lead": "Nuevo lead desde The Forest Software Lab\nPerfil: empresa\nNombre: Ana Pérez\nEmpresa: ACME\nPaís: Chile\nContacto: ana@acme.cl\nNecesidad: Reportes manuales en planillas; quiere BI y automatización\nServicios de interés: BI, IPA y RPA\nAlcance: 4 fuentes (ERP, CRM, 2 planillas)\nSiguiente paso: Sesión de Discovery\nConsentimiento: sí"
+   }
+  ]
+ },
+ {
+  "id": "b",
+  "title": "Consultora que busca desarrollo a medida",
+  "sub": "Reconoce al partner y explica las etapas",
+  "steps": [
+   {
+    "u": "Somos una consultora. Un cliente nos pide una aplicación a medida y no tenemos equipo de desarrollo.",
+    "b": "La **fábrica de software** de The Forest cubre ese caso. Un proyecto avanza por etapas: **Discovery → Mockup → Desarrollo → Testing y Go Live → Capacitación y Soporte**, así el cliente ve un prototipo antes de que se construya.\n\n¿Qué debería resolver la aplicación y para qué área?"
+   },
+   {
+    "u": "Gestión de solicitudes internas de un banco pequeño.",
+    "b": "Gracias. Con eso un ejecutivo puede armar la sesión de **Discovery**. Los detalles de modalidad de colaboración con partners, tecnologías y valores los confirma él.\n\n¿Autorizas compartir tus datos con el equipo comercial?"
+   },
+   {
+    "u": "Sí. Soy Luis Rojas, de Integra TI (Perú), luis@integrati.pe",
+    "b": "Gracias, Luis. Preparé el resumen para el equipo comercial. Puedes continuar por WhatsApp:",
+    "lead": "Nuevo lead desde The Forest Software Lab\nPerfil: partner\nNombre: Luis Rojas\nEmpresa: Integra TI\nPaís: Perú\nContacto: luis@integrati.pe\nNecesidad: App a medida para gestión de solicitudes internas (cliente bancario)\nServicios de interés: Fábrica de software\nSiguiente paso: Sesión de Discovery\nConsentimiento: sí"
+   }
+  ]
+ },
+ {
+  "id": "c",
+  "title": "Pregunta que el material no responde",
+  "sub": "No inventa precios ni tecnologías y deriva",
+  "steps": [
+   {
+    "u": "¿Cuánto cuesta un ForestBot y en qué tecnología está hecho?",
+    "b": "**ForestBot©** es el producto de asistentes virtuales de The Forest, pero no tengo tarifas ni el detalle técnico: esa información la entrega un ejecutivo.\n\nSi me cuentas qué quieres que atienda el bot, dejo todo listo para que te contacten."
+   },
+   {
+    "u": "Atender consultas repetitivas de clientes. Acepto compartir mis datos. Marcos Díaz, Colombia, 3001234567",
+    "b": "Gracias, Marcos. Dejé tu consulta lista para un ejecutivo. Puedes continuar por WhatsApp:",
+    "lead": "Nuevo lead desde The Forest Software Lab\nPerfil: desconocido\nNombre: Marcos Díaz\nPaís: Colombia\nContacto: 3001234567\nNecesidad: Cotizar ForestBot para consultas repetitivas de clientes\nServicios de interés: ForestBot©\nConsentimiento: sí"
+   }
+  ]
+ }
+]

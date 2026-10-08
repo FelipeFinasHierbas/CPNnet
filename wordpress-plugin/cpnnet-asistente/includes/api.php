@@ -90,14 +90,14 @@ function cpnnet_asistente_lead_summary(array $in): string
 {
     $line = static fn(string $label, $v): string => $label . ': ' . (is_array($v) ? implode(', ', $v) : (string) $v);
     return implode("\n", [
-        'Nuevo lead desde www.cpnnetsecurity.com',
+        cpnnet_asistente_brand_get('lead_title'),
         $line('Perfil', $in['perfil'] ?? ''),
         $line('Nombre', $in['nombre'] ?? ''),
         $line('Empresa', $in['empresa'] ?? ''),
         $line('País', $in['pais'] ?? ''),
         $line('Contacto', $in['contacto'] ?? ''),
         $line('Necesidad', $in['necesidad'] ?? ''),
-        $line('Marcas de interés', $in['marcas_interes'] ?? []),
+        $line(ucfirst(cpnnet_asistente_brand_get('items')) . ' de interés', $in['marcas_interes'] ?? []),
         $line('Dimensionamiento', $in['dimensionamiento'] ?? ''),
         $line('Siguiente paso sugerido', $in['siguiente_paso'] ?? ''),
     ]);
@@ -192,7 +192,7 @@ function cpnnet_asistente_handle_chat(WP_REST_Request $req)
 
             if ($response->stopReason === 'refusal') {
                 cpnnet_asistente_usage_log($model, $usage, $conv_id);
-                return new WP_REST_Response(['reply' => 'No puedo ayudarte con esa consulta. ¿Quieres que te derive con un ejecutivo de CPNnet?', 'whatsapp_url' => null]);
+                return new WP_REST_Response(['reply' => 'No puedo ayudarte con esa consulta. ¿Quieres que te derive con un ejecutivo de ' . cpnnet_asistente_brand_get('short') . '?', 'whatsapp_url' => null]);
             }
             if ($response->stopReason !== 'tool_use') {
                 break;

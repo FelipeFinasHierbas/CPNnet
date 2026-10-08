@@ -216,7 +216,7 @@ add_action('admin_post_cpnnet_asistente_webhook_save', function () {
 
 add_action('admin_post_cpnnet_asistente_webhook_test', function () {
     cpnnet_asistente_admin_guard();
-    [$ok] = cpnnet_asistente_webhook_post('ping', ['mensaje' => 'Prueba de conexión desde el Asistente CPNnet']);
+    [$ok] = cpnnet_asistente_webhook_post('ping', ['mensaje' => 'Prueba de conexión desde ' . cpnnet_asistente_brand_get('menu')]);
     cpnnet_asistente_admin_redirect('cpnnet-asistente-integracion', $ok ? 'pingok' : 'pingfail');
 });
 
@@ -228,7 +228,7 @@ function cpnnet_asistente_page_integracion(): void
         delete_transient('cpnnet_new_token_' . get_current_user_id());
     }
     $base = esc_url_raw(rest_url('cpnnet-asistente/v1'));
-    cpnnet_asistente_wrap_start('Integración con el CRM', 'Tres formas de llevar los leads al CRM de CPNnet. Este plugin nunca escribe en la base de datos del CRM.');
+    cpnnet_asistente_wrap_start('Integración con el CRM', 'Tres formas de llevar los leads al CRM. Este plugin nunca escribe en la base de datos del CRM.');
     ?>
     <div class="cpn-grid cpn-grid-2">
         <section class="cpn-card">
