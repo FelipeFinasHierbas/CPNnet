@@ -90,6 +90,16 @@ function cpnnet_asistente_tab_general(): void
                 <td><label><input type="checkbox" name="<?php echo esc_attr($name); ?>[enabled]" value="1" <?php checked($o['enabled'], 1); ?>> Mostrar el asistente en el sitio</label></td>
             </tr>
             <tr>
+                <th scope="row">Quién ve el chat</th>
+                <td>
+                    <select name="<?php echo esc_attr($name); ?>[visibility]">
+                        <option value="admins" <?php selected($o['visibility'], 'admins'); ?>>Solo administradores (modo de prueba)</option>
+                        <option value="public" <?php selected($o['visibility'], 'public'); ?>>Todos los visitantes del sitio</option>
+                    </select>
+                    <p class="description">Con «Activar chat» marcado y el modo de prueba, el chat lo ven únicamente los administradores con sesión iniciada: sirve para probar en el sitio real sin exponerlo. Cuando todo esté bien, cámbialo a «Todos los visitantes».</p>
+                </td>
+            </tr>
+            <tr>
                 <th scope="row">API key de Anthropic</th>
                 <td>
                     <?php if ($key_in_config) : ?>

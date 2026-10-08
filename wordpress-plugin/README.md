@@ -17,7 +17,7 @@ El script copia la base de conocimiento (`knowledge/`) y el prompt (`bot/system-
    ```php
    define('CPNNET_ASISTENTE_API_KEY', 'sk-ant-...');
    ```
-4. Ajustes > Asistente CPNnet > General: número de WhatsApp (solo dígitos, con código de país), modelo, mensaje de bienvenida, límites y tope mensual de gasto. Marcar "Activar chat" al final.
+4. Ajustes > Asistente CPNnet > General: «Quién ve el chat» (empieza en **Solo administradores**: modo de prueba), número de WhatsApp (solo dígitos, con código de país), modelo, mensaje de bienvenida, límites y tope mensual de gasto. Marcar "Activar chat" al final, probar como administrador y, si todo está bien, cambiar «Quién ve el chat» a «Todos los visitantes».
 5. El cliente puede editar marcas, reglas y datos de la empresa desde las otras pestañas, sin tocar código (ver `docs/GUIA-CLIENTE.md`).
 
 ## Cómo funciona

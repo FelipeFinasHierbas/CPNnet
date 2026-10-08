@@ -16,6 +16,7 @@ function cpnnet_asistente_defaults(): array
 {
     return [
         'enabled'        => 0,
+        'visibility'     => 'admins', // 'admins' = modo de prueba (solo administradores) | 'public' = todos los visitantes
         'api_key'        => '',
         'model'          => 'claude-opus-5-5',
         'effort'         => 'low',
@@ -63,6 +64,7 @@ function cpnnet_asistente_sanitize($in): array
 
     return [
         'enabled'        => empty($in['enabled']) ? 0 : 1,
+        'visibility'     => (($in['visibility'] ?? '') === 'public') ? 'public' : 'admins',
         'api_key'        => $api_key,
         'model'          => $model,
         'effort'         => $effort,

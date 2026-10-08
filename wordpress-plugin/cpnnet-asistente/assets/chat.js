@@ -65,7 +65,7 @@
   }
   var title = el('div', 'cpnnet-chat__title');
   title.appendChild(el('strong', null, cfg.logo ? 'Asistente virtual' : 'CPNnet Security'));
-  title.appendChild(el('span', null, 'Con inteligencia artificial'));
+  title.appendChild(el('span', null, cfg.testMode ? 'Modo de prueba · solo administradores' : 'Con inteligencia artificial'));
   brand.appendChild(title);
   var close = el('button', 'cpnnet-chat__close', '×');
   close.type = 'button';
@@ -155,7 +155,7 @@
     var payload = state.messages.slice(-MAX_SEND).map(function (m) { return { role: m.role, content: m.content }; });
     fetch(cfg.endpoint, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: cfg.nonce ? { 'Content-Type': 'application/json', 'X-WP-Nonce': cfg.nonce } : { 'Content-Type': 'application/json' },
       body: JSON.stringify({ messages: payload, website: hp.value, conversation_id: state.convId, page: location.pathname })
     })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })

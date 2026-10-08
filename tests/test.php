@@ -60,7 +60,26 @@ $_GET=['lead'=>'999']; $h=page('cpnnet_asistente_page_leads'); ok('lead inexiste
 $_GET=[]; $h=page('cpnnet_asistente_page_integracion'); ok('pantalla de integración', str_contains($h,'Webhook') && str_contains($h,'curl -H'));
 // --- 6. acciones y permisos ---
 $GLOBALS['O']['cpnnet_asistente_integration']['webhook_url']=''; $_POST=['lead_id'=>'1','status'=>'contactado','notes'=>'Llamar mañana'];
-foreach($GLOBALS['HOOKS']['admin_post_cpnnet_asistente_lead_save'] as $cb) $cb(); $l=cpnnet_asistente_lead_by('id',1); ok('guardar seguimiento (estado y notas)', $l['status']==='contactado' && $l['notes']==='Llamar mañana');
+foreach($GLOBALS['HOOKS']['admin_post_cpnnet_asistente_lead_save'] as $cb){ try{ $cb(); }catch(RedirectSignal $e){} } ok('guardar seguimiento redirige a la ficha', str_contains($GLOBALS['REDIR']??'','lead=1')); $l=cpnnet_asistente_lead_by('id',1); ok('guardar seguimiento (estado y notas)', $l['status']==='contactado' && $l['notes']==='Llamar mañana');
 $caps=array_reduce($GLOBALS['HOOKS']['user_has_cap'],fn($c,$f)=>$f($c),['manage_options'=>true]); ok('los administradores obtienen la capacidad comercial', !empty($caps['cpnnet_asistente_leads']));
 $GLOBALS['CAPS']=['read'=>true]; try{ foreach($GLOBALS['HOOKS']['admin_post_cpnnet_asistente_leads_csv'] as $cb) $cb(); ok('sin permiso no exporta',false);}catch(Exception $e){ ok('sin permiso no exporta el CSV', str_contains($e->getMessage(),'wp_die')); }
+// --- 7. modo de prueba (solo administradores) ---
+$setv=function($v){ $GLOBALS['O']['cpnnet_asistente']['visibility']=$v; }; $rest_n=0;
+$visit=['read'=>true]; $admin=['cpnnet_asistente_leads'=>true,'manage_options'=>true];
+$GLOBALS['T']=[]; $GLOBALS['O']['cpnnet_asistente']['hourly_limit']=999; unset($GLOBALS['O']['cpnnet_asistente']['visibility']);
+ok('por defecto el chat arranca en modo de prueba (solo administradores)', cpnnet_asistente_get('visibility')==='admins');
+$GLOBALS['CAPS']=$visit; $setv('admins'); $r=chat([['role'=>'user','content'=>'Hola']]); ok('modo de prueba: un visitante recibe 403 en el endpoint', $r->status===403);
+$GLOBALS['CAPS']=$admin; $r=chat([['role'=>'user','content'=>'Hola']]); ok('modo de prueba: un administrador sí puede usarlo', $r->status===200);
+$setv('public'); $GLOBALS['CAPS']=$visit; $r=chat([['role'=>'user','content'=>'Hola']]); ok('modo público: un visitante puede usarlo', $r->status===200);
+$enq=function(){ $GLOBALS['ENQ']=[]; $GLOBALS['INLINE']=null; foreach($GLOBALS['HOOKS']['wp_enqueue_scripts'] as $cb) $cb(); return [$GLOBALS['ENQ'],$GLOBALS['INLINE']]; };
+$setv('admins'); $GLOBALS['CAPS']=$visit; [$e]=$enq(); ok('modo de prueba: al visitante no se le carga el widget', $e===[]);
+$GLOBALS['CAPS']=$admin; [$e,$js]=$enq(); ok('modo de prueba: al administrador se le carga con nonce y etiqueta de prueba', count($e)===2 && str_contains($js,'"testMode":true') && str_contains($js,'"nonce":"nonce-abc123"'));
+$setv('public'); $GLOBALS['CAPS']=$visit; [$e,$js]=$enq(); ok('modo público: al visitante se le carga sin nonce', count($e)===2 && str_contains($js,'"testMode":false') && str_contains($js,'"nonce":""'));
+$GLOBALS['O']['cpnnet_asistente']['enabled']=0; [$e]=$enq(); ok('desactivado: no se carga para nadie', $e===[]); $GLOBALS['O']['cpnnet_asistente']['enabled']=1;
+$setv('admins'); $_GET=[]; $GLOBALS['CAPS']=$admin; $h=page('cpnnet_asistente_page_panel'); ok('el panel avisa que está en modo de prueba', str_contains($h,'Modo de prueba'));
+$setv('public'); $h=page('cpnnet_asistente_page_panel'); ok('el aviso desaparece en modo público', !str_contains($h,'Modo de prueba'));
+$san=cpnnet_asistente_sanitize(['visibility'=>'cualquier-cosa']); ok('un valor inválido de visibilidad vuelve al modo seguro', $san['visibility']==='admins');
+$san=cpnnet_asistente_sanitize(['visibility'=>'public']); ok('se puede guardar el modo público', $san['visibility']==='public');
+$_GET=[]; $h=page('cpnnet_asistente_tab_general'); ok('el selector «Quién ve el chat» aparece en General', str_contains($h,'Quién ve el chat') && str_contains($h,'Solo administradores'));
+echo "-- {$GLOBALS['n']} verificaciones ejecutadas\n"; if(($GLOBALS['n']??0)<50){ echo "FAIL el script terminó antes de lo previsto\n"; $GLOBALS['fail']=1; }
 exit($GLOBALS['fail']??0);

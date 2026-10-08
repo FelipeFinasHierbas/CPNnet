@@ -17,6 +17,12 @@ add_action('rest_api_init', function () {
     ]);
 });
 
+/** ¿Puede esta persona ver y usar el chat? En modo de prueba, solo los administradores. */
+function cpnnet_asistente_can_see_chat(): bool
+{
+    return cpnnet_asistente_get('visibility') === 'public' || current_user_can('manage_options');
+}
+
 function cpnnet_asistente_error(string $msg, int $status): WP_REST_Response
 {
     return new WP_REST_Response(['error' => $msg], $status);
@@ -126,6 +132,9 @@ function cpnnet_asistente_handle_chat(WP_REST_Request $req)
     }
     if (!cpnnet_asistente_same_origin()) {
         return cpnnet_asistente_error('Solicitud no permitida.', 403);
+    }
+    if (!cpnnet_asistente_can_see_chat()) {
+        return cpnnet_asistente_error('El asistente está en modo de prueba y solo lo ven los administradores.', 403);
     }
     $key = cpnnet_asistente_api_key();
     if ($key === '') {

@@ -27,6 +27,9 @@ function cpnnet_asistente_wrap_start(string $title, string $subtitle = ''): void
         echo '<p>' . esc_html($subtitle) . '</p>';
     }
     echo '</div></div></div>';
+    if (cpnnet_asistente_get('enabled') && cpnnet_asistente_get('visibility') !== 'public') {
+        echo '<div class="cpn-alert">Modo de prueba: el chat está activo pero lo ven solo los administradores. Para abrirlo al público, cámbialo en Configuración > General > «Quién ve el chat».</div>';
+    }
     $msg = isset($_GET['msg']) ? (string) $_GET['msg'] : '';
     if ($msg !== '' && isset($notices[$msg])) {
         $bad = in_array($msg, ['invalid', 'badurl', 'pingfail', 'resentfail'], true);

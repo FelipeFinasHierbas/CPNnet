@@ -7,10 +7,12 @@ Los paquetes ya construidos están en [`releases/`](releases/):
 
 | Archivo | Para qué | Cómo |
 |---|---|---|
-| `cpnnet-asistente-0.3.0.zip` | Plugin real (IA, panel comercial, integración CRM) | WordPress > Plugins > Añadir nuevo > Subir plugin. Pasos de configuración: [`wordpress-plugin/README.md`](wordpress-plugin/README.md) y [`docs/GUIA-CLIENTE.md`](docs/GUIA-CLIENTE.md) |
+| `cpnnet-asistente-0.4.0.zip` | Plugin real (IA, panel comercial, integración CRM) | WordPress > Plugins > Añadir nuevo > Subir plugin. Pasos de configuración: [`wordpress-plugin/README.md`](wordpress-plugin/README.md) y [`docs/GUIA-CLIENTE.md`](docs/GUIA-CLIENTE.md) |
 | `asistente-demo.zip` | Demos guionadas (chat + panel), sin PHP ni API key | cPanel > Administrador de archivos > subir y **Extraer**. Ver [`demo/LEEME.md`](demo/LEEME.md) |
 
 Requisitos del plugin: PHP 8.1+, salida HTTPS a `api.anthropic.com`, y una API key de Anthropic en `wp-config.php`: `define('CPNNET_ASISTENTE_API_KEY', 'sk-ant-...');`
+
+**Modo de prueba:** al activar el chat, por defecto lo ven solo los administradores (Configuración > General > «Quién ve el chat»). Se cambia a «Todos los visitantes» cuando las pruebas estén bien.
 
 ## Qué hay en el repositorio
 | Carpeta | Contenido |

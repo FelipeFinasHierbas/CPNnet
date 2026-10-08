@@ -15,7 +15,7 @@ function checked($a,$b=true,$e=true){$r=$a==$b?'checked':'';if($e)echo $r;return
 function admin_url($p=''){return "https://x/wp-admin/$p";} function rest_url($p=''){return "https://www.cpnnetsecurity.com/wp-json/$p";} function add_query_arg($a,$u=''){return $u.(str_contains($u,'?')?'&':'?').http_build_query($a);}
 function wp_nonce_field($a){echo '<input type="hidden" name="_wpnonce" value="n">';} function wp_nonce_url($u,$a){return $u.'&_wpnonce=n';} function number_format_i18n($n){return number_format($n);} function submit_button($t='',$ty='',$n='',$w=true){echo '<input type="submit" value="'.esc_attr($t).'">';}
 function current_user_can($c){return !empty($GLOBALS['CAPS'][$c]);} function get_current_user_id(){return 1;} function is_email($e){return (bool)filter_var($e,FILTER_VALIDATE_EMAIL);} function get_role($r){return null;} function add_role(...$a){}
-function settings_fields($g){} function wp_die($m,$c=0){throw new Exception("wp_die:$m");} function check_admin_referer($a){} function nocache_headers(){} function wp_safe_redirect($u){$GLOBALS['REDIR']=$u;}
+function settings_fields($g){} function wp_enqueue_style(...$a){$GLOBALS['ENQ'][]='style';} function wp_enqueue_script(...$a){$GLOBALS['ENQ'][]='script';} function wp_add_inline_script($h,$js,$pos='after'){$GLOBALS['INLINE']=$js;} function wp_create_nonce($a){return 'nonce-abc123';} function is_admin(){return false;} function wp_die($m,$c=0){throw new Exception("wp_die:$m");} function check_admin_referer($a){} function nocache_headers(){} class RedirectSignal extends Exception{} function wp_safe_redirect($u){$GLOBALS['REDIR']=$u; throw new RedirectSignal($u);} // en WordPress la redirección termina con exit; aquí se emula con una excepción
 class WP_Error{public function __construct(public $code='',public $msg='',public $data=[]){}} function is_wp_error($x){return $x instanceof WP_Error;}
 class WP_REST_Response{public function __construct(public $data=null,public $status=200){}}
 class WP_REST_Request implements ArrayAccess{public function __construct(private array $p=[],private array $h=[],private array $q=[]){} public function get_json_params(){return $this->p;} public function get_param($k){return $this->q[$k]??$this->p[$k]??null;} public function get_header($k){return $this->h[strtolower($k)]??null;} public function offsetGet(mixed $k):mixed{return $this->q[$k]??null;} public function offsetExists(mixed $k):bool{return isset($this->q[$k]);} public function offsetSet(mixed $k,mixed $v):void{} public function offsetUnset(mixed $k):void{}}
@@ -34,7 +34,7 @@ class WPDB{ public $prefix='wp_'; public $insert_id=0; public PDO $pdo;
 $wpdb=new WPDB;
 define('CPNNET_ASISTENTE_DIR',__DIR__.'/cpnnet-asistente/'); const CPNNET_ASISTENTE_OPTION='cpnnet_asistente';
 require CPNNET_ASISTENTE_DIR.'vendor/autoload.php';
-foreach(['settings','leads','usage','kb','prompt','api','integration','admin','dashboard'] as $f) require CPNNET_ASISTENTE_DIR."includes/$f.php";
+foreach(['settings','leads','usage','kb','prompt','api','widget','integration','admin','dashboard'] as $f) require CPNNET_ASISTENTE_DIR."includes/$f.php";
 define('CPNNET_ASISTENTE_VERSION','t'); define('CPNNET_ASISTENTE_URL','ASSET/');
-function ok($l,$c){echo ($c?'OK   ':'FAIL ').$l."\n"; if(!$c) $GLOBALS['fail']=1;}
+function ok($l,$c){$GLOBALS['n']=($GLOBALS['n']??0)+1; echo ($c?'OK   ':'FAIL ').$l."\n"; if(!$c) $GLOBALS['fail']=1;}
 $GLOBALS['O']['cpnnet_asistente']=['enabled'=>1,'api_key'=>'sk-test','model'=>'claude-opus-5-5','effort'=>'low','whatsapp'=>'56911112222','hourly_limit'=>99,'daily_limit'=>999,'monthly_budget'=>0,'save_transcript'=>1,'welcome'=>'x'];
