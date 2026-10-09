@@ -80,8 +80,8 @@ def t_webinar(p):
   <div style='font-size:21px;font-weight:600;line-height:1.35;margin-top:10px'>Mes de la<br>Ciberseguridad</div>
   <div style='width:70px;height:5px;border-radius:3px;background:{CYAN};margin-top:22px'></div></div>
 <div class='abs b1' style='left:76px;top:812px;right:76px'>
-  <div style='font-size:60px;line-height:1;font-weight:300;letter-spacing:1px'>{p['wordmark']}</div>
-  <h1 style='font-size:48px;line-height:1.16;font-weight:700;margin-top:24px'>{p['title']}</h1></div>
+  <div style='font-size:{60 if p.get("title") else 104}px;line-height:1;font-weight:300;letter-spacing:1px'>{p['wordmark']}</div>
+  {f"<h1 style='font-size:48px;line-height:1.16;font-weight:700;margin-top:24px'>{p['title']}</h1>" if p.get("title") else ""}</div>
 <div class='info abs' style='left:76px;top:1112px'><div class='d'>{b1.CAL}{p['fecha']}</div><div>{b1.CLK}<span>{b1.HORA}</span></div></div>
 {foot(1245, '#webinarscpnnet')}""", canv=True, seed=p["seed"], fx=.55, fy=.5, flip=p.get("flip", False))
 

@@ -84,7 +84,7 @@ PIECES = [
  dict(n="06", fecha="Vie 23 oct", tipo="reel", nombre="reel-faronics", seed=71, tag="Para partners · Faronics", hook="Reinicia y vuelve a empezar",
       points=["Deep Freeze restaura el equipo a un estado conocido", "Menos tickets en laboratorios, kioscos y salas", "Piloto de entrada: 10 a 20 equipos"], dur="30 s"),
  dict(n="07", fecha="Lun 26 oct", tipo="web", nombre="webinar-safetica", seed=111, flip=True, wordmark="<b>SAFETICA</b>", fecha_txt="27 de Octubre 2026", dia="27", fecha_pub="27 de Octubre 2026",
-      title="DLP e Insider Risk para proteger los datos desde adentro"),
+      title=""),
  dict(n="08", fecha="Mié 28 oct", tipo="sol", nombre="sophos", marca="Sophos", tag="Para partners · Protección · Red y operaciones",
       titulo="Red, acceso y respuesta en una sola arquitectura", hs=54, btop=630,
       bullets=["Firewall, SD-WAN, switching, wireless y ZTNA desde Sophos Central", "Red y endpoint comparten estado para aislar equipos comprometidos", "XDR y MDR para detectar y responder"],
