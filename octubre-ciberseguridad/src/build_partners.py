@@ -74,8 +74,8 @@ PIECES = [
       titulo="¿Saben exactamente dónde está su información sensible y quién puede verla?",
       bullets=["Descubre y clasifica datos no estructurados con IA", "Detecta permisos excesivos en Microsoft 365 y Google", "Base para DLP y para gobernar el uso de IA"],
       entrada="Data Discovery Assessment"),
- dict(n="03", fecha="Vie 16 oct", tipo="reel", nombre="reel-safetica", seed=61, flip=True, tag="Para partners · Safetica", hook="El riesgo no siempre viene de afuera",
-      points=["DLP + Insider Risk en una sola propuesta", "Dato + identidad + comportamiento", "Puerta de entrada: DLP/Insider Risk Assessment"], dur="30 s"),
+ dict(n="03", fecha="Vie 16 oct", tipo="reel", nombre="reel-aikido", seed=61, flip=True, tag="Para partners · Aikido", hook="Seguridad que los desarrolladores sí usan",
+      points=["Código, dependencias, secretos y cloud en una plataforma", "Menos ruido y corrección asistida con AutoFix", "Demo de entrada: uno o pocos repositorios"], dur="30 s"),
  dict(n="04", fecha="Lun 19 oct", tipo="copia", nombre="webinar-seceon", src=V / "posts/07_webinar-seceon.png"),
  dict(n="05", fecha="Mié 21 oct", tipo="sol", nombre="segura", marca="Segura", tag="Para partners · Protección · Identidad",
       titulo="¿Quién accede a los sistemas críticos de tu cliente, a qué, y qué hace?",
@@ -83,7 +83,8 @@ PIECES = [
       entrada="PAM Assessment o revisión de accesos de terceros"),
  dict(n="06", fecha="Vie 23 oct", tipo="reel", nombre="reel-faronics", seed=71, tag="Para partners · Faronics", hook="Reinicia y vuelve a empezar",
       points=["Deep Freeze restaura el equipo a un estado conocido", "Menos tickets en laboratorios, kioscos y salas", "Piloto de entrada: 10 a 20 equipos"], dur="30 s"),
- dict(n="07", fecha="Lun 26 oct", tipo="copia", nombre="webinar-aikido", src=V / "posts/10_webinar-aikido.png"),
+ dict(n="07", fecha="Lun 26 oct", tipo="web", nombre="webinar-safetica", seed=111, flip=True, wordmark="<b>SAFETICA</b>", fecha_txt="27 de Octubre 2026", dia="27", fecha_pub="27 de Octubre 2026",
+      title="DLP e Insider Risk para proteger los datos desde adentro"),
  dict(n="08", fecha="Mié 28 oct", tipo="sol", nombre="sophos", marca="Sophos", tag="Para partners · Protección · Red y operaciones",
       titulo="Red, acceso y respuesta en una sola arquitectura", hs=54, btop=630,
       bullets=["Firewall, SD-WAN, switching, wireless y ZTNA desde Sophos Central", "Red y endpoint comparten estado para aislar equipos comprometidos", "XDR y MDR para detectar y responder"],
@@ -102,6 +103,11 @@ def render():
             out = OUT / sub / f"{p['n']}_{p['nombre']}.png"
             if p["tipo"] == "copia":
                 shutil.copy(p["src"], out)
+            elif p["tipo"] == "web":
+                p2 = dict(p, fecha=p["fecha_pub"])
+                pg = br.new_page(viewport={"width": 1080, "height": 1350})
+                pg.set_content(b2.t_webinar(p2), timeout=120000); pg.wait_for_timeout(500)
+                pg.screenshot(path=str(out)); pg.close()
             else:
                 h = 1920 if p["tipo"] == "reel" else 1350
                 pg = br.new_page(viewport={"width": 1080, "height": h})
