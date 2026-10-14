@@ -21,7 +21,7 @@ LOGOS, ICON, FINE = rr.LOGOS, rr.ICON, rr.FINE
 SRC3 = ROOT / "v3-partners/posts"
 
 EXTRA = f"""
-.sol-b{{display:flex;gap:18px;align-items:flex-start;font-size:24px;font-weight:600;line-height:1.3;margin:15px 0}}
+.sol-b{{display:flex;gap:18px;align-items:flex-start;font-size:26px;font-weight:600;line-height:1.3;margin:17px 0}}
 .sol-b:before{{content:'';flex:none;width:30px;height:30px;margin-top:1px;border-radius:50%;background:{AZURE} url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M6 12.5l4 4 8-9' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/70% no-repeat}}
 .chip{{background:linear-gradient(135deg,{ROYAL},{NAVY});border-radius:26px;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 32px rgba(20,50,100,.28)}}
 .promo{{background:linear-gradient(135deg,#2a5aa8,#3f86d0);border-radius:28px;display:flex;align-items:center;gap:26px;padding:0 34px;color:#fff;box-shadow:0 14px 36px rgba(32,60,113,.3)}}
@@ -43,10 +43,19 @@ def head_right(top, co, dark=False):
     name = "COLOMBIA" if co else "CHILE &nbsp;|&nbsp; PERÚ"
     col = "#a8c8f0" if dark else AZURE
     return (f"<div class='abs' style='right:76px;top:{top}px;width:520px'><div style='display:flex;align-items:center;gap:14px;justify-content:flex-end;font-size:19px;font-weight:600;letter-spacing:2px'>{name}"
-            f"<span class='hf' style='display:flex;gap:8px'>{flags}</span></div>{f'<div class=tagl style=color:{col}>{rr.TAGLINE}</div>' if dark else ''}</div>")
+            f"<span class='hf' style='display:flex;gap:8px'>{flags}</span></div></div>")
 
 
-def promo(y, h=96):
+def cta_btn(y):
+    return (f"<div class='abs' style='right:76px;top:{y}px;height:58px;padding:0 30px;border-radius:999px;background:linear-gradient(135deg,#2a5aa8,#3f86d0);color:#fff;"
+            f"font-size:22px;font-weight:700;display:flex;align-items:center;box-shadow:0 10px 26px rgba(32,60,113,.3)'>Habla con tu ejecutivo CPNnet</div>")
+
+
+def cta_band(y, h=92):
+    return (f"<div class='abs promo' style='left:76px;right:76px;top:{y}px;height:{h}px;justify-content:center'><div class='big' style='font-size:34px'>Habla con tu ejecutivo CPNnet</div></div>")
+
+
+def promo_unused(y, h=96):
     return (f"<div class='abs promo' style='left:76px;right:76px;top:{y}px;height:{h}px'><div class='big'>¡GANA EL 1%!</div><div class='sep'></div>"
             f"<div class='tx'>Tus vendedores ganan el 1% de las ventas netas elegibles.<br><b>10 oct – 31 dic 2026</b></div></div>")
 
@@ -68,18 +77,17 @@ def t_post(k, co=False):
     body = (f"<svg class='arcs' width='1080' height='1350' viewBox='0 0 1080 1350'>{rings}</svg>"
             + head_right(70, co)
             + f"<div class='abs lab' style='left:76px;top:262px'>Risk Reduction Q4 · {P['nombre']}</div>"
-            + f"<h1 class='abs' style='left:76px;right:76px;top:306px;font-size:58px;line-height:1.1;font-weight:800;text-wrap:balance'>{P['q']}</h1>"
-            + logo_chip(P["marca"], 76, 560, 330, 150, lh)
-            + f"<div class='abs' style='left:76px;top:732px;width:330px;display:flex;align-items:center;gap:14px'>"
+            + f"<h1 class='abs' style='left:76px;right:76px;top:306px;font-size:62px;line-height:1.08;font-weight:800;text-wrap:balance'>{P['q']}</h1>"
+            + logo_chip(P["marca"], 76, 580, 330, 170, lh + 8)
+            + f"<div class='abs' style='left:76px;top:776px;width:330px;display:flex;align-items:center;gap:14px'>"
               f"<div style='flex:none;width:58px;height:58px;border-radius:50%;background:{AZURE};display:flex;align-items:center;justify-content:center'>{rr.icon(k, 32)}</div>"
               f"<div style='font-size:22px;font-weight:800;letter-spacing:1px;text-transform:uppercase;line-height:1.1'>{P['nombre']}</div></div>"
-            + f"<div class='abs card' style='left:440px;right:76px;top:560px;padding:24px 34px 10px'>"
-              f"<div style='font-size:23px;font-weight:800;color:{AZURE};line-height:1.25;margin-bottom:6px'>{P['pos']}</div>{bullets}</div>"
-            + f"<div class='abs' style='left:76px;right:76px;top:960px;background:linear-gradient(135deg,{ROYAL},{NAVY});border-radius:30px;padding:22px 40px;color:#fff;box-shadow:0 14px 36px rgba(20,50,100,.3)'>"
+            + f"<div class='abs card' style='left:440px;right:76px;top:580px;padding:26px 34px 12px'>"
+              f"<div style='font-size:25px;font-weight:800;color:{AZURE};line-height:1.25;margin-bottom:8px'>{P['pos']}</div>{bullets}</div>"
+            + f"<div class='abs' style='left:76px;right:76px;top:1050px;background:linear-gradient(135deg,{ROYAL},{NAVY});border-radius:30px;padding:26px 40px;color:#fff;box-shadow:0 14px 36px rgba(20,50,100,.3)'>"
               f"<div style='font-size:18px;font-weight:700;letter-spacing:4px;color:{CYAN};text-transform:uppercase'>Tu puerta de entrada</div>"
-              f"<div style='font-size:29px;font-weight:800;margin-top:4px;line-height:1.2'>{P['entrada']}</div></div>"
-            + promo(1104) + fine(1218)
-            + f"<div class='pill' style='top:1262px'>#CPNnetPartners</div>")
+              f"<div style='font-size:31px;font-weight:800;margin-top:6px;line-height:1.2'>{P['entrada']}</div></div>"
+            + f"<div class='pill' style='top:1262px'>#CPNnetPartners</div>" + cta_btn(1262))
     return page(1350, "lt", body)
 
 
@@ -93,27 +101,26 @@ def t_overview(co=False):
     cards = ""
     for i, k in enumerate(order):
         x = 76 if i % 2 == 0 else 76 + 438 + 14
-        y = 462 + (i // 2) * 208
+        y = 458 + (i // 2) * 240
         m = PL[k]["marca"]
         lh = 24 if m not in ("vicarius", "action1") else 30
-        cards += (f"<div class='abs ocard' style='left:{x}px;top:{y}px;width:438px;height:194px'>"
+        cards += (f"<div class='abs ocard' style='left:{x}px;top:{y}px;width:438px;height:224px'>"
                   f"<div style='display:flex;align-items:center;gap:12px'><div style='flex:none;width:46px;height:46px;border-radius:50%;background:{AZURE};display:flex;align-items:center;justify-content:center'>{rr.icon(k, 26)}</div>"
                   f"<div style='font-size:21px;font-weight:800;letter-spacing:.5px;text-transform:uppercase'>{PL[k]['nombre']}</div></div>"
-                  f"<div style='font-size:17px;font-weight:500;line-height:1.3;margin-top:10px;height:46px'>{qs[k]}</div>"
-                  f"<div class='chip' style='position:absolute;left:26px;bottom:18px;height:42px;padding:0 20px;border-radius:16px;box-shadow:none'><img src='{LOGOS[m]}' style='height:{lh}px'></div></div>")
+                  f"<div style='font-size:20px;font-weight:600;line-height:1.28;margin-top:12px;height:78px'>{qs[k]}</div>"
+                  f"<div class='chip' style='position:absolute;left:26px;bottom:20px;height:44px;padding:0 20px;border-radius:16px;box-shadow:none'><img src='{LOGOS[m]}' style='height:{lh}px'></div></div>")
     rings = b2.arc(1040, 30, 260, 220, -28, 18, .5, .1, gid="a1", opacity=.6)
     body = (f"<svg class='arcs' width='1080' height='1350' viewBox='0 0 1080 1350'>{rings}</svg>" + head_right(70, co)
             + f"<div class='abs lab' style='left:76px;top:262px'>CPNnet | Risk Reduction Q4</div>"
             + f"<h1 class='abs' style='left:76px;right:76px;top:306px;font-size:56px;line-height:1.08;font-weight:800'>¿Dónde está la próxima <span class='az'>brecha</span> de tus clientes?</h1>"
-            + cards + promo(1104) + fine(1218)
-            + f"<div class='pill' style='top:1262px'>#CPNnetPartners</div>")
+            + cards + f"<div class='pill' style='top:1262px'>#CPNnetPartners</div>" + cta_btn(1262))
     return page(1350, "lt", body)
 
 
 # ------------------------------------------------------------------ reel (foto en diagonal)
 def t_reel(k):
     P = rr.pilares()[k]
-    steps = "".join(f"<div class='step' style='margin:20px 0;font-size:31px'><b>{i+1}</b><div>{x}</div></div>" for i, x in enumerate(P["b"]))
+    steps = "".join(f"<div class='step' style='margin:24px 0;font-size:34px'><b>{i+1}</b><div>{x}</div></div>" for i, x in enumerate(P["b"]))
     ring = b2.arc(900, 1010, 150, 150, -28, 14, .75, .0, (CYAN, AZURE), 1, 'a1')
     lh = 60 if P["marca"] != "vicarius" else 70
     qh = P["q"].replace("class='az'", "style='color:#7fd8ee'")
@@ -128,7 +135,7 @@ def t_reel(k):
             + f"<div class='abs' style='left:76px;top:520px;right:90px;font-size:70px;font-weight:800;line-height:1.06;letter-spacing:-2px;text-shadow:0 3px 22px rgba(0,16,40,.85)'>{qh}</div>"
             + logo_chip(P["marca"], 76, 930, 300, 120, lh)
             + f"<div class='abs' style='left:76px;right:76px;top:1160px'>{steps}</div>"
-            + promo(1530, 92))
+            + cta_band(1520, 96))
     return page(1920, "dk", body, canv=True, seed={"identidades": 21, "aplicaciones": 23, "endpoints": 25}[k], fx=.7, fy=.45, flip=k == "aplicaciones")
 
 
