@@ -1,14 +1,14 @@
 {
- "name": "Kindforce Pilates",
- "short": "Kindforce Pilates",
- "site": "",
- "lead_title": "Nueva consulta desde el asistente de Kindforce Pilates",
+ "name": "Kind Force Pilates",
+ "short": "Kind Force Pilates",
+ "site": "kindforcepilates.com",
+ "lead_title": "Nueva consulta desde el asistente de Kind Force Pilates",
  "menu": "Asistente Pilates",
- "role_label": "Recepción Kindforce Pilates",
+ "role_label": "Recepción Kind Force Pilates",
  "crm_label": "sistema de reservas",
  "item": "plan",
  "items": "planes",
- "welcome": "¡Hola! 👋 Soy el asistente de Kindforce Pilates. ¿Quieres agendar tu clase de prueba gratis, conocer los planes o tienes alguna duda?",
+ "welcome": "¡Hola! 👋 Soy el asistente de Kind Force Pilates. ¿Quieres agendar tu clase de prueba gratis, conocer los planes o tienes alguna duda?",
  "chips": [
   "Quiero mi clase de prueba gratis",
   "Quiero conocer los planes",
@@ -18,18 +18,22 @@
   "nuevo": "Nuevo alumno",
   "alumno": "Alumno actual"
  },
- "handoff_to": "la recepción de Kindforce Pilates",
+ "handoff_to": "la recepción de Kind Force Pilates",
  "handoff_when": "agendar la clase de prueba gratuita, inscribirse en un plan, reservar una clase, pagar o hablar con alguien del estudio",
  "sizing_label": "Disponibilidad y frecuencia",
  "colors": {
-  "primary": "#a2574f",
-  "dark": "#5e2f2a",
-  "accent": "#e0a387",
-  "tint": "#f2d5c8",
-  "bg": "#faf5f2"
+  "primary": "#6b625a",
+  "dark": "#3b3632",
+  "accent": "#cbb79c",
+  "tint": "#ece4d8",
+  "bg": "#f6f2ec",
+  "ink": "#2e2a27",
+  "mut": "#7a7169",
+  "line": "#e5ddd2"
  },
  "logo": "pilates-logo.png",
  "logo_white": "pilates-logo-white.png",
  "wa_label": "Continuar por WhatsApp con recepción",
- "inbox_label": "recepción"
+ "inbox_label": "recepción",
+ "texture": "grain"
 }

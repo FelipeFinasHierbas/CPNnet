@@ -1,6 +1,6 @@
-# Asistente para Kindforce Pilates — plan por etapas
+# Asistente para Kind Force Pilates — plan por etapas
 
-Cliente: **Kindforce Pilates**. Hoy reciben ~10 consultas al mes, reservan y cobran con **BoxMagic** y contactan por **WhatsApp** (el mismo número que usan en campañas de Meta). Objetivo: que las consultas crezcan y que ninguna se pierda.
+Cliente: **Kind Force Pilates** (Av. Los Leones 292, local 1, Providencia · kindforcepilates.com · @kindforcepilates). Hoy reciben ~10 consultas al mes, reservan y cobran con **BoxMagic** y contactan por **WhatsApp** (el mismo número que usan en campañas de Meta). Objetivo: que las consultas crezcan y que ninguna se pierda.
 
 ## Qué hace el asistente
 - Responde al instante, 24/7, con lo que el estudio definió: planes, cómo empezar, dudas frecuentes.
@@ -22,9 +22,9 @@ Cliente: **Kindforce Pilates**. Hoy reciben ~10 consultas al mes, reservan y cob
 ## Puntos a confirmar
 1. **Número de WhatsApp.** Hoy se usa en la app y en campañas. Meta permite, con algunos proveedores, conectar la API sin dejar de usar la app en ese número (coexistencia). Hay que verificarlo para este número; si no se puede, se usa un número nuevo solo para el asistente.
 2. **BoxMagic.** Consultar a BoxMagic si ofrece API o un link de reserva/compra por plan. En la etapa 1 el asistente deriva a recepción y menciona BoxMagic solo a alumnos actuales.
-3. **Planes publicados.** Pasar el contenido de la historia destacada «Planes» (nombre, clases, precio, vigencia) para cargarlo en el panel.
+3. **Planes y precios.** Cargados desde el sitio oficial (8/12/16 sesiones a $60.000/$80.000/$100.000; 90/180/365 días con 10/20/30% de descuento). Los leí a través de un buscador porque el sitio está bloqueado en este entorno: **confirmar que estén vigentes**.
 4. **Datos del estudio:** dirección, horarios, tipos de clase, condiciones de la clase de prueba (además de que es gratis), política de cancelación y medios de pago.
-5. **Logo y colores** (los actuales son provisionales).
+5. **Logo e identidad.** Paleta gris y beige con grano sutil y logotipo tipográfico (KIND FORCE / PILATES), hechos a partir de la descripción del sitio («minimalista, tonos grises y beige»). **No es el logo oficial:** reemplazarlo por el archivo real y ajustar los colores exactos.
 
 ## Costo
 - **Modelo de IA (estimación).** Con 10 a 100 conversaciones al mes: unos US$1 a 11 con Opus 5.5 (el modelo por defecto) y menos de US$1 con Haiku 5.5 (habría que agregarlo al selector y probar su calidad). Lo paga el estudio con su propia API key y tiene tope mensual.

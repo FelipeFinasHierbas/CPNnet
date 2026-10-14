@@ -10,6 +10,7 @@ if($variant){
   ok('variante: el prompt y la base de conocimiento no son los de CPNnet', str_contains(cpnnet_asistente_rules(),$exp['short']) && !str_contains(cpnnet_asistente_rules(),'CPNnet') && !str_contains(json_encode(cpnnet_asistente_kb()),'Sophos'));
   ok('variante: la empresa no menciona productos de CPNnet como propios', !str_contains(cpnnet_asistente_company(),'Segura'));
   $enum=cpnnet_asistente_tools()[0]['inputSchema']['properties']['perfil']['enum'];
+  if(($exp['texture']??'')==='grain') ok('variante: textura y tonos neutros de la marca en el CSS', str_contains(cpnnet_asistente_brand_css(),'feTurbulence') && str_contains(cpnnet_asistente_brand_css(),'color:'.$exp['colors']['ink']));
   ok('variante: perfiles propios en la herramienta', $enum===array_merge(array_keys($exp['profiles']??['partner'=>1,'empresa'=>1]),['desconocido']));
 }else{
   ok('base: identidad CPNnet por defecto', $b['name']==='CPNnet Security' && $b['colors']['primary']==='#2b4c8c' && $b['lead_title']==='Nuevo lead desde www.cpnnetsecurity.com');

@@ -1,13 +1,13 @@
 {
  "_meta": {
-  "source": "Información entregada por el estudio (chat del 14-10-2026). Los planes publicados están en la historia destacada «Planes» de Instagram y aún no se cargan aquí.",
+  "source": "Información del estudio (chat) + Sitio oficial kindforcepilates.com (leído a través de un buscador el 14-10-2026; confirmar vigencia con el estudio).",
   "language": "es",
   "notes": "Fuente única de verdad del bot. Precios en pesos chilenos (CLP). Lo marcado «por confirmar» no se inventa: el bot deriva a recepción."
  },
  "domains": [
   {
    "id": "estudio",
-   "name": "Kindforce Pilates",
+   "name": "Kind Force Pilates",
    "layer": "Planes",
    "description": "Planes y clases del estudio."
   }
@@ -20,7 +20,10 @@
    "first_order": [
     "clase-de-prueba",
     "plan-4-clases",
-    "planes-publicados"
+    "plan-8-sesiones",
+    "plan-12-sesiones",
+    "plan-16-sesiones",
+    "planes-largo-plazo"
    ],
    "cross_sell": []
   }
@@ -32,7 +35,7 @@
    "tier": "primer_orden",
    "category": "planes",
    "tagline": "Primera clase de prueba sin costo.",
-   "summary": "Kindforce Pilates ofrece una clase de prueba GRATIS para personas nuevas. Es la forma recomendada de partir: conocer el estudio, el método y a las profesoras/es sin compromiso. Día, horario y cupos: los coordina recepción.",
+   "summary": "Kind Force Pilates ofrece una clase de prueba GRATIS para personas nuevas. Es la forma recomendada de partir: conocer el estudio, el método y a las profesoras/es sin compromiso. Día, horario y cupos: los coordina recepción.",
    "ideal_for": [
     "personas que nunca han hecho pilates",
     "quienes quieren conocer el estudio antes de elegir plan"
@@ -79,23 +82,95 @@
    ]
   },
   {
-   "id": "planes-publicados",
-   "name": "Planes publicados (historia destacada «Planes»)",
+   "id": "plan-8-sesiones",
+   "name": "Plan mensual 8 sesiones",
    "tier": "primer_orden",
    "category": "planes",
-   "tagline": "Planes regulares del estudio.",
-   "summary": "El estudio tiene planes definidos que publica en la historia destacada «Planes» de Instagram. Su detalle (nombres, clases incluidas, precios) aún no está cargado: Por confirmar con el estudio. Mientras tanto, invita a revisar la historia destacada o deriva a recepción para el detalle.",
+   "tagline": "8 clases al mes por $60.000.",
+   "summary": "Plan mensual de 8 sesiones (unas 2 por semana).",
    "ideal_for": [
-    "alumnos regulares"
+    "quienes vienen 2 veces por semana"
    ],
    "problems": [
-    "Querer venir de forma constante"
+    "Querer entrenar de forma constante con un plan mensual"
    ],
    "differentiators": [
-    "Planes definidos por el estudio"
+    "Clases Pilates Interval Fusion de 50 minutos"
    ],
-   "sizing": "Por confirmar con el estudio.",
-   "entry_point": "Revisar la historia destacada «Planes» o hablar con recepción.",
+   "sizing": "$60.000 al mes por 8 sesiones.",
+   "entry_point": "Si es nueva/o: clase de prueba gratuita. Si ya la hizo: inscribirse con recepción.",
+   "qualifying_questions": [
+    "¿Has hecho pilates antes?",
+    "¿Cuántas veces por semana te gustaría venir y en qué horario?",
+    "¿Qué te gustaría lograr: postura, fuerza, flexibilidad, aliviar molestias?"
+   ]
+  },
+  {
+   "id": "plan-12-sesiones",
+   "name": "Plan mensual 12 sesiones",
+   "tier": "primer_orden",
+   "category": "planes",
+   "tagline": "12 clases al mes por $80.000.",
+   "summary": "Plan mensual de 12 sesiones (unas 3 por semana).",
+   "ideal_for": [
+    "quienes vienen 3 veces por semana"
+   ],
+   "problems": [
+    "Querer entrenar de forma constante con un plan mensual"
+   ],
+   "differentiators": [
+    "Clases Pilates Interval Fusion de 50 minutos"
+   ],
+   "sizing": "$80.000 al mes por 12 sesiones.",
+   "entry_point": "Si es nueva/o: clase de prueba gratuita. Si ya la hizo: inscribirse con recepción.",
+   "qualifying_questions": [
+    "¿Has hecho pilates antes?",
+    "¿Cuántas veces por semana te gustaría venir y en qué horario?",
+    "¿Qué te gustaría lograr: postura, fuerza, flexibilidad, aliviar molestias?"
+   ]
+  },
+  {
+   "id": "plan-16-sesiones",
+   "name": "Plan mensual 16 sesiones",
+   "tier": "primer_orden",
+   "category": "planes",
+   "tagline": "16 clases al mes por $100.000.",
+   "summary": "Plan mensual de 16 sesiones (unas 4 por semana).",
+   "ideal_for": [
+    "quienes vienen 4 veces por semana"
+   ],
+   "problems": [
+    "Querer entrenar de forma constante con un plan mensual"
+   ],
+   "differentiators": [
+    "Clases Pilates Interval Fusion de 50 minutos"
+   ],
+   "sizing": "$100.000 al mes por 16 sesiones.",
+   "entry_point": "Si es nueva/o: clase de prueba gratuita. Si ya la hizo: inscribirse con recepción.",
+   "qualifying_questions": [
+    "¿Has hecho pilates antes?",
+    "¿Cuántas veces por semana te gustaría venir y en qué horario?",
+    "¿Qué te gustaría lograr: postura, fuerza, flexibilidad, aliviar molestias?"
+   ]
+  },
+  {
+   "id": "planes-largo-plazo",
+   "name": "Planes de 90, 180 y 365 días",
+   "tier": "primer_orden",
+   "category": "planes",
+   "tagline": "Descuento por pagar más meses.",
+   "summary": "Los planes de 90, 180 y 365 días tienen 10%, 20% y 30% de descuento respectivamente frente al valor mensual. El monto exacto lo confirma recepción.",
+   "ideal_for": [
+    "quienes ya decidieron entrenar de forma constante"
+   ],
+   "problems": [
+    "Querer entrenar de forma constante con un plan mensual"
+   ],
+   "differentiators": [
+    "Clases Pilates Interval Fusion de 50 minutos"
+   ],
+   "sizing": "Descuentos: 90 días 10%, 180 días 20%, 365 días 30% sobre el valor mensual.",
+   "entry_point": "Si es nueva/o: clase de prueba gratuita. Si ya la hizo: inscribirse con recepción.",
    "qualifying_questions": [
     "¿Has hecho pilates antes?",
     "¿Cuántas veces por semana te gustaría venir y en qué horario?",

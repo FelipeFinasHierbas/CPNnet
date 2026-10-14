@@ -15,6 +15,15 @@ s = (here / "template.html").read_text(encoding="utf-8")
 s = s.replace("/*CSS*/", css).replace("__LOGO_WHITE__", b64(V / "img" / brand["logo_white"], "image/png"))
 s = s.replace("--p:#2b4c8c;--d:#1b2f5e;--a:#4f9bd6;--bg:#f4f7fb", f"--p:{c['primary']};--d:{c['dark']};--a:{c['accent']};--bg:{c['bg']}")
 s = re.sub(r"var WELCOME='.*?';", lambda m: "var WELCOME=" + json.dumps(brand["welcome"], ensure_ascii=False) + ";", s, 1)
+if brand.get("texture") == "grain":
+    svg = "<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.35'/></svg>"
+    grain = f'url("data:image/svg+xml;utf8,{svg}")'
+    s = s.replace("</style>", f".top,.cpnnet-chat__header{{background:{grain},linear-gradient(135deg,{c['primary']},{c['dark']})}}</style>", 1)
+for k, old in (("ink", "#1c2540"), ("mut", "#5f6b85"), ("line", "#dde5f0"), ("line", "#cfd8e6"), ("line", "#dde2ec"), ("tint", "#eef3fb")):
+    if c.get(k):
+        s = s.replace(old, c[k])
+if c.get("ink"):
+    s = s.replace("rgba(43,76,140,.18)", "rgba(0,0,0,.08)").replace("rgba(20,30,60,.2)", "rgba(40,30,20,.18)")
 scen = (V / "demo/scenarios.json").read_text(encoding="utf-8")
 s = re.sub(r"var SCENARIOS=\[.*?\n\];\nvar cur=", lambda m: "var SCENARIOS=" + scen + ";\nvar cur=", s, 1, flags=re.S)
 s = s.replace("CPNnet Security", brand["name"]).replace("el catálogo de CPNnet", "la información de " + brand["short"]).replace("equipo comercial de CPNnet", "equipo de " + brand["short"])
