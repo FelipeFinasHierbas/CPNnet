@@ -188,7 +188,7 @@ function cpnnet_asistente_handle_chat(WP_REST_Request $req)
         $ctx = ['conv_id' => $conv_id, 'pagina' => $page, 'transcript' => $transcript];
         $whatsapp_url = null;
         $usage = cpnnet_asistente_usage_zero();
-        for ($i = 0; $i < 4; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $args['messages'] = $messages;
             $response = $client->messages->create(...$args);
             $usage = cpnnet_asistente_usage_add($usage, $response->usage);
@@ -207,6 +207,7 @@ function cpnnet_asistente_handle_chat(WP_REST_Request $req)
                     [$text, $url, $is_error] = match (true) {
                         $block->name === 'derivar_a_ejecutivo' => cpnnet_asistente_run_tool($input, $ctx),
                         $block->name === 'ver_horarios' && cpnnet_asistente_booking_enabled() => cpnnet_asistente_run_booking_tool($input),
+                        $block->name === 'agendar_clase_prueba' && cpnnet_asistente_trial_enabled() => cpnnet_asistente_run_trial_tool($input, $ctx),
                         default => ['Herramienta desconocida.', null, true],
                     };
                     $whatsapp_url = $url ?? $whatsapp_url;

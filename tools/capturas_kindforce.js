@@ -21,7 +21,7 @@ const shot = async (p, el, file, maxH = 820) => { await el.scrollIntoViewIfNeede
   await tab('cambio'); await p.evaluate(() => document.querySelector('section[data-tab=cambio] #horario').scrollIntoView());
   await shot(p, await p.$('section[data-tab=cambio] #horario'), 'cambio.png', 640);
   await tab('correos');
-  for (const [i, f] of [[0, 'mail-pago.png'], [1, 'mail-reserva.png'], [2, 'mail-recordatorio.png'], [3, 'mail-cambio.png'], [4, 'mail-vence.png'], [5, 'mail-cancelada.png']]) {
+  for (const [i, f] of [[0, 'mail-pago.png'], [1, 'mail-prueba.png'], [2, 'mail-estudio.png'], [3, 'mail-reserva.png'], [4, 'mail-recordatorio.png'], [5, 'mail-cambio.png'], [6, 'mail-vence.png'], [7, 'mail-cancelada.png']]) {
     await p.click(`.mailnav button[data-mail="${i}"]`); await p.waitForTimeout(300);
     const fr = await (await p.$(`.mail[data-mail="${i}"] iframe`)).contentFrame();
     const t = await fr.$('table table'); await t.screenshot({ path: out(f) });

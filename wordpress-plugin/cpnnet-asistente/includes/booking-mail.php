@@ -104,6 +104,18 @@ function cpnnet_asistente_mail_booking(int $booking_id, string $kind, ?array $pr
     $cta = ['Ver mi perfil', cpnnet_asistente_portal_url()];
     switch ($kind) {
         case 'reserva':
+            if ($m && (string) $m['plan_id'] === (string) $cfg['trial_plan'] && $cfg['trial_plan'] !== '') {
+                // Clase de prueba agendada por el asistente: un solo correo con todo lo necesario.
+                $b = cpnnet_asistente_brand();
+                $html = cpnnet_asistente_mail_html(
+                    '¡Tu clase de prueba está agendada!',
+                    'Hola ' . $u['name'] . ', ¡qué bueno que te animes! Te esperamos en ' . $b['name'] . '. Es gratis y sin compromiso.',
+                    $rows,
+                    ['Crear mi contraseña y ver mi reserva', wp_lostpassword_url(cpnnet_asistente_portal_url())],
+                    'Llega 10 minutos antes y trae ropa cómoda. Si no puedes venir, cancela o cambia la hora desde tu perfil (hasta ' . (int) $cfg['cancel_hours'] . ' horas antes): la primera vez crea tu contraseña con el botón de arriba, usando este correo.'
+                );
+                return cpnnet_asistente_send_mail($u['email'], 'Clase de prueba agendada', $html);
+            }
             [$subject, $title, $intro] = ['Reserva confirmada', '¡Tu clase está reservada!', 'Hola ' . $u['name'] . ', te esperamos.'];
             $rows = array_merge($rows, $plan_row);
             $outro = $policy;
@@ -159,4 +171,27 @@ function cpnnet_asistente_mail_expiry(int $membership_id): bool
         $cta
     );
     return cpnnet_asistente_send_mail($u['email'], 'Tu plan vence el ' . cpnnet_asistente_fmt_date($m['ends_on']), $html);
+}
+
+/** Aviso interno al estudio: el asistente agendó una clase de prueba. */
+function cpnnet_asistente_mail_staff_trial(int $booking_id, string $phone = '', string $goal = ''): bool
+{
+    $b = cpnnet_asistente_booking_with_session($booking_id);
+    if (!$b) {
+        return false;
+    }
+    $cfg = cpnnet_asistente_booking_cfg();
+    $to = is_email((string) $cfg['staff_email']) ? (string) $cfg['staff_email'] : (string) get_option('admin_email');
+    $u = cpnnet_asistente_user_info((int) $b['user_id']);
+    $rows = [['Persona', $u['name']], ['Correo', $u['email']], ['Teléfono', $phone ?: '—'], ['Clase', $b['title']], ['Día y hora', cpnnet_asistente_fmt_session($b['starts_at'])]];
+    if ($goal !== '') {
+        $rows[] = ['Busca', $goal];
+    }
+    $html = cpnnet_asistente_mail_html(
+        'Nueva clase de prueba agendada',
+        'El asistente agendó una clase de prueba. La persona ya recibió su confirmación por correo; queda en la Agenda y en el panel de consultas.',
+        $rows,
+        ['Ver la agenda', admin_url('admin.php?page=cpnnet-asistente-agenda')]
+    );
+    return cpnnet_asistente_send_mail($to, 'Clase de prueba: ' . $u['name'], $html);
 }

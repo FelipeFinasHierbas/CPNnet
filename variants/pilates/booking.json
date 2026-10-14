@@ -332,5 +332,8 @@
  "reminder_hours": 12,
  "expiry_days": 3,
  "window_days": 14,
- "portal_url": "https://kindforcepilates.com/mi-perfil/"
+ "portal_url": "https://kindforcepilates.com/mi-perfil/",
+ "trial_plan": "prueba",
+ "trial_auto": true,
+ "staff_email": ""
 }

@@ -38,6 +38,9 @@ function cpnnet_asistente_booking_defaults(): array
         'window_days'    => 14,   // se pueden reservar clases de los próximos X días
         'portal_url'     => '',   // página con el shortcode [asistente_reservas]
         'example'        => false, // true = horario/planes de ejemplo aún no confirmados por el estudio
+        'trial_plan'     => '',    // id del plan de «clase de prueba» (1 clase, $0); vacío = sin agendamiento automático
+        'trial_auto'     => true,  // el asistente agenda la clase de prueba solo (false = la deriva a recepción)
+        'staff_email'    => '',    // aviso de cada clase de prueba agendada (vacío = correo del administrador)
     ];
     $file = CPNNET_ASISTENTE_DIR . 'booking.json';
     if (is_readable($file)) {
@@ -247,7 +250,7 @@ function cpnnet_asistente_upcoming_sessions(int $days = 0, ?int $now = null): ar
 /* ---------- Planes de alumnos ---------- */
 
 /** Registra un pago: crea el plan del alumno y envía la confirmación. Devuelve el id del plan o un WP_Error. */
-function cpnnet_asistente_membership_create(int $user_id, string $plan_id, int $amount, string $payment_ref, string $starts_on = '')
+function cpnnet_asistente_membership_create(int $user_id, string $plan_id, int $amount, string $payment_ref, string $starts_on = '', bool $notify = true)
 {
     global $wpdb;
     $plan = cpnnet_asistente_booking_plan($plan_id);
@@ -270,7 +273,9 @@ function cpnnet_asistente_membership_create(int $user_id, string $plan_id, int $
         'created_at'    => gmdate('Y-m-d H:i:s', cpnnet_asistente_now()),
     ]);
     $id = (int) $wpdb->insert_id;
-    cpnnet_asistente_mail_payment($id);
+    if ($notify) {
+        cpnnet_asistente_mail_payment($id);
+    }
     return $id;
 }
 
@@ -570,7 +575,7 @@ function cpnnet_asistente_run_booking_tool(array $input): array
     $lines = [];
     foreach ($rows as $r) {
         $free = max(0, (int) $r['capacity'] - (int) $r['booked']);
-        $lines[] = cpnnet_asistente_fmt_session($r['starts_at']) . ' — ' . $r['title'] . ($r['instructor'] ? ' (' . $r['instructor'] . ')' : '') . ' — ' . ($free > 0 ? $free . ' cupos' : 'completa');
+        $lines[] = '[id ' . (int) $r['id'] . '] ' . cpnnet_asistente_fmt_session($r['starts_at']) . ' — ' . $r['title'] . ($r['instructor'] ? ' (' . $r['instructor'] . ')' : '') . ' — ' . ($free > 0 ? $free . ' cupos' : 'completa');
     }
     $text = $lines ? implode("\n", $lines) : 'No hay clases programadas en esos días.';
     $text .= "\nReservas, cambios y cancelaciones: en el perfil del alumno, " . cpnnet_asistente_portal_url() . ' (cancelación hasta ' . (int) $cfg['cancel_hours'] . ' h antes).';
@@ -578,6 +583,127 @@ function cpnnet_asistente_run_booking_tool(array $input): array
         $text = "ATENCIÓN: el estudio aún no confirma este horario (es de ejemplo). No lo presentes como definitivo; ofrece que recepción confirme.\n" . $text;
     }
     return [$text, null, false];
+}
+
+/* ---------- Herramienta del asistente: agendar_clase_prueba ---------- */
+
+function cpnnet_asistente_trial_enabled(): bool
+{
+    $cfg = cpnnet_asistente_booking_cfg();
+    return cpnnet_asistente_booking_enabled() && !empty($cfg['trial_auto']) && $cfg['trial_plan'] !== '' && cpnnet_asistente_booking_plan((string) $cfg['trial_plan']) !== null;
+}
+
+function cpnnet_asistente_trial_tool(): array
+{
+    return [
+        'name'        => 'agendar_clase_prueba',
+        'description' => 'Agenda la clase de prueba gratuita de una persona NUEVA en una clase con cupo: crea su acceso, reserva el cupo y le envía la confirmación por correo. '
+            . 'Antes: usa ver_horarios, ofrece 2 o 3 horarios y deja que la persona elija; pide nombre, correo y teléfono, y su consentimiento explícito para registrar sus datos. '
+            . 'Usa el id de la clase que aparece en ver_horarios. No la uses para alumnos actuales ni si la persona mencionó lesiones, embarazo o cirugías (en ese caso deriva a recepción).',
+        'inputSchema' => [
+            'type'       => 'object',
+            'properties' => [
+                'clase_id'       => ['type' => 'integer', 'description' => 'id de la clase elegida (de ver_horarios)'],
+                'nombre'         => ['type' => 'string'],
+                'correo'         => ['type' => 'string'],
+                'telefono'       => ['type' => 'string'],
+                'objetivo'       => ['type' => 'string', 'description' => 'Qué busca la persona, en una línea'],
+                'consentimiento' => ['type' => 'boolean', 'description' => 'true solo si la persona aceptó registrar sus datos'],
+            ],
+            'required'   => ['clase_id', 'nombre', 'correo', 'consentimiento'],
+        ],
+    ];
+}
+
+/** ¿La persona ya usó su clase de prueba? (una por correo) */
+function cpnnet_asistente_trial_used(int $user_id): bool
+{
+    global $wpdb;
+    $t = cpnnet_asistente_bt('memberships');
+    return (bool) $wpdb->get_var($wpdb->prepare("SELECT id FROM {$t} WHERE user_id = %d AND plan_id = %s AND status <> 'anulado'", $user_id, (string) cpnnet_asistente_booking_cfg()['trial_plan']));
+}
+
+/**
+ * Agenda la clase de prueba. Devuelve [texto para el modelo, null, es_error].
+ * Pasos: valida → busca o crea a la persona (rol alumno) → plan de prueba (sin correo propio) → reserva el cupo
+ * (correo «clase de prueba agendada») → registra el lead en el panel → avisa al estudio por correo.
+ */
+function cpnnet_asistente_run_trial_tool(array $in, array $ctx = []): array
+{
+    $cfg = cpnnet_asistente_booking_cfg();
+    if (!cpnnet_asistente_trial_enabled()) {
+        return ['El agendamiento automático no está activo: deriva a recepción con derivar_a_ejecutivo.', null, true];
+    }
+    if (($in['consentimiento'] ?? null) !== true) {
+        return ['Falta el consentimiento explícito de la persona para registrar sus datos. Pídelo antes de agendar.', null, true];
+    }
+    $email = sanitize_email((string) ($in['correo'] ?? ''));
+    $name = trim(sanitize_text_field((string) ($in['nombre'] ?? '')));
+    $phone = substr(sanitize_text_field((string) ($in['telefono'] ?? '')), 0, 40);
+    if (!is_email($email) || $name === '') {
+        return ['Falta un nombre o un correo válido. Pídelo de nuevo (el correo es para enviarle la confirmación).', null, true];
+    }
+    if (!empty($cfg['example'])) {
+        return ['El horario del estudio aún no está confirmado (es de ejemplo), así que no se puede agendar automáticamente. Deriva a recepción con derivar_a_ejecutivo.', null, true];
+    }
+    $session_id = (int) ($in['clase_id'] ?? 0);
+    $s = cpnnet_asistente_session($session_id);
+    if (!$s || $s['status'] !== 'activa' || cpnnet_asistente_ts($s['starts_at']) <= cpnnet_asistente_now()) {
+        return ['Esa clase no existe o ya pasó. Vuelve a consultar ver_horarios y ofrece otro horario.', null, true];
+    }
+    if ((int) $s['booked'] >= (int) $s['capacity']) {
+        return ['Esa clase ya no tiene cupos. Ofrece otro horario de ver_horarios.', null, true];
+    }
+    $plan = cpnnet_asistente_booking_plan((string) $cfg['trial_plan']);
+    $last_day = (new DateTimeImmutable(cpnnet_asistente_local_date(cpnnet_asistente_now())))->modify('+' . max(0, (int) $plan['days'] - 1) . ' day')->format('Y-m-d');
+    if (cpnnet_asistente_local_date(cpnnet_asistente_ts($s['starts_at'])) > $last_day) {
+        return ['La clase de prueba debe ser dentro de los próximos ' . (int) $plan['days'] . ' días. Ofrece un horario más cercano.', null, true];
+    }
+
+    $existing = get_user_by('email', $email);
+    if ($existing && cpnnet_asistente_trial_used((int) $existing->ID)) {
+        return ['Esta persona ya tomó (o tiene agendada) su clase de prueba. No agendes otra: ofrécele los planes o deriva a recepción.', null, true];
+    }
+    if ($existing && cpnnet_asistente_memberships_of((int) $existing->ID)) {
+        return ['Esta persona ya es alumna con plan vigente: puede reservar en su perfil (' . cpnnet_asistente_portal_url() . ').', null, true];
+    }
+    $uid = $existing ? (int) $existing->ID : cpnnet_asistente_ensure_member($email, $name, false);
+    if (is_wp_error($uid)) {
+        return ['No se pudo registrar a la persona. Deriva a recepción con derivar_a_ejecutivo.', null, true];
+    }
+    if ($phone !== '') {
+        update_user_meta($uid, 'cpnnet_telefono', $phone);
+    }
+    $mid = cpnnet_asistente_membership_create($uid, (string) $plan['id'], 0, 'Asistente (clase de prueba)', '', false);
+    if (is_wp_error($mid)) {
+        return ['No se pudo agendar. Deriva a recepción con derivar_a_ejecutivo.', null, true];
+    }
+    $bid = cpnnet_asistente_book($uid, $session_id);
+    if (is_wp_error($bid)) {
+        global $wpdb;
+        $wpdb->update(cpnnet_asistente_bt('memberships'), ['status' => 'anulado'], ['id' => (int) $mid]);
+        return [$bid->get_error_message() . ' Ofrece otro horario de ver_horarios.', null, true];
+    }
+    $when = cpnnet_asistente_fmt_session($s['starts_at']);
+
+    // Queda en el panel de consultas, como lead ya agendado.
+    $lead = [
+        'perfil'           => 'nuevo',
+        'nombre'           => $name,
+        'contacto'         => trim($email . ($phone !== '' ? ' · ' . $phone : '')),
+        'necesidad'        => (string) ($in['objetivo'] ?? 'Clase de prueba'),
+        'marcas_interes'   => [(string) $plan['name']],
+        'siguiente_paso'   => 'Clase de prueba agendada por el asistente: ' . $when,
+        'consentimiento'   => true,
+    ];
+    $summary = cpnnet_asistente_lead_summary($lead);
+    $saved = cpnnet_asistente_leads_insert($lead, $summary, (string) ($ctx['conv_id'] ?? ''), (string) ($ctx['pagina'] ?? ''), (array) ($ctx['transcript'] ?? []));
+    cpnnet_asistente_lead_update((int) ($saved['id'] ?? 0), ['status' => 'calificado']);
+    cpnnet_asistente_webhook_send_lead($saved['uuid']);
+    cpnnet_asistente_mail_staff_trial($bid, $phone, (string) ($in['objetivo'] ?? ''));
+
+    return ['Clase de prueba agendada: ' . $when . ' (' . $s['title'] . '). Se envió la confirmación a ' . $email
+        . '. Díselo a la persona con calidez, recuérdale llegar 10 minutos antes y que puede cambiar o cancelar desde su perfil (' . cpnnet_asistente_portal_url() . ') hasta ' . (int) $cfg['cancel_hours'] . ' horas antes. No prometas nada más.', null, false];
 }
 
 /* ---------- Registro en WordPress ---------- */

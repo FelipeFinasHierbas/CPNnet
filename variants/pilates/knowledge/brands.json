@@ -35,7 +35,7 @@
    "tier": "primer_orden",
    "category": "planes",
    "tagline": "Primera clase de prueba sin costo.",
-   "summary": "Kind Force Pilates ofrece una clase de prueba GRATIS para personas nuevas. Es la forma recomendada de partir: conocer el estudio, el método y a las profesoras/es sin compromiso. Día, horario y cupos: los coordina recepción.",
+   "summary": "Kind Force Pilates ofrece una clase de prueba GRATIS para personas nuevas. Es la forma recomendada de partir: conocer el estudio, el método y a las profesoras/es sin compromiso. El asistente la agenda en un horario con cupo (una por persona).",
    "ideal_for": [
     "personas que nunca han hecho pilates",
     "quienes quieren conocer el estudio antes de elegir plan"
@@ -48,7 +48,7 @@
     "Sin costo y sin compromiso"
    ],
    "sizing": "Gratis. Una clase por persona nueva (condiciones adicionales: por confirmar con el estudio).",
-   "entry_point": "Agendar la clase de prueba con recepción.",
+   "entry_point": "El asistente la agenda en el momento: elige un horario con cupo y llega la confirmación por correo.",
    "qualifying_questions": [
     "¿Has hecho pilates antes?",
     "¿Cuántas veces por semana te gustaría venir y en qué horario?",

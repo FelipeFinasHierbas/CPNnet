@@ -23,7 +23,10 @@ function cpnnet_asistente_system_prompt(): string
         $cfg = cpnnet_asistente_booking_cfg();
         $cached .= "\n\n# Reservas\nTienes la herramienta `ver_horarios` con las clases y cupos reales de los próximos días: úsala cuando pregunten por horarios o disponibilidad, y no inventes horarios."
             . "\nLos alumnos con plan reservan, cambian y cancelan sus clases en su perfil: " . cpnnet_asistente_portal_url()
-            . ' (cancelación o cambio hasta ' . (int) $cfg['cancel_hours'] . ' horas antes; reciben confirmación y recordatorio por correo). Tú no reservas ni cobras: para contratar un plan o agendar la clase de prueba, deriva con `derivar_a_ejecutivo`.';
+            . ' (cancelación o cambio hasta ' . (int) $cfg['cancel_hours'] . ' horas antes; reciben confirmación y recordatorio por correo).';
+        $cached .= cpnnet_asistente_trial_enabled()
+            ? "\nClase de prueba: agéndala tú con `agendar_clase_prueba` (consulta `ver_horarios`, ofrece 2 o 3 horarios con cupo, pide nombre, correo, teléfono y consentimiento). Si menciona lesiones, embarazo o cirugías, o si la herramienta da error, deriva con `derivar_a_ejecutivo`. Tú no cobras: para contratar un plan, deriva."
+            : "\nTú no reservas ni cobras: para contratar un plan o agendar la clase de prueba, deriva con `derivar_a_ejecutivo`.";
     }
     return $cached;
 }
@@ -55,6 +58,9 @@ function cpnnet_asistente_tools(): array
     ]];
     if (cpnnet_asistente_booking_enabled()) {
         $tools[] = cpnnet_asistente_booking_tool();
+        if (cpnnet_asistente_trial_enabled()) {
+            $tools[] = cpnnet_asistente_trial_tool();
+        }
     }
     return $tools;
 }

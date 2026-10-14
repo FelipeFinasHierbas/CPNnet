@@ -143,5 +143,56 @@ ok('agenda del estudio: ocupación y botón para cancelar clase', str_contains($
 ob_start(); cpnnet_asistente_page_alumnos(); $h = ob_get_clean();
 ok('alumnos y pagos: formulario y tabla de planes', str_contains($h, 'Registrar pago') && str_contains($h, 'Plan 8 sesiones'));
 
+// --- clase de prueba agendada por el asistente ---
+$GLOBALS['CAPS'] = ['cpnnet_asistente_leads' => true, 'manage_options' => true];
+$c = cpnnet_asistente_booking_cfg(); $c['plans'][] = ['id' => 'prueba', 'name' => 'Clase de prueba', 'classes' => 1, 'days' => 7, 'price' => 0];
+$c['trial_plan'] = 'prueba'; $c['trial_auto'] = true; $c['example'] = true; $GLOBALS['O'][CPNNET_ASISTENTE_BOOKING_OPTION] = $c;
+$GLOBALS['O']['admin_email'] = 'recepcion@kindforce.cl';
+ok('el asistente tiene agendar_clase_prueba cuando está activa', in_array('agendar_clase_prueba', array_column(cpnnet_asistente_tools(), 'name'), true));
+$sp = $mk(26, 2); $sfull = $mk(30, 1); $sfar = $mk(24 * 10, 5);
+$in = ['clase_id' => $sp, 'nombre' => 'Daniela', 'correo' => 'dani@mail.cl', 'telefono' => '+56 9 4444 3333', 'objetivo' => 'Postura', 'consentimiento' => true];
+[$t, , $err] = cpnnet_asistente_run_trial_tool($in);
+ok('prueba: con horario de ejemplo no agenda (deriva)', $err && str_contains($t, 'ejemplo'));
+$c['example'] = false; $GLOBALS['O'][CPNNET_ASISTENTE_BOOKING_OPTION] = $c; $mails();
+[$t, , $err] = cpnnet_asistente_run_trial_tool(['consentimiento' => false] + $in);
+ok('prueba: sin consentimiento no agenda', $err && str_contains($t, 'consentimiento'));
+[$t, , $err] = cpnnet_asistente_run_trial_tool(['correo' => 'no-es-correo'] + $in);
+ok('prueba: correo inválido', $err && str_contains($t, 'correo'));
+[$t, , $err] = cpnnet_asistente_run_trial_tool(['clase_id' => $sfar] + $in);
+ok('prueba: solo dentro de la vigencia de la clase de prueba', $err && str_contains($t, '7 días'));
+$leads0 = $cnt("SELECT COUNT(*) FROM wp_cpnnet_asistente_leads");
+[$t, , $err] = cpnnet_asistente_run_trial_tool($in, ['conv_id' => 'conv-prueba-1']);
+$u = get_user_by('email', 'dani@mail.cl');
+ok('prueba: agenda, crea la alumna y ocupa el cupo', !$err && str_contains($t, 'agendada') && $u && cpnnet_asistente_session($sp)['booked'] == 1 && count(cpnnet_asistente_bookings_of($u->ID)) === 1);
+ok('prueba: no envía el correo genérico de WordPress (va todo en el correo de la marca)', !in_array($u->ID, $GLOBALS['NEWUSER'] ?? [], true));
+$mail = $mails(); $to = array_column($mail, 'to');
+$mine = array_values(array_filter($mail, fn($m) => $m['to'] === 'dani@mail.cl'));
+ok('prueba: un solo correo a la persona, «clase de prueba agendada», con enlace para crear su contraseña', count($mine) === 1 && str_contains($mine[0]['subject'], 'Clase de prueba agendada') && str_contains($mine[0]['body'], 'lostpassword'));
+ok('prueba: aviso al estudio con los datos', in_array('recepcion@kindforce.cl', $to, true) && str_contains(implode('', array_column($mail, 'body')), '+56 9 4444 3333'));
+ok('prueba: queda en el panel de consultas como lead calificado', $cnt("SELECT COUNT(*) FROM wp_cpnnet_asistente_leads") === $leads0 + 1 && $db->get_var("SELECT status FROM wp_cpnnet_asistente_leads ORDER BY id DESC LIMIT 1") === 'calificado' && str_contains((string) $db->get_var("SELECT siguiente_paso FROM wp_cpnnet_asistente_leads ORDER BY id DESC LIMIT 1"), 'agendada'));
+[$t, , $err] = cpnnet_asistente_run_trial_tool(['clase_id' => $mk(28, 5)] + $in);
+ok('prueba: una sola clase de prueba por persona', $err && str_contains($t, 'ya tomó'));
+[$t, , $err] = cpnnet_asistente_run_trial_tool(['clase_id' => $sfull, 'correo' => 'otra@mail.cl'] + $in);
+ok('prueba: la primera persona en una clase de 1 cupo sí entra', !$err); $mails();
+[$t, , $err] = cpnnet_asistente_run_trial_tool(['clase_id' => $sfull, 'correo' => 'tercera@mail.cl'] + $in);
+ok('prueba: clase sin cupos → pide otro horario y no deja planes huérfanos', $err && str_contains($t, 'cupos') && !get_user_by('email', 'tercera@mail.cl') || ($err && count(cpnnet_asistente_memberships_of(get_user_by('email', 'tercera@mail.cl')->ID)) === 0));
+[$t, , $err] = cpnnet_asistente_run_trial_tool(['correo' => 'luis@mail.cl', 'clase_id' => $mk(27, 5)] + $in);
+ok('prueba: una alumna con plan vigente va a su perfil, no a prueba', $err && (str_contains($t, 'perfil') || str_contains($t, 'ya tomó')));
+$c['trial_auto'] = false; $GLOBALS['O'][CPNNET_ASISTENTE_BOOKING_OPTION] = $c;
+ok('prueba: desactivada → sin herramienta y el prompt pide derivar', !in_array('agendar_clase_prueba', array_column(cpnnet_asistente_tools(), 'name'), true));
+[$txt] = cpnnet_asistente_run_booking_tool(['dias' => 2]);
+ok('ver_horarios entrega el id de cada clase para poder agendar', (bool) preg_match('/\[id \d+\]/', $txt));
+
+// --- flujo completo por el chat (servidor simulado de Claude): el modelo llama a agendar_clase_prueba ---
+if (getenv('ANTHROPIC_BASE_URL')) {
+    $c = cpnnet_asistente_booking_cfg(); $c['trial_auto'] = true; $c['example'] = false; $GLOBALS['O'][CPNNET_ASISTENTE_BOOKING_OPTION] = $c;
+    $GLOBALS['O']['cpnnet_asistente']['visibility'] = 'public'; $GLOBALS['O']['cpnnet_asistente']['enabled'] = 1; $GLOBALS['CAPS'] = [];
+    $sc = $mk(29, 4);
+    $_SERVER['HTTP_ORIGIN'] = 'https://www.cpnnetsecurity.com'; $_SERVER['REMOTE_ADDR'] = '9.9.9.9';
+    $r = cpnnet_asistente_handle_chat(new WP_REST_Request(['messages' => [['role' => 'user', 'content' => "Quiero mi clase de prueba AGENDAR_PRUEBA:$sc"]], 'conversation_id' => 'conv-chat-prueba']));
+    ok('chat: el modelo agenda la clase de prueba con la herramienta y la clase queda reservada', $r->status === 200 && str_contains((string) $r->data['reply'], 'Clase de prueba agendada') && cpnnet_asistente_session($sc)['booked'] == 1);
+    $mails();
+}
+
 echo "-- {$GLOBALS['n']} verificaciones de reservas\n"; if (($GLOBALS['n'] ?? 0) < 40) { echo "FAIL el script terminó antes de lo previsto\n"; $GLOBALS['fail'] = 1; }
 exit($GLOBALS['fail'] ?? 0);

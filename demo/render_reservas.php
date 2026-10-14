@@ -35,6 +35,12 @@ $GLOBALS['MAILS'] = [];
 $camila = $ids[0];
 $m = cpnnet_asistente_memberships_of($camila)[0];
 cpnnet_asistente_mail_payment((int) $m['id']);
+// Clase de prueba agendada por el asistente (correo a la persona + aviso al estudio)
+$GLOBALS['O']['admin_email'] = 'recepcion@kindforcepilates.com';
+$c2 = cpnnet_asistente_booking_cfg(); $c2['example'] = false; $GLOBALS['O'][CPNNET_ASISTENTE_BOOKING_OPTION] = $c2;
+$sx = cpnnet_asistente_upcoming_sessions(3); $trialSession = (int) $sx[5]['id'];
+cpnnet_asistente_run_trial_tool(['clase_id' => $trialSession, 'nombre' => 'Daniela Muñoz', 'correo' => 'daniela.munoz@mail.cl', 'telefono' => '+56 9 4444 3333', 'objetivo' => 'Primera vez; mañanas', 'consentimiento' => true]);
+$c2['example'] = true; $GLOBALS['O'][CPNNET_ASISTENTE_BOOKING_OPTION] = $c2;
 $mine = cpnnet_asistente_bookings_of($camila);
 cpnnet_asistente_mail_booking((int) $mine[0]['id'], 'reserva');
 cpnnet_asistente_mail_booking((int) $mine[0]['id'], 'recordatorio');
@@ -101,7 +107,7 @@ main{max-width:1240px;margin:0 auto;padding:18px 24px 40px}
 <main>
 <section data-tab="perfil"><p class="intro">Lo que ve una alumna en el sitio (página «Mi perfil»): su plan con las clases disponibles y el vencimiento, sus próximas clases (cambiar o cancelar hasta 12 h antes) y el horario con cupos en tiempo real.</p><div class="site"><div class="fake"><img src="{$logo}" alt=""> Inicio · Planes · <b>Mi perfil</b></div>{$fix($portal)}</div></section>
 <section data-tab="cambio" hidden><p class="intro">Al tocar «Cambiar», la alumna elige otro horario con cupo. No gasta otra clase y libera el cupo anterior.</p><div class="site">{$fix($portal_change)}</div></section>
-<section data-tab="correos" hidden><p class="intro">Correos que el sistema envía solo, con la marca del estudio: pago confirmado, reserva, recordatorio de clase, cambio, plan por vencer y clase cancelada por el estudio.</p><div class="mailwrap"><div class="mailnav">{$mail_btns}</div><div>{$mail_tabs}</div></div></section>
+<section data-tab="correos" hidden><p class="intro">Correos que el sistema envía solo, con la marca del estudio: pago confirmado, clase de prueba agendada por el asistente (y el aviso al estudio), reserva, recordatorio de clase, cambio, plan por vencer y clase cancelada por el estudio.</p><div class="mailwrap"><div class="mailnav">{$mail_btns}</div><div>{$mail_tabs}</div></div></section>
 <section data-tab="agenda" hidden><p class="intro">Recepción ve la ocupación de cada clase y quiénes vienen. Si cancela una clase, el sistema avisa a cada alumna y le devuelve la clase.</p><div class="wpadmin">{$fix($agenda)}</div></section>
 <section data-tab="alumnos" hidden><p class="intro">Recepción registra el pago (transferencia, efectivo, etc.): se activa el plan, se crea el acceso de la alumna y le llega la confirmación por correo.</p><div class="wpadmin">{$fix($alumnos)}</div></section>
 <section data-tab="config" hidden><p class="intro">Planes, horario semanal (una línea por clase), plazos y avisos. Las clases se crean solas para las próximas semanas.</p><div class="wpadmin">{$fix($config)}</div></section>

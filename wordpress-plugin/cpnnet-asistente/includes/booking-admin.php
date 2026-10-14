@@ -153,7 +153,7 @@ function cpnnet_asistente_page_alumnos(): void
 }
 
 /** Busca al alumno por correo o lo crea (rol alumno) y le envía el enlace para crear su contraseña. */
-function cpnnet_asistente_ensure_member(string $email, string $name)
+function cpnnet_asistente_ensure_member(string $email, string $name, bool $notify = true)
 {
     $u = get_user_by('email', $email);
     if ($u) {
@@ -170,7 +170,9 @@ function cpnnet_asistente_ensure_member(string $email, string $name)
     if (is_wp_error($id)) {
         return $id;
     }
-    wp_new_user_notification($id, null, 'user'); // correo de WordPress con el enlace para crear la contraseña
+    if ($notify) {
+        wp_new_user_notification($id, null, 'user'); // correo de WordPress con el enlace para crear la contraseña
+    }
     return (int) $id;
 }
 
@@ -187,6 +189,14 @@ function cpnnet_asistente_page_reservas_cfg(): void
     if ($bad !== '') {
         echo '<div class="notice notice-error"><p>Algunas líneas no se entendieron y no se guardaron: ' . esc_html($bad) . '.</p></div>';
     }
+    $plan_opts = '<option value="">— Sin clase de prueba automática —</option>';
+    foreach ($cfg['plans'] as $p) {
+        $plan_opts .= '<option value="' . esc_attr($p['id']) . '"' . selected((string) $cfg['trial_plan'], (string) $p['id'], false) . '>' . esc_html($p['name']) . '</option>';
+    }
+    $trial_row = '<tr><th><label for="trial_plan">Clase de prueba</label></th><td><select id="trial_plan" name="trial_plan">' . $plan_opts . '</select> '
+        . '<label><input type="checkbox" name="trial_auto" value="1"' . checked(!empty($cfg['trial_auto']), true, false) . '> El asistente la agenda solo</label>'
+        . '<p class="description">Plan de 1 clase a $0 que el asistente usa para agendar la clase de prueba de personas nuevas (una por correo). Sin marcar, la deriva a recepción.</p></td></tr>'
+        . '<tr><th><label for="staff_email">Aviso al estudio</label></th><td><input type="email" id="staff_email" name="staff_email" value="' . esc_attr((string) $cfg['staff_email']) . '" class="regular-text" placeholder="recepcion@…"><p class="description">Recibe un correo por cada clase de prueba agendada (vacío = correo del administrador).</p></td></tr>';
     $num = static fn($k, $label, $help) => '<tr><th><label for="' . $k . '">' . esc_html($label) . '</label></th><td><input type="number" min="0" id="' . $k . '" name="' . $k . '" value="' . (int) $cfg[$k] . '" class="small-text"> <span class="description">' . esc_html($help) . '</span></td></tr>';
     echo '<form method="post" action="' . esc_url(admin_url('admin-post.php')) . '"><input type="hidden" name="action" value="cpnnet_guardar_reservas">' . wp_nonce_field('cpnnet_guardar_reservas', '_wpnonce', true, false)
         . '<section class="cpn-card"><h3>Planes</h3><p class="description">Una línea por plan: <code>id | Nombre | clases | días de vigencia | precio</code>. Ej.: <code>plan-8 | Plan 8 sesiones | 8 | 30 | 60000</code></p>'
@@ -198,6 +208,7 @@ function cpnnet_asistente_page_reservas_cfg(): void
         . $num('reminder_hours', 'Recordatorio de clase', 'horas antes (correo)')
         . $num('expiry_days', 'Aviso de plan por vencer', 'días antes (correo)')
         . $num('window_days', 'Reservas abiertas', 'días hacia adelante')
+        . $trial_row
         . '<tr><th><label for="portal_url">Página del perfil del alumno</label></th><td><input type="url" id="portal_url" name="portal_url" value="' . esc_attr($cfg['portal_url']) . '" class="regular-text" placeholder="https://…/mi-perfil/"><p class="description">Crea una página con el shortcode <code>[asistente_reservas]</code> y pega aquí su dirección.</p></td></tr>'
         . '</table></section>';
     submit_button('Guardar configuración de reservas');
@@ -245,6 +256,10 @@ function cpnnet_asistente_booking_admin_action(string $action): void
                 $cfg[$k] = max($min, min($max, (int) ($_POST[$k] ?? $cfg[$k])));
             }
             $cfg['portal_url'] = esc_url_raw((string) ($_POST['portal_url'] ?? ''));
+            $trial = sanitize_title((string) ($_POST['trial_plan'] ?? ''));
+            $cfg['trial_plan'] = $trial !== '' && in_array($trial, array_column($cfg['plans'], 'id'), true) ? $trial : '';
+            $cfg['trial_auto'] = !empty($_POST['trial_auto']);
+            $cfg['staff_email'] = is_email((string) ($_POST['staff_email'] ?? '')) ? sanitize_email((string) $_POST['staff_email']) : '';
             $cfg['example'] = false;
             update_option(CPNNET_ASISTENTE_BOOKING_OPTION, $cfg);
             cpnnet_asistente_generate_sessions();

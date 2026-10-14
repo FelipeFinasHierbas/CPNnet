@@ -43,7 +43,7 @@ function wp_insert_user($d){$id=count($GLOBALS['USERS'])+100; $GLOBALS['USERS'][
 function wp_generate_password($n=12){return str_repeat('x',$n);} function wp_new_user_notification($id,$x=null,$n='both'){$GLOBALS['NEWUSER'][]=$id;}
 function is_user_logged_in(){return !empty($GLOBALS['UID']);} function wp_login_form($a){return '<form id="loginform"></form>';} function wp_lostpassword_url($r=''){return 'https://x/wp-login.php?action=lostpassword';} function wp_logout_url($r=''){return 'https://x/wp-login.php?action=logout';} function wp_login_url($r=''){return 'https://x/wp-login.php';}
 function wp_verify_nonce($n,$a){return $n==='n-'.$a;} function sanitize_email($e){return filter_var(trim($e),FILTER_SANITIZE_EMAIL);}
-function wp_next_scheduled($h){return false;} function wp_schedule_event(...$a){$GLOBALS['CRON'][]=$a; return true;} function wp_clear_scheduled_hook($h){}
+function update_user_meta($u,$k,$v){$GLOBALS['UMETA'][$u][$k]=$v; return true;} function wp_next_scheduled($h){return false;} function wp_schedule_event(...$a){$GLOBALS['CRON'][]=$a; return true;} function wp_clear_scheduled_hook($h){}
 require CPNNET_ASISTENTE_DIR.'vendor/autoload.php';
 foreach(['brand','settings','leads','usage','kb','prompt','api','widget','integration','admin','dashboard','booking','booking-mail','booking-portal','booking-admin'] as $f) require CPNNET_ASISTENTE_DIR."includes/$f.php";
 define('CPNNET_ASISTENTE_VERSION','t'); define('CPNNET_ASISTENTE_URL','ASSET/');

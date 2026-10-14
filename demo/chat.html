@@ -76,7 +76,7 @@ h1{font-size:24px;margin:0 0 6px;font-weight:700}
     <p class="lead">Elige un escenario y avanza con las respuestas sugeridas en el chat. Es una demo guionada para mostrar el flujo: en el sitio real el asistente responde con IA a cualquier consulta, usando solo el catálogo de CPNnet.</p>
     <div class="scen" id="scen"></div>
     <div class="card">
-      <h2>Lo que recibe el ejecutivo por WhatsApp</h2>
+      <h2 id="leadh">Lo que recibe el ejecutivo por WhatsApp</h2>
       <div class="wa empty" id="lead">Aparece al final de la conversación, cuando el visitante acepta compartir sus datos.</div>
     </div>
     <p class="note">Los datos de las conversaciones de ejemplo (nombres, empresas, correos) son ficticios.</p>
@@ -128,8 +128,8 @@ var note=el('p','cpnnet-chat__note','Asistente con IA. No compartas contraseñas
 function bubble(role,text,wa){var b=el('div','cpnnet-chat__msg cpnnet-chat__msg--'+role);rich(b,text);if(wa){var a=el('a','cpnnet-chat__wa','Continuar por WhatsApp con un ejecutivo');a.href='#lead';b.appendChild(document.createElement('br'));b.appendChild(a)}log.appendChild(b);log.scrollTop=log.scrollHeight;return b}
 function showChips(){chips.textContent='';var s=cur&&cur.steps[step];if(!s){chips.hidden=true;return}chips.hidden=false;var c=el('button','cpnnet-chat__chip',s.u);c.type='button';c.onclick=function(){play(s)};chips.appendChild(c)}
 function play(s){if(busy)return;busy=true;chips.hidden=true;bubble('user',s.u);var t=bubble('assistant','Escribiendo…');t.classList.add('cpnnet-chat__msg--typing');
- setTimeout(function(){t.remove();bubble('assistant',s.b,!!s.lead);if(s.lead){var L=document.getElementById('lead');L.className='wa';L.textContent=s.lead}step++;busy=false;showChips()},1100)}
-function start(i){cur=SCENARIOS[i];step=0;busy=false;hinted=false;log.textContent='';bubble('assistant',WELCOME);var L=document.getElementById('lead');L.className='wa empty';L.textContent='Aparece al final de la conversación, cuando el visitante acepta compartir sus datos.';
+ setTimeout(function(){t.remove();bubble('assistant',s.b,!!s.lead&&!cur.auto);if(s.lead){var L=document.getElementById('lead');L.className='wa';L.textContent=s.lead}step++;busy=false;showChips()},1100)}
+function start(i){cur=SCENARIOS[i];var H=document.getElementById('leadh');if(H){H.dataset.def=H.dataset.def||H.textContent;H.textContent=cur.leadTitle||H.dataset.def;}step=0;busy=false;hinted=false;log.textContent='';bubble('assistant',WELCOME);var L=document.getElementById('lead');L.className='wa empty';L.textContent='Aparece al final de la conversación, cuando el visitante acepta compartir sus datos.';
  [].forEach.call(document.querySelectorAll('#scen button'),function(b,j){b.classList.toggle('on',j===i)});showChips()}
 form.addEventListener('submit',function(e){e.preventDefault();var v=inp.value.trim();if(!v)return;inp.value='';bubble('user',v);if(!hinted){hinted=true;setTimeout(function(){bubble('assistant','En esta demo guionada elige una de las respuestas sugeridas. En el sitio real respondo con IA a cualquier consulta.')},500)}});
 inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();form.requestSubmit()}});

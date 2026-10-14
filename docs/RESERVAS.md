@@ -22,6 +22,7 @@ Disponible para las variantes que lo activan en `brand.json` con `"modules": ["b
   - clase cancelada por el estudio;
   - recordatorio de clase (X horas antes);
   - plan por vencer (X días antes), con botón para renovar por WhatsApp.
+- **Clase de prueba automática:** el asistente consulta los cupos, ofrece 2 o 3 horarios, pide nombre, correo, teléfono y consentimiento, y agenda la clase de prueba. Para eso crea el acceso de la persona, le asigna el plan «Clase de prueba» de 1 clase a $0 y reserva el cupo. La persona recibe un correo con la marca y un enlace para crear su contraseña; el estudio recibe un aviso por correo y la consulta queda en el panel como «calificado». Hay una clase de prueba por correo. No se agenda en casos de salud (lesiones, embarazo), ni mientras el horario sea de ejemplo: en esos casos el asistente deriva. Se activa en *Configuración de reservas → Clase de prueba*.
 - **Asistente del chat:** la herramienta `ver_horarios` da los horarios y cupos reales sin datos de alumnos, y el asistente deriva a recepción o al perfil para reservar. Mientras el horario sea «de ejemplo», el asistente no lo presenta como definitivo.
 
 ## Puesta en marcha (unos 20 minutos)
@@ -33,7 +34,7 @@ Disponible para las variantes que lo activan en `brand.json` con `"modules": ["b
 6. Registrar el primer pago en *Alumnos y pagos*. El alumno recibe el correo para crear su contraseña y la confirmación de su plan.
 
 ## Lo que todavía no hace (comparado con BoxMagic)
-- **Pago en línea** (Webpay, Mercado Pago, Flow). Hoy recepción registra el pago y el sistema confirma por correo. Es el siguiente paso natural.
+- **Pago en línea** (pendiente: el estudio define la pasarela). Hoy, para contratar un plan, el asistente deriva a recepción; recepción registra el pago y el sistema confirma por correo.
 - Lista de espera, congelamiento de planes (hoy se hace a mano), múltiples sedes o salas, app móvil propia y reportes de asistencia.
 - **Migración desde BoxMagic.** Se pueden importar alumnos y planes vigentes desde una exportación en CSV.
 

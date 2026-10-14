@@ -76,7 +76,7 @@ h1{font-size:24px;margin:0 0 6px;font-weight:700}
     <p class="lead">Elige un escenario y avanza con las respuestas sugeridas en el chat. Es una demo guionada para mostrar el flujo: en el sitio real el asistente responde con IA a cualquier consulta, usando solo la información de Kind Force Pilates.</p>
     <div class="scen" id="scen"></div>
     <div class="card">
-      <h2>Lo que recibe recepción por WhatsApp</h2>
+      <h2 id="leadh">Lo que recibe recepción por WhatsApp</h2>
       <div class="wa empty" id="lead">Aparece al final de la conversación, cuando el visitante acepta compartir sus datos.</div>
     </div>
     <p class="note">Los datos de las conversaciones de ejemplo (nombres, empresas, correos) son ficticios.</p>
@@ -88,41 +88,47 @@ var WELCOME="¡Hola! 👋 Soy el asistente de Kind Force Pilates. ¿Quieres agen
 var SCENARIOS=[
  {
   "id": "a",
-  "title": "Llega desde un anuncio, nunca ha hecho pilates",
-  "sub": "La guía a su clase de prueba gratuita",
+  "title": "Llega desde un anuncio y agenda sola",
+  "sub": "El asistente agenda la clase de prueba gratuita, sin pasar por recepción",
   "steps": [
    {
     "u": "Hola, vi su anuncio. Nunca he hecho pilates, ¿cómo parto?",
-    "b": "¡Qué bueno que te animes! 🙌 Partir de cero es lo más normal acá.\nPara recomendarte algo que te acomode: ¿qué te gustaría lograr (postura, fuerza, flexibilidad, aliviar molestias) y cuántas veces por semana podrías venir?"
+    "b": "¡Qué bueno que te animes! 🙌 Lo ideal es partir con nuestra **clase de prueba gratuita**: conoces el estudio y el método sin compromiso.\n¿Qué días u horarios te acomodan?"
    },
    {
-    "u": "Más que nada postura, trabajo en oficina. No sé si pueda venir todas las semanas.",
-    "b": "Entiendo, la postura es de lo que más se trabaja en pilates.\nLo ideal para partir es nuestra **clase de prueba gratuita**: conoces el estudio y el método sin compromiso. Después, si no puedes venir todas las semanas, hay opciones flexibles.\n¿Te gustaría que recepción te contacte para agendarla? Necesito tu nombre, teléfono y tu autorización para compartirlos con el estudio."
+    "u": "Tardes, idealmente jueves.",
+    "b": "Tengo estos horarios con cupo:\n• **Jueves 16/10 · 18:00** (3 cupos)\n• **Jueves 16/10 · 19:00** (5 cupos)\n• **Viernes 17/10 · 18:00** (6 cupos)\n¿Cuál te acomoda?"
    },
    {
-    "u": "Sí, dale. Soy Camila Soto, +56 9 8765 4321. Prefiero en la tarde.",
-    "b": "¡Listo, Camila! Le dejé tu consulta a recepción; te escribirán por WhatsApp para coordinar el día y la hora de tu clase de prueba. 🤍",
-    "lead": "Nueva consulta desde el asistente de Kind Force Pilates\nPerfil: Nuevo alumno\nNombre: Camila Soto\nContacto: +56 9 8765 4321\nNecesidad: Empezar pilates para mejorar postura (trabajo de oficina); sin experiencia\nPlanes de interés: Clase de prueba gratuita\nDisponibilidad y frecuencia: Tardes; no todas las semanas\nSiguiente paso sugerido: Agendar clase de prueba gratuita"
+    "u": "Jueves a las 19:00.",
+    "b": "¡Perfecto! Para agendarla necesito tu **nombre, correo y teléfono**, y tu autorización para registrar tus datos."
+   },
+   {
+    "u": "Camila Soto, camila.soto@mail.cl, +56 9 8765 4321. Acepto.",
+    "b": "¡Listo, Camila! 🤍 Tu clase de prueba quedó agendada para el **jueves 16/10 a las 19:00**. Te envié la confirmación a camila.soto@mail.cl.\nLlega 10 minutos antes; si necesitas cambiarla, lo haces desde tu perfil hasta 12 horas antes.",
+    "lead": "Nueva clase de prueba agendada\nPersona: Camila Soto\nCorreo: camila.soto@mail.cl\nTeléfono: +56 9 8765 4321\nClase: Pilates Interval Fusion\nDía y hora: Jueves 16/10 · 19:00\nBusca: Primera vez; tardes\n\n→ Ya está en la Agenda y en el panel de consultas. Camila recibió su confirmación por correo."
    }
-  ]
+  ],
+  "auto": true,
+  "leadTitle": "Lo que recibe el estudio (correo automático)"
  },
  {
   "id": "p",
-  "title": "Pregunta por los planes",
-  "sub": "Recomienda según cuántas veces por semana puede venir",
+  "title": "Pregunta por los planes y quiere inscribirse",
+  "sub": "Recomienda el plan y pasa el pago a recepción (hasta tener pago en línea)",
   "steps": [
    {
     "u": "Hola, ¿qué planes tienen?",
     "b": "¡Hola! Nuestra clase es **Pilates Interval Fusion** (50 min). Los planes mensuales son:\n• **8 sesiones**: $60.000\n• **12 sesiones**: $80.000\n• **16 sesiones**: $100.000\nY si pagas 90, 180 o 365 días tienes 10%, 20% o 30% de descuento.\n¿Cuántas veces por semana te gustaría venir?"
    },
    {
-    "u": "Unas 3 veces. Pero nunca he venido.",
-    "b": "Entonces te calza el de **12 sesiones**. Como es tu primera vez, te recomiendo partir con nuestra **clase de prueba gratuita** y después eliges con calma.\n¿Te contacta recepción para agendarla? Necesito tu nombre, teléfono y tu autorización para compartirlos."
+    "u": "Unas 3 veces. Ya hice la clase de prueba, quiero inscribirme.",
+    "b": "¡Qué bueno! Entonces te calza el de **12 sesiones** ($80.000 al mes).\nPara inscribirte y pagar te conecto con recepción. ¿Me dejas tu nombre y teléfono, y me autorizas a compartirlos con el estudio?"
    },
    {
     "u": "Sí, acepto. Daniela Muñoz, +56 9 4444 3333. Mañanas.",
-    "b": "¡Listo, Daniela! Recepción te escribirá por WhatsApp para coordinar tu clase de prueba. 🤍",
-    "lead": "Nueva consulta desde el asistente de Kind Force Pilates\nPerfil: Nuevo alumno\nNombre: Daniela Muñoz\nContacto: +56 9 4444 3333\nNecesidad: Entrenar 3 veces por semana; primera vez en el estudio\nPlanes de interés: Clase de prueba gratuita, Plan mensual 12 sesiones\nDisponibilidad y frecuencia: Mañanas, 3 veces por semana\nSiguiente paso sugerido: Agendar clase de prueba gratuita"
+    "b": "¡Listo, Daniela! Recepción te escribirá por WhatsApp para activar tu plan y coordinar el pago. 🤍",
+    "lead": "Nueva consulta desde el asistente de Kind Force Pilates\nPerfil: Nuevo alumno\nNombre: Daniela Muñoz\nContacto: +56 9 4444 3333\nNecesidad: Inscribirse; 3 veces por semana (ya hizo la clase de prueba)\nPlanes de interés: Plan mensual 12 sesiones\nDisponibilidad y frecuencia: Mañanas, 3 veces por semana\nSiguiente paso sugerido: Activar plan y coordinar pago"
    }
   ]
  },
@@ -160,17 +166,16 @@ var SCENARIOS=[
  },
  {
   "id": "c",
-  "title": "Pregunta lo que el asistente no sabe",
-  "sub": "No inventa horarios ni cupos",
+  "title": "Alumna pregunta por cupos de mañana",
+  "sub": "Responde con los cupos reales y la manda a su perfil",
   "steps": [
    {
-    "u": "¿Tienen cupo mañana a las 7 de la mañana?",
-    "b": "Los cupos del día no los veo desde aquí: se manejan en BoxMagic y con recepción. Si ya eres alumna/o, puedes revisarlo directo en BoxMagic.\nSi quieres, le pido a recepción que te confirme. ¿Me dejas tu nombre y teléfono y me autorizas a compartirlos?"
+    "u": "Hola, ya soy alumna. ¿Hay cupo mañana a las 7?",
+    "b": "¡Hola! Sí: mañana **jueves a las 07:00** quedan **3 cupos** en Pilates Interval Fusion.\nComo ya eres alumna, puedes reservarlo tú misma en tu perfil (kindforcepilates.com/mi-perfil). ¿Te ayudo con algo más?"
    },
    {
-    "u": "Ya soy alumna. Ok: Francisca, +56 9 1111 2222.",
-    "b": "¡Gracias, Francisca! Recepción te confirmará el cupo por WhatsApp.",
-    "lead": "Nueva consulta desde el asistente de Kind Force Pilates\nPerfil: Alumno actual\nNombre: Francisca\nContacto: +56 9 1111 2222\nNecesidad: Confirmar cupo mañana 7:00\nSiguiente paso sugerido: Confirmar cupo en BoxMagic"
+    "u": "Perfecto, gracias.",
+    "b": "¡De nada! Que tengas una linda clase 🤍"
    }
   ]
  }
@@ -188,8 +193,8 @@ var note=el('p','cpnnet-chat__note','Asistente con IA. No compartas contraseñas
 function bubble(role,text,wa){var b=el('div','cpnnet-chat__msg cpnnet-chat__msg--'+role);rich(b,text);if(wa){var a=el('a','cpnnet-chat__wa','Continuar por WhatsApp con recepción');a.href='#lead';b.appendChild(document.createElement('br'));b.appendChild(a)}log.appendChild(b);log.scrollTop=log.scrollHeight;return b}
 function showChips(){chips.textContent='';var s=cur&&cur.steps[step];if(!s){chips.hidden=true;return}chips.hidden=false;var c=el('button','cpnnet-chat__chip',s.u);c.type='button';c.onclick=function(){play(s)};chips.appendChild(c)}
 function play(s){if(busy)return;busy=true;chips.hidden=true;bubble('user',s.u);var t=bubble('assistant','Escribiendo…');t.classList.add('cpnnet-chat__msg--typing');
- setTimeout(function(){t.remove();bubble('assistant',s.b,!!s.lead);if(s.lead){var L=document.getElementById('lead');L.className='wa';L.textContent=s.lead}step++;busy=false;showChips()},1100)}
-function start(i){cur=SCENARIOS[i];step=0;busy=false;hinted=false;log.textContent='';bubble('assistant',WELCOME);var L=document.getElementById('lead');L.className='wa empty';L.textContent='Aparece al final de la conversación, cuando el visitante acepta compartir sus datos.';
+ setTimeout(function(){t.remove();bubble('assistant',s.b,!!s.lead&&!cur.auto);if(s.lead){var L=document.getElementById('lead');L.className='wa';L.textContent=s.lead}step++;busy=false;showChips()},1100)}
+function start(i){cur=SCENARIOS[i];var H=document.getElementById('leadh');if(H){H.dataset.def=H.dataset.def||H.textContent;H.textContent=cur.leadTitle||H.dataset.def;}step=0;busy=false;hinted=false;log.textContent='';bubble('assistant',WELCOME);var L=document.getElementById('lead');L.className='wa empty';L.textContent='Aparece al final de la conversación, cuando el visitante acepta compartir sus datos.';
  [].forEach.call(document.querySelectorAll('#scen button'),function(b,j){b.classList.toggle('on',j===i)});showChips()}
 form.addEventListener('submit',function(e){e.preventDefault();var v=inp.value.trim();if(!v)return;inp.value='';bubble('user',v);if(!hinted){hinted=true;setTimeout(function(){bubble('assistant','En esta demo guionada elige una de las respuestas sugeridas. En el sitio real respondo con IA a cualquier consulta.')},500)}});
 inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();form.requestSubmit()}});
