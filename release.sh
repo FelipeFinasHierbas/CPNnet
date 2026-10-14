@@ -14,7 +14,12 @@ cp "$ROOT/dist/cpnnet-asistente.zip" "$ROOT/releases/cpnnet-asistente-$VER.zip"
 cp "$ROOT/dist/asistente-demo.zip" "$ROOT/releases/asistente-demo.zip"
 # Variante The Forest (misma base de código con otra marca y otro conocimiento)
 VARIANT=the-forest "$ROOT/wordpress-plugin/build.sh" >/dev/null
-python3 "$ROOT/demo/build_forest.py"
+python3 "$ROOT/demo/build_variant.py" the-forest
 cp "$ROOT/dist/forest-asistente.zip" "$ROOT/releases/forest-asistente-$VER.zip"
 cp "$ROOT/demo/forest-chat.html" "$ROOT/releases/forest-demo-chat.html"
+# Variante Studio Pilates (rubro bienestar)
+VARIANT=pilates "$ROOT/wordpress-plugin/build.sh" >/dev/null
+python3 "$ROOT/demo/build_variant.py" pilates
+cp "$ROOT/dist/pilates-asistente.zip" "$ROOT/releases/pilates-asistente-$VER.zip"
+cp "$ROOT/demo/pilates-chat.html" "$ROOT/releases/pilates-demo-chat.html"
 ls -lh "$ROOT/releases"

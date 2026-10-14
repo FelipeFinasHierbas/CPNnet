@@ -89,18 +89,21 @@ function cpnnet_asistente_clean_messages($raw): array
 function cpnnet_asistente_lead_summary(array $in): string
 {
     $line = static fn(string $label, $v): string => $label . ': ' . (is_array($v) ? implode(', ', $v) : (string) $v);
-    return implode("\n", [
+    $prof = cpnnet_asistente_profiles();
+    $lines = [
         cpnnet_asistente_brand_get('lead_title'),
-        $line('Perfil', $in['perfil'] ?? ''),
+        $line('Perfil', $prof[$in['perfil'] ?? ''] ?? ($in['perfil'] ?? '')),
         $line('Nombre', $in['nombre'] ?? ''),
         $line('Empresa', $in['empresa'] ?? ''),
         $line('País', $in['pais'] ?? ''),
         $line('Contacto', $in['contacto'] ?? ''),
         $line('Necesidad', $in['necesidad'] ?? ''),
         $line(ucfirst(cpnnet_asistente_brand_get('items')) . ' de interés', $in['marcas_interes'] ?? []),
-        $line('Dimensionamiento', $in['dimensionamiento'] ?? ''),
+        $line(cpnnet_asistente_brand_get('sizing_label'), $in['dimensionamiento'] ?? ''),
         $line('Siguiente paso sugerido', $in['siguiente_paso'] ?? ''),
-    ]);
+    ];
+    // las líneas sin dato no se envían (p. ej. «Empresa» en un rubro de personas)
+    return implode("\n", array_filter($lines, static fn(string $l, int $i): bool => $i === 0 || !preg_match('/: $/', $l), ARRAY_FILTER_USE_BOTH));
 }
 
 /**
@@ -192,7 +195,7 @@ function cpnnet_asistente_handle_chat(WP_REST_Request $req)
 
             if ($response->stopReason === 'refusal') {
                 cpnnet_asistente_usage_log($model, $usage, $conv_id);
-                return new WP_REST_Response(['reply' => 'No puedo ayudarte con esa consulta. ¿Quieres que te derive con un ejecutivo de ' . cpnnet_asistente_brand_get('short') . '?', 'whatsapp_url' => null]);
+                return new WP_REST_Response(['reply' => 'No puedo ayudarte con esa consulta. ¿Quieres que te derive con ' . cpnnet_asistente_brand_get('handoff_to') . '?', 'whatsapp_url' => null]);
             }
             if ($response->stopReason !== 'tool_use') {
                 break;

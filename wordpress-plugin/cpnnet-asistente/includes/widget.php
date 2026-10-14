@@ -17,6 +17,7 @@ add_action('wp_enqueue_scripts', function () {
         'logo'     => esc_url_raw(cpnnet_asistente_logo_url(true)),
         'name'     => cpnnet_asistente_brand_get('name'),
         'short'    => cpnnet_asistente_brand_get('short'),
+        'waLabel'  => cpnnet_asistente_brand_get('wa_label'),
         'chips'    => array_values((array) cpnnet_asistente_brand_get('chips')),
         'testMode' => $test_mode,
         // En modo de prueba la llamada va autenticada (cookie + nonce de REST) para que el servidor sepa que es un administrador.

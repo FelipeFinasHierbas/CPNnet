@@ -1,0 +1,6 @@
+{
+  "slug": "pilates-asistente",
+  "plugin_name": "Asistente Studio Pilates",
+  "description": "Asistente con IA (Claude) para un estudio de pilates: informa planes, guía a la primera clase y deriva a la recepción por WhatsApp.",
+  "author": "The Forest Software Lab"
+}

@@ -107,7 +107,7 @@
     var b = el('div', 'cpnnet-chat__msg cpnnet-chat__msg--' + role);
     renderText(b, text);
     if (waUrl) {
-      var a = el('a', 'cpnnet-chat__wa', 'Continuar por WhatsApp con un ejecutivo');
+      var a = el('a', 'cpnnet-chat__wa', cfg.waLabel || 'Continuar por WhatsApp con un ejecutivo');
       a.href = waUrl; a.target = '_blank'; a.rel = 'noopener noreferrer';
       b.appendChild(document.createElement('br'));
       b.appendChild(a);

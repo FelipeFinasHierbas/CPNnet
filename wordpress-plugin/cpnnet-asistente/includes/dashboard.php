@@ -194,7 +194,7 @@ function cpnnet_asistente_leads_table_html(array $rows): string
         $crm = $r['exported_at'] ? '<span class="cpn-pill cpn-pill-ok">Exportado</span>' : '<span class="cpn-pill">Pendiente</span>';
         $h .= '<tr><td>' . esc_html(cpnnet_asistente_local($r['created_at'])) . '</td>'
             . '<td><a href="' . esc_url($url) . '"><strong>' . esc_html($r['nombre'] ?: 'Sin nombre') . '</strong></a><br><span class="cpn-sub">' . esc_html($r['empresa']) . '</span></td>'
-            . '<td>' . esc_html(ucfirst($r['perfil'])) . '</td><td>' . esc_html($marcas ?: '—') . '</td><td>' . esc_html($r['pais'] ?: '—') . '</td>'
+            . '<td>' . esc_html(cpnnet_asistente_profiles()[$r['perfil']] ?? ucfirst($r['perfil'])) . '</td><td>' . esc_html($marcas ?: '—') . '</td><td>' . esc_html($r['pais'] ?: '—') . '</td>'
             . '<td>' . cpnnet_asistente_status_pill($r['status']) . '</td><td>' . $crm . '</td></tr>';
     }
     return $h . '</tbody></table>';
@@ -234,7 +234,7 @@ function cpnnet_asistente_page_panel(): void
     echo '<section class="cpn-card"><h3>Estado de los leads</h3>' . cpnnet_asistente_hbars($est) . '</section>';
     echo '<section class="cpn-card"><h3>' . esc_html(ucfirst(cpnnet_asistente_brand_get('items'))) . ' más consultad' . (cpnnet_asistente_brand_get('item') === 'marca' ? 'as' : 'os') . '</h3>' . cpnnet_asistente_hbars($s['marcas']) . '</section>';
     $perfil = [];
-    foreach ($s['perfil'] as $k => $v) { $perfil[ucfirst($k)] = $v; }
+    foreach ($s['perfil'] as $k => $v) { $perfil[cpnnet_asistente_profiles()[$k] ?? ucfirst($k)] = $v; }
     echo '<section class="cpn-card"><h3>Perfil y país</h3>' . cpnnet_asistente_hbars($perfil) . '<h4>Países</h4>' . cpnnet_asistente_hbars($s['paises']) . '</section>';
     echo '</div>';
     echo '<section class="cpn-card"><div class="cpn-card-head"><h3>Últimos leads</h3><a class="button" href="' . esc_url(cpnnet_asistente_leads_url()) . '">Ver todos</a></div>' . cpnnet_asistente_leads_table_html($s['recent']) . '</section>';
@@ -269,7 +269,7 @@ function cpnnet_asistente_page_leads(): void
     echo '<select name="status"><option value="">Todos los estados</option>';
     foreach (CPNNET_ASISTENTE_STATUSES as $k => $l) { echo '<option value="' . esc_attr($k) . '"' . selected($f['status'], $k, false) . '>' . esc_html($l) . '</option>'; }
     echo '</select><select name="perfil"><option value="">Todos los perfiles</option>';
-    foreach (['partner' => 'Partner', 'empresa' => 'Empresa', 'desconocido' => 'Desconocido'] as $k => $l) { echo '<option value="' . esc_attr($k) . '"' . selected($f['perfil'], $k, false) . '>' . esc_html($l) . '</option>'; }
+    foreach (cpnnet_asistente_profiles() as $k => $l) { echo '<option value="' . esc_attr($k) . '"' . selected($f['perfil'], $k, false) . '>' . esc_html($l) . '</option>'; }
     echo '</select><label>Desde <input type="date" name="from" value="' . esc_attr($f['from']) . '"></label><label>Hasta <input type="date" name="to" value="' . esc_attr($f['to']) . '"></label>';
     echo '<button class="button button-primary">Filtrar</button>';
     $csv = wp_nonce_url(add_query_arg(array_merge(['action' => 'cpnnet_asistente_leads_csv'], $keep), admin_url('admin-post.php')), 'cpnnet_asistente_csv');
@@ -303,13 +303,13 @@ function cpnnet_asistente_page_lead(int $id): void
     }
     $row = static fn(string $l, string $v): string => '<div class="cpn-field"><span>' . esc_html($l) . '</span><div>' . $v . '</div></div>';
     echo '<div class="cpn-grid cpn-grid-2"><section class="cpn-card"><h3>Datos del lead</h3><div class="cpn-fields">'
-        . $row('Perfil', esc_html(ucfirst($r['perfil'])))
+        . $row('Perfil', esc_html(cpnnet_asistente_profiles()[$r['perfil']] ?? ucfirst($r['perfil'])))
         . $row('Contacto', $contact)
         . $row('Empresa', esc_html($r['empresa'] ?: '—'))
         . $row('País', esc_html($r['pais'] ?: '—'))
         . $row(ucfirst(cpnnet_asistente_brand_get('items')) . ' de interés', esc_html($marcas ?: '—'))
         . $row('Necesidad', nl2br(esc_html((string) $r['necesidad'] ?: '—')))
-        . $row('Dimensionamiento', nl2br(esc_html((string) $r['dimensionamiento'] ?: '—')))
+        . $row(cpnnet_asistente_brand_get('sizing_label'), nl2br(esc_html((string) $r['dimensionamiento'] ?: '—')))
         . $row('Siguiente paso sugerido', nl2br(esc_html((string) $r['siguiente_paso'] ?: '—')))
         . $row('Página de origen', esc_html($r['pagina'] ?: '—'))
         . $row('Fecha', esc_html(cpnnet_asistente_local($r['created_at'])))

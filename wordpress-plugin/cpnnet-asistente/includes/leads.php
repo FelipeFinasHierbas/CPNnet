@@ -153,7 +153,7 @@ function cpnnet_asistente_leads_query(array $f = [], int $limit = 20, int $offse
         $where[] = 'status = %s';
         $args[]  = $f['status'];
     }
-    if (!empty($f['perfil']) && in_array($f['perfil'], ['partner', 'empresa', 'desconocido'], true)) {
+    if (!empty($f['perfil']) && array_key_exists($f['perfil'], cpnnet_asistente_profiles())) {
         $where[] = 'perfil = %s';
         $args[]  = $f['perfil'];
     }

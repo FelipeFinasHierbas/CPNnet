@@ -1,0 +1,54 @@
+[
+ {
+  "id": "a",
+  "title": "Llega desde un anuncio, nunca ha hecho pilates",
+  "sub": "La guía a su primera clase y ofrece el plan de 4 clases",
+  "steps": [
+   {
+    "u": "Hola, vi su anuncio. Nunca he hecho pilates, ¿cómo parto?",
+    "b": "¡Qué bueno que te animes! 🙌 Partir de cero es lo más normal acá.\nPara recomendarte algo que te acomode: ¿qué te gustaría lograr (postura, fuerza, flexibilidad, aliviar molestias) y cuántas veces por semana podrías venir?"
+   },
+   {
+    "u": "Más que nada postura, trabajo en oficina. No sé si pueda venir todas las semanas.",
+    "b": "Entiendo, la postura es de lo que más se trabaja en pilates.\nSi prefieres partir sin comprometerte a un plan mensual, tenemos un **plan de 4 clases por $40.000**: te sirve para conocer el método a tu ritmo.\n¿Te gustaría que recepción te contacte para agendar tu primera clase? Necesito tu nombre, teléfono y tu autorización para compartirlos con el estudio."
+   },
+   {
+    "u": "Sí, dale. Soy Camila Soto, +56 9 8765 4321. Prefiero en la tarde.",
+    "b": "¡Listo, Camila! Le dejé tu consulta a recepción; te escribirán por WhatsApp para coordinar día, hora y pago. 💪",
+    "lead": "Nueva consulta desde el asistente de Studio Pilates\nPerfil: Nuevo alumno\nNombre: Camila Soto\nContacto: +56 9 8765 4321\nNecesidad: Empezar pilates para mejorar postura (trabajo de oficina); sin experiencia\nPlanes de interés: Plan 4 clases\nDisponibilidad y frecuencia: Tardes; no todas las semanas\nSiguiente paso sugerido: Agendar primera clase"
+   }
+  ]
+ },
+ {
+  "id": "b",
+  "title": "Consulta con dolor de espalda",
+  "sub": "No da consejos médicos y deriva con cuidado",
+  "steps": [
+   {
+    "u": "Tengo una hernia lumbar, ¿el pilates me sirve?",
+    "b": "Gracias por contarme. No puedo darte una indicación médica: lo mejor es que lo converses con tu médico o kinesiólogo antes de partir.\nSi te dan el visto bueno, avisa al estudio para que adapten la clase. ¿Quieres que recepción te contacte para conversarlo?"
+   },
+   {
+    "u": "Sí, por favor. Rodrigo, rodrigo@mail.cl. Acepto que compartan mis datos.",
+    "b": "Perfecto, Rodrigo. Recepción te escribirá para ver tu caso con calma. 🙏",
+    "lead": "Nueva consulta desde el asistente de Studio Pilates\nPerfil: Nuevo alumno\nNombre: Rodrigo\nContacto: rodrigo@mail.cl\nNecesidad: Hernia lumbar; quiere saber si puede hacer pilates (se le recomendó consultar a su médico)\nSiguiente paso sugerido: Conversar con recepción antes de agendar"
+   }
+  ]
+ },
+ {
+  "id": "c",
+  "title": "Pregunta lo que el asistente no sabe",
+  "sub": "No inventa horarios ni cupos",
+  "steps": [
+   {
+    "u": "¿Tienen cupo mañana a las 7 de la mañana?",
+    "b": "Los cupos del día no los veo desde aquí: se manejan en BoxMagic y con recepción. Si ya eres alumna/o, puedes revisarlo directo en BoxMagic.\nSi quieres, le pido a recepción que te confirme. ¿Me dejas tu nombre y teléfono y me autorizas a compartirlos?"
+   },
+   {
+    "u": "Ya soy alumna. Ok: Francisca, +56 9 1111 2222.",
+    "b": "¡Gracias, Francisca! Recepción te confirmará el cupo por WhatsApp.",
+    "lead": "Nueva consulta desde el asistente de Studio Pilates\nPerfil: Alumno actual\nNombre: Francisca\nContacto: +56 9 1111 2222\nNecesidad: Confirmar cupo mañana 7:00\nSiguiente paso sugerido: Confirmar cupo en BoxMagic"
+   }
+  ]
+ }
+]

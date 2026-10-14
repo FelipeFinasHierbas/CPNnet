@@ -27,13 +27,13 @@ function cpnnet_asistente_tools(): array
 {
     return [[
         'name'        => 'derivar_a_ejecutivo',
-        'description' => 'Deriva al visitante a un ejecutivo de ' . cpnnet_asistente_brand_get('short') . ' por WhatsApp con un resumen de su consulta. '
-            . 'Úsala solo cuando el visitante quiera avanzar (cotización, demo, reunión o hablar con alguien) '
+        'description' => 'Deriva al visitante a ' . cpnnet_asistente_brand_get('handoff_to') . ' por WhatsApp con un resumen de su consulta. '
+            . 'Úsala solo cuando el visitante quiera avanzar (' . cpnnet_asistente_brand_get('handoff_when') . ') '
             . 'y haya dado su consentimiento explícito para compartir sus datos con el equipo comercial.',
         'inputSchema' => [
             'type'       => 'object',
             'properties' => [
-                'perfil'           => ['type' => 'string', 'enum' => ['partner', 'empresa', 'desconocido']],
+                'perfil'           => ['type' => 'string', 'enum' => array_keys(cpnnet_asistente_profiles())],
                 'nombre'           => ['type' => 'string', 'description' => 'Nombre del visitante'],
                 'empresa'          => ['type' => 'string'],
                 'pais'             => ['type' => 'string'],

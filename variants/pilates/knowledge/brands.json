@@ -1,0 +1,79 @@
+{
+ "_meta": {
+  "source": "Información entregada por el estudio (chat del 14-10-2026). Los planes publicados están en la historia destacada «Planes» de Instagram y aún no se cargan aquí.",
+  "language": "es",
+  "notes": "Fuente única de verdad del bot. Precios en pesos chilenos (CLP). Lo marcado «por confirmar» no se inventa: el bot deriva a recepción."
+ },
+ "domains": [
+  {
+   "id": "estudio",
+   "name": "Studio Pilates",
+   "layer": "Planes",
+   "description": "Planes y clases del estudio."
+  }
+ ],
+ "categories": [
+  {
+   "id": "planes",
+   "domain": "estudio",
+   "name": "Planes",
+   "first_order": [
+    "plan-4-clases",
+    "planes-publicados"
+   ],
+   "cross_sell": []
+  }
+ ],
+ "brands": [
+  {
+   "id": "plan-4-clases",
+   "name": "Plan 4 clases",
+   "tier": "primer_orden",
+   "category": "planes",
+   "tagline": "4 clases por $40.000 (CLP).",
+   "summary": "Plan de 4 clases a $40.000. NO se publica en Instagram: ofrécelo solo cuando la persona quiera empezar con pocas clases, probar el método o cuando el precio de los planes publicados sea una barrera. Vigencia, horarios y tipo de clase: por confirmar con el estudio.",
+   "ideal_for": [
+    "personas que quieren probar",
+    "quienes pueden venir pocas veces al mes"
+   ],
+   "problems": [
+    "No saber si el pilates le va a gustar",
+    "No poder comprometerse con un plan mensual"
+   ],
+   "differentiators": [
+    "Entrada de bajo compromiso al estudio"
+   ],
+   "sizing": "Precio: $40.000 por 4 clases. Vigencia: Por confirmar con el estudio.",
+   "entry_point": "Reservar la primera clase con recepción (o por BoxMagic cuando la persona ya tenga cuenta).",
+   "qualifying_questions": [
+    "¿Has hecho pilates antes?",
+    "¿Cuántas veces por semana te gustaría venir y en qué horario?",
+    "¿Qué te gustaría lograr: postura, fuerza, flexibilidad, aliviar molestias?"
+   ]
+  },
+  {
+   "id": "planes-publicados",
+   "name": "Planes publicados (historia destacada «Planes»)",
+   "tier": "primer_orden",
+   "category": "planes",
+   "tagline": "Planes regulares del estudio.",
+   "summary": "El estudio tiene planes definidos que publica en la historia destacada «Planes» de Instagram. Su detalle (nombres, clases incluidas, precios) aún no está cargado: Por confirmar con el estudio. Mientras tanto, invita a revisar la historia destacada o deriva a recepción para el detalle.",
+   "ideal_for": [
+    "alumnos regulares"
+   ],
+   "problems": [
+    "Querer venir de forma constante"
+   ],
+   "differentiators": [
+    "Planes definidos por el estudio"
+   ],
+   "sizing": "Por confirmar con el estudio.",
+   "entry_point": "Revisar la historia destacada «Planes» o hablar con recepción.",
+   "qualifying_questions": [
+    "¿Has hecho pilates antes?",
+    "¿Cuántas veces por semana te gustaría venir y en qué horario?",
+    "¿Qué te gustaría lograr: postura, fuerza, flexibilidad, aliviar molestias?"
+   ]
+  }
+ ]
+}

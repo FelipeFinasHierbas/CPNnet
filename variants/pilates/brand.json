@@ -1,0 +1,35 @@
+{
+ "name": "Studio Pilates",
+ "short": "Studio Pilates",
+ "site": "",
+ "lead_title": "Nueva consulta desde el asistente de Studio Pilates",
+ "menu": "Asistente Pilates",
+ "role_label": "Recepción Studio Pilates",
+ "crm_label": "sistema de reservas",
+ "item": "plan",
+ "items": "planes",
+ "welcome": "¡Hola! 👋 Soy el asistente de Studio Pilates. ¿Quieres conocer nuestros planes, agendar una clase o tienes alguna duda?",
+ "chips": [
+  "Quiero conocer los planes",
+  "Nunca he hecho pilates",
+  "Ya soy alumna/o"
+ ],
+ "profiles": {
+  "nuevo": "Nuevo alumno",
+  "alumno": "Alumno actual"
+ },
+ "handoff_to": "la recepción de Studio Pilates",
+ "handoff_when": "inscribirse en un plan, reservar una clase, pagar o hablar con alguien del estudio",
+ "sizing_label": "Disponibilidad y frecuencia",
+ "colors": {
+  "primary": "#a2574f",
+  "dark": "#5e2f2a",
+  "accent": "#e0a387",
+  "tint": "#f2d5c8",
+  "bg": "#faf5f2"
+ },
+ "logo": "pilates-logo.png",
+ "logo_white": "pilates-logo-white.png",
+ "wa_label": "Continuar por WhatsApp con recepción",
+ "inbox_label": "recepción"
+}
