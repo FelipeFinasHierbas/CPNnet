@@ -22,14 +22,14 @@
  "handoff_when": "agendar la clase de prueba gratuita, inscribirse en un plan, reservar una clase, pagar o hablar con alguien del estudio",
  "sizing_label": "Disponibilidad y frecuencia",
  "colors": {
-  "primary": "#6b625a",
-  "dark": "#3b3632",
-  "accent": "#cbb79c",
-  "tint": "#ece4d8",
-  "bg": "#f6f2ec",
-  "ink": "#2e2a27",
-  "mut": "#7a7169",
-  "line": "#e5ddd2"
+  "primary": "#6c4bb4",
+  "dark": "#2b2b30",
+  "accent": "#a78bdb",
+  "tint": "#efeaf8",
+  "bg": "#f6f5f8",
+  "ink": "#26262b",
+  "mut": "#6e6c75",
+  "line": "#e6e3ec"
  },
  "logo": "pilates-logo.png",
  "logo_white": "pilates-logo-white.png",
