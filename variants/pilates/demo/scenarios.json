@@ -2,7 +2,7 @@
  {
   "id": "a",
   "title": "Llega desde un anuncio, nunca ha hecho pilates",
-  "sub": "La guía a su primera clase y ofrece el plan de 4 clases",
+  "sub": "La guía a su clase de prueba gratuita",
   "steps": [
    {
     "u": "Hola, vi su anuncio. Nunca he hecho pilates, ¿cómo parto?",
@@ -10,12 +10,28 @@
    },
    {
     "u": "Más que nada postura, trabajo en oficina. No sé si pueda venir todas las semanas.",
-    "b": "Entiendo, la postura es de lo que más se trabaja en pilates.\nSi prefieres partir sin comprometerte a un plan mensual, tenemos un **plan de 4 clases por $40.000**: te sirve para conocer el método a tu ritmo.\n¿Te gustaría que recepción te contacte para agendar tu primera clase? Necesito tu nombre, teléfono y tu autorización para compartirlos con el estudio."
+    "b": "Entiendo, la postura es de lo que más se trabaja en pilates.\nLo ideal para partir es nuestra **clase de prueba gratuita**: conoces el estudio y el método sin compromiso. Después, si no puedes venir todas las semanas, hay opciones flexibles.\n¿Te gustaría que recepción te contacte para agendarla? Necesito tu nombre, teléfono y tu autorización para compartirlos con el estudio."
    },
    {
     "u": "Sí, dale. Soy Camila Soto, +56 9 8765 4321. Prefiero en la tarde.",
-    "b": "¡Listo, Camila! Le dejé tu consulta a recepción; te escribirán por WhatsApp para coordinar día, hora y pago. 💪",
-    "lead": "Nueva consulta desde el asistente de Studio Pilates\nPerfil: Nuevo alumno\nNombre: Camila Soto\nContacto: +56 9 8765 4321\nNecesidad: Empezar pilates para mejorar postura (trabajo de oficina); sin experiencia\nPlanes de interés: Plan 4 clases\nDisponibilidad y frecuencia: Tardes; no todas las semanas\nSiguiente paso sugerido: Agendar primera clase"
+    "b": "¡Listo, Camila! Le dejé tu consulta a recepción; te escribirán por WhatsApp para coordinar el día y la hora de tu clase de prueba. 💪",
+    "lead": "Nueva consulta desde el asistente de Kindforce Pilates\nPerfil: Nuevo alumno\nNombre: Camila Soto\nContacto: +56 9 8765 4321\nNecesidad: Empezar pilates para mejorar postura (trabajo de oficina); sin experiencia\nPlanes de interés: Clase de prueba gratuita\nDisponibilidad y frecuencia: Tardes; no todas las semanas\nSiguiente paso sugerido: Agendar clase de prueba gratuita"
+   }
+  ]
+ },
+ {
+  "id": "d",
+  "title": "Ya hizo la clase de prueba",
+  "sub": "Ofrece el plan de 4 clases (no publicado) cuando calza",
+  "steps": [
+   {
+    "u": "Hice la clase de prueba y me encantó, pero no puedo ir todas las semanas. ¿Qué me recomiendas?",
+    "b": "¡Qué bueno que te gustó! 😊 Si no puedes venir de forma fija, tenemos un **plan de 4 clases por $40.000**: lo usas a tu ritmo, sin plan mensual.\n¿Quieres que recepción te contacte para activarlo? Necesito tu nombre, teléfono y tu autorización para compartirlos."
+   },
+   {
+    "u": "Sí. Valentina Ríos, +56 9 5555 0000. Acepto.",
+    "b": "¡Gracias, Valentina! Recepción te escribirá por WhatsApp para activar tu plan y coordinar el pago.",
+    "lead": "Nueva consulta desde el asistente de Kindforce Pilates\nPerfil: Nuevo alumno\nNombre: Valentina Ríos\nContacto: +56 9 5555 0000\nNecesidad: Seguir después de la clase de prueba sin plan mensual\nPlanes de interés: Plan 4 clases\nDisponibilidad y frecuencia: No todas las semanas\nSiguiente paso sugerido: Activar plan 4 clases"
    }
   ]
  },
@@ -31,7 +47,7 @@
    {
     "u": "Sí, por favor. Rodrigo, rodrigo@mail.cl. Acepto que compartan mis datos.",
     "b": "Perfecto, Rodrigo. Recepción te escribirá para ver tu caso con calma. 🙏",
-    "lead": "Nueva consulta desde el asistente de Studio Pilates\nPerfil: Nuevo alumno\nNombre: Rodrigo\nContacto: rodrigo@mail.cl\nNecesidad: Hernia lumbar; quiere saber si puede hacer pilates (se le recomendó consultar a su médico)\nSiguiente paso sugerido: Conversar con recepción antes de agendar"
+    "lead": "Nueva consulta desde el asistente de Kindforce Pilates\nPerfil: Nuevo alumno\nNombre: Rodrigo\nContacto: rodrigo@mail.cl\nNecesidad: Hernia lumbar; quiere saber si puede hacer pilates (se le recomendó consultar a su médico)\nSiguiente paso sugerido: Conversar con recepción antes de agendar"
    }
   ]
  },
@@ -47,7 +63,7 @@
    {
     "u": "Ya soy alumna. Ok: Francisca, +56 9 1111 2222.",
     "b": "¡Gracias, Francisca! Recepción te confirmará el cupo por WhatsApp.",
-    "lead": "Nueva consulta desde el asistente de Studio Pilates\nPerfil: Alumno actual\nNombre: Francisca\nContacto: +56 9 1111 2222\nNecesidad: Confirmar cupo mañana 7:00\nSiguiente paso sugerido: Confirmar cupo en BoxMagic"
+    "lead": "Nueva consulta desde el asistente de Kindforce Pilates\nPerfil: Alumno actual\nNombre: Francisca\nContacto: +56 9 1111 2222\nNecesidad: Confirmar cupo mañana 7:00\nSiguiente paso sugerido: Confirmar cupo en BoxMagic"
    }
   ]
  }

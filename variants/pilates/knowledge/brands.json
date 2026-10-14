@@ -7,7 +7,7 @@
  "domains": [
   {
    "id": "estudio",
-   "name": "Studio Pilates",
+   "name": "Kindforce Pilates",
    "layer": "Planes",
    "description": "Planes y clases del estudio."
   }
@@ -18,6 +18,7 @@
    "domain": "estudio",
    "name": "Planes",
    "first_order": [
+    "clase-de-prueba",
     "plan-4-clases",
     "planes-publicados"
    ],
@@ -26,12 +27,38 @@
  ],
  "brands": [
   {
+   "id": "clase-de-prueba",
+   "name": "Clase de prueba gratuita",
+   "tier": "primer_orden",
+   "category": "planes",
+   "tagline": "Primera clase de prueba sin costo.",
+   "summary": "Kindforce Pilates ofrece una clase de prueba GRATIS para personas nuevas. Es la forma recomendada de partir: conocer el estudio, el método y a las profesoras/es sin compromiso. Día, horario y cupos: los coordina recepción.",
+   "ideal_for": [
+    "personas que nunca han hecho pilates",
+    "quienes quieren conocer el estudio antes de elegir plan"
+   ],
+   "problems": [
+    "No saber si el pilates le va a gustar",
+    "Inseguridad de partir sin experiencia"
+   ],
+   "differentiators": [
+    "Sin costo y sin compromiso"
+   ],
+   "sizing": "Gratis. Una clase por persona nueva (condiciones adicionales: por confirmar con el estudio).",
+   "entry_point": "Agendar la clase de prueba con recepción.",
+   "qualifying_questions": [
+    "¿Has hecho pilates antes?",
+    "¿Cuántas veces por semana te gustaría venir y en qué horario?",
+    "¿Qué te gustaría lograr: postura, fuerza, flexibilidad, aliviar molestias?"
+   ]
+  },
+  {
    "id": "plan-4-clases",
    "name": "Plan 4 clases",
    "tier": "primer_orden",
    "category": "planes",
    "tagline": "4 clases por $40.000 (CLP).",
-   "summary": "Plan de 4 clases a $40.000. NO se publica en Instagram: ofrécelo solo cuando la persona quiera empezar con pocas clases, probar el método o cuando el precio de los planes publicados sea una barrera. Vigencia, horarios y tipo de clase: por confirmar con el estudio.",
+   "summary": "Plan de 4 clases a $40.000. NO se publica en Instagram: ofrécelo solo cuando la persona quiera seguir con pocas clases (por ejemplo después de la clase de prueba) o cuando el precio de los planes publicados sea una barrera. Vigencia, horarios y tipo de clase: por confirmar con el estudio.",
    "ideal_for": [
     "personas que quieren probar",
     "quienes pueden venir pocas veces al mes"

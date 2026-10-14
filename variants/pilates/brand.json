@@ -1,25 +1,25 @@
 {
- "name": "Studio Pilates",
- "short": "Studio Pilates",
+ "name": "Kindforce Pilates",
+ "short": "Kindforce Pilates",
  "site": "",
- "lead_title": "Nueva consulta desde el asistente de Studio Pilates",
+ "lead_title": "Nueva consulta desde el asistente de Kindforce Pilates",
  "menu": "Asistente Pilates",
- "role_label": "Recepción Studio Pilates",
+ "role_label": "Recepción Kindforce Pilates",
  "crm_label": "sistema de reservas",
  "item": "plan",
  "items": "planes",
- "welcome": "¡Hola! 👋 Soy el asistente de Studio Pilates. ¿Quieres conocer nuestros planes, agendar una clase o tienes alguna duda?",
+ "welcome": "¡Hola! 👋 Soy el asistente de Kindforce Pilates. ¿Quieres agendar tu clase de prueba gratis, conocer los planes o tienes alguna duda?",
  "chips": [
+  "Quiero mi clase de prueba gratis",
   "Quiero conocer los planes",
-  "Nunca he hecho pilates",
   "Ya soy alumna/o"
  ],
  "profiles": {
   "nuevo": "Nuevo alumno",
   "alumno": "Alumno actual"
  },
- "handoff_to": "la recepción de Studio Pilates",
- "handoff_when": "inscribirse en un plan, reservar una clase, pagar o hablar con alguien del estudio",
+ "handoff_to": "la recepción de Kindforce Pilates",
+ "handoff_when": "agendar la clase de prueba gratuita, inscribirse en un plan, reservar una clase, pagar o hablar con alguien del estudio",
  "sizing_label": "Disponibilidad y frecuencia",
  "colors": {
   "primary": "#a2574f",

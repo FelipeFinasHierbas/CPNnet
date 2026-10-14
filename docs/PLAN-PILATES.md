@@ -1,11 +1,12 @@
-# Asistente para Studio Pilates — plan por etapas
+# Asistente para Kindforce Pilates — plan por etapas
 
-Cliente: estudio de pilates (nombre comercial por confirmar). Hoy reciben ~10 consultas al mes, reservan y cobran con **BoxMagic** y contactan por **WhatsApp** (el mismo número que usan en campañas de Meta). Objetivo: que las consultas crezcan y que ninguna se pierda.
+Cliente: **Kindforce Pilates**. Hoy reciben ~10 consultas al mes, reservan y cobran con **BoxMagic** y contactan por **WhatsApp** (el mismo número que usan en campañas de Meta). Objetivo: que las consultas crezcan y que ninguna se pierda.
 
 ## Qué hace el asistente
 - Responde al instante, 24/7, con lo que el estudio definió: planes, cómo empezar, dudas frecuentes.
 - Distingue **nuevo alumno** de **alumno actual**.
-- Guía a la persona nueva a su **primera clase**. Ofrece el **plan de 4 clases ($40.000)** solo cuando la persona quiere probar o el precio es una barrera, porque ese plan no se publica.
+- Guía a la persona nueva a su **clase de prueba gratuita**.
+- Ofrece el **plan de 4 clases ($40.000)** solo cuando la persona quiere seguir sin plan mensual (por ejemplo después de la prueba) o el precio es una barrera, porque ese plan no se publica.
 - No da indicaciones médicas: ante lesiones o embarazo sugiere consultar a un profesional y deriva a recepción.
 - No inventa horarios, cupos ni precios no cargados. No cobra en el chat.
 - Con el **consentimiento** de la persona, deja la consulta lista para recepción por WhatsApp (nombre, contacto, necesidad, plan de interés, disponibilidad) y la guarda en el panel.
@@ -22,7 +23,7 @@ Cliente: estudio de pilates (nombre comercial por confirmar). Hoy reciben ~10 co
 1. **Número de WhatsApp.** Hoy se usa en la app y en campañas. Meta permite, con algunos proveedores, conectar la API sin dejar de usar la app en ese número (coexistencia). Hay que verificarlo para este número; si no se puede, se usa un número nuevo solo para el asistente.
 2. **BoxMagic.** Consultar a BoxMagic si ofrece API o un link de reserva/compra por plan. En la etapa 1 el asistente deriva a recepción y menciona BoxMagic solo a alumnos actuales.
 3. **Planes publicados.** Pasar el contenido de la historia destacada «Planes» (nombre, clases, precio, vigencia) para cargarlo en el panel.
-4. **Datos del estudio:** nombre comercial, dirección, horarios, tipos de clase, clase de prueba (sí/no), política de cancelación y medios de pago.
+4. **Datos del estudio:** dirección, horarios, tipos de clase, condiciones de la clase de prueba (además de que es gratis), política de cancelación y medios de pago.
 5. **Logo y colores** (los actuales son provisionales).
 
 ## Costo
