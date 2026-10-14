@@ -109,7 +109,7 @@ def t_post(k, co=False):
     lh = 64 if P["marca"] not in ("vicarius", "action1") else 72
     body = (f"<svg class='arcs' width='1080' height='1350' viewBox='0 0 1080 1350'>{rings}</svg>"
             + head_right(70, co)
-            + f"<div class='abs lab' style='left:76px;top:262px'>Risk Reduction Q4 · {P['nombre']}</div>"
+            + f"<div class='abs lab' style='left:76px;top:262px'>Mes de la Ciberseguridad · {P['nombre']}</div>"
             + f"<h1 class='abs' style='left:76px;right:76px;top:306px;font-size:62px;line-height:1.08;font-weight:800;text-wrap:balance'>{P['q']}</h1>"
             + (logo_chip(P["marca"], 76, 580, 330, 84, 52) + logo_chip(P["marca2"], 76, 680, 330, 84, 40) if P.get("marca2") else logo_chip(P["marca"], 76, 580, 330, 170, lh + 8))
             + f"<div class='abs' style='left:76px;top:{790 if P.get('marca2') else 776}px;width:330px;display:flex;align-items:center;gap:14px'>"
@@ -145,7 +145,7 @@ def t_overview(co=False):
                   f"<div class='chip' style='position:absolute;left:26px;bottom:20px;height:44px;padding:0 20px;border-radius:16px;box-shadow:none'><img src='{LOGOS[m]}' style='height:{lh}px'></div>{extra}</div>")
     rings = b2.arc(1040, 30, 260, 220, -28, 18, .5, .1, gid="a1", opacity=.6)
     body = (f"<svg class='arcs' width='1080' height='1350' viewBox='0 0 1080 1350'>{rings}</svg>" + head_right(70, co)
-            + f"<div class='abs lab' style='left:76px;top:262px'>CPNnet | Risk Reduction Q4</div>"
+            + f"<div class='abs lab' style='left:76px;top:262px'>CPNnet | Mes de la Ciberseguridad</div>"
             + f"<h1 class='abs' style='left:76px;right:76px;top:306px;font-size:56px;line-height:1.08;font-weight:800'>¿Dónde está la próxima <span class='az'>brecha</span> de tus clientes?</h1>"
             + cards + f"<div class='pill' style='top:1262px'>#CPNnetPartners</div>" + cta_btn(1262))
     return page(1350, "lt", body)
@@ -165,7 +165,7 @@ def t_reel(k):
             f"<div style='width:96px;height:96px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(111,227,245,.8)'>"
             f"<div style='border-left:34px solid {AZURE};border-top:21px solid transparent;border-bottom:21px solid transparent;margin-left:10px'></div></div></div>"
             + head_right(300, False, dark=True)
-            + f"<div class='abs lab' style='left:76px;top:470px'>Risk Reduction Q4 · {P['nombre']}</div>"
+            + f"<div class='abs lab' style='left:76px;top:470px'>Mes de la Ciberseguridad · {P['nombre']}</div>"
             + f"<div class='abs' style='left:76px;top:520px;right:90px;font-size:70px;font-weight:800;line-height:1.06;letter-spacing:-2px;text-shadow:0 3px 22px rgba(0,16,40,.85)'>{qh}</div>"
             + logo_chip(P["marca"], 76, 930, 300, 120, lh)
             + f"<div class='abs' style='left:76px;right:76px;top:1160px'>{steps}</div>"
