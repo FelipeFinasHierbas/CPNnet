@@ -29,6 +29,7 @@ EXTRA = f"""
 .promo .tx{{font-size:20px;font-weight:500;line-height:1.3}} .promo .tx b{{font-weight:800}}
 .fine{{font-size:13px;line-height:1.4;opacity:.7;text-align:center}}
 .ocard{{background:#fff;border-radius:30px;box-shadow:0 14px 40px rgba(20,50,100,.14);padding:22px 26px}}
+.hf svg{{width:38px;height:38px;flex:none}}
 .tagl{{font-size:13px;line-height:1.35;letter-spacing:1px;text-transform:uppercase;text-align:right;margin-top:8px}}
 """
 
@@ -42,7 +43,7 @@ def head_right(top, co, dark=False):
     name = "COLOMBIA" if co else "CHILE &nbsp;|&nbsp; PERÚ"
     col = "#a8c8f0" if dark else AZURE
     return (f"<div class='abs' style='right:76px;top:{top}px;width:520px'><div style='display:flex;align-items:center;gap:14px;justify-content:flex-end;font-size:19px;font-weight:600;letter-spacing:2px'>{name}"
-            f"<span style='display:flex;gap:8px'>{flags}</span></div>{f'<div class=tagl style=color:{col}>{rr.TAGLINE}</div>' if dark else ''}</div>")
+            f"<span class='hf' style='display:flex;gap:8px'>{flags}</span></div>{f'<div class=tagl style=color:{col}>{rr.TAGLINE}</div>' if dark else ''}</div>")
 
 
 def promo(y, h=96):
