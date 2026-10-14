@@ -18,7 +18,7 @@ for d in ("posts", "reels"):
 SRC3 = ROOT / "v3-partners/posts"
 LOGOS = {p.stem: "data:image/png;base64," + base64.b64encode(p.read_bytes()).decode() for p in (ROOT / "assets/logos").glob("*.png")}
 _flags = re.findall(r"<svg.*?</svg>", b1.FLAGS, flags=re.S)
-FLAG = {"cl": _flags[0], "pe": _flags[1], "co": _flags[3]}
+FLAG = {"cl": _flags[0], "pe": _flags[1], "us": _flags[2], "co": _flags[3]}
 NAVY, AZ, CY = "#0a1a3a", "#3d9be9", "#6fe3f5"
 TAGLINE = "Mismas amenazas.<br>Más oportunidades de proteger lo que importa."
 FINE = "Promoción exclusiva para canales Partner de CPNnet con relación comercial vigente antes del 1 de octubre de 2026 · Aplican bases y condiciones"
