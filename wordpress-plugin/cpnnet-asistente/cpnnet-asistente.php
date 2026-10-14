@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       CPNnet Asistente Comercial
  * Description:       Chat con IA (Claude) para www.cpnnetsecurity.com: orienta a partners y empresas sobre el portafolio de CPNnet y deriva los leads por WhatsApp.
- * Version:           0.6.0
+ * Version:           0.7.0
  * Requires PHP:      8.1
  * Requires at least: 6.0
  * Author:            CPNnet Security
@@ -21,7 +21,7 @@ if (defined('CPNNET_ASISTENTE_VERSION')) {
     return;
 }
 
-define('CPNNET_ASISTENTE_VERSION', '0.6.0');
+define('CPNNET_ASISTENTE_VERSION', '0.7.0');
 define('CPNNET_ASISTENTE_DIR', plugin_dir_path(__FILE__));
 define('CPNNET_ASISTENTE_URL', plugin_dir_url(__FILE__));
 define('CPNNET_ASISTENTE_OPTION', 'cpnnet_asistente');
@@ -46,14 +46,24 @@ require_once CPNNET_ASISTENTE_DIR . 'includes/widget.php';
 require_once CPNNET_ASISTENTE_DIR . 'includes/integration.php';
 require_once CPNNET_ASISTENTE_DIR . 'includes/admin.php';
 require_once CPNNET_ASISTENTE_DIR . 'includes/dashboard.php';
+require_once CPNNET_ASISTENTE_DIR . 'includes/booking.php';
+require_once CPNNET_ASISTENTE_DIR . 'includes/booking-mail.php';
+require_once CPNNET_ASISTENTE_DIR . 'includes/booking-portal.php';
+require_once CPNNET_ASISTENTE_DIR . 'includes/booking-admin.php';
 
 register_activation_hook(__FILE__, 'cpnnet_asistente_activate');
+register_deactivation_hook(__FILE__, static fn() => wp_clear_scheduled_hook('cpnnet_asistente_booking_tick'));
 
 function cpnnet_asistente_activate(): void
 {
     cpnnet_asistente_leads_create_table();
     cpnnet_asistente_usage_create_table();
     cpnnet_asistente_ensure_role();
+    if (cpnnet_asistente_booking_enabled()) {
+        cpnnet_asistente_booking_create_tables();
+        cpnnet_asistente_booking_ensure_role();
+        cpnnet_asistente_generate_sessions();
+    }
     if (get_option(CPNNET_ASISTENTE_OPTION) === false) {
         add_option(CPNNET_ASISTENTE_OPTION, cpnnet_asistente_defaults());
     }

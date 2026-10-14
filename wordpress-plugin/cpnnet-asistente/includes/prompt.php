@@ -19,13 +19,19 @@ function cpnnet_asistente_system_prompt(): string
     $cached = cpnnet_asistente_rules()
         . "\n\n# Datos de la empresa\n" . cpnnet_asistente_company()
         . "\n\n# Base de conocimiento (JSON, única fuente de verdad)\n" . $kb;
+    if (cpnnet_asistente_booking_enabled()) {
+        $cfg = cpnnet_asistente_booking_cfg();
+        $cached .= "\n\n# Reservas\nTienes la herramienta `ver_horarios` con las clases y cupos reales de los próximos días: úsala cuando pregunten por horarios o disponibilidad, y no inventes horarios."
+            . "\nLos alumnos con plan reservan, cambian y cancelan sus clases en su perfil: " . cpnnet_asistente_portal_url()
+            . ' (cancelación o cambio hasta ' . (int) $cfg['cancel_hours'] . ' horas antes; reciben confirmación y recordatorio por correo). Tú no reservas ni cobras: para contratar un plan o agendar la clase de prueba, deriva con `derivar_a_ejecutivo`.';
+    }
     return $cached;
 }
 
 /** Definición de la única herramienta del bot. */
 function cpnnet_asistente_tools(): array
 {
-    return [[
+    $tools = [[
         'name'        => 'derivar_a_ejecutivo',
         'description' => 'Deriva al visitante a ' . cpnnet_asistente_brand_get('handoff_to') . ' por WhatsApp con un resumen de su consulta. '
             . 'Úsala solo cuando el visitante quiera avanzar (' . cpnnet_asistente_brand_get('handoff_when') . ') '
@@ -47,4 +53,8 @@ function cpnnet_asistente_tools(): array
             'required'   => ['perfil', 'necesidad', 'consentimiento'],
         ],
     ]];
+    if (cpnnet_asistente_booking_enabled()) {
+        $tools[] = cpnnet_asistente_booking_tool();
+    }
+    return $tools;
 }

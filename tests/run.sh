@@ -14,4 +14,4 @@ sleep 1
 export ANTHROPIC_BASE_URL=http://127.0.0.1:8098 NO_PROXY=127.0.0.1
 echo "== base CPNnet =="; php test.php | tail -4; php test_brand.php | tail -6
 for d in "$T"/*/; do n="$(basename "$d")"; [ "$n" = cpnnet-asistente ] && continue
-  echo "== variante $n =="; PLUGIN_DIR="$n" php test_brand.php | tail -12; done
+  echo "== variante $n =="; PLUGIN_DIR="$n" php test_brand.php | tail -12; PLUGIN_DIR="$n" php test_booking.php | grep -v "^OK"; done

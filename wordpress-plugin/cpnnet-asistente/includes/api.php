@@ -188,7 +188,7 @@ function cpnnet_asistente_handle_chat(WP_REST_Request $req)
         $ctx = ['conv_id' => $conv_id, 'pagina' => $page, 'transcript' => $transcript];
         $whatsapp_url = null;
         $usage = cpnnet_asistente_usage_zero();
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 4; $i++) {
             $args['messages'] = $messages;
             $response = $client->messages->create(...$args);
             $usage = cpnnet_asistente_usage_add($usage, $response->usage);
@@ -204,9 +204,11 @@ function cpnnet_asistente_handle_chat(WP_REST_Request $req)
             foreach ($response->content as $block) {
                 if ($block instanceof ToolUseBlock) {
                     $input = is_array($block->input) ? $block->input : [];
-                    [$text, $url, $is_error] = $block->name === 'derivar_a_ejecutivo'
-                        ? cpnnet_asistente_run_tool($input, $ctx)
-                        : ['Herramienta desconocida.', null, true];
+                    [$text, $url, $is_error] = match (true) {
+                        $block->name === 'derivar_a_ejecutivo' => cpnnet_asistente_run_tool($input, $ctx),
+                        $block->name === 'ver_horarios' && cpnnet_asistente_booking_enabled() => cpnnet_asistente_run_booking_tool($input),
+                        default => ['Herramienta desconocida.', null, true],
+                    };
                     $whatsapp_url = $url ?? $whatsapp_url;
                     $results[] = ['type' => 'tool_result', 'toolUseID' => $block->id, 'content' => $text, 'isError' => $is_error];
                 }

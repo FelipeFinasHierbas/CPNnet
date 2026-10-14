@@ -17,7 +17,7 @@ Cliente: **Kind Force Pilates** (Av. Los Leones 292, local 1, Providencia · kin
 | 1. Web | Widget en el sitio del estudio + panel de consultas | Sitio en WordPress (si no hay, una landing simple) + API key | **Listo** (`pilates-asistente`) |
 | 2. WhatsApp | El asistente atiende el WhatsApp del estudio, incluidos los anuncios «clic a WhatsApp» de Meta; recepción toma la conversación cuando hace falta | WhatsApp Business Platform (API de Meta) y un servidor pequeño con HTTPS | Por construir |
 | 3. Instagram y Facebook | Respuestas a mensajes directos | App de Meta aprobada para mensajería | Por construir |
-| 4. Reservas en el chat | Ver cupos y reservar sin salir de la conversación | Integración con BoxMagic (por confirmar si tiene API) | Por evaluar |
+| 4. Reservas propias | Planes, horario con cupos, perfil del alumno, correos de pago/reserva/recordatorios y cupos en el chat (reemplaza a BoxMagic) | Revisar planes y horario de ejemplo, SMTP y cron en cPanel (ver `docs/RESERVAS.md`) | **Listo (0.7.0)**; falta pago en línea |
 
 ## Puntos a confirmar
 1. **Número de WhatsApp.** Hoy se usa en la app y en campañas. Meta permite, con algunos proveedores, conectar la API sin dejar de usar la app en ese número (coexistencia). Hay que verificarlo para este número; si no se puede, se usa un número nuevo solo para el asistente.

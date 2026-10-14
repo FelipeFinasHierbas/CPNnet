@@ -60,3 +60,10 @@
 .cpn-foot{color:var(--mut);font-size:12.5px;margin:6px 2px}
 @media(max-width:1100px){.cpn-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.cpn-grid-3,.cpn-grid-2{grid-template-columns:1fr}}
 @media(max-width:600px){.cpn-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.cpn-head{flex-direction:column;align-items:flex-start}.cpn-field{grid-template-columns:1fr}.cpn-table{display:block;overflow-x:auto}}
+/* Reservas */
+.cpn-occ{height:6px;width:110px;border-radius:9px;background:var(--line);overflow:hidden;margin-bottom:4px}.cpn-occ span{display:block;height:100%;background:var(--p)}
+.cpn-st-activo{background:#e3f4e8;color:#1e5b33}.cpn-st-vencido{background:#f1f1f1;color:#666}.cpn-st-anulado{background:#fbeaea;color:#8a2323}
+.cpn-form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px 18px;align-items:end}
+.cpn-form-grid label{display:flex;flex-direction:column;gap:5px;font-weight:600;font-size:12.5px;color:var(--mut)}
+.cpn-form-grid input,.cpn-form-grid select{font-weight:400;min-height:36px;border-radius:8px}
+.cpn-form-grid p{margin:0}

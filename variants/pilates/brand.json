@@ -35,5 +35,8 @@
  "logo_white": "pilates-logo-white.png",
  "wa_label": "Continuar por WhatsApp con recepción",
  "inbox_label": "recepción",
- "texture": "grain"
+ "texture": "grain",
+ "modules": [
+  "booking"
+ ]
 }

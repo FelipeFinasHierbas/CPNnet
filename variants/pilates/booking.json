@@ -1,0 +1,336 @@
+{
+ "example": true,
+ "_nota": "Horario, cupos y vigencia de los planes de EJEMPLO: el estudio debe confirmarlos en Configuración de reservas.",
+ "plans": [
+  {
+   "id": "prueba",
+   "name": "Clase de prueba",
+   "classes": 1,
+   "days": 7,
+   "price": 0
+  },
+  {
+   "id": "plan-4",
+   "name": "Plan 4 clases",
+   "classes": 4,
+   "days": 30,
+   "price": 40000
+  },
+  {
+   "id": "plan-8",
+   "name": "Plan 8 sesiones",
+   "classes": 8,
+   "days": 30,
+   "price": 60000
+  },
+  {
+   "id": "plan-12",
+   "name": "Plan 12 sesiones",
+   "classes": 12,
+   "days": 30,
+   "price": 80000
+  },
+  {
+   "id": "plan-16",
+   "name": "Plan 16 sesiones",
+   "classes": 16,
+   "days": 30,
+   "price": 100000
+  }
+ ],
+ "schedule": [
+  {
+   "id": "1-0700-pilates-i",
+   "weekday": 1,
+   "time": "07:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "1-0800-pilates-i",
+   "weekday": 1,
+   "time": "08:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "1-0900-pilates-i",
+   "weekday": 1,
+   "time": "09:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "1-1800-pilates-i",
+   "weekday": 1,
+   "time": "18:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "1-1900-pilates-i",
+   "weekday": 1,
+   "time": "19:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "1-2000-pilates-i",
+   "weekday": 1,
+   "time": "20:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "2-0700-pilates-i",
+   "weekday": 2,
+   "time": "07:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "2-0800-pilates-i",
+   "weekday": 2,
+   "time": "08:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "2-0900-pilates-i",
+   "weekday": 2,
+   "time": "09:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "2-1800-pilates-i",
+   "weekday": 2,
+   "time": "18:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "2-1900-pilates-i",
+   "weekday": 2,
+   "time": "19:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "2-2000-pilates-i",
+   "weekday": 2,
+   "time": "20:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "3-0700-pilates-i",
+   "weekday": 3,
+   "time": "07:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "3-0800-pilates-i",
+   "weekday": 3,
+   "time": "08:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "3-0900-pilates-i",
+   "weekday": 3,
+   "time": "09:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "3-1800-pilates-i",
+   "weekday": 3,
+   "time": "18:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "3-1900-pilates-i",
+   "weekday": 3,
+   "time": "19:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "3-2000-pilates-i",
+   "weekday": 3,
+   "time": "20:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "4-0700-pilates-i",
+   "weekday": 4,
+   "time": "07:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "4-0800-pilates-i",
+   "weekday": 4,
+   "time": "08:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "4-0900-pilates-i",
+   "weekday": 4,
+   "time": "09:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "4-1800-pilates-i",
+   "weekday": 4,
+   "time": "18:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "4-1900-pilates-i",
+   "weekday": 4,
+   "time": "19:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "4-2000-pilates-i",
+   "weekday": 4,
+   "time": "20:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "5-0700-pilates-i",
+   "weekday": 5,
+   "time": "07:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "5-0800-pilates-i",
+   "weekday": 5,
+   "time": "08:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "5-0900-pilates-i",
+   "weekday": 5,
+   "time": "09:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "5-1800-pilates-i",
+   "weekday": 5,
+   "time": "18:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "5-1900-pilates-i",
+   "weekday": 5,
+   "time": "19:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "5-2000-pilates-i",
+   "weekday": 5,
+   "time": "20:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "6-0900-pilates-i",
+   "weekday": 6,
+   "time": "09:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  },
+  {
+   "id": "6-1000-pilates-i",
+   "weekday": 6,
+   "time": "10:00",
+   "duration": 50,
+   "title": "Pilates Interval Fusion",
+   "capacity": 8,
+   "instructor": ""
+  }
+ ],
+ "cancel_hours": 12,
+ "reminder_hours": 12,
+ "expiry_days": 3,
+ "window_days": 14,
+ "portal_url": "https://kindforcepilates.com/mi-perfil/"
+}

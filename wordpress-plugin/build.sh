@@ -26,6 +26,7 @@ if [ -n "$VARIANT" ]; then
   cp "$V/knowledge/brands.json" "$V/knowledge/company.md" "$STAGE/cpnnet-asistente/knowledge/"
   cp "$V/bot/system-prompt.md" "$STAGE/cpnnet-asistente/prompt/"
   cp "$V/brand.json" "$STAGE/cpnnet-asistente/brand.json"
+  [ -f "$V/booking.json" ] && cp "$V/booking.json" "$STAGE/cpnnet-asistente/booking.json"
   cp "$V"/img/* "$STAGE/cpnnet-asistente/assets/img/"
   rm -f "$STAGE/cpnnet-asistente/assets/img/cpnnet-logo"*.png
   python3 - "$V/variant.json" "$STAGE/cpnnet-asistente/cpnnet-asistente.php" <<'PY'

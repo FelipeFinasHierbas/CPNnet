@@ -34,6 +34,7 @@ function cpnnet_asistente_brand(): array
         'sizing_label' => 'Dimensionamiento', // en otros rubros: «Disponibilidad», «Alcance»…
         'handoff_when' => 'cotización, demo, reunión o hablar con alguien',
         'colors'      => ['primary' => '#2b4c8c', 'dark' => '#1b2f5e', 'accent' => '#4f9bd6', 'tint' => '#bcd3ee', 'bg' => '#f4f7fb'],
+        'modules'     => [], // módulos opcionales: 'booking' = reservas, planes y correos
         'texture'     => '', // '' | 'grain': grano sutil sobre los degradados de la marca
         'logo'        => 'cpnnet-logo.png',
         'logo_white'  => 'cpnnet-logo-white.png',

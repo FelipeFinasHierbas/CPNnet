@@ -22,4 +22,6 @@ VARIANT=pilates "$ROOT/wordpress-plugin/build.sh" >/dev/null
 python3 "$ROOT/demo/build_variant.py" pilates
 cp "$ROOT/dist/pilates-asistente.zip" "$ROOT/releases/pilates-asistente-$VER.zip"
 cp "$ROOT/demo/pilates-chat.html" "$ROOT/releases/pilates-demo-chat.html"
+"$ROOT/demo/build_reservas.sh" pilates
+cp "$ROOT/demo/pilates-reservas.html" "$ROOT/releases/pilates-demo-reservas.html"
 ls -lh "$ROOT/releases"

@@ -20,6 +20,7 @@ function cpnnet_asistente_wrap_start(string $title, string $subtitle = ''): void
         'pingok' => 'La prueba llegó al CRM correctamente.', 'pingfail' => 'La prueba no llegó al CRM. Revisa la URL y que el CRM responda con código 2xx.',
         'lead_saved' => 'Lead actualizado.', 'resent' => 'Se reenvió el lead al CRM.', 'resentfail' => 'No se pudo reenviar al CRM; revisa la configuración del webhook.',
         'marked' => 'Lead marcado como exportado.',
+        'paid' => 'Pago registrado: el plan quedó activo y se envió la confirmación por correo.', 'session_cancelled' => 'Clase cancelada: se avisó a los alumnos y se les devolvió la clase.',
     ];
     $logo = esc_url(cpnnet_asistente_logo_url(true));
     echo '<div class="wrap cpn-wrap"><div class="cpn-head"><div class="cpn-head-main"><img class="cpn-logo" src="' . $logo . '" alt="' . esc_attr(cpnnet_asistente_brand_get('name')) . '"><span class="cpn-head-sep"></span><div><h1>' . esc_html($title) . '</h1>';
