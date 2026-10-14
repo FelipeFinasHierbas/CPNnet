@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kind Force Pilates · Asistente y reservas (móvil)</title>
+<style>
+@font-face{font-family:"M";font-weight:400;src:url("../wordpress-plugin/cpnnet-asistente/assets/fonts/montserrat-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"M";font-weight:500;src:url("../wordpress-plugin/cpnnet-asistente/assets/fonts/montserrat-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"M";font-weight:600;src:url("../wordpress-plugin/cpnnet-asistente/assets/fonts/montserrat-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"M";font-weight:700;src:url("../wordpress-plugin/cpnnet-asistente/assets/fonts/montserrat-latin-700-normal.woff2") format("woff2")}
+@page{size:405px 720px;margin:0}
+*{box-sizing:border-box}
+:root{--p:#6b625a;--d:#3b3632;--a:#cbb79c;--t:#ece4d8;--bg:#f6f2ec;--ink:#2e2a27;--mut:#7a7169;--line:#e5ddd2;
+--grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.35'/></svg>")}
+html,body{margin:0;padding:0}
+body{font:15px/1.5 "M",Montserrat,Helvetica,Arial,sans-serif;color:var(--ink);background:#d9d3cb}
+.deck{width:405px;margin:0 auto}
+.slide{width:405px;height:720px;padding:34px 26px 40px;position:relative;overflow:hidden;page-break-after:always;background:var(--bg)}
+.slide:last-child{page-break-after:auto}
+@media screen{.slide{margin:0 0 10px;border-radius:0}}
+.dark{background:var(--grain),linear-gradient(160deg,var(--p),var(--d));color:#fff}
+.logo{height:26px;display:block;margin-bottom:22px}
+.kicker{display:block;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-weight:700}
+.dark .kicker{color:var(--a)}
+h1{font-size:34px;line-height:1.1;margin:16px 0 14px;font-weight:700}
+h2{font-size:24px;line-height:1.18;margin:8px 0 16px;font-weight:700}
+p{margin:0 0 10px}.mut{color:var(--mut)}.dark .mut{color:rgba(255,255,255,.85)}
+.foot{position:absolute;left:26px;right:26px;bottom:14px;display:flex;justify-content:space-between;font-size:10px;color:var(--mut);letter-spacing:.05em}
+.dark .foot{color:rgba(255,255,255,.65)}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:10px}
+.card h3{margin:0 0 3px;font-size:16px}.card p{margin:0;font-size:13.5px;color:#4a443f;line-height:1.45}
+.big{font-size:30px;font-weight:700;line-height:1}
+ul.clean{list-style:none;padding:0;margin:0}ul.clean li{position:relative;padding-left:20px;margin:0 0 10px;font-size:14.5px;line-height:1.45}
+ul.clean li::before{content:"";position:absolute;left:0;top:9px;width:10px;height:2px;background:var(--a)}
+.frame{border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 10px 26px rgba(40,30,20,.14);background:#fff}
+.frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.steps{counter-reset:s}.steps .card{display:flex;gap:12px;align-items:flex-start;padding:12px 14px}
+.steps .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--p);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.pill{display:inline-block;background:var(--t);color:var(--d);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:600;margin:0 5px 6px 0}
+.stage{border-left:3px solid var(--a);padding:2px 0 2px 12px;margin-bottom:12px}
+.stage b{font-size:15px;display:block}.stage span:not(.badge){display:block;font-size:13px;color:#4a443f}
+.badge{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:3px 9px;margin:3px 0}
+.b-ok{background:#e3f1e7;color:#2f6b45}.b-next{background:var(--t);color:var(--d)}.b-later{background:#eee;color:#777}
+.row2{display:flex;gap:10px}.row2>*{flex:1}
+.lead{background:#e7f8ec;border:1px solid #b8e6c6;border-radius:14px;padding:12px 14px;font-size:12.5px;line-height:1.5;color:#15361f}
+.tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;font-size:13px}
+.tbl td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}.tbl td:last-child{text-align:right;font-weight:600;white-space:nowrap}
+.ok{color:#2f6b45}.no{color:var(--mut)}
+</style></head><body><div class="deck">
+
+<section class="slide dark">
+  <img src="../variants/pilates/img/pilates-logo-white.png" alt="Kind Force Pilates" style="height:44px;margin-top:40px">
+  <h1 style="margin-top:110px">Asistente con IA y reservas en línea</h1>
+  <p class="mut" style="font-size:16px">Respuesta al instante para cada consulta, la clase de prueba agendada y alumnas que reservan solas, con correos automáticos y la imagen de Kind Force.</p>
+  <div class="foot"><span>Fuerza con propósito, energía en equilibrio</span><span>Propuesta</span></div>
+</section>
+
+<section class="slide">
+  <img class="logo" src="../variants/pilates/img/pilates-logo.png" alt="">
+  <span class="kicker">Punto de partida</span>
+  <h2>Hoy: WhatsApp para consultas y BoxMagic para reservas</h2>
+  <div class="card"><div class="big">~10</div><p style="margin-top:6px">consultas al mes. La meta: que crezcan y que <b>ninguna se pierda</b> por responder tarde.</p></div>
+  <div class="card"><div class="big">24/7</div><p style="margin-top:6px">Quien ve un anuncio a las 23:00 quiere saber precios y horarios <b>en ese momento</b>.</p></div>
+  <div class="card"><div class="big">1</div><p style="margin-top:6px">sola herramienta para vender, agendar y avisar, con <b>la marca del estudio</b> y sin pagar por alumna.</p></div>
+  <div class="foot"><span>Kind Force Pilates</span><span>2</span></div>
+</section>
+
+<section class="slide">
+  <img class="logo" src="../variants/pilates/img/pilates-logo.png" alt="">
+  <span class="kicker">Cómo funciona</span>
+  <h2>De la primera consulta a la alumna que reserva sola</h2>
+  <div class="steps">
+    <div class="card"><span class="n">1</span><p><b>Llega</b> desde un anuncio, Instagram o la web, a cualquier hora.</p></div>
+    <div class="card"><span class="n">2</span><p><b>El asistente responde</b>: planes, precios, horarios con cupos reales.</p></div>
+    <div class="card"><span class="n">3</span><p><b>Clase de prueba gratis</b>: con su permiso, la consulta llega a recepción por WhatsApp.</p></div>
+    <div class="card"><span class="n">4</span><p><b>Recepción registra el pago</b>: se activa el plan y llega la confirmación por correo.</p></div>
+    <div class="card"><span class="n">5</span><p><b>En su perfil</b> reserva, cambia o cancela, con recordatorios automáticos.</p></div>
+  </div>
+  <div class="foot"><span>Kind Force Pilates</span><span>3</span></div>
+</section>
+
+<section class="slide">
+  <img class="logo" src="../variants/pilates/img/pilates-logo.png" alt="">
+  <span class="kicker">El asistente</span>
+  <h2>Responde como lo haría recepción</h2>
+  <div class="frame" style="height:330px;width:260px;margin:0 auto 14px"><img src="img/chat-prueba.png" style="object-position:bottom"></div>
+  <ul class="clean">
+    <li>Guía a la <b>clase de prueba gratuita</b>.</li>
+    <li>El <b>plan de 4 clases</b> solo aparece cuando calza.</li>
+    <li><b>No inventa</b>: si no sabe, deriva a recepción.</li>
+  </ul>
+  <div class="foot"><span>Kind Force Pilates</span><span>4</span></div>
+</section>
+
+<section class="slide">
+  <img class="logo" src="../variants/pilates/img/pilates-logo.png" alt="">
+  <span class="kicker">El asistente</span>
+  <h2>Precios claros y la consulta lista para recepción</h2>
+  <div class="frame" style="height:250px;width:240px;margin:0 auto 12px"><img src="img/chat-planes.png"></div>
+  <span class="kicker" style="margin-bottom:6px">Lo que recibe recepción por WhatsApp</span>
+  <div class="lead"><b>Nueva consulta · Kind Force Pilates</b><br>Perfil: Nuevo alumno · Daniela Muñoz<br>Necesidad: 3 veces por semana, primera vez<br>Planes: Clase de prueba, Plan 12 sesiones<br>Disponibilidad: mañanas</div>
+  <div class="foot"><span>Kind Force Pilates</span><span>5</span></div>
+</section>
+
+<section class="slide">
+  <img class="logo" src="../variants/pilates/img/pilates-logo.png" alt="">
+  <span class="kicker">Perfil de la alumna</span>
+  <h2>Su plan, sus clases y el horario con cupos</h2>
+  <div class="frame" style="height:390px;width:240px;margin:0 auto 14px;border-radius:26px;border:6px solid var(--d)"><img src="img/movil.png"></div>
+  <ul class="clean">
+    <li>Ve <b>cuántas clases le quedan</b> y cuándo vence.</li>
+    <li><b>Cambia o cancela</b> hasta 12 h antes; la clase vuelve a su plan.</li>
+  </ul>
+  <div class="foot"><span>Kind Force Pilates</span><span>6</span></div>
+</section>
+
+<section class="slide">
+  <img class="logo" src="../variants/pilates/img/pilates-logo.png" alt="">
+  <span class="kicker">Cambiar una clase</span>
+  <h2>Otro horario, sin gastar otra clase</h2>
+  <div class="frame" style="height:330px;margin-bottom:14px"><img src="img/cambio.png"></div>
+  <ul class="clean">
+    <li>Toca <b>«Cambiar»</b> y elige un horario con cupo.</li>
+    <li>El cupo anterior <b>se libera al instante</b>.</li>
+    <li>Le llega la <b>confirmación por correo</b>.</li>
+  </ul>
+  <div class="foot"><span>Kind Force Pilates</span><span>7</span></div>
+</section>
+
+<section class="slide">
+  <img class="logo" src="../variants/pilates/img/pilates-logo.png" alt="">
+  <span class="kicker">Correos automáticos</span>
+  <h2>Cada paso confirmado por correo</h2>
+  <div class="frame" style="height:340px;margin-bottom:14px"><img src="img/mail-pago.png"></div>
+  <p><span class="pill">Pago confirmado</span><span class="pill">Reserva</span><span class="pill">Cambio</span><span class="pill">Cancelación</span><span class="pill">Recordatorio de clase</span><span class="pill">Plan por vencer</span><span class="pill">Clase cancelada por el estudio</span></p>
+  <div class="foot"><span>Kind Force Pilates</span><span>8</span></div>
+</section>
+
+<section class="slide">
+  <img class="logo" src="../variants/pilates/img/pilates-logo.png" alt="">
+  <span class="kicker">Panel del estudio</span>
+  <h2>Agenda, pagos y configuración</h2>
+  <div class="frame" style="height:200px;margin-bottom:12px"><img src="img/agenda.png"></div>
+  <ul class="clean">
+    <li><b>Agenda</b>: ocupación y quiénes vienen; cancelar una clase avisa a todas.</li>
+    <li><b>Alumnos y pagos</b>: registrar el pago activa el plan y envía la confirmación.</li>
+    <li><b>Configuración</b>: planes, horario semanal y plazos, sin depender de nadie.</li>
+  </ul>
+  <div class="foot"><span>Kind Force Pilates</span><span>9</span></div>
+</section>
+
+<section class="slide">
+  <img class="logo" src="../variants/pilates/img/pilates-logo.png" alt="">
+  <span class="kicker">Frente a BoxMagic</span>
+  <h2>Lo esencial ya está</h2>
+  <table class="tbl">
+    <tr><td>Planes, horario con cupos y perfil</td><td class="ok">Incluido</td></tr>
+    <tr><td>Reservar, cambiar y cancelar</td><td class="ok">Incluido</td></tr>
+    <tr><td>Correos y recordatorios</td><td class="ok">Incluido</td></tr>
+    <tr><td>Asistente con IA con cupos reales</td><td class="ok">Incluido</td></tr>
+    <tr><td>Pago en línea</td><td class="no">Siguiente</td></tr>
+    <tr><td>Lista de espera · congelar plan</td><td class="no">Según prioridad</td></tr>
+    <tr><td>Traspaso desde BoxMagic</td><td class="no">Por planilla</td></tr>
+  </table>
+  <div class="foot"><span>Kind Force Pilates</span><span>10</span></div>
+</section>
+
+<section class="slide">
+  <img class="logo" src="../variants/pilates/img/pilates-logo.png" alt="">
+  <span class="kicker">Plan de trabajo</span>
+  <h2>Por etapas</h2>
+  <div class="stage"><b>1 · Sitio web: asistente + reservas</b><span class="badge b-ok">Listo para instalar</span><span>Carga de planes y horario reales, pruebas con el equipo.</span></div>
+  <div class="stage"><b>2 · WhatsApp con el asistente</b><span class="badge b-next">Siguiente</span><span>Atiende el WhatsApp del estudio y los anuncios «clic a WhatsApp».</span></div>
+  <div class="stage"><b>3 · Pago en línea</b><span class="badge b-next">Siguiente</span><span>La alumna compra su plan y se activa solo.</span></div>
+  <div class="stage"><b>4 · Instagram y Facebook</b><span class="badge b-later">Después</span><span>Mensajes directos (requiere aprobación de Meta).</span></div>
+  <p class="mut" style="font-size:13px;margin-top:14px">El asistente no crea demanda por sí solo: convierte mejor la que traen las campañas, respondiendo en segundos.</p>
+  <div class="foot"><span>Kind Force Pilates</span><span>11</span></div>
+</section>
+
+<section class="slide">
+  <img class="logo" src="../variants/pilates/img/pilates-logo.png" alt="">
+  <span class="kicker">Costos de operación</span>
+  <h2>Sin costo por alumna y con tope mensual</h2>
+  <div class="card"><span class="kicker">Inteligencia artificial</span><div class="big" style="margin:6px 0">US$1–11 / mes</div><p>Para 10 a 100 conversaciones con el modelo más capaz (estimación). Cuenta propia del estudio, con tope mensual.</p></div>
+  <div class="card"><span class="kicker">Reservas y correos</span><div class="big" style="margin:6px 0">$0</div><p>Por alumna o reserva. Corre en el hosting actual, con el correo del dominio.</p></div>
+  <div class="card"><span class="kicker">WhatsApp (etapa 2)</span><div class="big" style="margin:6px 0;font-size:24px">Según Meta</div><p>Responder es gratis o muy bajo; los mensajes que inicia el estudio se cobran por mensaje.</p></div>
+  <p class="mut" style="font-size:11px">Referencia octubre 2026. No incluye el valor de implementación.</p>
+  <div class="foot"><span>Kind Force Pilates</span><span>12</span></div>
+</section>
+
+<section class="slide">
+  <img class="logo" src="../variants/pilates/img/pilates-logo.png" alt="">
+  <span class="kicker">Para dejarlo listo</span>
+  <h2>Lo que necesitamos del estudio</h2>
+  <div class="card"><h3>Marca</h3><p>Logo oficial y colores exactos (aquí se usó una versión aproximada).</p></div>
+  <div class="card"><h3>Planes y precios</h3><p>Confirmar vigencia de 8/12/16 sesiones, 90/180/365 días y el plan de 4 clases.</p></div>
+  <div class="card"><h3>Horario real</h3><p>Días, horas, cupos e instructoras (el de la demo es de ejemplo).</p></div>
+  <div class="card"><h3>Accesos</h3><p>WordPress, correo del dominio y WhatsApp de recepción.</p></div>
+  <div class="foot"><span>Kind Force Pilates</span><span>13</span></div>
+</section>
+
+<section class="slide dark">
+  <span class="kicker" style="margin-top:30px">Próximos pasos</span>
+  <h1 style="font-size:30px">Del demo al sitio real</h1>
+  <ul class="clean" style="margin-top:16px">
+    <li>Reunión de 30 minutos para validar planes, horario y textos.</li>
+    <li>Instalación en <b>modo de prueba</b> (solo lo ve el equipo).</li>
+    <li>Pruebas con recepción y un grupo de alumnas.</li>
+    <li>Publicación y medición: consultas, clases de prueba y ocupación.</li>
+  </ul>
+  <img src="../variants/pilates/img/pilates-logo-white.png" alt="" style="height:36px;position:absolute;left:26px;bottom:56px">
+  <div class="foot"><span>Demos interactivas: chat y reservas</span><span>14</span></div>
+</section>
+</div>
+<script>
+// En pantallas angostas, escala las diapositivas al ancho del teléfono.
+(function(){function fit(){var w=Math.min(1,(window.innerWidth||405)/405);document.querySelector('.deck').style.zoom=w<1?w:'';}
+if(!window.matchMedia('print').matches){fit();addEventListener('resize',fit);}})();
+</script>
+</body></html>

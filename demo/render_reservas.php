@@ -94,6 +94,7 @@ main{max-width:1240px;margin:0 auto;padding:18px 24px 40px}
 .wpadmin .button-primary{background:{$c['primary']};border-color:{$c['primary']};color:#fff}.wpadmin .button-link-delete{color:#b32d2e;border-color:#b32d2e}
 .wpadmin textarea,.wpadmin input,.wpadmin select{border:1px solid #c3c4c7;border-radius:6px;padding:6px 8px;font:inherit}.wpadmin .large-text{width:100%}.wpadmin .form-table th{text-align:left;padding:10px 12px 10px 0;width:240px;font-weight:600}
 .note{font-size:12px;color:{$c['mut']};margin-top:18px}
+@media(max-width:640px){nav.tabs{flex-wrap:nowrap;overflow-x:auto;padding:12px 16px 4px;-webkit-overflow-scrolling:touch;scrollbar-width:none}nav.tabs button{flex:none}main{padding:14px 12px 30px}.site{padding:14px}.site .fake{display:none}.wpadmin{padding:4px 8px 12px;overflow-x:auto}.top{padding:12px 16px}.top .t{display:none}.mail iframe{height:620px}}
 </style></head><body>
 <div class="top"><div style="display:flex;align-items:center;gap:14px"><img src="{$logoW}" alt="{$name}"><span class="t">Reservas, perfil del alumno y correos</span></div><span class="badge">DEMO CON DATOS DE EJEMPLO</span></div>
 <nav class="tabs"><button class="on" data-tab="perfil">Perfil del alumno</button><button data-tab="cambio">Cambiar una clase</button><button data-tab="correos">Correos automáticos</button><button data-tab="agenda">Panel: Agenda</button><button data-tab="alumnos">Panel: Alumnos y pagos</button><button data-tab="config">Panel: Configuración</button><button data-tab="acceso">Acceso</button></nav>

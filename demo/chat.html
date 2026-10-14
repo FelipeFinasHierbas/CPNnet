@@ -65,7 +65,7 @@ h1{font-size:24px;margin:0 0 6px;font-weight:700}
 .demo-chat .cpnnet-chat__panel{height:620px;width:100%;box-shadow:0 12px 40px rgba(20,30,60,.2)}
 .cpnnet-chat__chips{flex-direction:column;align-items:stretch}
 .cpnnet-chat__chip{text-align:left;border-radius:12px;line-height:1.35}
-@media(max-width:900px){main{grid-template-columns:1fr}}
+@media(max-width:900px){main{grid-template-columns:1fr;padding:18px 14px;gap:16px}main>section{display:contents}#chat{order:1}main>section>.card{order:2}main>section>.note{order:3}.demo-chat .cpnnet-chat__panel{height:72vh;min-height:460px}}
 </style>
 </head>
 <body>
@@ -133,7 +133,7 @@ function start(i){cur=SCENARIOS[i];step=0;busy=false;hinted=false;log.textConten
  [].forEach.call(document.querySelectorAll('#scen button'),function(b,j){b.classList.toggle('on',j===i)});showChips()}
 form.addEventListener('submit',function(e){e.preventDefault();var v=inp.value.trim();if(!v)return;inp.value='';bubble('user',v);if(!hinted){hinted=true;setTimeout(function(){bubble('assistant','En esta demo guionada elige una de las respuestas sugeridas. En el sitio real respondo con IA a cualquier consulta.')},500)}});
 inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();form.requestSubmit()}});
-var sc=document.getElementById('scen');SCENARIOS.forEach(function(s,i){var b=el('button');b.type='button';b.appendChild(el('strong',null,s.title));b.appendChild(el('small',null,s.sub));b.onclick=function(){start(i)};sc.appendChild(b)});
+var sc=document.getElementById('scen');SCENARIOS.forEach(function(s,i){var b=el('button');b.type='button';b.appendChild(el('strong',null,s.title));b.appendChild(el('small',null,s.sub));b.onclick=function(){start(i);if(window.innerWidth<900)document.getElementById('chat').scrollIntoView({behavior:'smooth',block:'start'})};sc.appendChild(b)});
 start(0);
 </script>
 </body>
