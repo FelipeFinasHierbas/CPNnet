@@ -129,6 +129,28 @@ const Flags: React.FC<{ size: number; delay?: number }> = ({ size, delay = 0 }) 
   );
 };
 
+const Mascota: React.FC<{ left: number; top: number; height: number; delay?: number; from?: "right" | "bottom" }> = ({ left, top, height, delay = 0, from = "right" }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const p = spring({ frame: frame - delay, fps, config: { damping: 12, stiffness: 110 } });
+  const bob = Math.sin((frame - delay) / 14) * 10;
+  const off = from === "right" ? `${(1 - p) * 500}px ${bob}px` : `0px ${(1 - p) * 500 + bob}px`;
+  return (
+    <Img
+      src={staticFile("mascota.png")}
+      style={{
+        position: "absolute",
+        left,
+        top,
+        height,
+        translate: off,
+        rotate: `${interpolate(p, [0, 1], [8, 0])}deg`,
+        filter: "drop-shadow(0 24px 40px rgba(0,10,30,.6))",
+      }}
+    />
+  );
+};
+
 // ------------------------------------------------------------------ escena 1: gancho
 const Hook: React.FC<ReelProps> = ({ pilar, marca, fondo, pregunta, seed }) => {
   const frame = useCurrentFrame();
@@ -198,6 +220,7 @@ const Hook: React.FC<ReelProps> = ({ pilar, marca, fondo, pregunta, seed }) => {
           );
         })}
       </div>
+      <Mascota left={600} top={1010} height={640} delay={50} />
       <Chip
         marca={marca}
         height={96}
@@ -283,22 +306,7 @@ const Point: React.FC<{ n: number; text: string } & ReelProps> = ({ n, text, mar
       >
         <Chip marca={marca} height={70} />
       </div>
-      <div
-        style={{
-          position: "absolute",
-          right: 80,
-          top: 1528,
-          fontFamily: FAMILY,
-          fontSize: 28,
-          fontWeight: 700,
-          letterSpacing: 5,
-          color: CYAN,
-          textTransform: "uppercase",
-          opacity: interpolate(frame, [30, 45], [0, 1], clampOpts),
-        }}
-      >
-        {pilar}
-      </div>
+      <Mascota left={700} top={1330} height={400} delay={20} from="bottom" />
     </AbsoluteFill>
   );
 };
@@ -314,14 +322,14 @@ const Cta: React.FC<ReelProps> = ({ marca, fondo, seed }) => {
       <Particles seed={seed + 9} />
       <Img
         src={staticFile("logo-blanco.png")}
-        style={{ position: "absolute", left: 270, top: 330, width: 540, scale: pop(0) }}
+        style={{ position: "absolute", left: 320, top: 290, width: 440, scale: pop(0) }}
       />
       <div
         style={{
           position: "absolute",
           left: 80,
           right: 80,
-          top: 760,
+          top: 600,
           textAlign: "center",
           fontFamily: FAMILY,
           fontSize: 92,
@@ -340,7 +348,7 @@ const Cta: React.FC<ReelProps> = ({ marca, fondo, seed }) => {
           position: "absolute",
           left: 130,
           right: 130,
-          top: 1120,
+          top: 930,
           height: 130,
           borderRadius: 65,
           background: `linear-gradient(135deg, #2a5aa8, #3f86d0)`,
@@ -357,11 +365,12 @@ const Cta: React.FC<ReelProps> = ({ marca, fondo, seed }) => {
       >
         #CPNnetPartners
       </div>
-      <div style={{ position: "absolute", left: 0, right: 0, top: 1360, display: "flex", justifyContent: "center", opacity: interpolate(frame, [36, 50], [0, 1], clampOpts) }}>
+      <div style={{ position: "absolute", left: 80, top: 1330, display: "flex", opacity: interpolate(frame, [36, 50], [0, 1], clampOpts) }}>
         <Chip marca={marca} height={78} />
       </div>
-      <div style={{ position: "absolute", left: 0, right: 0, top: 1530, display: "flex", justifyContent: "center" }}>
-        <Flags size={84} delay={40} />
+      <Mascota left={600} top={1130} height={620} delay={30} />
+      <div style={{ position: "absolute", left: 80, top: 1480, display: "flex" }}>
+        <Flags size={70} delay={40} />
       </div>
     </AbsoluteFill>
   );
