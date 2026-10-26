@@ -1,5 +1,6 @@
 import { Composition } from "remotion";
 import { Reel } from "./Reel";
+import { Webinar } from "./Webinar";
 
 // 5 escenas de 4 s con 4 transiciones de 0,5 s: 600 - 60 = 540 fotogramas (18 s a 30 fps)
 export const RemotionRoot: React.FC = () => {
@@ -63,6 +64,27 @@ export const RemotionRoot: React.FC = () => {
             "AutoFix: propone la versión segura y abre el pull request",
           ],
           seed: 23,
+        }}
+      />
+      <Composition
+        id="ReelWebinarSafetica"
+        component={Webinar}
+        durationInFrames={555}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          marca: "safetica",
+          fondo: "bg_aplicaciones.jpg",
+          dia: "27",
+          mes: "octubre",
+          gancho: ["¿Tu equipo usa IA?", "Protege los datos sin frenar la productividad"],
+          mensaje: ["DLP con Insider Risk", "en una sola propuesta"],
+          titulo: "Detecta patrones de riesgo",
+          puntos: ["Descargas masivas", "Copias", "Accesos fuera de horario"],
+          horaChile: "11:00 hrs Chile",
+          horaPeruColombia: "09:00 hrs Perú y Colombia",
+          seed: 111,
         }}
       />
     </>

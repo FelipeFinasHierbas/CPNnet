@@ -16,14 +16,14 @@ import { TransitionSeries, linearTiming } from "@remotion/transitions";
 import { slide } from "@remotion/transitions/slide";
 import { fade } from "@remotion/transitions/fade";
 
-const NAVY = "#1A2E52";
-const ROYAL = "#203C71";
-const AZURE = "#3A84BD";
-const SKY = "#84BAE1";
-const CYAN = "#6fe3f5";
-const FAMILY = "Montserrat";
+export const NAVY = "#1A2E52";
+export const ROYAL = "#203C71";
+export const AZURE = "#3A84BD";
+export const SKY = "#84BAE1";
+export const CYAN = "#6fe3f5";
+export const FAMILY = "Montserrat";
 
-const fontsReady = Promise.all(
+export const fontsReady = Promise.all(
   ["400", "500", "600", "700", "800"].map((w) =>
     loadFont({ family: FAMILY, url: staticFile(`fonts/Montserrat-${w}.ttf`), weight: w }),
   ),
@@ -38,11 +38,11 @@ export type ReelProps = {
   readonly seed: number;
 };
 
-const ease = Easing.bezier(0.16, 1, 0.3, 1);
-const clampOpts = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
+export const ease = Easing.bezier(0.16, 1, 0.3, 1);
+export const clampOpts = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
 // ------------------------------------------------------------------ piezas reutilizables
-const Backdrop: React.FC<{ fondo: string; dim: number; zoomFrom: number }> = ({ fondo, dim, zoomFrom }) => {
+export const Backdrop: React.FC<{ fondo: string; dim: number; zoomFrom: number }> = ({ fondo, dim, zoomFrom }) => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
   return (
@@ -64,7 +64,7 @@ const Backdrop: React.FC<{ fondo: string; dim: number; zoomFrom: number }> = ({ 
   );
 };
 
-const Particles: React.FC<{ seed: number }> = ({ seed }) => {
+export const Particles: React.FC<{ seed: number }> = ({ seed }) => {
   const frame = useCurrentFrame();
   const dots = Array.from({ length: 22 }, (_, i) => {
     const r = (n: number) => ((Math.sin(seed * 97 + i * 131 + n * 17) + 1) / 2);
@@ -92,7 +92,7 @@ const Particles: React.FC<{ seed: number }> = ({ seed }) => {
   );
 };
 
-const Chip: React.FC<{ marca: string; height: number; style?: React.CSSProperties }> = ({ marca, height, style }) => (
+export const Chip: React.FC<{ marca: string; height: number; style?: React.CSSProperties }> = ({ marca, height, style }) => (
   <div
     style={{
       display: "flex",
@@ -109,7 +109,7 @@ const Chip: React.FC<{ marca: string; height: number; style?: React.CSSPropertie
   </div>
 );
 
-const Flags: React.FC<{ size: number; delay?: number }> = ({ size, delay = 0 }) => {
+export const Flags: React.FC<{ size: number; delay?: number }> = ({ size, delay = 0 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   return (
@@ -129,7 +129,7 @@ const Flags: React.FC<{ size: number; delay?: number }> = ({ size, delay = 0 }) 
   );
 };
 
-const Mascota: React.FC<{ left: number; top: number; height: number; delay?: number; from?: "right" | "bottom" }> = ({ left, top, height, delay = 0, from = "right" }) => {
+export const Mascota: React.FC<{ left: number; top: number; height: number; delay?: number; from?: "right" | "bottom" }> = ({ left, top, height, delay = 0, from = "right" }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const p = spring({ frame: frame - delay, fps, config: { damping: 12, stiffness: 110 } });
@@ -377,7 +377,7 @@ const Cta: React.FC<ReelProps> = ({ marca, fondo, seed }) => {
 };
 
 // ------------------------------------------------------------------ capa fija: marca + arco + progreso
-const Overlay: React.FC<{ total: number }> = ({ total }) => {
+export const Overlay: React.FC<{ total: number }> = ({ total }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   return (
@@ -398,7 +398,7 @@ const Overlay: React.FC<{ total: number }> = ({ total }) => {
       </svg>
       <Img
         src={staticFile("logo-blanco.png")}
-        style={{ position: "absolute", left: 80, top: 130, width: 250, opacity: interpolate(frame, [0, 15, 405, 420], [0, 1, 1, 0], clampOpts), translate: interpolate(frame, [0, 20], ["0px -30px", "0px 0px"], { ...clampOpts, easing: ease }) }}
+        style={{ position: "absolute", left: 80, top: 130, width: 250, opacity: interpolate(frame, [0, 15, total - 135, total - 120], [0, 1, 1, 0], clampOpts), translate: interpolate(frame, [0, 20], ["0px -30px", "0px 0px"], { ...clampOpts, easing: ease }) }}
       />
       <div style={{ position: "absolute", left: 80, right: 80, bottom: 90, height: 10, borderRadius: 5, backgroundColor: "rgba(255,255,255,.18)" }}>
         <div style={{ width: `${interpolate(frame, [0, total - 1 * fps], [0, 100], clampOpts)}%`, height: "100%", borderRadius: 5, background: `linear-gradient(90deg, ${SKY}, ${CYAN})` }} />
