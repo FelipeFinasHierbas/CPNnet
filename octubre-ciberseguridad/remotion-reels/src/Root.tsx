@@ -102,6 +102,30 @@ export const RemotionRoot: React.FC = () => {
           mes: "octubre",
           gancho: ["¿Tu equipo usa IA?", "Protege los datos sin frenar la productividad"],
           frase: "Hoy te esperamos en nuestro webinar de Safetica",
+          dy: 0,
+          mensaje: ["", ""],
+          titulo: "",
+          puntos: [],
+          horaChile: "11:00 hrs Chile",
+          horaPeruColombia: "09:00 hrs Perú y Colombia",
+          seed: 111,
+        }}
+      />
+      <Composition
+        id="ReelWebinarSafeticaHoy1920"
+        component={WebinarHoy}
+        durationInFrames={375}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          marca: "safetica",
+          fondo: "bg_aplicaciones.jpg",
+          dia: "27",
+          mes: "octubre",
+          gancho: ["¿Tu equipo usa IA?", "Protege los datos sin frenar la productividad"],
+          frase: "Hoy te esperamos en nuestro webinar de Safetica",
+          dy: 300,
           mensaje: ["", ""],
           titulo: "",
           puntos: [],
