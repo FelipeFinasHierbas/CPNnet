@@ -1,6 +1,7 @@
 import { Composition } from "remotion";
 import { Reel } from "./Reel";
 import { Webinar } from "./Webinar";
+import { WebinarHoy } from "./WebinarHoy";
 
 // 5 escenas de 4 s con 4 transiciones de 0,5 s: 600 - 60 = 540 fotogramas (18 s a 30 fps)
 export const RemotionRoot: React.FC = () => {
@@ -82,6 +83,28 @@ export const RemotionRoot: React.FC = () => {
           mensaje: ["DLP con Insider Risk", "en una sola propuesta"],
           titulo: "Detecta patrones de riesgo",
           puntos: ["Descargas masivas", "Copias", "Accesos fuera de horario"],
+          horaChile: "11:00 hrs Chile",
+          horaPeruColombia: "09:00 hrs Perú y Colombia",
+          seed: 111,
+        }}
+      />
+      <Composition
+        id="ReelWebinarSafeticaHoy1350"
+        component={WebinarHoy}
+        durationInFrames={375}
+        fps={30}
+        width={1080}
+        height={1350}
+        defaultProps={{
+          marca: "safetica",
+          fondo: "bg_aplicaciones.jpg",
+          dia: "27",
+          mes: "octubre",
+          gancho: ["¿Tu equipo usa IA?", "Protege los datos sin frenar la productividad"],
+          frase: "Hoy te esperamos en nuestro webinar de Safetica",
+          mensaje: ["", ""],
+          titulo: "",
+          puntos: [],
           horaChile: "11:00 hrs Chile",
           horaPeruColombia: "09:00 hrs Perú y Colombia",
           seed: 111,

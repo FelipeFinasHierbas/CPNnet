@@ -19,7 +19,7 @@ export type WebinarProps = {
   readonly seed: number;
 };
 
-const Words: React.FC<{ text: string; size: number; color?: string; delay: number; top: number; weight?: number }> = ({ text, size, color = "#fff", delay, top, weight = 800 }) => {
+export const Words: React.FC<{ text: string; size: number; color?: string; delay: number; top: number; weight?: number; hlFrom?: number }> = ({ text, size, color = "#fff", delay, top, weight = 800, hlFrom }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   return (
@@ -27,7 +27,7 @@ const Words: React.FC<{ text: string; size: number; color?: string; delay: numbe
       {text.split(" ").map((w, i) => {
         const p = spring({ frame: frame - delay - i * 4, fps, config: { damping: 14, stiffness: 150 } });
         return (
-          <span key={i} style={{ display: "inline-block", opacity: interpolate(p, [0, 0.6], [0, 1], clampOpts), translate: `0px ${interpolate(p, [0, 1], [70, 0])}px` }}>
+          <span key={i} style={{ display: "inline-block", color: hlFrom !== undefined && i >= hlFrom ? CYAN : color, opacity: interpolate(p, [0, 0.6], [0, 1], clampOpts), translate: `0px ${interpolate(p, [0, 1], [70, 0])}px` }}>
             {w}
           </span>
         );
