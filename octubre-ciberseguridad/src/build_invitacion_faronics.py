@@ -18,13 +18,13 @@ clk = ("<svg width='{s}' height='{s}' viewBox='0 0 24 24' fill='none' stroke='#f
 
 L = {
  "1080x1350": dict(W=1080, H=1350, grad="180deg,rgba(3,18,38,.93) 0%,rgba(3,18,38,.74) 55%,rgba(3,18,38,.3) 100%", arc=(780, 1010, 320, 380),
-     logo=(80, 70, 210), flags=(80, 90, 40), label=(80, 250, 26), chip=(80, 300, 88), title=(80, 430, 920, 62),
+     logo=(80, 70, 210), flags=(80, 90, 40), label=(80, 250, 26), chip=(80, 298, 104), title=(80, 440, 920, 62),
      card=(80, 745, 500, 24, 56), btn=(80, 985, 500, 100, 40), mascot=(580, 740, 540), pill=(80, 62, 28), flagsize=40),
  "1080x1920": dict(W=1080, H=1920, grad="180deg,rgba(3,18,38,.93) 0%,rgba(3,18,38,.76) 55%,rgba(3,18,38,.28) 100%", arc=(720, 1400, 380, 450),
-     logo=(80, 110, 220), flags=(80, 135, 40), label=(80, 470, 28), chip=(80, 530, 100), title=(80, 680, 920, 72),
+     logo=(80, 110, 220), flags=(80, 135, 40), label=(80, 470, 28), chip=(80, 522, 120), title=(80, 690, 920, 72),
      card=(80, 1060, 520, 26, 60), btn=(80, 1330, 520, 108, 42), mascot=(520, 1050, 760), pill=(80, 74, 28), flagsize=40),
  "1200x628": dict(W=1200, H=628, grad="90deg,rgba(3,18,38,.94) 0%,rgba(3,18,38,.8) 55%,rgba(3,18,38,.2) 100%", arc=(960, 330, 250, 300),
-     logo=(56, 28, 140), flags=(56, 40, 30), label=(56, 158, 20), chip=(56, 168, 54), title=(56, 225, 730, 44),
+     logo=(56, 28, 140), flags=(56, 40, 30), label=(56, 158, 20), chip=(230, 38, 66), title=(56, 225, 730, 44),
      card=(56, 405, 690, 20, 40), btn=(56, 525, 330, 62, 28), mascot=(860, 36, 570), pill=(0, 0, 0), flagsize=30),
 }
 TITLE = "<span style='color:%s'>Faronics Cloud</span>: más control y protección para los endpoints" % CYAN
@@ -40,7 +40,7 @@ def make(name, c):
     small = name == "1200x628"
     flags_html = "" if small else f"<div class='abs' style='right:{fx}px;top:{fy}px;display:flex;gap:10px'>{fl}</div>"
     pill = "" if small else f"<div class='abs' style='left:{px}px;bottom:{pb}px;border-radius:999px;background:#2f86ff;padding:12px 34px;font-size:{pf}px;font-weight:600'>#CPNnetPartners</div>"
-    chip_html = m.logo_chip("faronics", hx, hy, int(hh * 3.4), hh, int(hh * 0.5))
+    chip_html = m.logo_chip("faronics", hx, hy, int(hh * 4.1), hh, int(hh * 0.62))
     row = lambda icon, txt: (f"<div style='display:flex;align-items:center;gap:{ks*0.4:.0f}px'>{icon.format(s=ks)}<div style='font-size:{kf*1.35:.0f}px;font-weight:700;white-space:nowrap'>{txt}</div></div>")
     card = (f"<div class='abs' style='left:{kx}px;top:{ky}px;width:{kw}px;padding:{kf*0.9:.0f}px {kf*1.3:.0f}px;border-radius:{kf*1.2:.0f}px;background:rgba(32,60,113,.78);border:2px solid rgba(132,186,225,.4);"
             f"box-shadow:0 20px 50px rgba(0,10,30,.5);display:flex;flex-direction:{'row' if small else 'column'};gap:{kf*0.9:.0f}px;{'width:'+str(kw)+'px;' if small else ''}'>"
@@ -60,7 +60,7 @@ body{{width:{W}px;height:{H}px;overflow:hidden;background:{NAVY};font-family:'Mo
 <img class='abs' src='{b1.LOGO}' style='left:{lx}px;top:{ly}px;width:{lw}px'>
 {flags_html}
 <div class='abs' style='left:{ax}px;top:{ay}px;font-size:{af}px;font-weight:700;letter-spacing:{af*0.28:.0f}px;color:{CYAN};text-transform:uppercase'>Invitación exclusiva</div>
-{chip_html if not small else ''}
+{chip_html}
 <h1 class='abs' style='left:{tx}px;top:{ty}px;width:{tw}px;font-size:{tf}px;line-height:1.08;font-weight:800;letter-spacing:-1.5px;text-shadow:0 6px 40px rgba(0,10,30,.7)'>{TITLE}</h1>
 {r3.mascot(mx, my, mh, dark=True)}
 {card}{btn}{pill}
