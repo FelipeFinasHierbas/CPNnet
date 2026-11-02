@@ -134,6 +134,116 @@ export const RemotionRoot: React.FC = () => {
           seed: 111,
         }}
       />
+      <Composition
+        id="ReelNovDomum"
+        component={Reel}
+        durationInFrames={540}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          etiqueta: "Noviembre",
+          pilar: "Identidades",
+          marca: "segura",
+          fondo: "bgm_segura.jpg",
+          pregunta: "¿Cómo acceden sus *proveedores* a los sistemas críticos?",
+          puntos: [
+            "Acceso desde el navegador, sin VPN, con enlace único que vence",
+            "Sesión en contenedor aislado, grabada y con monitoreo en vivo",
+            "Control por sistema, horario y ubicación",
+          ],
+          brand: { hi: "#4DE8D0", acc: "#00D1B5", acc2: "#00A892", base: "#003A32", dark: "#001F1B", tinte: "0,31,27", onacc: "#012B25" },
+          seed: 31,
+        }}
+      />
+      <Composition
+        id="ReelNovAction1"
+        component={Reel}
+        durationInFrames={540}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          etiqueta: "Noviembre",
+          pilar: "Vulnerabilidades",
+          marca: "action1",
+          fondo: "bgm_action1.jpg",
+          pregunta: "¿Cómo parchea equipos remotos *sin VPN*?",
+          puntos: [
+            "Agente con conexión saliente a la nube: sin VPN ni servidor local",
+            "Parchea sistema operativo y software de terceros",
+            "Si el equipo estaba apagado, recibe la actualización al reconectarse",
+          ],
+          brand: { hi: "#7BE6FF", acc: "#00CCFF", acc2: "#00A6D1", base: "#02457A", dark: "#021E33", tinte: "2,30,51", onacc: "#021E33" },
+          seed: 33,
+        }}
+      />
+      <Composition
+        id="ReelNovVicarius"
+        component={Reel}
+        durationInFrames={540}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          etiqueta: "Noviembre",
+          pilar: "Vulnerabilidades",
+          marca: "vicarius",
+          fondo: "bgm_vicarius.jpg",
+          pregunta: "¿Qué hace cuando *no existe un parche*?",
+          puntos: [
+            "Patching automatizado, también de aplicaciones de terceros",
+            "Protección sin parche mientras llega la actualización",
+            "Scripting para corregir configuraciones",
+          ],
+          brand: { hi: "#5FE3CE", acc: "#0EC0A4", acc2: "#0A9C85", base: "#182954", dark: "#0E1A38", tinte: "14,26,56", onacc: "#08211e" },
+          seed: 35,
+        }}
+      />
+      <Composition
+        id="ReelNovKriptos"
+        component={Reel}
+        durationInFrames={540}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          etiqueta: "Noviembre",
+          pilar: "Datos",
+          marca: "kriptos",
+          fondo: "bgm_kriptos.jpg",
+          pregunta: "¿Quién puede *ver qué* en sus documentos?",
+          puntos: [
+            "Visibilidad de quién accede a documentos, carpetas y unidades",
+            "Detecta datos sobreexpuestos y accesos de riesgo",
+            "Corrige permisos a escala",
+          ],
+          brand: { hi: "#9AEEFA", acc: "#6fe3f5", acc2: "#3A84BD", base: "#203C71", dark: "#0a1a35", tinte: "10,26,53", onacc: "#0a1a35" },
+          seed: 37,
+        }}
+      />
+      <Composition
+        id="ReelNovSophos"
+        component={Reel}
+        durationInFrames={540}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          etiqueta: "Noviembre",
+          pilar: "Red y endpoint",
+          marca: "sophos",
+          fondo: "bgm_sophos.jpg",
+          pregunta: "¿Cómo empieza un ataque de *ransomware*?",
+          puntos: [
+            "79% de los ataques parte de identidades comprometidas",
+            "Correo malicioso (26%) y phishing (24%) suman la mitad de los casos",
+            "XDR y MDR de Sophos correlacionan firewall y endpoint",
+          ],
+          brand: { hi: "#B9C2FF", acc: "#7A8CFF", acc2: "#5468F0", base: "#2006F7", dark: "#0A143A", tinte: "10,20,58", onacc: "#0A143A" },
+          seed: 15,
+        }}
+      />
     </>
   );
 };

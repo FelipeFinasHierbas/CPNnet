@@ -29,7 +29,11 @@ export const fontsReady = Promise.all(
   ),
 );
 
+export type Brand = { readonly hi: string; readonly acc: string; readonly acc2: string; readonly base: string; readonly dark: string; readonly tinte: string; readonly onacc: string };
+
 export type ReelProps = {
+  readonly brand?: Brand;
+  readonly etiqueta?: string;
   readonly pilar: string;
   readonly marca: string;
   readonly fondo: string;
@@ -46,7 +50,7 @@ export const Backdrop: React.FC<{ fondo: string; dim: number; zoomFrom: number }
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
   return (
-    <AbsoluteFill style={{ backgroundColor: NAVY, overflow: "hidden" }}>
+    <AbsoluteFill style={{ backgroundColor: "var(--dark, #1A2E52)", overflow: "hidden" }}>
       <Img
         src={staticFile(fondo)}
         style={{
@@ -59,7 +63,7 @@ export const Backdrop: React.FC<{ fondo: string; dim: number; zoomFrom: number }
           translate: interpolate(frame, [0, durationInFrames], ["0px 0px", "-30px -40px"], clampOpts),
         }}
       />
-      <AbsoluteFill style={{ backgroundColor: `rgba(6,22,48,${dim})` }} />
+      <AbsoluteFill style={{ backgroundColor: `rgba(var(--tinte, 6,22,48),${dim})` }} />
     </AbsoluteFill>
   );
 };
@@ -82,7 +86,7 @@ export const Particles: React.FC<{ seed: number }> = ({ seed }) => {
             width: d.s,
             height: d.s,
             borderRadius: "50%",
-            backgroundColor: i % 3 === 0 ? CYAN : "#ffd27a",
+            backgroundColor: i % 3 === 0 ? "var(--hi, #6fe3f5)" : "#ffd27a",
             opacity: d.o,
             filter: "blur(1.5px)",
           }}
@@ -92,6 +96,8 @@ export const Particles: React.FC<{ seed: number }> = ({ seed }) => {
   );
 };
 
+const WORDMARK: Record<string, string> = { sophos: "SOPHOS", sonicwall: "SONICWALL", seceon: "SECEON" };
+
 export const Chip: React.FC<{ marca: string; height: number; style?: React.CSSProperties }> = ({ marca, height, style }) => (
   <div
     style={{
@@ -100,12 +106,16 @@ export const Chip: React.FC<{ marca: string; height: number; style?: React.CSSPr
       justifyContent: "center",
       padding: `${height * 0.28}px ${height * 0.5}px`,
       borderRadius: height * 0.5,
-      background: `linear-gradient(135deg, ${ROYAL}, ${NAVY})`,
+      background: `linear-gradient(135deg, var(--base, #203C71), var(--dark, #1A2E52))`,
       boxShadow: "0 18px 48px rgba(0,10,30,.45)",
       ...style,
     }}
   >
-    <Img src={staticFile(`logos/${marca}.png`)} style={{ height, objectFit: "contain" }} />
+    {WORDMARK[marca] ? (
+      <span style={{ fontFamily: FAMILY, fontWeight: 800, fontSize: height * 0.8, letterSpacing: 3, color: "#fff", lineHeight: 1 }}>{WORDMARK[marca]}</span>
+    ) : (
+      <Img src={staticFile(`logos/${marca}.png`)} style={{ height, objectFit: "contain" }} />
+    )}
   </div>
 );
 
@@ -152,7 +162,7 @@ export const Mascota: React.FC<{ left: number; top: number; height: number; dela
 };
 
 // ------------------------------------------------------------------ escena 1: gancho
-const Hook: React.FC<ReelProps> = ({ pilar, marca, fondo, pregunta, seed }) => {
+const Hook: React.FC<ReelProps> = ({ pilar, marca, fondo, pregunta, seed, etiqueta }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   let on = false;
@@ -176,13 +186,13 @@ const Hook: React.FC<ReelProps> = ({ pilar, marca, fondo, pregunta, seed }) => {
           fontSize: 26,
           fontWeight: 700,
           letterSpacing: 4,
-          color: CYAN,
+          color: "var(--hi, #6fe3f5)",
           textTransform: "uppercase",
           opacity: interpolate(frame, [4, 20], [0, 1], clampOpts),
           translate: interpolate(frame, [4, 24], ["-60px 0px", "0px 0px"], { ...clampOpts, easing: ease }),
         }}
       >
-        Mes de la Ciberseguridad · {pilar}
+        {etiqueta ?? "Mes de la Ciberseguridad"} · {pilar}
       </div>
       <div
         style={{
@@ -209,7 +219,7 @@ const Hook: React.FC<ReelProps> = ({ pilar, marca, fondo, pregunta, seed }) => {
               key={i}
               style={{
                 display: "inline-block",
-                color: hl ? CYAN : "#fff",
+                color: hl ? "var(--hi, #6fe3f5)" : "#fff",
                 opacity: interpolate(p, [0, 0.6], [0, 1], clampOpts),
                 translate: `0px ${interpolate(p, [0, 1], [90, 0])}px`,
                 scale: interpolate(p, [0, 1], [0.8, 1]),
@@ -220,7 +230,7 @@ const Hook: React.FC<ReelProps> = ({ pilar, marca, fondo, pregunta, seed }) => {
           );
         })}
       </div>
-      <Mascota left={600} top={1010} height={640} delay={50} />
+      <Mascota left={610} top={1110} height={600} delay={50} />
       <Chip
         marca={marca}
         height={96}
@@ -255,7 +265,7 @@ const Point: React.FC<{ n: number; text: string } & ReelProps> = ({ n, text, mar
           fontWeight: 800,
           lineHeight: 1,
           color: "transparent",
-          WebkitTextStroke: `6px ${SKY}`,
+          WebkitTextStroke: `6px var(--hi, #84BAE1)`,
           opacity: interpolate(frame, [0, 18], [0, 0.55], clampOpts),
           translate: interpolate(frame, [0, 30], ["-200px 0px", "0px 0px"], { ...clampOpts, easing: ease }),
         }}
@@ -341,7 +351,7 @@ const Cta: React.FC<ReelProps> = ({ marca, fondo, seed }) => {
           translate: `0px ${interpolate(frame, [12, 36], [70, 0], { ...clampOpts, easing: ease })}px`,
         }}
       >
-        Habla con tu ejecutivo <span style={{ color: CYAN }}>CPNnet</span>
+        Habla con tu ejecutivo <span style={{ color: "var(--hi, #6fe3f5)" }}>CPNnet</span>
       </div>
       <div
         style={{
@@ -351,7 +361,7 @@ const Cta: React.FC<ReelProps> = ({ marca, fondo, seed }) => {
           top: 930,
           height: 130,
           borderRadius: 65,
-          background: `linear-gradient(135deg, #2a5aa8, #3f86d0)`,
+          background: `linear-gradient(135deg, var(--acc, #2a5aa8), var(--acc2, #3f86d0))`,
           boxShadow: `0 0 ${40 + Math.sin(frame / 5) * 25}px rgba(111,227,245,.75)`,
           display: "flex",
           alignItems: "center",
@@ -359,7 +369,7 @@ const Cta: React.FC<ReelProps> = ({ marca, fondo, seed }) => {
           fontFamily: FAMILY,
           fontSize: 50,
           fontWeight: 800,
-          color: "#fff",
+          color: "var(--onacc, #fff)",
           scale: pop(26) * (1 + Math.sin(frame / 6) * 0.015),
         }}
       >
@@ -385,15 +395,15 @@ export const Overlay: React.FC<{ total: number }> = ({ total }) => {
       <svg width={1080} height={1920} viewBox="0 0 1080 1920" style={{ position: "absolute", inset: 0 }}>
         <defs>
           <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor={CYAN} />
-            <stop offset="1" stopColor={AZURE} />
+            <stop offset="0" style={{ stopColor: "var(--hi, #6fe3f5)" }} />
+            <stop offset="1" style={{ stopColor: "var(--acc, #3A84BD)" }} />
           </linearGradient>
         </defs>
         <g transform={`rotate(${frame * 1.6} 930 250)`}>
           <circle cx={930} cy={250} r={120} fill="none" stroke="url(#g)" strokeWidth={14} strokeLinecap="round" strokeDasharray="520 900" opacity={0.85} />
         </g>
         <g transform={`rotate(${-frame * 2.4} 930 250)`}>
-          <circle cx={930} cy={250} r={86} fill="none" stroke={SKY} strokeWidth={6} strokeLinecap="round" strokeDasharray="160 500" opacity={0.7} />
+          <circle cx={930} cy={250} r={86} fill="none" style={{ stroke: "var(--hi, #84BAE1)" }} strokeWidth={6} strokeLinecap="round" strokeDasharray="160 500" opacity={0.7} />
         </g>
       </svg>
       <Img
@@ -401,7 +411,7 @@ export const Overlay: React.FC<{ total: number }> = ({ total }) => {
         style={{ position: "absolute", left: 80, top: 130, width: 250, opacity: interpolate(frame, [0, 15, total - 135, total - 120], [0, 1, 1, 0], clampOpts), translate: interpolate(frame, [0, 20], ["0px -30px", "0px 0px"], { ...clampOpts, easing: ease }) }}
       />
       <div style={{ position: "absolute", left: 80, right: 80, bottom: 90, height: 10, borderRadius: 5, backgroundColor: "rgba(255,255,255,.18)" }}>
-        <div style={{ width: `${interpolate(frame, [0, total - 1 * fps], [0, 100], clampOpts)}%`, height: "100%", borderRadius: 5, background: `linear-gradient(90deg, ${SKY}, ${CYAN})` }} />
+        <div style={{ width: `${interpolate(frame, [0, total - 1 * fps], [0, 100], clampOpts)}%`, height: "100%", borderRadius: 5, background: `linear-gradient(90deg, var(--acc, #84BAE1), var(--hi, #6fe3f5))` }} />
       </div>
     </AbsoluteFill>
   );
@@ -416,7 +426,7 @@ export const Reel: React.FC<ReelProps> = (props) => {
   const { durationInFrames } = useVideoConfig();
   const T = 15;
   return (
-    <AbsoluteFill style={{ backgroundColor: NAVY, fontFamily: FAMILY }}>
+    <AbsoluteFill style={{ backgroundColor: NAVY, fontFamily: FAMILY, ...(props.brand ? ({ "--hi": props.brand.hi, "--acc": props.brand.acc, "--acc2": props.brand.acc2, "--base": props.brand.base, "--dark": props.brand.dark, "--tinte": props.brand.tinte, "--onacc": props.brand.onacc } as React.CSSProperties) : {}) }}>
       <TransitionSeries>
         <TransitionSeries.Sequence name="Gancho" durationInFrames={120}>
           <Hook {...props} />

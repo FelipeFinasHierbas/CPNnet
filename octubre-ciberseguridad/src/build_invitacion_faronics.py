@@ -30,7 +30,7 @@ L = {
 TITLE = "<span style='color:%s'>Faronics Cloud</span>: más control y protección para los endpoints" % CYAN
 
 
-def make(name, c):
+def make(name, c, kicker='Invitación exclusiva', fecha='5 de noviembre', btn_text='Reserva tu lugar'):
     W, H = c["W"], c["H"]; cx, cy, r1, r2 = c["arc"]
     ring = b2.arc(cx, cy, r1, r1, -28, 16, .72, .0, (CYAN, AZURE), 1, 'a1'); ring2 = b2.arc(cx, cy, r2, r2, 20, 6, .35, .2, (SKY, AZURE), .7, 'a2')
     fs = c["flagsize"]
@@ -44,9 +44,9 @@ def make(name, c):
     row = lambda icon, txt: (f"<div style='display:flex;align-items:center;gap:{ks*0.4:.0f}px'>{icon.format(s=ks)}<div style='font-size:{kf*1.35:.0f}px;font-weight:700;white-space:nowrap'>{txt}</div></div>")
     card = (f"<div class='abs' style='left:{kx}px;top:{ky}px;width:{kw}px;padding:{kf*0.9:.0f}px {kf*1.3:.0f}px;border-radius:{kf*1.2:.0f}px;background:rgba(32,60,113,.78);border:2px solid rgba(132,186,225,.4);"
             f"box-shadow:0 20px 50px rgba(0,10,30,.5);display:flex;flex-direction:{'row' if small else 'column'};gap:{kf*0.9:.0f}px;{'width:'+str(kw)+'px;' if small else ''}'>"
-            + row(cal, "5 de noviembre") + row(clk, "11:30 hrs Chile") + "</div>")
+            + row(cal, fecha) + row(clk, "11:30 hrs Chile") + "</div>")
     btn = (f"<div class='abs' style='left:{bx}px;top:{by}px;width:{bw}px;height:{bh}px;border-radius:{bh//2}px;background:linear-gradient(135deg,#2a5aa8,#3f86d0);"
-           f"display:flex;align-items:center;justify-content:center;font-size:{bf}px;font-weight:800;box-shadow:0 12px 34px rgba(32,60,113,.5)'>Reserva tu lugar</div>")
+           f"display:flex;align-items:center;justify-content:center;font-size:{bf}px;font-weight:800;box-shadow:0 12px 34px rgba(32,60,113,.5)'>{btn_text}</div>")
     return f"""<html><head><meta charset='utf-8'><style>{b1.FONTS}
 *{{box-sizing:border-box;margin:0;padding:0}}
 body{{width:{W}px;height:{H}px;overflow:hidden;background:{NAVY};font-family:'Montserrat',sans-serif;color:#fff}}
@@ -59,7 +59,7 @@ body{{width:{W}px;height:{H}px;overflow:hidden;background:{NAVY};font-family:'Mo
 <svg class='abs' style='left:0;top:0' width='{W}' height='{H}' viewBox='0 0 {W} {H}'>{ring}{ring2}</svg>
 <img class='abs' src='{b1.LOGO}' style='left:{lx}px;top:{ly}px;width:{lw}px'>
 {flags_html}
-<div class='abs' style='left:{ax}px;top:{ay}px;font-size:{af}px;font-weight:700;letter-spacing:{af*0.28:.0f}px;color:{CYAN};text-transform:uppercase'>Invitación exclusiva</div>
+<div class='abs' style='left:{ax}px;top:{ay}px;font-size:{af}px;font-weight:700;letter-spacing:{af*0.28:.0f}px;color:{CYAN};text-transform:uppercase'>{kicker}</div>
 {chip_html}
 <h1 class='abs' style='left:{tx}px;top:{ty}px;width:{tw}px;font-size:{tf}px;line-height:1.08;font-weight:800;letter-spacing:-1.5px;text-shadow:0 6px 40px rgba(0,10,30,.7)'>{TITLE}</h1>
 {r3.mascot(mx, my, mh, dark=True)}
@@ -67,11 +67,12 @@ body{{width:{W}px;height:{H}px;overflow:hidden;background:{NAVY};font-family:'Mo
 <script>{js}</script></body></html>"""
 
 
-with sync_playwright() as pw:
-    br = pw.chromium.launch(executable_path="/opt/pw-browsers/chromium", args=["--no-sandbox"])
-    for name, c in L.items():
-        pg = br.new_page(viewport={"width": c["W"], "height": c["H"]})
-        pg.set_content(make(name, c), timeout=120000); pg.wait_for_timeout(800)
-        pg.screenshot(path=str(OUT / f"invitacion-faronics_{name}.png")); pg.close()
-    br.close()
-print("ok")
+if __name__ == '__main__':
+  with sync_playwright() as pw:
+      br = pw.chromium.launch(executable_path="/opt/pw-browsers/chromium", args=["--no-sandbox"])
+      for name, c in L.items():
+          pg = br.new_page(viewport={"width": c["W"], "height": c["H"]})
+          pg.set_content(make(name, c), timeout=120000); pg.wait_for_timeout(800)
+          pg.screenshot(path=str(OUT / f"invitacion-faronics_{name}.png")); pg.close()
+      br.close()
+  print("ok")
