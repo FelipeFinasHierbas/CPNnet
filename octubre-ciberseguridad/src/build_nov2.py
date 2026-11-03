@@ -91,12 +91,13 @@ body{{width:1080px;height:{H}px;overflow:hidden;font-family:'Montserrat',sans-se
 def check(c, size=34, onlight=False):
     return (f"<div style='flex:none;width:{size}px;height:{size}px;border-radius:50%;background:{c['acc']};display:flex;align-items:center;justify-content:center'>"
             f"<svg width='{size*.62:.0f}' height='{size*.62:.0f}' viewBox='0 0 24 24'><path d='M6 12.5l4 4 8-9' fill='none' stroke='{c['onacc']}' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/></svg></div>")
-WORD = {"seceon": "SECEON", "sophos": "SOPHOS", "sonicwall": "SONICWALL"}
+WORD = {"sophos": "SOPHOS"}
+BOOST = {"vicarius": 1.5}
 def logo_chip(marca, x, y, w, h, lh):
     if marca in WORD:
         k = .95 if marca != "sonicwall" else .72
         return f"<div class='abs chip' style='left:{x}px;top:{y}px;width:{w}px;height:{h}px'><span style='font-size:{int(lh*k)}px;font-weight:800;letter-spacing:3px'>{WORD[marca]}</span></div>"
-    return f"<div class='abs chip' style='left:{x}px;top:{y}px;width:{w}px;height:{h}px'><img src='{m.LOGOS[marca]}' style='height:{lh}px;max-width:{w-48}px;object-fit:contain'></div>"
+    return f"<div class='abs chip' style='left:{x}px;top:{y}px;width:{w}px;height:{h}px'><img src='{m.LOGOS[marca]}' style='height:{int(lh*BOOST.get(marca,1))}px;max-width:{w-48}px;object-fit:contain'></div>"
 def flags(size=34):
     return "".join(rr.FLAG[k].replace("<svg ", f"<svg width='{size}' height='{size}' ") for k in ("cl", "pe", "us", "co"))
 def header(c, y=64):
@@ -234,7 +235,7 @@ def page_cierre(H):
     tiles = ""
     for i, k in enumerate(order):
         b = BR.get(k) or dict(CP, area='Más marcas para partners'); x = 76 if i % 2 == 0 else 76 + 456; y = 470 + dy + (i // 2) * 138
-        logo = (f"<img src='{m.LOGOS[k]}' style='height:44px;max-width:190px;object-fit:contain'>" if (k in m.LOGOS) else (f"<span style='font-size:30px;font-weight:800;letter-spacing:3px;color:#fff'>PRÓXIMAMENTE</span>" if k == "pronto" else f"<span style='font-size:{36 if k=='sonicwall' else 40}px;font-weight:800;letter-spacing:2px;color:#fff'>{WORD[k]}</span>"))
+        logo = (f"<img src='{m.LOGOS[k]}' style='height:{int(44 * (1.3 if k == 'vicarius' else 1))}px;max-width:200px;object-fit:contain'>" if (k in m.LOGOS) else (f"<span style='font-size:30px;font-weight:800;letter-spacing:3px;color:#fff'>PRÓXIMAMENTE</span>" if k == "pronto" else f"<span style='font-size:{36 if k=='sonicwall' else 40}px;font-weight:800;letter-spacing:2px;color:#fff'>{WORD[k]}</span>"))
         tiles += (f"<div class='abs' style='left:{x}px;top:{y}px;width:448px;height:126px;border-radius:26px;overflow:hidden;background:linear-gradient(135deg,{b['dark']},{b['base']});box-shadow:0 12px 30px rgba(20,33,61,.22)'>"
                   f"<div style='position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:{b['acc']};opacity:.35'></div>"
                   f"<div style='position:absolute;left:26px;top:16px;display:flex;align-items:center;height:54px'>{logo}</div>"
