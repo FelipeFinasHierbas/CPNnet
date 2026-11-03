@@ -240,7 +240,7 @@ export const RemotionRoot: React.FC = () => {
             "Correo malicioso (26%) y phishing (24%) suman la mitad de los casos",
             "XDR y MDR de Sophos correlacionan firewall y endpoint",
           ],
-          brand: { hi: "#B9C2FF", acc: "#7A8CFF", acc2: "#5468F0", base: "#2006F7", dark: "#0A143A", tinte: "10,20,58", onacc: "#0A143A" },
+          brand: { hi: "#B5DDFF", acc: "#5CB8FF", acc2: "#2F9AEA", base: "#0070C0", dark: "#032C52", tinte: "3,44,82", onacc: "#032C52" },
           seed: 15,
         }}
       />

@@ -23,7 +23,7 @@ BR = {
  "faronics": dict(dark="#0E1317", base="#2B1216", acc="#D52027", acc2="#A8171D", hi="#FF7378", onacc="#ffffff", pat="squares", nombre="Faronics", area="Endpoints", icon="endpoints"),
  "action1":  dict(dark="#021E33", base="#02457A", acc="#00CCFF", acc2="#00A6D1", hi="#7BE6FF", onacc="#021E33", pat="dots", nombre="Action1", area="Vulnerabilidades", icon="vulnerabilidades"),
  "vicarius": dict(dark="#0E1A38", base="#182954", acc="#0EC0A4", acc2="#0A9C85", hi="#5FE3CE", onacc="#08211e", pat="hex", nombre="Vicarius", area="Vulnerabilidades", icon="vulnerabilidades"),
- "sophos":   dict(dark="#0A143A", base="#2006F7", acc="#7A8CFF", acc2="#5468F0", hi="#B9C2FF", onacc="#0A143A", pat="shields", nombre="Sophos", area="Red y endpoint", icon="soc"),
+ "sophos":   dict(dark="#032C52", base="#0070C0", acc="#5CB8FF", acc2="#2F9AEA", hi="#B5DDFF", onacc="#032C52", pat="shields", nombre="Sophos", area="Red y endpoint", icon="soc"),
  "sonicwall": dict(dark="#0A1233", base="#285AE6", acc="#F5F5F5", acc2="#D5DCE8", hi="#BFD0FF", onacc="#0A1233", pat="bricks", nombre="SonicWall", area="Seguridad de red", icon="soc"),
  "kriptos":  dict(CP, pat="tiles", nombre="Kriptos", area="Datos", icon="datos"),
  "seceon":   dict(CP, pat="radar", nombre="Seceon", area="Operaciones de seguridad", icon="soc"),
@@ -91,7 +91,7 @@ body{{width:1080px;height:{H}px;overflow:hidden;font-family:'Montserrat',sans-se
 def check(c, size=34, onlight=False):
     return (f"<div style='flex:none;width:{size}px;height:{size}px;border-radius:50%;background:{c['acc']};display:flex;align-items:center;justify-content:center'>"
             f"<svg width='{size*.62:.0f}' height='{size*.62:.0f}' viewBox='0 0 24 24'><path d='M6 12.5l4 4 8-9' fill='none' stroke='{c['onacc']}' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/></svg></div>")
-WORD = {"sophos": "SOPHOS"}
+WORD = {}
 BOOST = {"vicarius": 1.5}
 def logo_chip(marca, x, y, w, h, lh):
     if marca in WORD:
@@ -157,13 +157,15 @@ D = {
 }
 for v in D.values(): v.update(BR[v["marca"]] | {"marca": v["marca"]})
 
+CW = lambda marca, base: 560 if marca == 'sophos' else base
+
 def fs_for(q): return 54 if len(re.sub(r"<[^>]+>", "", q)) <= 46 else 46
 
 def post_A(d, H, dy):
     c = d; bullets = "".join(f"<div style='display:flex;gap:18px;align-items:flex-start;padding:16px 22px;border-radius:22px;background:rgba(255,255,255,.07);margin-bottom:12px'>{check(c,34)}<div style='font-size:25px;font-weight:600;line-height:1.28'>{b}</div></div>" for b in d["b"])
     ico = rr.icon(c['icon'], 32).replace("stroke='#fff'", "stroke='" + c['onacc'] + "'")
-    body = (header(c, 64 + dy) + logo_chip(d["marca"], 76, 218 + dy, 380, 112, 66)
-      + f"<div class='abs' style='left:490px;top:{245+dy}px;display:flex;align-items:center;gap:14px'><div style='width:58px;height:58px;border-radius:50%;background:{c['acc']};display:flex;align-items:center;justify-content:center'>{ico}</div><div style='font-size:21px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;line-height:1.15;max-width:360px'>{d['area']}</div></div>"
+    body = (header(c, 64 + dy) + logo_chip(d["marca"], 76, 218 + dy, CW(d["marca"], 380), 112, 66)
+      + f"<div class='abs' style='left:{76+CW(d['marca'],380)+34}px;top:{245+dy}px;display:flex;align-items:center;gap:14px'><div style='width:58px;height:58px;border-radius:50%;background:{c['acc']};display:flex;align-items:center;justify-content:center'>{ico}</div><div style='font-size:21px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;line-height:1.15;max-width:360px'>{d['area']}</div></div>"
       + f"<h1 class='abs' style='left:76px;right:76px;top:{345+dy}px;font-size:{fs_for(d['q'])}px;line-height:1.08;font-weight:800;letter-spacing:-1px;text-wrap:balance'>{d['q']}</h1>"
       + f"<div class='abs' style='left:76px;right:76px;top:{505+dy}px;padding:20px 28px;border-radius:26px;background:rgba(0,0,0,.28);border:2px solid {c['acc']}55'><div style='font-size:15px;font-weight:700;letter-spacing:4px;color:{c['hi']};text-transform:uppercase;margin-bottom:6px'>{d['pos']}</div><div style='font-size:26px;font-weight:500;line-height:1.3'>{d['ctx']}</div></div>"
       + f"<div class='abs' style='left:76px;width:620px;top:{680+dy}px'>{bullets}</div>"
@@ -184,8 +186,8 @@ def post_B(d, H, dy):
       + f"<div class='abs' style='left:0;top:0;width:1080px;height:{panel_h}px;background:radial-gradient(800px 600px at 88% 10%,{c['acc']}55,transparent 65%),linear-gradient(160deg,{c['dark']},{c['base']})'></div>"
       + pattern(c['pat'], c, 1080, panel_h, 4)
       + f"<div class='abs' style='left:0;top:{panel_h-6}px;width:1080px;height:6px;background:{c['acc']}'></div>"
-      + header(c, 64 + dy) + logo_chip(d["marca"], 76, 216 + dy, 400, 124, 74)
-      + f"<div class='abs' style='left:510px;top:{252+dy}px;font-size:21px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:{c['hi']};max-width:480px;line-height:1.2'>{d['area']}</div>"
+      + header(c, 64 + dy) + logo_chip(d["marca"], 76, 216 + dy, CW(d["marca"], 400), 124, 74)
+      + f"<div class='abs' style='left:{76+CW(d['marca'],400)+34}px;top:{252+dy}px;font-size:21px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:{c['hi']};max-width:480px;line-height:1.2'>{d['area']}</div>"
       + f"<h1 class='abs' style='left:76px;right:76px;top:{350+dy}px;font-size:{fs_for(d['q'])}px;line-height:1.08;font-weight:800;letter-spacing:-1px;text-wrap:balance'>{d['q']}</h1>"
       + f"<div class='abs' style='left:76px;right:76px;top:{610+dy}px;font-size:26px;font-weight:600;line-height:1.3;color:{ink}'><span style='color:{c['base']};font-weight:800;letter-spacing:3px;font-size:15px;text-transform:uppercase;display:block;margin-bottom:6px'>{d['pos']}</span>{d['ctx']}</div>"
       + f"<div class='abs' style='left:370px;right:76px;top:{765+dy}px'>{bullets}</div>"
@@ -207,7 +209,7 @@ def page_reel(key):
     steps = "".join(f"<div style='display:flex;gap:26px;align-items:center;margin:22px 0'><div style='flex:none;width:72px;height:72px;border-radius:50%;background:{c['acc']};color:{c['onacc']};display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:800'>{i+1}</div><div style='font-size:34px;font-weight:700;line-height:1.2'>{b}</div></div>" for i, b in enumerate(d["b"]))
     body = (header(c, 110) + f"<div class='abs' style='left:76px;top:470px;font-size:24px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:{c['hi']}'>Noviembre · {d['area']}</div>"
       + f"<div class='abs' style='left:76px;top:520px;right:90px;font-size:68px;font-weight:800;line-height:1.06;letter-spacing:-2px;text-shadow:0 3px 22px rgba(0,0,0,.6)'>{d['q']}</div>"
-      + logo_chip(d["marca"], 76, 900, 360, 130, 76)
+      + logo_chip(d["marca"], 76, 900, CW(d["marca"], 360), 130, 76)
       + r3.mascot(715, 700, 440, dark=True)
       + f"<div class='abs' style='left:76px;right:76px;top:1120px'>{steps}</div>"
       + f"<div class='abs' style='left:76px;right:76px;top:1520px;height:96px;border-radius:28px;background:linear-gradient(135deg,{c['acc']},{c['acc2']});color:{c['onacc']};display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:800'>Habla con tu ejecutivo CPNnet</div>"
@@ -235,7 +237,7 @@ def page_cierre(H):
     tiles = ""
     for i, k in enumerate(order):
         b = BR.get(k) or dict(CP, area='Más marcas para partners'); x = 76 if i % 2 == 0 else 76 + 456; y = 470 + dy + (i // 2) * 138
-        logo = (f"<img src='{m.LOGOS[k]}' style='height:{int(44 * (1.3 if k == 'vicarius' else 1))}px;max-width:200px;object-fit:contain'>" if (k in m.LOGOS) else (f"<span style='font-size:30px;font-weight:800;letter-spacing:3px;color:#fff'>PRÓXIMAMENTE</span>" if k == "pronto" else f"<span style='font-size:{36 if k=='sonicwall' else 40}px;font-weight:800;letter-spacing:2px;color:#fff'>{WORD[k]}</span>"))
+        logo = (f"<img src='{m.LOGOS[k]}' style='height:{int(44 * (1.3 if k == 'vicarius' else 1))}px;max-width:{300 if k in ('sophos', 'sonicwall') else 200}px;object-fit:contain'>" if (k in m.LOGOS) else (f"<span style='font-size:30px;font-weight:800;letter-spacing:3px;color:#fff'>PRÓXIMAMENTE</span>" if k == "pronto" else f"<span style='font-size:{36 if k=='sonicwall' else 40}px;font-weight:800;letter-spacing:2px;color:#fff'>{WORD[k]}</span>"))
         tiles += (f"<div class='abs' style='left:{x}px;top:{y}px;width:448px;height:126px;border-radius:26px;overflow:hidden;background:linear-gradient(135deg,{b['dark']},{b['base']});box-shadow:0 12px 30px rgba(20,33,61,.22)'>"
                   f"<div style='position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:{b['acc']};opacity:.35'></div>"
                   f"<div style='position:absolute;left:26px;top:16px;display:flex;align-items:center;height:54px'>{logo}</div>"

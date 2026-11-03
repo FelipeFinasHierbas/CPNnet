@@ -96,7 +96,7 @@ export const Particles: React.FC<{ seed: number }> = ({ seed }) => {
   );
 };
 
-const WORDMARK: Record<string, string> = { sophos: "SOPHOS" };
+const WORDMARK: Record<string, string> = {};
 
 export const Chip: React.FC<{ marca: string; height: number; style?: React.CSSProperties }> = ({ marca, height, style }) => (
   <div
@@ -114,7 +114,7 @@ export const Chip: React.FC<{ marca: string; height: number; style?: React.CSSPr
     {WORDMARK[marca] ? (
       <span style={{ fontFamily: FAMILY, fontWeight: 800, fontSize: height * 0.8, letterSpacing: 3, color: "#fff", lineHeight: 1 }}>{WORDMARK[marca]}</span>
     ) : (
-      <Img src={staticFile(`logos/${marca}.png`)} style={{ height: marca === "vicarius" ? height * 1.5 : height, objectFit: "contain" }} />
+      <Img src={staticFile(`logos/${marca}.png`)} style={marca === "sophos" ? { width: height * 5.2, objectFit: "contain" } : { height: marca === "vicarius" ? height * 1.5 : height, objectFit: "contain" }} />
     )}
   </div>
 );
