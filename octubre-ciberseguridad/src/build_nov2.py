@@ -164,12 +164,12 @@ def fs_for(q): return 54 if len(re.sub(r"<[^>]+>", "", q)) <= 46 else 46
 def post_A(d, H, dy):
     c = d; bullets = "".join(f"<div style='display:flex;gap:18px;align-items:flex-start;padding:16px 22px;border-radius:22px;background:rgba(255,255,255,.07);margin-bottom:12px'>{check(c,34)}<div style='font-size:25px;font-weight:600;line-height:1.28'>{b}</div></div>" for b in d["b"])
     ico = rr.icon(c['icon'], 32).replace("stroke='#fff'", "stroke='" + c['onacc'] + "'")
-    body = (header(c, 64 + dy) + logo_chip(d["marca"], 76, 218 + dy, CW(d["marca"], 380), 112, 66)
-      + f"<div class='abs' style='left:{76+CW(d['marca'],380)+34}px;top:{245+dy}px;display:flex;align-items:center;gap:14px'><div style='width:58px;height:58px;border-radius:50%;background:{c['acc']};display:flex;align-items:center;justify-content:center'>{ico}</div><div style='font-size:21px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;line-height:1.15;max-width:360px'>{d['area']}</div></div>"
-      + f"<h1 class='abs' style='left:76px;right:76px;top:{345+dy}px;font-size:{fs_for(d['q'])}px;line-height:1.08;font-weight:800;letter-spacing:-1px;text-wrap:balance'>{d['q']}</h1>"
-      + f"<div class='abs' style='left:76px;right:76px;top:{505+dy}px;padding:20px 28px;border-radius:26px;background:rgba(0,0,0,.28);border:2px solid {c['acc']}55'><div style='font-size:15px;font-weight:700;letter-spacing:4px;color:{c['hi']};text-transform:uppercase;margin-bottom:6px'>{d['pos']}</div><div style='font-size:26px;font-weight:500;line-height:1.3'>{d['ctx']}</div></div>"
-      + f"<div class='abs' style='left:76px;width:620px;top:{680+dy}px'>{bullets}</div>"
-      + r3.mascot(700, 690 + dy, 420, dark=True)
+    body = (header(c, 64 + dy) + logo_chip(d["marca"], 76, 246 + dy, CW(d["marca"], 380), 112, 66)
+      + f"<div class='abs' style='left:{76+CW(d['marca'],380)+34}px;top:{273+dy}px;display:flex;align-items:center;gap:14px'><div style='width:58px;height:58px;border-radius:50%;background:{c['acc']};display:flex;align-items:center;justify-content:center'>{ico}</div><div style='font-size:21px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;line-height:1.15;max-width:360px'>{d['area']}</div></div>"
+      + f"<h1 class='abs' style='left:76px;right:76px;top:{378+dy}px;font-size:{fs_for(d['q'])}px;line-height:1.08;font-weight:800;letter-spacing:-1px;text-wrap:balance'>{d['q']}</h1>"
+      + f"<div class='abs' style='left:76px;right:76px;top:{528+dy}px;padding:18px 28px;border-radius:26px;background:rgba(0,0,0,.28);border:2px solid {c['acc']}55'><div style='font-size:15px;font-weight:700;letter-spacing:4px;color:{c['hi']};text-transform:uppercase;margin-bottom:6px'>{d['pos']}</div><div style='font-size:26px;font-weight:500;line-height:1.3'>{d['ctx']}</div></div>"
+      + f"<div class='abs' style='left:76px;width:620px;top:{692+dy}px'>{bullets}</div>"
+      + r3.mascot(700, 700 + dy, 410, dark=True)
       + f"<div class='abs' style='left:76px;right:76px;top:{1110+dy}px;border-radius:28px;background:linear-gradient(135deg,{c['acc']},{c['acc2']});padding:20px 38px;color:{c['onacc']}'><div style='font-size:17px;font-weight:800;letter-spacing:4px;text-transform:uppercase;opacity:.8'>Tu puerta de entrada</div><div style='font-size:30px;font-weight:800;margin-top:4px'>{d['entrada']}</div></div>"
       + footer(c, 1262 + dy))
     return body
@@ -181,24 +181,24 @@ def footer(c, y):
 def post_B(d, H, dy):
     c = d; light = "#F2F6FA"; ink = "#14213D"
     bullets = "".join(f"<div style='display:flex;gap:18px;align-items:flex-start;padding:11px 18px;border-radius:20px;background:#fff;border:2px solid {c['acc']}55;margin-bottom:10px;box-shadow:0 8px 22px rgba(20,33,61,.08)'>{check(c,32)}<div style='font-size:23px;font-weight:600;line-height:1.25;color:{ink}'>{b}</div></div>" for b in d["b"])
-    panel_h = 575 + dy
+    panel_h = 600 + dy
     body = (f"<div class='abs' style='left:0;top:{panel_h}px;width:1080px;height:{H-panel_h}px;background:{light}'></div>"
       + f"<div class='abs' style='left:0;top:0;width:1080px;height:{panel_h}px;background:radial-gradient(800px 600px at 88% 10%,{c['acc']}55,transparent 65%),linear-gradient(160deg,{c['dark']},{c['base']})'></div>"
       + pattern(c['pat'], c, 1080, panel_h, 4)
       + f"<div class='abs' style='left:0;top:{panel_h-6}px;width:1080px;height:6px;background:{c['acc']}'></div>"
-      + header(c, 64 + dy) + logo_chip(d["marca"], 76, 216 + dy, CW(d["marca"], 400), 124, 74)
-      + f"<div class='abs' style='left:{76+CW(d['marca'],400)+34}px;top:{252+dy}px;font-size:21px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:{c['hi']};max-width:480px;line-height:1.2'>{d['area']}</div>"
-      + f"<h1 class='abs' style='left:76px;right:76px;top:{350+dy}px;font-size:{fs_for(d['q'])}px;line-height:1.08;font-weight:800;letter-spacing:-1px;text-wrap:balance'>{d['q']}</h1>"
-      + f"<div class='abs' style='left:76px;right:76px;top:{610+dy}px;font-size:26px;font-weight:600;line-height:1.3;color:{ink}'><span style='color:{c['base']};font-weight:800;letter-spacing:3px;font-size:15px;text-transform:uppercase;display:block;margin-bottom:6px'>{d['pos']}</span>{d['ctx']}</div>"
-      + f"<div class='abs' style='left:370px;right:76px;top:{765+dy}px'>{bullets}</div>"
-      + r3.mascot(40, 770 + dy, 330, glow=True, dark=False)
+      + header(c, 64 + dy) + logo_chip(d["marca"], 76, 248 + dy, CW(d["marca"], 400), 124, 74)
+      + f"<div class='abs' style='left:{76+CW(d['marca'],400)+34}px;top:{284+dy}px;font-size:21px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:{c['hi']};max-width:480px;line-height:1.2'>{d['area']}</div>"
+      + f"<h1 class='abs' style='left:76px;right:76px;top:{392+dy}px;font-size:{fs_for(d['q'])}px;line-height:1.08;font-weight:800;letter-spacing:-1px;text-wrap:balance'>{d['q']}</h1>"
+      + f"<div class='abs' style='left:76px;right:76px;top:{632+dy}px;font-size:26px;font-weight:600;line-height:1.3;color:{ink}'><span style='color:{c['base']};font-weight:800;letter-spacing:3px;font-size:15px;text-transform:uppercase;display:block;margin-bottom:6px'>{d['pos']}</span>{d['ctx']}</div>"
+      + f"<div class='abs' style='left:370px;right:76px;top:{782+dy}px'>{bullets}</div>"
+      + r3.mascot(40, 780 + dy, 320, glow=True, dark=False)
       + f"<div class='abs' style='left:76px;right:76px;top:{1135+dy}px;border-radius:28px;background:linear-gradient(135deg,{c['dark']},{c['base']});padding:16px 38px;color:#fff'><div style='font-size:17px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:{c['hi']}'>Tu puerta de entrada</div><div style='font-size:30px;font-weight:800;margin-top:4px'>{d['entrada']}</div></div>"
       + f"<div class='abs' style='left:76px;top:{1262+dy}px;border-radius:999px;background:{c['base']};color:#fff;padding:12px 32px;font-size:26px;font-weight:700'>#CPNnetPartners</div>"
       + f"<div class='abs' style='right:76px;top:{1262+dy}px;border-radius:999px;background:{c['acc']};color:{c['onacc']};padding:14px 32px;font-size:22px;font-weight:800'>Habla con tu ejecutivo CPNnet</div>")
     return body
 
 def page_post(key, H, style):
-    d = D[key]; dy = 0 if H == 1350 else 285
+    d = D[key]; dy = 0 if H == 1350 else (330 if style == "B" else 285)
     c = d
     bg = dark_bg(c, H, seed=d.get("seed", 3)) if style == "A" else f"<div class='abs' style='inset:0;background:{c['dark']}'></div>"
     body = post_A(d, H, dy) if style == "A" else post_B(d, H, dy)
