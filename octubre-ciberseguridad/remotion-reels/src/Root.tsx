@@ -1,6 +1,7 @@
 import { Composition } from "remotion";
 import { Reel } from "./Reel";
 import { Webinar } from "./Webinar";
+import { SeguraDomum } from "./SeguraDomum";
 import { WebinarHoy } from "./WebinarHoy";
 
 // 5 escenas de 4 s con 4 transiciones de 0,5 s: 600 - 60 = 540 fotogramas (18 s a 30 fps)
@@ -242,6 +243,26 @@ export const RemotionRoot: React.FC = () => {
           ],
           brand: { hi: "#B5DDFF", acc: "#5CB8FF", acc2: "#2F9AEA", base: "#0070C0", dark: "#032C52", tinte: "3,44,82", onacc: "#032C52" },
           seed: 15,
+        }}
+      />
+      <Composition
+        id="ReelSeguraDomumV2"
+        component={SeguraDomum}
+        durationInFrames={540}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          brand: { hi: "#4DE8D0", acc: "#00D1B5", acc2: "#00A892", base: "#003A32", dark: "#001F1B", tinte: "0,31,27", onacc: "#012B25" },
+          marca: "segura",
+          fondo: "bgm_segura.jpg",
+          etiqueta: "Noviembre · Identidades",
+          gancho: "¿Cómo acceden sus proveedores a los sistemas críticos?",
+          p1: "Acceso sin VPN, con enlace único que vence",
+          p2: "Sesión en contenedor aislado, grabada y con monitoreo en vivo",
+          p3: "Control por sistema, horario y ubicación",
+          cierre: "Habla con tu ejecutivo CPNnet",
+          seed: 5,
         }}
       />
     </>
