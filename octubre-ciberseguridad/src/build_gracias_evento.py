@@ -45,3 +45,40 @@ if __name__ == "__main__":
             pg.screenshot(path=str(OUT / f"linkedin-gracias-bitacora_{name}_1080x1350.png")); pg.close()
         br.close()
     print("ok")
+
+def make2(evento):
+    js = b1.BG_JS.replace("SEED", "52").replace("FX", ".78").replace("FY", ".4").replace("FLIP", "false")
+    card = lambda k, w, h, sh=True: f"<div style='width:{w}px;height:{h}px;border-radius:26px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 34px rgba(0,0,0,.35)'><img src='{LG[k]}' style='max-width:{w-40}px;max-height:{h-30}px;mix-blend-mode:multiply'></div>"
+    return f"""<html><head><meta charset='utf-8'><style>{b1.FONTS}
+*{{box-sizing:border-box;margin:0;padding:0}}
+body{{width:1080px;height:1350px;overflow:hidden;background:{NAVY};font-family:'Montserrat',sans-serif;color:#fff}}
+.abs{{position:absolute}}
+</style></head><body>
+<canvas id='bg' class='abs' width='1080' height='1350' style='left:0;top:0'></canvas>
+<div class='abs' style='inset:0;background:radial-gradient(700px 600px at 85% 70%,rgba(58,132,189,.35),transparent 65%),linear-gradient(180deg,rgba(6,18,40,.92) 0%,rgba(6,18,40,.75) 60%,rgba(6,18,40,.6) 100%)'></div>
+<div class='abs' style='inset:0;opacity:.06;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:60px 60px'></div>
+<img class='abs' src='{b1.LOGO}' style='left:76px;top:64px;width:200px'>
+<div class='abs' style='right:76px;top:82px;display:flex;gap:8px'>{flags}</div>
+<div class='abs' style='left:76px;top:250px;padding:12px 28px;border-radius:999px;background:rgba(111,227,245,.12);border:2px solid {CYAN}99;font-size:22px;font-weight:700;letter-spacing:4px;color:{CYAN};text-transform:uppercase'>{evento}</div>
+<h1 class='abs' style='left:76px;top:330px;font-size:112px;line-height:1;font-weight:800;letter-spacing:-3px'>¡Gracias,<br><span style='color:{CYAN}'>Manuel Díaz!</span></h1>
+<div class='abs' style='left:76px;top:590px;width:928px;height:176px;border-radius:32px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.18);display:flex;align-items:center;gap:30px;padding:0 30px'>
+  {card('bitacora',210,116)}
+  <div><div style='font-size:26px;font-weight:800;line-height:1.2'>Director Ejecutivo de Revista Bitácora, Grupo Bitácora</div>
+  <div style='font-size:24px;font-weight:500;line-height:1.3;margin-top:8px;opacity:.92'>Por invitarnos a conversar sobre protección de datos, confianza digital y Open Banking.</div></div>
+</div>
+<div class='abs' style='left:76px;top:812px;font-size:19px;font-weight:700;letter-spacing:4px;color:{SKY};text-transform:uppercase'>Fue un gusto participar junto a</div>
+<div class='abs' style='left:76px;top:856px;display:flex;gap:18px'>{card('kriptos',270,132)}{card('think',230,132)}</div>
+<div class='abs' style='left:76px;top:1030px;width:600px;padding:22px 30px;border-radius:28px;background:linear-gradient(135deg,#2a5aa8,#3f86d0);font-size:30px;font-weight:800;line-height:1.25;box-shadow:0 14px 36px rgba(0,0,0,.35)'>Conocer, clasificar y proteger mejor su información.</div>
+<div class='abs' style='left:76px;top:1160px;width:600px;font-size:22px;font-weight:500;line-height:1.35;opacity:.92'>Trabajamos con nuestros partners para fortalecer la seguridad y la gestión de datos de las organizaciones.</div>
+{r3.mascot(690, 760, 500, dark=True)}
+<div class='abs' style='left:76px;top:1262px;border-radius:999px;background:rgba(255,255,255,.14);border:2px solid {CYAN}88;padding:12px 32px;font-size:26px;font-weight:700'>#CPNnetSecurity</div>
+<script>{js}</script></body></html>"""
+
+if __name__ == "__main__":
+    with sync_playwright() as pw:
+        br = pw.chromium.launch(executable_path="/opt/pw-browsers/chromium", args=["--no-sandbox"])
+        for name, ev in (("data-trust-summit", "Data & Trust Summit 2026"), ("governance-resilience-summit", "Governance & Resilience Summit 2026")):
+            pg = br.new_page(viewport={"width": 1080, "height": 1350}); pg.set_content(make2(ev), timeout=120000); pg.wait_for_timeout(700)
+            pg.screenshot(path=str(OUT / f"linkedin-gracias-bitacora_v2_{name}_1080x1350.png")); pg.close()
+        br.close()
+    print("ok v2")
